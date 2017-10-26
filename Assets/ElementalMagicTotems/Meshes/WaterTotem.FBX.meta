@@ -1,0 +1,222 @@
+fileFormatVersion: 2
+guid: 2200b69c90f1c704b8cba034c8a862a8
+timeCreated: 1459098250
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Be_DownCoth_J01
+    100002: Be_UpCoth_J01
+    100004: Bn_DownCoth_A01
+    100006: Bn_DownCoth_B01
+    100008: Bn_DownCoth_C01
+    100010: Bn_DownCoth_D01
+    100012: Bn_DownCoth_E01
+    100014: Bn_DownCoth_F01
+    100016: Bn_DownCoth_G01
+    100018: Bn_DownCoth_H01
+    100020: Bn_DownCoth_I01
+    100022: Bn_DownCoth_J01
+    100024: Bn_UpCoth_A01
+    100026: Bn_UpCoth_B01
+    100028: Bn_UpCoth_C01
+    100030: Bn_UpCoth_D01
+    100032: Bn_UpCoth_E01
+    100034: Bn_UpCoth_F01
+    100036: Bn_UpCoth_G01
+    100038: Bn_UpCoth_H01
+    100040: Bn_UpCoth_I01
+    100042: Bn_UpCoth_J01
+    100044: Object001
+    100046: //RootNode
+    100048: WaterTotem_A01
+    100050: WaterTotem_A01_Cl01
+    100052: WaterTotem_A01_Cl02
+    100054: WaterTotem_A01_Water002
+    400000: Be_DownCoth_J01
+    400002: Be_UpCoth_J01
+    400004: Bn_DownCoth_A01
+    400006: Bn_DownCoth_B01
+    400008: Bn_DownCoth_C01
+    400010: Bn_DownCoth_D01
+    400012: Bn_DownCoth_E01
+    400014: Bn_DownCoth_F01
+    400016: Bn_DownCoth_G01
+    400018: Bn_DownCoth_H01
+    400020: Bn_DownCoth_I01
+    400022: Bn_DownCoth_J01
+    400024: Bn_UpCoth_A01
+    400026: Bn_UpCoth_B01
+    400028: Bn_UpCoth_C01
+    400030: Bn_UpCoth_D01
+    400032: Bn_UpCoth_E01
+    400034: Bn_UpCoth_F01
+    400036: Bn_UpCoth_G01
+    400038: Bn_UpCoth_H01
+    400040: Bn_UpCoth_I01
+    400042: Bn_UpCoth_J01
+    400044: Object001
+    400046: //RootNode
+    400048: WaterTotem_A01
+    400050: WaterTotem_A01_Cl01
+    400052: WaterTotem_A01_Cl02
+    400054: WaterTotem_A01_Water002
+    2300000: WaterTotem_A01
+    3300000: WaterTotem_A01
+    4300000: WaterTotem_A01
+    4300002: WaterTotem_A01_Cl01
+    4300004: WaterTotem_A01_Cl02
+    4300006: WaterTotem_A01_Water002
+    7400000: WaterTotem_Idle
+    9500000: //RootNode
+    13700000: WaterTotem_A01_Cl01
+    13700002: WaterTotem_A01_Cl02
+    13700004: WaterTotem_A01_Water002
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: WaterTotem_Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 99
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bn_DownCoth_A01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01/Bn_DownCoth_C01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01/Bn_DownCoth_C01/Bn_DownCoth_D01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01/Bn_DownCoth_C01/Bn_DownCoth_D01/Bn_DownCoth_E01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01/Bn_DownCoth_C01/Bn_DownCoth_D01/Bn_DownCoth_E01/Bn_DownCoth_F01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01/Bn_DownCoth_C01/Bn_DownCoth_D01/Bn_DownCoth_E01/Bn_DownCoth_F01/Bn_DownCoth_G01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01/Bn_DownCoth_C01/Bn_DownCoth_D01/Bn_DownCoth_E01/Bn_DownCoth_F01/Bn_DownCoth_G01/Bn_DownCoth_H01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01/Bn_DownCoth_C01/Bn_DownCoth_D01/Bn_DownCoth_E01/Bn_DownCoth_F01/Bn_DownCoth_G01/Bn_DownCoth_H01/Bn_DownCoth_I01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01/Bn_DownCoth_C01/Bn_DownCoth_D01/Bn_DownCoth_E01/Bn_DownCoth_F01/Bn_DownCoth_G01/Bn_DownCoth_H01/Bn_DownCoth_I01/Bn_DownCoth_J01
+        weight: 1
+      - path: Bn_DownCoth_A01/Bn_DownCoth_B01/Bn_DownCoth_C01/Bn_DownCoth_D01/Bn_DownCoth_E01/Bn_DownCoth_F01/Bn_DownCoth_G01/Bn_DownCoth_H01/Bn_DownCoth_I01/Bn_DownCoth_J01/Be_DownCoth_J01
+        weight: 1
+      - path: Bn_UpCoth_A01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01/Bn_UpCoth_C01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01/Bn_UpCoth_C01/Bn_UpCoth_D01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01/Bn_UpCoth_C01/Bn_UpCoth_D01/Bn_UpCoth_E01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01/Bn_UpCoth_C01/Bn_UpCoth_D01/Bn_UpCoth_E01/Bn_UpCoth_F01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01/Bn_UpCoth_C01/Bn_UpCoth_D01/Bn_UpCoth_E01/Bn_UpCoth_F01/Bn_UpCoth_G01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01/Bn_UpCoth_C01/Bn_UpCoth_D01/Bn_UpCoth_E01/Bn_UpCoth_F01/Bn_UpCoth_G01/Bn_UpCoth_H01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01/Bn_UpCoth_C01/Bn_UpCoth_D01/Bn_UpCoth_E01/Bn_UpCoth_F01/Bn_UpCoth_G01/Bn_UpCoth_H01/Bn_UpCoth_I01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01/Bn_UpCoth_C01/Bn_UpCoth_D01/Bn_UpCoth_E01/Bn_UpCoth_F01/Bn_UpCoth_G01/Bn_UpCoth_H01/Bn_UpCoth_I01/Bn_UpCoth_J01
+        weight: 1
+      - path: Bn_UpCoth_A01/Bn_UpCoth_B01/Bn_UpCoth_C01/Bn_UpCoth_D01/Bn_UpCoth_E01/Bn_UpCoth_F01/Bn_UpCoth_G01/Bn_UpCoth_H01/Bn_UpCoth_I01/Bn_UpCoth_J01/Be_UpCoth_J01
+        weight: 1
+      - path: Object001
+        weight: 1
+      - path: WaterTotem_A01
+        weight: 1
+      - path: WaterTotem_A01_Cl01
+        weight: 1
+      - path: WaterTotem_A01_Cl02
+        weight: 1
+      - path: WaterTotem_A01_Water002
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
