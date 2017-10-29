@@ -15,32 +15,39 @@ public class Actions : MonoBehaviour {
 
 	public void Stay () {
 		animator.SetBool("Aiming", false);
+		animator.SetBool ("Squat", false);
 		animator.SetFloat ("Speed", 0f);
 		}
 
 	public void Walk () {
 		animator.SetBool("Aiming", false);
-		animator.SetFloat ("Speed", 0.5f);
+		animator.SetFloat ("Speed", 1.5f);
+		animator.Play ("Walk");
 	}
 
 	public void Run () {
 		animator.SetBool("Aiming", false);
-		animator.SetFloat ("Speed", 1f);
+		animator.SetFloat ("Speed", 3f);
+		animator.Play ("Run");
 	}
 
 	public void Attack () {
+		animator.SetBool ("Squat", false);
 		Aiming ();
-		animator.SetTrigger ("Attack");
+		animator.Play ("Attack");
 	}
 
 	public void Death () {
+		animator.SetBool ("Squat", false);
 		if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Death"))
 			animator.Play("Idle", 0);
 		else
-			animator.SetTrigger ("Death");
+			animator.Play ("Death");
 	}
 
 	public void Damage () {
+		animator.SetBool ("Squat", false);
+		animator.SetBool("Aiming", false);
 		if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Death")) return;
 		int id = Random.Range(0, countOfDamageAnimations);
 		if (countOfDamageAnimations > 1)
@@ -48,14 +55,14 @@ public class Actions : MonoBehaviour {
 				id = Random.Range(0, countOfDamageAnimations);
 		lastDamageAnimation = id;
 		animator.SetInteger ("DamageID", id);
-		animator.SetTrigger ("Damage");
+		animator.Play ("Damage");
 	}
 
 	public void Jump () {
 		animator.SetBool ("Squat", false);
 		animator.SetFloat ("Speed", 0f);
 		animator.SetBool("Aiming", false);
-		animator.SetTrigger ("Jump");
+		animator.Play ("Jump");
 	}
 
 	public void Aiming () {
@@ -65,7 +72,21 @@ public class Actions : MonoBehaviour {
 	}
 
 	public void Sitting () {
-		animator.SetBool ("Squat", !animator.GetBool("Squat"));
+		animator.SetBool ("Squat", true);
 		animator.SetBool("Aiming", false);
+		animator.Play ("Sneak");
+	}
+
+	public void Wary () {
+		animator.SetBool ("Squat", true);
+		animator.SetBool("Aiming", false);
+		animator.Play ("Wary");
+	}
+
+
+	public void CrouchingRun () {
+		animator.SetBool ("Squat", true);
+		animator.SetBool("Aiming", false);
+		animator.Play ("CrouchingRun");
 	}
 }
