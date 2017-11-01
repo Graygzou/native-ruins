@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class MovementController : MonoBehaviour {
+public class MovementControllerAnimal : MonoBehaviour {
 
-    [SerializeField] private float m_moveSpeed = 10;
-    [SerializeField] private float m_turnSpeed =5;
+    [SerializeField] private float m_moveSpeed = 1;
+	[SerializeField] private float m_maxSpeed = 3;
+    [SerializeField] private float m_turnSpeed =1;
 	[SerializeField] private float m_cameraSpeed = 2f;
-    [SerializeField] private float m_jumpForce = 5;
-    [SerializeField] private Animator m_animator =null;
-	[SerializeField] private Actions actions=null;
+    [SerializeField] private float m_jumpForce = 3;
+    //[SerializeField] private Animator m_animator =null;
+	//[SerializeField] private Actions actions=null;
     [SerializeField] private Rigidbody m_rigidBody;
 	[SerializeField] private Transform m_cameraPivot = null;
 
@@ -143,28 +144,40 @@ public class MovementController : MonoBehaviour {
 		transform.rotation = Quaternion.LookRotation (NextDir);
 		transform.position += NextDir * m_moveSpeed * Time.deltaTime;
 
-
-		Animate (NextDir);
-		JumpingAndLanding();
+		GetInputs ();
+		//Animate (NextDir);
+		JumpingAndLanding(NextDir);
 
     }
 
-    private void JumpingAndLanding()
+	private void JumpingAndLanding(Vector3 NextDir)
     {
         bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
 
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
         {
             m_jumpTimeStamp = Time.time;
-			actions.Jump ();
-            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
-
+			//actions.Jump ();
+			if(!NextDir.Equals(Vector3.zero))
+				m_rigidBody.AddForce((Vector3.up+transform.forward) * m_jumpForce, ForceMode.Impulse);
+			else
+				m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
         }
 
 
     }
 
-	private void Animate(Vector3 NextDir){
+	private void GetInputs(){
+		if (m_isGrounded) {
+			if (Input.GetKey (KeyCode.LeftShift)) {
+				m_moveSpeed = m_maxSpeed;
+			} else {
+				m_moveSpeed = m_moveSpeed;
+			}
+		}
+	}
+
+	/*private void Animate(Vector3 NextDir){
 		if (m_isGrounded) {
 			if (NextDir.Equals (Vector3.zero)) {
 				if (Input.GetKey (KeyCode.LeftControl)) {
@@ -192,7 +205,7 @@ public class MovementController : MonoBehaviour {
 
 			m_moveSpeed = m_animator.GetFloat ("Speed");
 		}
-	}
+	}*/
 
 	float SignedAngleBetween(Vector3 a, Vector3 b, Vector3 n){
 		// angle in [0,180]
