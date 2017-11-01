@@ -3,25 +3,17 @@ using System.Collections.Generic;
 
 public class MovementController : MonoBehaviour {
 
-
-
-
-
     [SerializeField] private float m_moveSpeed = 10;
-    [SerializeField] private float m_turnSpeed = 200;
+    [SerializeField] private float m_turnSpeed =5;
+	[SerializeField] private float m_cameraSpeed = 0.3f;
     [SerializeField] private float m_jumpForce = 5;
     [SerializeField] private Animator m_animator;
 	[SerializeField] private Actions actions;
     [SerializeField] private Rigidbody m_rigidBody;
+	[SerializeField] private Transform m_cameraPivot = null;
 
 
-    private float m_currentV = 0;
-    private float m_currentH = 0;
-
-    private readonly float m_interpolation = 10;
-    private readonly float m_walkScale = 0.33f;
-    private readonly float m_backwardsWalkScale = 0.16f;
-    private readonly float m_backwardRunScale = 0.66f;
+	private Vector3 lastMousePosition = Vector3.zero;
 
     private bool m_wasGrounded;
     private Vector3 m_currentDirection = Vector3.zero;
@@ -31,6 +23,33 @@ public class MovementController : MonoBehaviour {
 
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
+
+
+	private void LateUpdate()
+	{
+		Vector3 dir = Input.mousePosition - lastMousePosition;
+		lastMousePosition = Input.mousePosition;
+
+		UpdateCamera(dir.x, -dir.y);
+		Transform cameraTrans = m_cameraPivot.GetChild(0);
+		float z = Mathf.Clamp(Input.mouseScrollDelta.y*0.3f + cameraTrans.localPosition.z, -8, -2);
+		cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
+	}
+
+	private void UpdateCamera(float deltaX, float deltaY)
+	{
+		m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position;
+		if (deltaX == 0 && deltaY == 0) return;
+
+		Vector3 rotate = m_cameraPivot.localEulerAngles + new Vector3(deltaY*m_cameraSpeed, deltaX*m_cameraSpeed, 0);
+		if (rotate.x >= 180f) rotate.x -= 360f;
+		if (rotate.x > -20f && rotate.x < 90f)
+		{
+			m_cameraPivot.localEulerAngles = rotate;
+		}
+	}
+
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -97,17 +116,26 @@ public class MovementController : MonoBehaviour {
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
 	
-		Vector3 NextDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+		Transform cameraTrans = m_cameraPivot.GetChild(0);
+		Vector3 projected_forward_camera= Vector3.ProjectOnPlane (cameraTrans.forward, new Vector3 (0, 1, 0));
+
+		Vector3 NextDir = new Vector3(h, 0, v);
+
+
+
+		//Vector3 newOrientation = Vector3.Normalize(transform.right*h)*Time.deltaTime*m_turnSpeed+transform.forward;
+		//transform.rotation = Quaternion.LookRotation (Vector3.Project(transform.forward+transform.right, newOrientation));
+		//transform.rotation = Quaternion.LookRotation (NextDir);
+		//transform.position += transform.forward * m_moveSpeed * Time.deltaTime;
+
+		//transform.forward.Set(projected_forward_camera.x, projected_forward_camera.y, projected_forward_camera.z);
+		//transform.Rotate(0f,cameraTrans.eulerAngles.y-transform.eulerAngles.y,0f);
+		//NextDir = Quaternion.Euler(0f,cameraTrans.eulerAngles.y-transform.eulerAngles.y,0f)*NextDir;
+		transform.rotation = Quaternion.LookRotation (NextDir);
+		transform.position += NextDir * m_moveSpeed * Time.deltaTime;
+
+
 		Animate (NextDir);
-			
-	
-		//if(NextDir != Vector3.zero)
-			//transform.rotation = Quaternion.LookRotation(NextDir);
-
-		transform.rotation = Quaternion.LookRotation(NextDir);
-		transform.position += Vector3.Normalize(NextDir) * m_moveSpeed * Time.deltaTime;
-
-
 		JumpingAndLanding();
 
     }
