@@ -19,12 +19,23 @@ public class OursAgentScript : Animaux {
         
 
         Gizmos.color = Color.black;
-        Gizmos.DrawLine(transform.position, transform.position + GetComponent<Rigidbody>().velocity.normalized * steering.m_WanderDistance);
-        Gizmos.DrawWireSphere(transform.position + transform.forward * steering.m_WanderDistance, steering.m_dWanderRadius);
+        //Gizmos.DrawLine(transform.position, transform.position + GetComponent<Rigidbody>().velocity.normalized * steering.m_WanderDistance);
+        //Gizmos.DrawWireSphere(transform.position + transform.forward * steering.m_WanderDistance, steering.m_dWanderRadius);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(steering.m_vWanderTarget, 0.33f);
-        Gizmos.DrawLine(transform.position + GetComponent<Rigidbody>().velocity.normalized * steering.m_WanderDistance, steering.m_vWanderTarget);
+    
+        //Gizmos.DrawLine(transform.position + GetComponent<Rigidbody>().velocity.normalized * steering.m_WanderDistance, steering.m_vWanderTarget);
+
+        // -----------------------------------------
+
+        Gizmos.color = Color.magenta;
+        //foreach(Ray r in steering.m_Senseurs) {
+        //    Gizmos.DrawLine(transform.position, transform.position + r.direction * steering.m_ObstacleMaxDistance);
+        //}
+        
+
+        Gizmos.color = Color.gray;
+        Gizmos.DrawLine(transform.position, transform.position + steering.m_DesiredVelocity);
     }
 
     // Update is called once per frame

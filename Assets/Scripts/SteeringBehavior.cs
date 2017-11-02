@@ -14,6 +14,11 @@ public class SteeringBehavior : MonoBehaviour {
 
     private float m_Timer = 0;
 
+    // Variables for the obstacles avoidance
+    public float m_BoundingSphereRadius;
+    public float m_ObstacleMaxDistance;
+    public List<Ray> m_Senseurs;
+
     // Maybe useless
     NavMeshAgent animal;
 
@@ -27,6 +32,13 @@ public class SteeringBehavior : MonoBehaviour {
         // set Items
         m_dWanderRadius = 3.0f;
         m_WanderDistance = 7.0f;
+
+        m_BoundingSphereRadius = 1.0f;
+        m_ObstacleMaxDistance = 10.0f;
+
+        m_Senseurs.Add(new Ray(agent.transform.position, agent.transform.forward));
+        m_Senseurs.Add(new Ray(agent.transform.position, Quaternion.Euler(0, 25, 0) * agent.transform.forward));
+        m_Senseurs.Add(new Ray(agent.transform.position, Quaternion.Euler(0, -25, 0) * agent.transform.forward));
 
         // Set velocity
         Vector3 velocity = agent.transform.forward * m_MaxSpeed;
@@ -44,7 +56,9 @@ public class SteeringBehavior : MonoBehaviour {
 
     public void UpdateBehavior(Animaux agent) {
         //StartCoroutine(UpdateSteer());
-        Vector3 steeringForceAverage = Wander(agent.transform);
+        Vector3 steeringForceAverage;
+        steeringForceAverage = ObstancleAvoidance(agent) * 2;
+        steeringForceAverage += new Vector3(0, 0, 1); //Wander(agent.transform) * 1;
 
         Debug.Log(steeringForceAverage);
 
@@ -67,128 +81,55 @@ public class SteeringBehavior : MonoBehaviour {
 
     }
 
-    //IEnumerator UpdateSteer()
-    //{
-    //    // TODO watch tuto
-    //    // Tire au hasard un nombre entre 0 et 1
-    //    float val = Random.value;
-    //    if (val > 0.1)
-    //    {
-    //        Wander();
-    //        yield return new WaitForSeconds(.1f);
-    //    }
-    //    else
-    //    {
-    //        // choisie une nouvelle direction
-    //        float theta = Random.value * 2 * Mathf.PI;
-    //        m_vWanderTarget = new Vector3(m_dWanderRadius * Mathf.Cos(theta), 0f,
-    //                                    m_dWanderRadius * Mathf.Sin(theta));
-    //        m_vWanderTarget += agent.transform.position + new Vector3(0, 0, distanceProjection);
-
-    //        // Marqué une pause.
-    //        yield return new WaitForSeconds(3f);
-    //    }
-
-    //    //while (Vector3.Distance(transform.position, target) > 0.05f)
-    //    //{
-    //    //    transform.position = Vector3.Lerp(transform.position, target, smoothing * Time.deltaTime);
-
-    //    //    yield return null;
-    //    //}
-    //}
-
-    //public void UpdateSteer() {
-    //    // TODO watch tuto
-    //    // Tire au hasard un nombre entre 0 et 1
-    //    //float val = Random.value;
-    //    //if (val > 0.005)
-    //    //{
-    //        Wander2();
-    //    //}
-    //    //else
-    //    //{
-    //    //    // choisie une nouvelle direction
-    //    //    float theta = Random.value * 2 * Mathf.PI;
-    //    //    m_vWanderTarget = new Vector3(m_dWanderRadius * Mathf.Cos(theta), 0f,
-    //    //                                m_dWanderRadius * Mathf.Sin(theta));
-    //    //    m_vWanderTarget += agent.transform.position + new Vector3(0, 0, -12f);
-
-    //    //    // Marqué une pause.
-    //    //}
-
-    //    //while (Vector3.Distance(transform.position, target) > 0.05f)
-    //    //{
-    //    //    transform.position = Vector3.Lerp(transform.position, target, smoothing * Time.deltaTime);
-
-    //    //    yield return null;
-    //    //}
-    //}
-
-
-
-    public Vector3 Wander(Transform transformAgent)
-    {
-
+    public Vector3 Wander(Transform transformAgent) {
         UpdateTimer(transformAgent);
-        
-        //wanderTarget = (transformAgent.position + transformAgent.forward * m_WanderDistance - wanderTarget).normalized * m_dWanderRadius;
-
         Vector3 m_DesiredVelocity = (m_vWanderTarget - transformAgent.position).normalized * m_MaxSpeed;
-
-        // translation
-        ////Debug.Log(target);
-        //Vector3 m_vWanderTarget2 = transformAgent.position + new Vector3(0, 0, distanceProjection) + direction;
-
-        //Debug.Log(agent.transform.position + " et " + m_vWanderTarget2);
-
         return m_DesiredVelocity;
-        //animal.SetDestination(m_vWanderTarget2);
-
     }
 
-    //public Vector3 Wander(Transform transformAgent) {
+    public Vector3 ObstancleAvoidance(Animaux agent) {
+
+        Vector3 m_DesiredVelocity = (m_vWanderTarget - agent.transform.position).normalized * m_MaxSpeed;
+
+        // Get most threatening obstacle
+        RaycastHit hitInfo;
+        Ray obstacleRay = new Ray(agent.transform.position, agent.transform.forward);
+        Vector3 avoidanceForce = Vector3.zero;
 
 
+        // Calculate avoidance force
+        if (Physics.Raycast(obstacleRay, out hitInfo, m_ObstacleMaxDistance)) {
+            avoidanceForce = Vector3.Reflect(agent.transform.forward * m_MaxSpeed, hitInfo.normal);
+            Vector3 t = m_DesiredVelocity;
+            Debug.Log("test");
+        }
 
+        // Calculate avoidance force
+        //if (Physics.SphereCast(ray, m_BoundingSphereRadius, out hitInfo, m_ObstacleMaxDistance, m_LayerMask))
+        //{
+        //    if (Vector3.Angle(hitInfo.normal, transform.up) > 45)
+        //    {
+        //        avoidanceForce = Vector3.Reflect(SteeringCore.Velocity, hitInfo.normal);
 
-    //    transformAgent.rotation = Quaternion.LookRotation(m_vWanderTarget);
+        //        if (Vector3.Dot(avoidanceForce, SteeringCore.Velocity) < -0.9f)
+        //        {
+        //            avoidanceForce = transform.right;
+        //        }
+        //    }
+        //}
 
-    //    //transformAgent.Translate(m_vWanderTarget * 0.001f);
+        return avoidanceForce;
+    }
 
-    //    // Update timer
-    //    UpdateTimer(transformAgent);
-
-    //    // Add a small perturbation to simulate wander
-    //    //Vector3 wanderTarget = m_vWanderTarget + new Vector3(Random.Range(-20.0f, 20.0f), 0f, Random.Range(-1.0f, 1.0f));
-    //    // 
-    //    //wanderTarget = (wanderTarget - (transformAgent.position + -transformAgent.forward) * m_WanderDistance).normalized * m_dWanderRadius;
-
-    //    //wanderTarget = transformAgent.forward + wanderTarget;
-
-    //    //Vector3 desiredVel = (wanderTarget - transformAgent.position).normalized * m_MaxSpeed * Time.deltaTime;
-
-    //    // then it depends if you are rotating it or not, if rotating:
-    //    //transformAgent.rotation = Quaternion.LookRotation(wanderTarget);
-
-    //    // Mise a jour 
-    //    //m_vWanderTarget = wanderTarget;
-
-    //    //transformAgent.Translate(wanderTarget * Time.deltaTime);
-    //    return m_vWanderTarget;
-    //}
-
-    private void UpdateTimer(Transform transformAgent)
-    {
+    private void UpdateTimer(Transform transformAgent) {
         m_Timer += Time.deltaTime;
 
-        if (m_Timer > 1)
-        {
+        if (m_Timer > 1) {
             // choisie une nouvelle direction
             float theta = Random.value * 2 * Mathf.PI;
             m_vWanderTarget = transformAgent.position + new Vector3(m_dWanderRadius * Mathf.Cos(theta), 0f,
                                 m_dWanderRadius * Mathf.Sin(theta));
             m_vWanderTarget += transformAgent.forward * m_WanderDistance;
-
             m_Timer = 0;
         }
     }
