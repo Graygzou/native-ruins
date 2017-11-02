@@ -11,7 +11,7 @@ public class SteeringBehavior : MonoBehaviour {
     public Vector3 m_vWanderTarget;
     public Vector3 m_DesiredVelocity { get; set; }
     public float m_MaxSpeed { get; set; }
-
+    
     private float m_Timer = 0;
 
     // Variables for the obstacles avoidance
@@ -36,6 +36,7 @@ public class SteeringBehavior : MonoBehaviour {
         m_BoundingSphereRadius = 1.0f;
         m_ObstacleMaxDistance = 10.0f;
 
+        m_Senseurs = new List<Ray>();
         m_Senseurs.Add(new Ray(agent.transform.position, agent.transform.forward));
         m_Senseurs.Add(new Ray(agent.transform.position, Quaternion.Euler(0, 25, 0) * agent.transform.forward));
         m_Senseurs.Add(new Ray(agent.transform.position, Quaternion.Euler(0, -25, 0) * agent.transform.forward));

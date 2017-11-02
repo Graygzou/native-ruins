@@ -61,9 +61,9 @@ public class WaterFlowFREEDemo : MonoBehaviour
 	void Start()
 	{
 
-		// Get information from Simple water's material.
-		m_WaterSimpleOriginal_Color = m_SimpleWater.GetComponent<Renderer>().material.GetColor("_Color");
-		m_WaterSimpleOriginal_UMoveSpeed = m_SimpleWater.GetComponent<Renderer>().material.GetFloat("_MoveSpeedU");
+        // Get information from Simple water's material.
+        m_WaterSimpleOriginal_Color = m_SimpleWater.GetComponent<Renderer>().material.GetColor("_Color");
+        m_WaterSimpleOriginal_UMoveSpeed = m_SimpleWater.GetComponent<Renderer>().material.GetFloat("_MoveSpeedU");
 		m_WaterSimpleOriginal_VMoveSpeed = m_SimpleWater.GetComponent<Renderer>().material.GetFloat("_MoveSpeedV");
 		m_WaterSimple_Color = m_WaterSimpleOriginal_Color;
 		m_WaterSimple_UMoveSpeed = m_WaterSimpleOriginal_UMoveSpeed;

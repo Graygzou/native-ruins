@@ -2,75 +2,38 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 3
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Toony_01_Material (64x64px)
   m_Shader: {fileID: 4800000, guid: 65ae9ae666ea007419d4f36e01d4a819, type: 3}
-  m_ShaderKeywords: []
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
   m_SavedProperties:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TexEnvs:
-      data:
-        first:
-          name: _MainTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 89693c1260379b74fa5fcfd197b79b50, type: 3}
-          m_Scale: {x: 4, y: 4}
-          m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 89693c1260379b74fa5fcfd197b79b50, type: 3}
+        m_Scale: {x: 30, y: 30}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-      data:
-        first:
-          name: _MainTexMultiply
-        second: 1.16071427
-      data:
-        first:
-          name: _MainTexMoveSpeedU
-        second: -.642857134
-      data:
-        first:
-          name: _MainTexMoveSpeedV
-        second: -.785714209
-      data:
-        first:
-          name: _Multiply
-        second: 5
-      data:
-        first:
-          name: _MoveSpeedU
-        second: .5
-      data:
-        first:
-          name: _MoveSpeedV
-        second: -.5
-      data:
-        first:
-          name: _MainTexTile
-        second: 4
-      data:
-        first:
-          name: _HeightMapTile
-        second: 1
-      data:
-        first:
-          name: _MainTexRefraction
-        second: 1.23749995
-      data:
-        first:
-          name: _HeightMapStrength
-        second: 1.60714281
-      data:
-        first:
-          name: _HeightMapMultiply
-        second: .11428573
+    - _HeightMapMultiply: 0.11428573
+    - _HeightMapStrength: 1.6071428
+    - _HeightMapTile: 1
+    - _MainTexMoveSpeedU: -0.64285713
+    - _MainTexMoveSpeedV: -0.7857142
+    - _MainTexMultiply: 1.1607143
+    - _MainTexRefraction: 1.2375
+    - _MainTexTile: 4
+    - _MoveSpeedU: 0.5
+    - _MoveSpeedV: -0.5
+    - _Multiply: 5
     m_Colors:
-      data:
-        first:
-          name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _MainTexColor
-        second: {r: 1, g: 1, b: 1, a: .666666687}
+    - _Color: {r: 0.122, g: 1, b: 1, a: 1}
+    - _MainTexColor: {r: 1, g: 1, b: 1, a: 0.6666667}
