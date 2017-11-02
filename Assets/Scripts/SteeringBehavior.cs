@@ -13,11 +13,13 @@ public class SteeringBehavior : MonoBehaviour {
     public float m_MaxSpeed { get; set; }
     
     private float m_Timer = 0;
+    bool avoid = false;
+    float theta;
 
     // Variables for the obstacles avoidance
     public float m_BoundingSphereRadius;
     public float m_ObstacleMaxDistance;
-    public List<Ray> m_Senseurs;
+    public Dictionary<Ray, float> m_Senseurs;
 
     // Maybe useless
     NavMeshAgent animal;
@@ -36,10 +38,7 @@ public class SteeringBehavior : MonoBehaviour {
         m_BoundingSphereRadius = 1.0f;
         m_ObstacleMaxDistance = 10.0f;
 
-        m_Senseurs = new List<Ray>();
-        m_Senseurs.Add(new Ray(agent.transform.position, agent.transform.forward));
-        m_Senseurs.Add(new Ray(agent.transform.position, Quaternion.Euler(0, 25, 0) * agent.transform.forward));
-        m_Senseurs.Add(new Ray(agent.transform.position, Quaternion.Euler(0, -25, 0) * agent.transform.forward));
+        m_Senseurs = new Dictionary<Ray, float>();
 
         // Set velocity
         Vector3 velocity = agent.transform.forward * m_MaxSpeed;
@@ -47,7 +46,7 @@ public class SteeringBehavior : MonoBehaviour {
         agent.GetComponent<Rigidbody>().velocity = velocity;
 
         // Create first random point
-        float theta = Random.value * 2 * Mathf.PI;
+        theta = Random.value * 2 * Mathf.PI;
         m_vWanderTarget = new Vector3(m_dWanderRadius * Mathf.Cos(theta), 0f,
                                     m_dWanderRadius * Mathf.Sin(theta));
         m_vWanderTarget += agent.transform.position + agent.transform.forward * m_WanderDistance;
@@ -57,18 +56,29 @@ public class SteeringBehavior : MonoBehaviour {
 
     public void UpdateBehavior(Animaux agent) {
         //StartCoroutine(UpdateSteer());
-        Vector3 steeringForceAverage;
-        steeringForceAverage = ObstancleAvoidance(agent) * 2;
-        steeringForceAverage += new Vector3(0, 0, 1); //Wander(agent.transform) * 1;
+        Vector3 steeringForceAverage = Vector3.zero;
+        Vector3 steeringForceObstacle = Vector3.zero;
+        if (!avoid) {
+            steeringForceObstacle = ObstancleAvoidance(agent);
+            steeringForceAverage += steeringForceObstacle;
+        }
+        if (steeringForceObstacle != Vector3.zero) {
+            agent.GetComponent<Rigidbody>().velocity = steeringForceObstacle * m_MaxSpeed;
+            m_vWanderTarget = agent.transform.position + agent.GetComponent<Rigidbody>().velocity;
+            avoid = true;
+        } else {
+            avoid = false;
+            Vector3 steeringForceWander = Wander(agent.transform);
+            steeringForceAverage += steeringForceWander;
 
-        Debug.Log(steeringForceAverage);
+            steeringForceAverage = steeringForceAverage * m_MaxSpeed;
+            Vector3 steeringForceAverage1 = Vector3.ClampMagnitude(steeringForceAverage, m_MaxSpeed);
 
-        steeringForceAverage = Vector3.ClampMagnitude(steeringForceAverage, m_MaxSpeed);
-
-        // Add steering force to velocity
-        agent.GetComponent<Rigidbody>().velocity = steeringForceAverage;
-        //m_Velocity += steeringForceAverage;
-        //transform.position += m_Velocity * Time.deltaTime;
+            // Add steering force to velocity
+            agent.GetComponent<Rigidbody>().velocity = steeringForceAverage1;
+            //m_Velocity += steeringForceAverage;
+            //transform.position += m_Velocity * Time.deltaTime;
+        }
 
         // Update rotation
         if (agent.GetComponent<Rigidbody>().velocity.sqrMagnitude > 1) {
@@ -78,32 +88,37 @@ public class SteeringBehavior : MonoBehaviour {
                 Quaternion.LookRotation(agent.GetComponent<Rigidbody>().velocity), Time.deltaTime * 5);
         }
 
-        agent.transform.Translate(steeringForceAverage * Time.deltaTime);
+        agent.animal.Move(agent.GetComponent<Rigidbody>().velocity * Time.deltaTime);
 
+        //agent.transform.Translate(agent.GetComponent<Rigidbody>().velocity * Time.deltaTime);
     }
 
     public Vector3 Wander(Transform transformAgent) {
         UpdateTimer(transformAgent);
-        Vector3 m_DesiredVelocity = (m_vWanderTarget - transformAgent.position).normalized * m_MaxSpeed;
+        Vector3 m_DesiredVelocity = (m_vWanderTarget - transformAgent.position).normalized;
         return m_DesiredVelocity;
     }
 
     public Vector3 ObstancleAvoidance(Animaux agent) {
 
-        Vector3 m_DesiredVelocity = (m_vWanderTarget - agent.transform.position).normalized * m_MaxSpeed;
-
         // Get most threatening obstacle
         RaycastHit hitInfo;
-        Ray obstacleRay = new Ray(agent.transform.position, agent.transform.forward);
+
+        m_Senseurs.Add(new Ray(agent.transform.position, agent.transform.forward), 5);
+        m_Senseurs.Add(new Ray(agent.transform.position + agent.transform.forward * 1.5f, Quaternion.Euler(0, 16, 0) * agent.transform.forward), 5);
+        m_Senseurs.Add(new Ray(agent.transform.position + agent.transform.forward * 1.5f, Quaternion.Euler(0, -16, 0) * agent.transform.forward), 5);
+
+        //Ray obstacleRay = new Ray(agent.transform.position, agent.transform.forward);
         Vector3 avoidanceForce = Vector3.zero;
 
-
-        // Calculate avoidance force
-        if (Physics.Raycast(obstacleRay, out hitInfo, m_ObstacleMaxDistance)) {
-            avoidanceForce = Vector3.Reflect(agent.transform.forward * m_MaxSpeed, hitInfo.normal);
-            Vector3 t = m_DesiredVelocity;
-            Debug.Log("test");
+        foreach (Ray r in m_Senseurs.Keys) {
+            // Calculate avoidance force
+            if (Physics.Raycast(r, out hitInfo, m_Senseurs[r])) {
+                avoidanceForce += Vector3.Reflect(agent.transform.forward * m_MaxSpeed, hitInfo.normal) * (m_Senseurs[r] - hitInfo.distance);
+                //avoidanceForce += hitInfo.normal * (m_Senseurs[r] - hitInfo.distance);
+            }
         }
+        m_Senseurs = new Dictionary<Ray, float>();
 
         // Calculate avoidance force
         //if (Physics.SphereCast(ray, m_BoundingSphereRadius, out hitInfo, m_ObstacleMaxDistance, m_LayerMask))
@@ -119,19 +134,20 @@ public class SteeringBehavior : MonoBehaviour {
         //    }
         //}
 
-        return avoidanceForce;
+        return avoidanceForce.normalized;
     }
 
     private void UpdateTimer(Transform transformAgent) {
         m_Timer += Time.deltaTime;
 
-        if (m_Timer > 1) {
+        if (!avoid && m_Timer > 0.7) {
             // choisie une nouvelle direction
-            float theta = Random.value * 2 * Mathf.PI;
+            theta = theta + Random.Range(-0.2f, 0.2f) * 2 * Mathf.PI;
             m_vWanderTarget = transformAgent.position + new Vector3(m_dWanderRadius * Mathf.Cos(theta), 0f,
                                 m_dWanderRadius * Mathf.Sin(theta));
             m_vWanderTarget += transformAgent.forward * m_WanderDistance;
             m_Timer = 0;
+            avoid = false;
         }
     }
 
