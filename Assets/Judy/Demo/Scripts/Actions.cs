@@ -21,13 +21,13 @@ public class Actions : MonoBehaviour {
 
 	public void Walk () {
 		animator.SetBool("Aiming", false);
-		animator.SetFloat ("Speed", 1.5f);
+		animator.SetFloat ("Speed", 16.5f);
 		animator.Play ("Walk");
 	}
 
 	public void Run () {
 		animator.SetBool("Aiming", false);
-		animator.SetFloat ("Speed", 4f);
+		animator.SetFloat ("Speed", 44f);
 		animator.Play ("Run");
 	}
 

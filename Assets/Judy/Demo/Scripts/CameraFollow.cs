@@ -15,14 +15,14 @@ namespace CompleteProject
         void Start ()
         {
             // Calculate the initial offset.
-            offset = transform.position - target.position;
+			offset = (transform.position - target.position)*11;
         }
 
 
         void FixedUpdate ()
         {
             // Create a postion the camera is aiming for based on the offset from the target.
-            Vector3 targetCamPos = target.position + offset;
+			Vector3 targetCamPos = target.position + target.forward*(-100);
 
             // Smoothly interpolate between the camera's current position and it's target position.
             transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);

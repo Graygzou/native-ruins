@@ -42,7 +42,7 @@ public class MovementController : MonoBehaviour {
 
 		UpdateCamera(dir.x, -dir.y);
 		Transform cameraTrans = m_cameraPivot.GetChild(0);
-		float z = Mathf.Clamp(Input.mouseScrollDelta.y*0.3f + cameraTrans.localPosition.z, -8, -2);
+		float z = Mathf.Clamp(Input.mouseScrollDelta.y*0.3f + cameraTrans.localPosition.z, -32, -12);
 		cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
 	}
 
@@ -57,6 +57,7 @@ public class MovementController : MonoBehaviour {
 		{
 			m_cameraPivot.localEulerAngles = rotate;
 		}
+	
 	}
 
 
