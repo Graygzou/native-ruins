@@ -5,43 +5,35 @@ using UnityEngine.AI;
 
 public class Animaux : MonoBehaviour {
 
-    //private NavMeshAgent animal;     // The current animal
-
-    public SteeringBehavior s;
+    //private NavMeshAgent animal;     // See if useless
+    public SteeringBehavior steering;
 
     // Attributes of animals
     public float health { get; set; }
     public float maxSpeed { get; set; }
     public float mass { get; set; }
 
-    private float maxTurnRate; // Maybe unused yet.
+    //public Animaux(float hea, float maxSpe, float mas) : this(hea, maxSpe, mas, 5) {
+    //}
 
-    private Vector3 target; // Can be player or another position.
-
-    public Animaux(float hea, float maxSpe, float mas) : this(hea, maxSpe, mas, 5) {
-    }
-
-    public Animaux(float hea, float maxSpe, float mas, float maxTurn) {
+    public Animaux(float hea, float maxSpe, float mas) {
         health = hea;
         maxSpeed = maxSpe;
         mass = mas;
-        maxTurnRate = maxTurn;
-
         //target = gameObject.transform.forward * 2;   // The animal follow his current heading.
     }
 
     void Start() {
-        s = new SteeringBehavior(gameObject);
+        steering = new SteeringBehavior(this);
     }
 
     // Update is called once per frame
     void Update() {
-        s.UpdateBehavior();
+        steering.UpdateBehavior(this);
         //Debug.Log(gameObject.transform.forward);
         //print(transform.position.x);
         //Wander();
     }
-
 
     //// Use to make the animal behave like he has no particular goals
     //public void Wander () {
