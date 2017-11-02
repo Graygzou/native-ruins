@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour {
     private Vector3 m_currentDirection = Vector3.zero;
 
     private float m_jumpTimeStamp = 0;
-    private float m_minJumpInterval = 0.25f;
+    private float m_minJumpInterval = 1.40f;
 
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
