@@ -1,0 +1,526 @@
+fileFormatVersion: 2
+guid: 0266a1eda0e078142aaa310bd89fcf05
+timeCreated: 1480207440
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: PigRig2_Head_AuxSHJnt
+    100002: PigRig2_l_Clavicle_01_01SHJnt
+    100004: PigRig2_l_Ears_01SHJnt
+    100006: PigRig2_l_FrontLeg_AnkleSHJnt
+    100008: PigRig2_l_FrontLeg_BallSHJnt
+    100010: PigRig2_l_FrontLeg_HipSHJnt
+    100012: PigRig2_l_FrontLeg_KneeSHJnt
+    100014: PigRig2_l_FrontLeg_ToeSHJnt
+    100016: PigRig2_l_HindLeg_AnkleSHJnt
+    100018: PigRig2_l_HindLeg_BallSHJnt
+    100020: PigRig2_l_HindLeg_HipSHJnt
+    100022: PigRig2_l_HindLeg_Knee1SHJnt
+    100024: PigRig2_l_HindLeg_Knee2SHJnt
+    100026: PigRig2_l_HindLeg_ToeSHJnt
+    100028: PigRig2_r_Clavicle_01_01SHJnt
+    100030: PigRig2_r_Ears_01SHJnt
+    100032: PigRig2_r_FrontLeg_AnkleSHJnt
+    100034: PigRig2_r_FrontLeg_BallSHJnt
+    100036: PigRig2_r_FrontLeg_HipSHJnt
+    100038: PigRig2_r_FrontLeg_KneeSHJnt
+    100040: PigRig2_r_FrontLeg_ToeSHJnt
+    100042: PigRig2_r_HindLeg_AnkleSHJnt
+    100044: PigRig2_r_HindLeg_BallSHJnt
+    100046: PigRig2_r_HindLeg_HipSHJnt
+    100048: PigRig2_r_HindLeg_Knee1SHJnt
+    100050: PigRig2_r_HindLeg_Knee2SHJnt
+    100052: PigRig2_r_HindLeg_ToeSHJnt
+    100054: PigRig2_ROOTSHJnt
+    100056: PigRig2_SHJntGrp
+    100058: PigRig2_Spine_01SHJnt
+    100060: PigRig2_Spine_02SHJnt
+    100062: PigRig2_Spine_TopSHJnt
+    100064: PigRig2_Tail_AuxSHJnt
+    100066: SA_Animal_Pig
+    100068: //RootNode
+    400000: PigRig2_Head_AuxSHJnt
+    400002: PigRig2_l_Clavicle_01_01SHJnt
+    400004: PigRig2_l_Ears_01SHJnt
+    400006: PigRig2_l_FrontLeg_AnkleSHJnt
+    400008: PigRig2_l_FrontLeg_BallSHJnt
+    400010: PigRig2_l_FrontLeg_HipSHJnt
+    400012: PigRig2_l_FrontLeg_KneeSHJnt
+    400014: PigRig2_l_FrontLeg_ToeSHJnt
+    400016: PigRig2_l_HindLeg_AnkleSHJnt
+    400018: PigRig2_l_HindLeg_BallSHJnt
+    400020: PigRig2_l_HindLeg_HipSHJnt
+    400022: PigRig2_l_HindLeg_Knee1SHJnt
+    400024: PigRig2_l_HindLeg_Knee2SHJnt
+    400026: PigRig2_l_HindLeg_ToeSHJnt
+    400028: PigRig2_r_Clavicle_01_01SHJnt
+    400030: PigRig2_r_Ears_01SHJnt
+    400032: PigRig2_r_FrontLeg_AnkleSHJnt
+    400034: PigRig2_r_FrontLeg_BallSHJnt
+    400036: PigRig2_r_FrontLeg_HipSHJnt
+    400038: PigRig2_r_FrontLeg_KneeSHJnt
+    400040: PigRig2_r_FrontLeg_ToeSHJnt
+    400042: PigRig2_r_HindLeg_AnkleSHJnt
+    400044: PigRig2_r_HindLeg_BallSHJnt
+    400046: PigRig2_r_HindLeg_HipSHJnt
+    400048: PigRig2_r_HindLeg_Knee1SHJnt
+    400050: PigRig2_r_HindLeg_Knee2SHJnt
+    400052: PigRig2_r_HindLeg_ToeSHJnt
+    400054: PigRig2_ROOTSHJnt
+    400056: PigRig2_SHJntGrp
+    400058: PigRig2_Spine_01SHJnt
+    400060: PigRig2_Spine_02SHJnt
+    400062: PigRig2_Spine_TopSHJnt
+    400064: PigRig2_Tail_AuxSHJnt
+    400066: SA_Animal_Pig
+    400068: //RootNode
+    4300000: SA_Animal_Pig
+    7400000: Pig_Idle
+    7400002: Pig_Walk
+    7400004: Pig_Run
+    7400006: Pig_Eat
+    9500000: //RootNode
+    13700000: SA_Animal_Pig
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Pig_Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: PigRig2_SHJntGrp
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt/PigRig2_l_HindLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt/PigRig2_l_HindLeg_BallSHJnt/PigRig2_l_HindLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt/PigRig2_r_HindLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt/PigRig2_r_HindLeg_BallSHJnt/PigRig2_r_HindLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt/PigRig2_l_Ears_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt/PigRig2_r_Ears_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt/PigRig2_l_FrontLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt/PigRig2_l_FrontLeg_BallSHJnt/PigRig2_l_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt/PigRig2_r_FrontLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt/PigRig2_r_FrontLeg_BallSHJnt/PigRig2_r_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Tail_AuxSHJnt
+        weight: 1
+      - path: SA_Animal_Pig
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Pig_Walk
+      takeName: Take 001
+      firstFrame: 130
+      lastFrame: 160
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: PigRig2_SHJntGrp
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt/PigRig2_l_HindLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt/PigRig2_l_HindLeg_BallSHJnt/PigRig2_l_HindLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt/PigRig2_r_HindLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt/PigRig2_r_HindLeg_BallSHJnt/PigRig2_r_HindLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt/PigRig2_l_Ears_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt/PigRig2_r_Ears_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt/PigRig2_l_FrontLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt/PigRig2_l_FrontLeg_BallSHJnt/PigRig2_l_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt/PigRig2_r_FrontLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt/PigRig2_r_FrontLeg_BallSHJnt/PigRig2_r_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Tail_AuxSHJnt
+        weight: 1
+      - path: SA_Animal_Pig
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Pig_Run
+      takeName: Take 001
+      firstFrame: 170
+      lastFrame: 205
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: PigRig2_SHJntGrp
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt/PigRig2_l_HindLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt/PigRig2_l_HindLeg_BallSHJnt/PigRig2_l_HindLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt/PigRig2_r_HindLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt/PigRig2_r_HindLeg_BallSHJnt/PigRig2_r_HindLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt/PigRig2_l_Ears_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt/PigRig2_r_Ears_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt/PigRig2_l_FrontLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt/PigRig2_l_FrontLeg_BallSHJnt/PigRig2_l_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt/PigRig2_r_FrontLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt/PigRig2_r_FrontLeg_BallSHJnt/PigRig2_r_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Tail_AuxSHJnt
+        weight: 1
+      - path: SA_Animal_Pig
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Pig_Eat
+      takeName: Take 001
+      firstFrame: 210
+      lastFrame: 330
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: PigRig2_SHJntGrp
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt/PigRig2_l_HindLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_l_HindLeg_HipSHJnt/PigRig2_l_HindLeg_Knee1SHJnt/PigRig2_l_HindLeg_Knee2SHJnt/PigRig2_l_HindLeg_AnkleSHJnt/PigRig2_l_HindLeg_BallSHJnt/PigRig2_l_HindLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt/PigRig2_r_HindLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_r_HindLeg_HipSHJnt/PigRig2_r_HindLeg_Knee1SHJnt/PigRig2_r_HindLeg_Knee2SHJnt/PigRig2_r_HindLeg_AnkleSHJnt/PigRig2_r_HindLeg_BallSHJnt/PigRig2_r_HindLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt/PigRig2_l_Ears_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_Head_AuxSHJnt/PigRig2_r_Ears_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt/PigRig2_l_FrontLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_l_Clavicle_01_01SHJnt/PigRig2_l_FrontLeg_HipSHJnt/PigRig2_l_FrontLeg_KneeSHJnt/PigRig2_l_FrontLeg_AnkleSHJnt/PigRig2_l_FrontLeg_BallSHJnt/PigRig2_l_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt/PigRig2_r_FrontLeg_BallSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Spine_01SHJnt/PigRig2_Spine_02SHJnt/PigRig2_Spine_TopSHJnt/PigRig2_r_Clavicle_01_01SHJnt/PigRig2_r_FrontLeg_HipSHJnt/PigRig2_r_FrontLeg_KneeSHJnt/PigRig2_r_FrontLeg_AnkleSHJnt/PigRig2_r_FrontLeg_BallSHJnt/PigRig2_r_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: PigRig2_SHJntGrp/PigRig2_ROOTSHJnt/PigRig2_Tail_AuxSHJnt
+        weight: 1
+      - path: SA_Animal_Pig
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 10
+    splitTangentsAcrossUV: 0
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
