@@ -145,7 +145,7 @@ public class MovementControllerAnimal : MonoBehaviour {
 		transform.rotation = Quaternion.LookRotation (NextDir);
 		transform.position += NextDir * m_moveSpeed * Time.deltaTime;
 
-		GetInputs ();
+		GetInputs (NextDir);
 		//Animate (NextDir);
 		JumpingAndLanding(NextDir);
 
@@ -168,15 +168,21 @@ public class MovementControllerAnimal : MonoBehaviour {
 
     }
 
-	private void GetInputs(){
+	private void GetInputs(Vector3 NextDir){
 		if (m_isGrounded) {
-			if (Input.GetKey (KeyCode.LeftShift)) {
-				m_moveSpeed = m_maxSpeed;
-				m_animator.SetFloat ("Speed_f", m_maxSpeed);
+			if (!NextDir.Equals (Vector3.zero)) {
+				if (Input.GetKey (KeyCode.LeftShift)) {
+					m_moveSpeed = m_maxSpeed;
+					m_animator.SetFloat ("Speed_f", m_maxSpeed);
+				} else {
+					m_moveSpeed = m_minSpeed;
+					m_animator.SetFloat ("Speed_f", m_minSpeed);
+				}
 			} else {
-				m_moveSpeed = m_minSpeed;
-				m_animator.SetFloat ("Speed_f", m_minSpeed);
+				m_moveSpeed = 0f;
+				m_animator.SetFloat ("Speed_f", 0f);
 			}
+
 		}
 		m_animator.Play ("Locomotion");
 	}
