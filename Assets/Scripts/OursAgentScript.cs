@@ -30,24 +30,33 @@ public class BearScript : Animaux {
 
 }
 
-public abstract class Singleton {
-    private static Singleton instance;
+public class Death {
+    private static Death instance;
 
-    private Singleton() { }
+    private Death() { }
 
-    public static Singleton Instance {
+    public static Death Instance {
         get {
             if (instance == null) {
-                instance = new Singleton();
+                instance = new Death();
             }
             return instance;
         }
     }
 
-    public abstract void Enter(GameObject o);
+    public void Enter(GameObject o)
+    {
 
-    public abstract void Execute(GameObject o);
+    }
 
-    public abstract void Exit(GameObject o);
+    public void Execute(GameObject o)
+    {
+
+    }
+
+    public void Exit(GameObject o)
+    {
+
+    }
 
 }
