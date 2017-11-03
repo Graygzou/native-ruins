@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.AI;
+using System;
 
 public class SteeringBehavior : MonoBehaviour {
-
-    // TODO : box wander a modifier inspector
 
     // Variables for the wander
     public float WanderDistance { get; set; }
     public float dWanderRadius { get; set; }
     public Vector3 vWanderTarget;
+    public Transform target_p;
     public Vector3 desiredVelocity { get; set; }
     public float maxSpeed { get; set; }
 
@@ -24,6 +24,8 @@ public class SteeringBehavior : MonoBehaviour {
     public bool wallAvoidanceOn;
     public bool obstacleAvoidanceOn;
     public bool wanderOn;
+    public bool fleeOn;
+    public bool seekOn;
 
     float theta;
 
@@ -59,7 +61,7 @@ public class SteeringBehavior : MonoBehaviour {
         GetComponent<Rigidbody>().velocity = velocity;
 
         // Create first random point
-        theta = Random.value * 2 * Mathf.PI;
+        theta = UnityEngine.Random.value * 2 * Mathf.PI;
         vWanderTarget = new Vector3(dWanderRadius * Mathf.Cos(theta), 0f,
                                     dWanderRadius * Mathf.Sin(theta));
         vWanderTarget += transform.position + transform.forward * WanderDistance;
@@ -97,12 +99,12 @@ public class SteeringBehavior : MonoBehaviour {
 
     }
 
-    // TODO : rajouter les ponderations
     public Vector3 CalculatePrioritized() {
-
-        // TODO : change
-        Vector3 steeringForceAverage = new Vector3(0f, 0f, 1.0f);
         Vector3 force;
+        Vector3 steeringForceAverage = Vector3.zero;
+        if (wanderOn) {
+            steeringForceAverage = new Vector3(0.0f, 0.0f, 1.0f); ;
+        }
 
         if (wallAvoidanceOn) {
             force = WallAvoidance() * 10.0f;
@@ -140,6 +142,29 @@ public class SteeringBehavior : MonoBehaviour {
             }
         }
 
+        if (fleeOn) {
+            force = Flee() * 1.0f;
+            if (force.magnitude < maxForce - steeringForceAverage.magnitude) {
+                // We add the value to the vector
+                steeringForceAverage += force;
+            } else {
+                //add it to the steering force
+                steeringForceAverage += (force.normalized * (maxForce - steeringForceAverage.magnitude));
+                return steeringForceAverage;
+            }
+        }
+
+        if (seekOn) {
+            force = Seek() * 1.0f;
+            if (force.magnitude < maxForce - steeringForceAverage.magnitude) {
+                // We add the value to the vector
+                steeringForceAverage += force;
+            } else {
+                //add it to the steering force
+                steeringForceAverage += (force.normalized * (maxForce - steeringForceAverage.magnitude));
+                return steeringForceAverage;
+            }
+        }
         return steeringForceAverage;
     }
 
@@ -149,7 +174,7 @@ public class SteeringBehavior : MonoBehaviour {
         timer += Time.deltaTime;
         if (timer > 0.7) {
             // get a new direction
-            theta = theta + Random.Range(-0.2f, 0.2f) * 2 * Mathf.PI;
+            theta = theta + UnityEngine.Random.Range(-0.2f, 0.2f) * 2 * Mathf.PI;
             vWanderTarget = transform.position + new Vector3(dWanderRadius * Mathf.Cos(theta), 0f,
                                 dWanderRadius * Mathf.Sin(theta));
             vWanderTarget += transform.forward * WanderDistance;
@@ -195,15 +220,29 @@ public class SteeringBehavior : MonoBehaviour {
         Debug.DrawRay(transform.position, transform.forward * minDetectionBoxLength);
 
         if (Physics.SphereCast(ray, 1.5f, out hitInfo, minDetectionBoxLength)) {
-
-            //Vector3 forceLateral = (transform.position - hitInfo.point) / hitInfo.distance;
-            //Vector3 forceFreinage = -transform.forward.normalized;
             if (hitInfo.transform != transform) {
-                m_DesiredVelocity = hitInfo.point - hitInfo.collider.bounds.center; // hitInfo.normal;//forceLateral + forceFreinage;
+                m_DesiredVelocity = hitInfo.point - hitInfo.collider.bounds.center;
                 m_DesiredVelocity = new Vector3(m_DesiredVelocity.x, 0f, 0f) / hitInfo.distance;
             }
         }
         return m_DesiredVelocity;
+    }
+
+    public Vector3 Seek() {
+        Vector3 m_DesiredVelocity = Vector3.zero;
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent != null) {
+            agent.SetDestination(target_p.position);
+        } else {
+            // Redefinir A* ici ?
+            m_DesiredVelocity = target_p.position - transform.position;
+        }
+        return m_DesiredVelocity;
+    }
+
+    public Vector3 Flee() {
+        Vector3 m_DesiredVelocity = (transform.position - target_p.position).normalized * maxSpeed;
+        return m_DesiredVelocity - GetComponent<Rigidbody>().velocity;
     }
 
     void OnDrawGizmos()
@@ -236,11 +275,29 @@ public class MyScriptEditor : Editor
     {
         var myScript = target as SteeringBehavior;
 
+        // For the behavior
         myScript.wallAvoidanceOn = EditorGUILayout.Toggle("Wall Avoidance", myScript.wallAvoidanceOn);
         myScript.obstacleAvoidanceOn = EditorGUILayout.Toggle("Obstacle Avoidance", myScript.obstacleAvoidanceOn);
         myScript.wanderOn = EditorGUILayout.Toggle("Wander", myScript.wanderOn);
+        myScript.fleeOn = EditorGUILayout.Toggle("Flee", myScript.fleeOn);
+        myScript.seekOn = EditorGUILayout.Toggle("Seek", myScript.seekOn);
 
+        using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(myScript.fleeOn || myScript.seekOn)))
+        {
+            if (group.visible == true)
+            {
+                EditorGUI.indentLevel++;
+                myScript.target_p = EditorGUILayout.ObjectField("Target", myScript.target_p, typeof(Transform), true) as Transform;
+                EditorGUI.indentLevel--;
+            }
+        }
+
+        //using (new EditorGUI.DisabledScope(myScript.fleeOn || myScript.seekOn))
+        //    myScript.target_p = EditorGUILayout.ObjectField("Target", myScript.target_p, typeof(Transform), true) as Transform;
+
+        // For parameters
         myScript.minDetectionBoxLength = EditorGUILayout.FloatField("Detection Lenght", myScript.minDetectionBoxLength);
+        myScript.dWanderRadius = EditorGUILayout.FloatField("Wander Radius", myScript.dWanderRadius);
 
     }
 }
