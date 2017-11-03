@@ -1,0 +1,620 @@
+fileFormatVersion: 2
+guid: 0904c2f7f32114047ad477fc14eb29c2
+timeCreated: 1485651324
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: RabbitRig
+    100004: RabbitRig_Head_JawEndSHJnt
+    100006: RabbitRig_Head_JawSHJnt
+    100008: RabbitRig_Head_TopSHJnt
+    100010: RabbitRig_l_Clavicle_01_01SHJnt
+    100012: RabbitRig_l_Eye_01SHJnt
+    100014: RabbitRig_l_FrontLeg_AnkleSHJnt
+    100016: RabbitRig_l_FrontLeg_BallSHJnt
+    100018: RabbitRig_l_FrontLeg_HipSHJnt
+    100020: RabbitRig_l_FrontLeg_KneeSHJnt
+    100022: RabbitRig_l_FrontLeg_ToeSHJnt
+    100024: RabbitRig_l_HindLeg_AnkleSHJnt
+    100026: RabbitRig_l_HindLeg_BallSHJnt
+    100028: RabbitRig_l_HindLeg_HipSHJnt
+    100030: RabbitRig_l_HindLeg_Knee1SHJnt
+    100032: RabbitRig_l_HindLeg_Knee2SHJnt
+    100034: RabbitRig_l_HindLeg_ToeSHJnt
+    100036: RabbitRig_Neck_01SHJnt
+    100038: RabbitRig_Neck_02SHJnt
+    100040: RabbitRig_Neck_TopSHJnt
+    100042: RabbitRig_r_Clavicle_01_01SHJnt
+    100044: RabbitRig_r_Eye_01SHJnt
+    100046: RabbitRig_r_FrontLeg_AnkleSHJnt
+    100048: RabbitRig_r_FrontLeg_BallSHJnt
+    100050: RabbitRig_r_FrontLeg_HipSHJnt
+    100052: RabbitRig_r_FrontLeg_KneeSHJnt
+    100054: RabbitRig_r_FrontLeg_ToeSHJnt
+    100056: RabbitRig_r_HindLeg_AnkleSHJnt
+    100058: RabbitRig_r_HindLeg_BallSHJnt
+    100060: RabbitRig_r_HindLeg_HipSHJnt
+    100062: RabbitRig_r_HindLeg_Knee1SHJnt
+    100064: RabbitRig_r_HindLeg_Knee2SHJnt
+    100066: RabbitRig_r_HindLeg_ToeSHJnt
+    100068: RabbitRig_ROOTSHJnt
+    100070: RabbitRig_SHJntGrp
+    100072: RabbitRig_Spine_01SHJnt
+    100074: RabbitRig_Spine_02SHJnt
+    100076: RabbitRig_Spine_TopSHJnt
+    100078: RabbitRig_Tail_01_01SHJnt
+    100080: RabbitRig_Tail_01_02SHJnt
+    100082: SM_Rabbit_01
+    100084: SM_Rabbit_02
+    100086: SM_Rabbit_03
+    400000: //RootNode
+    400002: RabbitRig
+    400004: RabbitRig_Head_JawEndSHJnt
+    400006: RabbitRig_Head_JawSHJnt
+    400008: RabbitRig_Head_TopSHJnt
+    400010: RabbitRig_l_Clavicle_01_01SHJnt
+    400012: RabbitRig_l_Eye_01SHJnt
+    400014: RabbitRig_l_FrontLeg_AnkleSHJnt
+    400016: RabbitRig_l_FrontLeg_BallSHJnt
+    400018: RabbitRig_l_FrontLeg_HipSHJnt
+    400020: RabbitRig_l_FrontLeg_KneeSHJnt
+    400022: RabbitRig_l_FrontLeg_ToeSHJnt
+    400024: RabbitRig_l_HindLeg_AnkleSHJnt
+    400026: RabbitRig_l_HindLeg_BallSHJnt
+    400028: RabbitRig_l_HindLeg_HipSHJnt
+    400030: RabbitRig_l_HindLeg_Knee1SHJnt
+    400032: RabbitRig_l_HindLeg_Knee2SHJnt
+    400034: RabbitRig_l_HindLeg_ToeSHJnt
+    400036: RabbitRig_Neck_01SHJnt
+    400038: RabbitRig_Neck_02SHJnt
+    400040: RabbitRig_Neck_TopSHJnt
+    400042: RabbitRig_r_Clavicle_01_01SHJnt
+    400044: RabbitRig_r_Eye_01SHJnt
+    400046: RabbitRig_r_FrontLeg_AnkleSHJnt
+    400048: RabbitRig_r_FrontLeg_BallSHJnt
+    400050: RabbitRig_r_FrontLeg_HipSHJnt
+    400052: RabbitRig_r_FrontLeg_KneeSHJnt
+    400054: RabbitRig_r_FrontLeg_ToeSHJnt
+    400056: RabbitRig_r_HindLeg_AnkleSHJnt
+    400058: RabbitRig_r_HindLeg_BallSHJnt
+    400060: RabbitRig_r_HindLeg_HipSHJnt
+    400062: RabbitRig_r_HindLeg_Knee1SHJnt
+    400064: RabbitRig_r_HindLeg_Knee2SHJnt
+    400066: RabbitRig_r_HindLeg_ToeSHJnt
+    400068: RabbitRig_ROOTSHJnt
+    400070: RabbitRig_SHJntGrp
+    400072: RabbitRig_Spine_01SHJnt
+    400074: RabbitRig_Spine_02SHJnt
+    400076: RabbitRig_Spine_TopSHJnt
+    400078: RabbitRig_Tail_01_01SHJnt
+    400080: RabbitRig_Tail_01_02SHJnt
+    400082: SM_Rabbit_01
+    400084: SM_Rabbit_02
+    400086: SM_Rabbit_03
+    4300000: SM_Rabbit_01
+    4300002: SM_Rabbit_02
+    4300004: SM_Rabbit_03
+    7400000: Rabbit_Idle
+    7400002: Rabbit_Walk
+    7400004: Rabbit_Run
+    7400006: Rabbit_Eat
+    9500000: //RootNode
+    13700000: SM_Rabbit_01
+    13700002: SM_Rabbit_02
+    13700004: SM_Rabbit_03
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 1
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Rabbit_Idle
+      takeName: Take 001
+      firstFrame: 70
+      lastFrame: 150
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: SM_Rabbit_01
+        weight: 1
+      - path: RabbitRig
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt/RabbitRig_l_FrontLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt/RabbitRig_l_FrontLeg_BallSHJnt/RabbitRig_l_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt/RabbitRig_r_FrontLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt/RabbitRig_r_FrontLeg_BallSHJnt/RabbitRig_r_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_JawSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_JawSHJnt/RabbitRig_Head_JawEndSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt/RabbitRig_l_Eye_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt/RabbitRig_r_Eye_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt/RabbitRig_l_HindLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt/RabbitRig_l_HindLeg_BallSHJnt/RabbitRig_l_HindLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt/RabbitRig_r_HindLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt/RabbitRig_r_HindLeg_BallSHJnt/RabbitRig_r_HindLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Tail_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Tail_01_01SHJnt/RabbitRig_Tail_01_02SHJnt
+        weight: 1
+      - path: SM_Rabbit_02
+        weight: 1
+      - path: SM_Rabbit_03
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Rabbit_Walk
+      takeName: Take 001
+      firstFrame: 40
+      lastFrame: 61
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: SM_Rabbit_01
+        weight: 1
+      - path: RabbitRig
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt/RabbitRig_l_FrontLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt/RabbitRig_l_FrontLeg_BallSHJnt/RabbitRig_l_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt/RabbitRig_r_FrontLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt/RabbitRig_r_FrontLeg_BallSHJnt/RabbitRig_r_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_JawSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_JawSHJnt/RabbitRig_Head_JawEndSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt/RabbitRig_l_Eye_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt/RabbitRig_r_Eye_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt/RabbitRig_l_HindLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt/RabbitRig_l_HindLeg_BallSHJnt/RabbitRig_l_HindLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt/RabbitRig_r_HindLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt/RabbitRig_r_HindLeg_BallSHJnt/RabbitRig_r_HindLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Tail_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Tail_01_01SHJnt/RabbitRig_Tail_01_02SHJnt
+        weight: 1
+      - path: SM_Rabbit_02
+        weight: 1
+      - path: SM_Rabbit_03
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Rabbit_Run
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 28
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: SM_Rabbit_01
+        weight: 1
+      - path: RabbitRig
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt/RabbitRig_l_FrontLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt/RabbitRig_l_FrontLeg_BallSHJnt/RabbitRig_l_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt/RabbitRig_r_FrontLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt/RabbitRig_r_FrontLeg_BallSHJnt/RabbitRig_r_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_JawSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_JawSHJnt/RabbitRig_Head_JawEndSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt/RabbitRig_l_Eye_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt/RabbitRig_r_Eye_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt/RabbitRig_l_HindLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt/RabbitRig_l_HindLeg_BallSHJnt/RabbitRig_l_HindLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt/RabbitRig_r_HindLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt/RabbitRig_r_HindLeg_BallSHJnt/RabbitRig_r_HindLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Tail_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Tail_01_01SHJnt/RabbitRig_Tail_01_02SHJnt
+        weight: 1
+      - path: SM_Rabbit_02
+        weight: 1
+      - path: SM_Rabbit_03
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Rabbit_Eat
+      takeName: Take 001
+      firstFrame: 170
+      lastFrame: 250
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: SM_Rabbit_01
+        weight: 1
+      - path: RabbitRig
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt/RabbitRig_l_FrontLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_l_Clavicle_01_01SHJnt/RabbitRig_l_FrontLeg_HipSHJnt/RabbitRig_l_FrontLeg_KneeSHJnt/RabbitRig_l_FrontLeg_AnkleSHJnt/RabbitRig_l_FrontLeg_BallSHJnt/RabbitRig_l_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt/RabbitRig_r_FrontLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_r_Clavicle_01_01SHJnt/RabbitRig_r_FrontLeg_HipSHJnt/RabbitRig_r_FrontLeg_KneeSHJnt/RabbitRig_r_FrontLeg_AnkleSHJnt/RabbitRig_r_FrontLeg_BallSHJnt/RabbitRig_r_FrontLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_JawSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_JawSHJnt/RabbitRig_Head_JawEndSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt/RabbitRig_l_Eye_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Spine_01SHJnt/RabbitRig_Spine_02SHJnt/RabbitRig_Spine_TopSHJnt/RabbitRig_Neck_01SHJnt/RabbitRig_Neck_02SHJnt/RabbitRig_Neck_TopSHJnt/RabbitRig_Head_TopSHJnt/RabbitRig_r_Eye_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt/RabbitRig_l_HindLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_l_HindLeg_HipSHJnt/RabbitRig_l_HindLeg_Knee1SHJnt/RabbitRig_l_HindLeg_Knee2SHJnt/RabbitRig_l_HindLeg_AnkleSHJnt/RabbitRig_l_HindLeg_BallSHJnt/RabbitRig_l_HindLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt/RabbitRig_r_HindLeg_BallSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_r_HindLeg_HipSHJnt/RabbitRig_r_HindLeg_Knee1SHJnt/RabbitRig_r_HindLeg_Knee2SHJnt/RabbitRig_r_HindLeg_AnkleSHJnt/RabbitRig_r_HindLeg_BallSHJnt/RabbitRig_r_HindLeg_ToeSHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Tail_01_01SHJnt
+        weight: 1
+      - path: RabbitRig/RabbitRig_SHJntGrp/RabbitRig_ROOTSHJnt/RabbitRig_Tail_01_01SHJnt/RabbitRig_Tail_01_02SHJnt
+        weight: 1
+      - path: SM_Rabbit_02
+        weight: 1
+      - path: SM_Rabbit_03
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    splitTangentsAcrossUV: 0
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: RabbitRig
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
