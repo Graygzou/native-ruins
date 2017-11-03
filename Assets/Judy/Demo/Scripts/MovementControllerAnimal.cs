@@ -14,6 +14,8 @@ public class MovementControllerAnimal : MonoBehaviour {
     [SerializeField] private Rigidbody m_rigidBody;
 	[SerializeField] private Transform m_cameraPivot = null;
 
+	[SerializeField]private AudioSource m_footstep;
+
 	private Vector3 initial_orientation;
 
 
@@ -33,6 +35,10 @@ public class MovementControllerAnimal : MonoBehaviour {
 
 	public void Start(){
 		initial_orientation = transform.forward;
+		m_footstep.Play ();
+		m_footstep.loop = true;
+		m_footstep.Pause ();
+
 	}
 
 	private void LateUpdate()
@@ -174,13 +180,18 @@ public class MovementControllerAnimal : MonoBehaviour {
 				if (Input.GetKey (KeyCode.LeftShift)) {
 					m_moveSpeed = m_maxSpeed;
 					m_animator.SetFloat ("Speed_f", m_maxSpeed);
+					m_footstep.UnPause ();
+					m_footstep.pitch = 1.7f;
 				} else {
 					m_moveSpeed = m_minSpeed;
 					m_animator.SetFloat ("Speed_f", m_minSpeed);
+					m_footstep.UnPause ();
+					m_footstep.pitch = 1f;
 				}
 			} else {
 				m_moveSpeed = 0f;
 				m_animator.SetFloat ("Speed_f", 0f);
+				m_footstep.Pause ();
 			}
 
 		}

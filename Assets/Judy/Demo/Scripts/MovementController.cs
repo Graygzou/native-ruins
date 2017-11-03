@@ -11,6 +11,7 @@ public class MovementController : MonoBehaviour {
 	[SerializeField] private Actions actions=null;
     [SerializeField] private Rigidbody m_rigidBody;
 	[SerializeField] private Transform m_cameraPivot = null;
+	[SerializeField]private AudioSource m_footstep;
 
 	private Vector3 initial_orientation;
 
@@ -31,6 +32,9 @@ public class MovementController : MonoBehaviour {
 
 	public void Start(){
 		initial_orientation = transform.forward;
+		m_footstep.Play ();
+		m_footstep.loop = true;
+		m_footstep.Pause ();
 	}
 
 	private void LateUpdate()
@@ -168,6 +172,7 @@ public class MovementController : MonoBehaviour {
 	private void Animate(Vector3 NextDir){
 		if (m_isGrounded) {
 			if (NextDir.Equals (Vector3.zero)) {
+				m_footstep.Pause ();
 				if (Input.GetKey (KeyCode.LeftControl)) {
 					actions.Wary ();
 				} else {
@@ -176,12 +181,16 @@ public class MovementController : MonoBehaviour {
 
 			} else {
 				if (Input.GetKey(KeyCode.LeftShift)) {
+					m_footstep.UnPause ();
+					m_footstep.pitch = 1.7f;
 					if (Input.GetKey (KeyCode.LeftControl)) {
 						actions.CrouchingRun ();
 					} else {
 						actions.Run ();
 					}
 				} else {
+					m_footstep.UnPause ();
+					m_footstep.pitch = 1f;
 					if (Input.GetKey (KeyCode.LeftControl)) {
 						actions.Sitting ();
 					} else {
