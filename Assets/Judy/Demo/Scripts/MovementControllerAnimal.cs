@@ -4,11 +4,12 @@ using System.Collections.Generic;
 public class MovementControllerAnimal : MonoBehaviour {
 
     [SerializeField] private float m_moveSpeed = 1;
+	[SerializeField] private float m_minSpeed = 1;
 	[SerializeField] private float m_maxSpeed = 3;
     [SerializeField] private float m_turnSpeed =1;
 	[SerializeField] private float m_cameraSpeed = 2f;
     [SerializeField] private float m_jumpForce = 3;
-    //[SerializeField] private Animator m_animator =null;
+    [SerializeField] private Animator m_animator =null;
 	//[SerializeField] private Actions actions=null;
     [SerializeField] private Rigidbody m_rigidBody;
 	[SerializeField] private Transform m_cameraPivot = null;
@@ -171,10 +172,13 @@ public class MovementControllerAnimal : MonoBehaviour {
 		if (m_isGrounded) {
 			if (Input.GetKey (KeyCode.LeftShift)) {
 				m_moveSpeed = m_maxSpeed;
+				m_animator.SetFloat ("Speed_f", m_maxSpeed);
 			} else {
-				m_moveSpeed = m_moveSpeed;
+				m_moveSpeed = m_minSpeed;
+				m_animator.SetFloat ("Speed_f", m_minSpeed);
 			}
 		}
+		m_animator.Play ("Locomotion");
 	}
 
 	/*private void Animate(Vector3 NextDir){
