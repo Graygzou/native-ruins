@@ -7,9 +7,6 @@ public class Animaux : MonoBehaviour {
 
     public NavMeshAgent animal;     // See if useless
 
-    [HideInInspector]
-    public SteeringBehavior steering;
-
     // Attributes of animals
     public float health { get; set; }
     public float maxSpeed { get; set; }
@@ -25,13 +22,7 @@ public class Animaux : MonoBehaviour {
     }
 
     void Start() {
-        steering = new SteeringBehavior(this);
         animal = GetComponent<NavMeshAgent>();
-    }
-
-    // Update is called once per frame
-    void Update() {
-        steering.UpdateBehavior(this);
     }
 
 }
