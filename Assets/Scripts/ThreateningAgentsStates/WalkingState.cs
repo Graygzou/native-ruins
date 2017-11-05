@@ -5,14 +5,7 @@ using UnityEngine;
 public class WalkingState : State<GameObject> {
 
     private static WalkingState instance;
-    private Animator anim;
-    private SteeringBehavior behavior;
-    private AgentProperty properties;
-
-    private AnimatorStateInfo animationState;
-    private AnimatorClipInfo[] animationClips;
-    private float timeIdle;
-    private float time;
+    // Do not add more variables here
 
     private WalkingState() { }
 
@@ -26,21 +19,17 @@ public class WalkingState : State<GameObject> {
     }
 
     override public void Enter(GameObject o) {
-        anim = o.GetComponent<Animator>();
-        behavior = o.GetComponent<SteeringBehavior>();
-        properties = o.GetComponent<AgentProperty>();
+        StateMachine FSM = o.GetComponent<StateMachine>();
 
-        //o.GetComponent<StateMachine>().StartCoroutine("WaitGoodAnimation");
-        anim.Play("Locomotion");
+        FSM.animator.Play("Locomotion");
 
         // Set the animation variables
-        anim.SetFloat("Speed_f", 0.5f);
-        behavior.wanderOn = true;
-        behavior.obstacleAvoidanceOn = true;
+        FSM.animator.SetFloat("Speed_f", 0.5f);
+        FSM.behavior.wanderOn = true;
+        FSM.behavior.obstacleAvoidanceOn = true;
 
         // make sure we're in the good state animation
-        animationState = anim.GetCurrentAnimatorStateInfo(0);
-        animationClips = anim.GetCurrentAnimatorClipInfo(0);
+        AnimatorStateInfo animationState = FSM.animator.GetCurrentAnimatorStateInfo(0);
         // Force the state animation
 
         //do
@@ -55,11 +44,14 @@ public class WalkingState : State<GameObject> {
 
         // TODO: voir ce qui peut etre fait au niveau de la classe State mere. (refactoring)
         // Set the number of time that the state will be play
-        timeIdle = (int)Mathf.Round(Random.Range(4.0f, 6.0f));
-        time = animationState.normalizedTime;
+        FSM.timeIdle = (int)Mathf.Round(Random.Range(4.0f, 6.0f));
+        FSM.time = animationState.normalizedTime;
     }
 
     override public void Execute(GameObject o) {
+        StateMachine FSM = o.GetComponent<StateMachine>();
+        AgentProperty properties = o.GetComponent<AgentProperty>();
+
         // Udpate variables
         properties.hungryIndicator += 0.1f;
 
@@ -67,21 +59,23 @@ public class WalkingState : State<GameObject> {
         if (properties.hungryIndicator >= 50.0f) {
             // Launch a coroutine to accelerate POLISH
             // o.GetComponent<AgentProperty>().StartCoroutine("DecelerateWalk");
-            anim.SetBool("IsHungry", true);
-            anim.SetFloat("Speed_f", 0.0f);
+            FSM.animator.SetBool("IsHungry", true);
+            FSM.animator.SetFloat("Speed_f", 0.0f);
             o.GetComponent<StateMachine>().ChangeState(EatingState.Instance);
         }
         else {
             float currTime = o.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
-            if (currTime >= time + timeIdle - 0.06) {
+            if (currTime >= FSM.time + FSM.timeIdle - 0.06) {
                 o.GetComponent<StateMachine>().ChangeState(IdleState.Instance);
             }
         }
     }
 
     override public void Exit(GameObject o) {
-        behavior.wanderOn = false;
-        behavior.obstacleAvoidanceOn = false;
+        StateMachine FSM = o.GetComponent<StateMachine>();
+
+        FSM.behavior.wanderOn = false;
+        FSM.behavior.obstacleAvoidanceOn = false;
     }
 
 }

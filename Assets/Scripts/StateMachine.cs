@@ -6,11 +6,16 @@ using System;
 
 public class StateMachine : MonoBehaviour {
 
-    
     GameObject owner;                   // Reference to the agent that owns this instance
-    SteeringBehavior behavior;          // Reference to the behavior of the agent
-    private Animator anim;                      // Reference to the animator component.
-    private StateMachineAnimation state;
+    public SteeringBehavior behavior;          // Reference to the behavior of the agent
+    public Animator animator;
+    //public Animation animation;
+    //private AgentProperty properties;
+
+    private AnimatorStateInfo animationState;
+    private AnimatorClipInfo[] animationClips;
+    public float timeIdle = 1.0f;
+    public float time = 0.0f;
 
     public State<GameObject> currentState;
     public State<GameObject> previousState;
@@ -19,11 +24,10 @@ public class StateMachine : MonoBehaviour {
     void Awake() {
         // Pre-process
         behavior = GetComponent<SteeringBehavior>();
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         owner = transform.root.gameObject;
         currentState = IdleState.Instance;
-        anim.SetFloat("Speed_f", 0.0f);
         previousState = null;
         globalState = ThreateningAgentGlobalState.Instance;
     }
@@ -31,26 +35,6 @@ public class StateMachine : MonoBehaviour {
     void Start() {
         //StateMachineAnimation state = anim.GetBehaviour<StateMachineAnimation>();
         //state.stateMachine = this;
-    }
-
-    IEnumerator WaitGoodAnimation()
-    {
-        AnimatorStateInfo animationState;
-        do {
-            animationState = anim.GetCurrentAnimatorStateInfo(0);
-            yield return new WaitForSeconds(.1f);
-        } while (!animationState.tagHash.Equals(Animator.StringToHash("Locomotion")));
-        
-    }
-
-    IEnumerator WaitGoodAnimationTEST()
-    {
-        AnimatorStateInfo animationState;
-        do {
-            animationState = anim.GetCurrentAnimatorStateInfo(0);
-            yield return new WaitForSeconds(.1f);
-        } while (!animationState.tagHash.Equals(Animator.StringToHash("Eat")));
-
     }
 
     //use these methods to initialize the FSM
