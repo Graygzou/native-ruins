@@ -10,9 +10,9 @@ public class MovementController : MonoBehaviour {
     [SerializeField] private Animator m_animator =null;
 	[SerializeField] private Actions actions=null;
     [SerializeField] private Rigidbody m_rigidBody;
-	[SerializeField] private Transform m_cameraPivot = null;
 	[SerializeField]private AudioSource m_footstep;
 
+	private Transform m_cameraPivot = null;
 	private Vector3 initial_orientation;
 
 
@@ -31,6 +31,7 @@ public class MovementController : MonoBehaviour {
 
 
 	public void Start(){
+		m_cameraPivot = GameObject.Find ("CameraPivot").transform;
 		initial_orientation = transform.forward;
 		m_footstep.Play ();
 		m_footstep.loop = true;
@@ -145,7 +146,8 @@ public class MovementController : MonoBehaviour {
 		Vector3 NextDir = new Vector3(h, 0, v);
 
 		NextDir = Quaternion.Euler(0f,angle,0f)*NextDir;
-		transform.rotation = Quaternion.LookRotation (NextDir);
+		if(!NextDir.Equals(Vector3.zero))
+			transform.rotation = Quaternion.LookRotation (NextDir);
 		transform.position += NextDir * m_moveSpeed * Time.deltaTime;
 
 
