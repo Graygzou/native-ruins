@@ -70,9 +70,9 @@ public class SteeringBehavior : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-        UpdateBehavior();
-    }
+    //void Update() {
+    //    UpdateBehavior();
+    //}
 
     /* -----------------------------------------
      * Update the steering behavior of the agent
@@ -81,10 +81,11 @@ public class SteeringBehavior : MonoBehaviour {
         //StartCoroutine(UpdateSteer());
         Vector3 m_vSteeringForce = CalculatePrioritized();
 
+        m_vSteeringForce.y = 0.0f;
         //make sure vehicle does not exceed maximum velocity
         Vector3.ClampMagnitude(m_vSteeringForce, maxSpeed);
 
-        GetComponent<Rigidbody>().velocity = m_vSteeringForce;
+        GetComponent<Rigidbody>().velocity = m_vSteeringForce.normalized * 5;
 
         //update the heading if the vehicle has a non zero velocity
         if (GetComponent<Rigidbody>().velocity.sqrMagnitude > 0.000001)
@@ -93,7 +94,22 @@ public class SteeringBehavior : MonoBehaviour {
                 Quaternion.LookRotation(GetComponent<Rigidbody>().velocity), Time.deltaTime);
         }
 
-        transform.position += transform.forward * GetComponent<NavMeshAgent>().speed * Time.deltaTime;
+        //transform.Translate(GetComponent<Rigidbody>().velocity * Time.deltaTime);
+        //transform.position = Vector3.Lerp(transform.position, transform.position + GetComponent<Rigidbody>().velocity, Time.deltaTime);
+
+        transform.position = Vector3.Lerp(transform.position, transform.position + GetComponent<Rigidbody>().velocity, Time.deltaTime);
+
+        // -- A TESTER --
+
+        // Normalise the movement vector and make it proportional to the speed per second.
+        // movement = movement.normalized * speed * Time.deltaTime;
+
+        // Move the player to it's current position plus the movement.
+        // playerRigidbody.MovePosition(transform.position + movement);
+
+        // -- Fin a tester ---
+
+
         //animal.Move(GetComponent<Rigidbody>().velocity * Time.deltaTime);
         //GetComponent<Rigidbody>().AddForce(GetComponent<Rigidbody>().velocity * GetComponent<NavMeshAgent>().speed);
 
@@ -107,7 +123,7 @@ public class SteeringBehavior : MonoBehaviour {
         }
 
         if (wallAvoidanceOn) {
-            force = WallAvoidance() * 10.0f;
+            force = WallAvoidance() * 5.0f;
             if (force.magnitude < maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
@@ -119,7 +135,7 @@ public class SteeringBehavior : MonoBehaviour {
         }
 
         if (obstacleAvoidanceOn) {
-            force = ObstaclesAvoidance() * 10.0f;
+            force = ObstaclesAvoidance() * 5.0f;
             if (force.magnitude < maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
@@ -276,18 +292,18 @@ public class MyScriptEditor : Editor
         var myScript = target as SteeringBehavior;
 
         // For the behavior
-        myScript.wallAvoidanceOn = EditorGUILayout.Toggle("Wall Avoidance", myScript.wallAvoidanceOn);
-        myScript.obstacleAvoidanceOn = EditorGUILayout.Toggle("Obstacle Avoidance", myScript.obstacleAvoidanceOn);
-        myScript.wanderOn = EditorGUILayout.Toggle("Wander", myScript.wanderOn);
-        myScript.fleeOn = EditorGUILayout.Toggle("Flee", myScript.fleeOn);
-        myScript.seekOn = EditorGUILayout.Toggle("Seek", myScript.seekOn);
+        myScript.wallAvoidanceOn = EditorGUILayout.Toggle("Wall Avoidance:", myScript.wallAvoidanceOn);
+        myScript.obstacleAvoidanceOn = EditorGUILayout.Toggle("Obstacle Avoidance:", myScript.obstacleAvoidanceOn);
+        myScript.wanderOn = EditorGUILayout.Toggle("Wander:", myScript.wanderOn);
+        myScript.fleeOn = EditorGUILayout.Toggle("Flee:", myScript.fleeOn);
+        myScript.seekOn = EditorGUILayout.Toggle("Seek:", myScript.seekOn);
 
         using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(myScript.fleeOn || myScript.seekOn)))
         {
             if (group.visible == true)
             {
                 EditorGUI.indentLevel++;
-                myScript.target_p = EditorGUILayout.ObjectField("Target", myScript.target_p, typeof(Transform), true) as Transform;
+                myScript.target_p = EditorGUILayout.ObjectField("Target:", myScript.target_p, typeof(Transform), true) as Transform;
                 EditorGUI.indentLevel--;
             }
         }
@@ -296,8 +312,8 @@ public class MyScriptEditor : Editor
         //    myScript.target_p = EditorGUILayout.ObjectField("Target", myScript.target_p, typeof(Transform), true) as Transform;
 
         // For parameters
-        myScript.minDetectionBoxLength = EditorGUILayout.FloatField("Detection Lenght", myScript.minDetectionBoxLength);
-        myScript.dWanderRadius = EditorGUILayout.FloatField("Wander Radius", myScript.dWanderRadius);
+        myScript.minDetectionBoxLength = EditorGUILayout.FloatField("Detection Lenght:", myScript.minDetectionBoxLength);
+        myScript.dWanderRadius = EditorGUILayout.FloatField("Wander Radius:", myScript.dWanderRadius);
 
     }
 }
