@@ -7,8 +7,10 @@ public class IdleState : State<GameObject>
     private static IdleState instance;
     private Animator anim;
     private AnimatorStateInfo animationState;
-    private float timeIdle;
-
+    private AnimatorClipInfo[] animationClips;
+    private float timeIdle = 1.0f;
+    private float time = 0.0f;
+    private float currTime;
     private IdleState() { }
 
     public static IdleState Instance {
@@ -28,23 +30,25 @@ public class IdleState : State<GameObject>
         anim.SetFloat("Speed_f", 0.0f);
         animationState = anim.GetCurrentAnimatorStateInfo(0);
 
-        AnimatorClipInfo[] animationClips;
+
+        animationClips = anim.GetCurrentAnimatorClipInfo(0);
         // make sure we're in the good state animation
-        do
-        {
-            animationState = anim.GetCurrentAnimatorStateInfo(0);
-            animationClips = anim.GetCurrentAnimatorClipInfo(0);
-        } while (!animationState.tagHash.Equals(Animator.StringToHash("Locomotion")) &&
-                 !animationClips[0].clip.name.Equals("Deer_Idle"));
+        //do
+        //{
+        //    animationState = anim.GetCurrentAnimatorStateInfo(0);
+        //    animationClips = anim.GetCurrentAnimatorClipInfo(0);
+        //} while (animationClips == null ||  !animationState.tagHash.Equals(Animator.StringToHash("Locomotion")) ||
+        //         !animationClips[0].clip.name.Equals("Deer_Idle"));
 
         // Set the number of the the state is play
         timeIdle = (int)Mathf.Round(Random.Range(1.0f, 2.0f));
-
+        time = animationState.normalizedTime;
     }
 
     override public void Execute(GameObject o)
     {
-        if(animationState.normalizedTime >= timeIdle - 0.4) {
+        float currTime = o.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+        if (currTime >= time + timeIdle - 0.06) {
             // Launch a coroutine to accelerate POLISH
             // o.GetComponent<AgentProperty>().StartCoroutine("AccelerateWalk");
 

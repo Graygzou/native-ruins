@@ -9,8 +9,11 @@ public class EatingState : State<GameObject>
     private Animator anim;
     public Animation animation;
     private AgentProperty properties;
+
+    private AnimatorStateInfo animationState;
+    private AnimatorClipInfo[] animationClips;
     private float timeIdle;
-    private float timer;
+    private float time;
 
     private EatingState() { }
 
@@ -30,52 +33,36 @@ public class EatingState : State<GameObject>
     {
         anim = o.GetComponent<Animator>();
         properties = o.GetComponent<AgentProperty>();
-        // Set the environnement to get the proper animation POLISH
-        //for (float i = anim.GetFloat("Speed_f"); i > 0f; i -= 0.1f) {
-        //    anim.SetFloat("Speed_f", i);
-        //}
-        anim.SetFloat("Speed_f", 0f);
-        anim.SetBool("IsHungry", true);
-        // Get the length of the animation
-        var animationState = anim.GetCurrentAnimatorStateInfo(0);
-        if (!animationState.IsName("Deer_Eat")) { Debug.Log("WAHTTTTTT"); }
 
-        // TODO FAIRE PAREIL POUR TOUS !!!
+        // Stop the previous animation
+        anim.Play("Eat");
 
-        var animationClips = anim.GetCurrentAnimatorClipInfo(0);
-        if (animationClips.Length == 0)
-        { Debug.Log("WAHTTTTTT"); }
-
-        var animationClip = animationClips[0].clip;
-        var animationTime = animationClip.length * animationState.normalizedTime;
-
-
-        AnimatorStateInfo currInfo = anim.GetCurrentAnimatorStateInfo(0);
-        timeIdle = Mathf.Round(Random.Range(1.0f, 3.0f)) * animationTime;
-        timer = 0.0f;
+        // Set the number of time that the state will be play
+        timeIdle = (int)Mathf.Round(Random.Range(2.0f, 4.0f));
     }
 
     override public void Execute(GameObject o)
     {
-        timer += Time.deltaTime;
 
         // Update of the variable if needed
         if (properties.hungryIndicator > 0.0f) {
-            properties.hungryIndicator -= 0.1f;
+            properties.hungryIndicator -= 1f;
         }
 
-        if (timer >= timeIdle) {
+        float currTime = o.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+        if (currTime >= timeIdle - 0.06) {
             // Launch a coroutine to accelerate POLISH
             // o.GetComponent<AgentProperty>().StartCoroutine("AccelerateWalk");
-            anim.SetBool("IsHungry", false);
+            // ---anim.SetBool("IsHungry", false);
             // Change state
             o.GetComponent<StateMachine>().ChangeState(WalkingState.Instance);
+            // Make the transition for the animation
+            anim.SetFloat("Speed_f", 0.5f);
         }
 
     }
 
-    override public void Exit(GameObject o)
-    {
-        // nothing
+    override public void Exit(GameObject o) {
+        anim.SetBool("IsHungry", false);
     }
 }
