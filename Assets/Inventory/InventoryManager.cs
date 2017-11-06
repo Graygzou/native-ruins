@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour {
 	public static bool bag_open = false;
 	private Vector2 deltaScreen;
 
-	public enum Object_Type {Mushroom, Meat, Flint, Wood, Bow, Torch, Fire, Plank, Sail, Rope, Raft};
+	public enum Object_Type {Mushroom, Meat, Flint, Wood, Bow, Arrow, Torch, Fire, Plank, Sail, Rope, Raft};
 	private static ArrayList inventaire = new ArrayList ();
 	// Use this for initialization
 	void Start () {
