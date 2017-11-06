@@ -10,9 +10,16 @@ public class AgentProperty : MonoBehaviour {
     public int health;
     public int maxSpeed;
     public int mass;
+
     // To enable some transition
     public bool isMean;
     public float hungryIndicator = 0.0f;
+
+    public bool isAlert;
+    public bool playerTooClose;
+
+    public SphereCollider visionRange;
+    public SphereCollider awarenessRange;
 
     //public Animaux(float hea, float maxSpe, float mas) : this(hea, maxSpe, mas, 5) {
     //}
@@ -24,7 +31,33 @@ public class AgentProperty : MonoBehaviour {
     void Start() {
         //animal = GetComponent<NavMeshAgent>();
     }
-    
+
+    void OnTriggerEnter(Collider other) {
+
+        // If the entering collider is the player...
+        if (other.gameObject.tag == "player") {
+            if (other == visionRange) {
+                // The animal enter the "State" Alert
+                isAlert = true;
+            } else if (other == awarenessRange) {
+                playerTooClose = true;
+            }
+
+        }
+    }
+
+    void OnTriggerExit(Collider other) {
+        // If the exiting collider is the player...
+        if (other.gameObject.tag == "player") {
+            if (other == visionRange) {
+                // The animal quit the "State" Alert
+                isAlert = false;
+            } else if (other == awarenessRange) {
+                playerTooClose = false;
+            }
+        }
+    }
+
     // POLISH
     //IEnumerator AccelerateWalk() {
     //    for (float i = 0f; i < 0.5f; i += 0.1f) {
@@ -49,5 +82,7 @@ public class MyScriptEditorAgent : Editor
         myScript.isMean = EditorGUILayout.Toggle("IsMean:", myScript.isMean);
         myScript.hungryIndicator = EditorGUILayout.FloatField("Hunger:", myScript.hungryIndicator);
 
+        myScript.visionRange = EditorGUILayout.ObjectField("VisionRange:", myScript.visionRange, typeof(SphereCollider), true) as SphereCollider;
+        myScript.awarenessRange = EditorGUILayout.ObjectField("AwarenessRange:", myScript.awarenessRange, typeof(SphereCollider), true) as SphereCollider;
     }
 }

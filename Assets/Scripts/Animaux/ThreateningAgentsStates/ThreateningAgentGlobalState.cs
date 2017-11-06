@@ -28,12 +28,20 @@ public class ThreateningAgentGlobalState : State<GameObject>
 
     override public void Execute(GameObject o)
     {
-        // checker random
-            // Si good => Idle
-        // checker si le joueur est en vue
-            // Si oui => Attack
-        // ------------------------------------------
-        // OU utiliser Coroutine pour eviter cet état.
+        AgentProperty properties = o.GetComponent<AgentProperty>();
+
+        if (properties.isAlert) {
+            // Get the ref of the play
+            GameObject player = GameObject.FindWithTag("player");
+
+            // check if the player does have a wierd behavior
+            if(player.GetComponent<Rigidbody>().velocity.magnitude > 5.0f) {
+                o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
+            }
+        }
+        if (properties.playerTooClose) {
+            o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
+        }
     }
 
     override public void Exit(GameObject o) { /* Empty */ }

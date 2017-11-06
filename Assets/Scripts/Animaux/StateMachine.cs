@@ -6,8 +6,8 @@ using System;
 
 public class StateMachine : MonoBehaviour {
 
-    GameObject owner;                   // Reference to the agent that owns this instance
-    public SteeringBehavior behavior;          // Reference to the behavior of the agent
+    GameObject owner;                       // Reference to the agent that owns this instance
+    public SteeringBehavior behavior;       // Reference to the behavior of the agent
     public Animator animator;
     //public Animation animation;
     //private AgentProperty properties;
