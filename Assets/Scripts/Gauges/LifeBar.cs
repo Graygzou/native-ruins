@@ -7,7 +7,6 @@ public class LifeBar : MonoBehaviour {
 
     public GameObject Life;
     public GameObject Hunger;
-    public GameObject Terrain;
     public GameObject Judy;
     public Color BarColor;
 
@@ -40,9 +39,34 @@ public class LifeBar : MonoBehaviour {
             currentTimeFaim++;
         }
 
-        //Pour une attaque animale, cela ce trouve dans les scripts des animaux quand ils se trouvent dans l'etat attaque
+    }
+    //*****************RECUPERATION DE VIE******************//
+    void JudyEatsSomething(float lifeBack)
+    {
+        if (Hunger.GetComponent<Scrollbar>().size >= 100f)
+        {
+            Life.GetComponent<Scrollbar>().size += lifeBack;
+        } else
+        {
+            Hunger.GetComponent<Scrollbar>().size += lifeBack;
+        }
+    }
 
-        //*****************RECUPERATION DE VIE******************//
-
+    //*****************SE FAIT ATTAQUER******************//
+    void JudyIsHurtByAnAnimal(float lifeLoosed)
+    {
+        //si forme puma, 50% de degats en plus
+        if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.puma)
+        {
+            Life.GetComponent<Scrollbar>().size -= lifeLoosed + lifeLoosed *0.5f;
+        }
+        else if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.human)
+        {
+            Life.GetComponent<Scrollbar>().size -= lifeLoosed;
+        } //si forme ours, 25% de degats en moins
+        else if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.bear)
+        {
+            Life.GetComponent<Scrollbar>().size -= lifeLoosed - lifeLoosed*0.25f;
+        }
     }
 }

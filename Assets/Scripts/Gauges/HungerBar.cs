@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HungerBar : MonoBehaviour {
 
     public GameObject Hunger;
+    public GameObject Judy;
     public Color BarColor;
 
     private int currentTimeFaim = 0;
@@ -20,7 +21,14 @@ public class HungerBar : MonoBehaviour {
 	void Update () {
         if (currentTimeFaim == timeMaxFaim)
         {
-            Hunger.GetComponent<Scrollbar>().size -= 0.02f;
+            if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.puma)
+            {
+                Hunger.GetComponent<Scrollbar>().size -= 0.06f;
+            }
+            else
+            {
+                Hunger.GetComponent<Scrollbar>().size -= 0.02f;
+            }
             currentTimeFaim = 0;
         }
         currentTimeFaim++;

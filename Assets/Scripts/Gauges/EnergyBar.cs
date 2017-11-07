@@ -15,9 +15,11 @@ public class EnergyBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(Input.GetKey(KeyCode.LeftShift)) {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
             Energy.GetComponent<Scrollbar>().size -= 0.001f;
-        } else
+        }
+        else
         {
             Energy.GetComponent<Scrollbar>().size += 0.001f;
         }
