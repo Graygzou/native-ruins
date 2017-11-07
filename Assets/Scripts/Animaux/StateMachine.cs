@@ -60,7 +60,11 @@ public class StateMachine : MonoBehaviour {
         if (currentState != null) {
             currentState.Execute(owner);
         }
-        behavior.UpdateBehavior();
+
+        //same for the steering behavior
+        if (behavior != null) {
+            behavior.UpdateBehavior();
+        }
     }
 
     //change to a new state

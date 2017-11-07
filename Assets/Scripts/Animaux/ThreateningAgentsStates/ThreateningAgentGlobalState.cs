@@ -32,7 +32,7 @@ public class ThreateningAgentGlobalState : State<GameObject>
 
         if (properties.isAlert) {
             // Get the ref of the play
-            GameObject player = GameObject.FindWithTag("player");
+            GameObject player = GameObject.FindWithTag("Player");
 
             // check if the player does have a wierd behavior
             if(player.GetComponent<Rigidbody>().velocity.magnitude > 5.0f) {

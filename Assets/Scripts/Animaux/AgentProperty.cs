@@ -35,11 +35,11 @@ public class AgentProperty : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
 
         // If the entering collider is the player...
-        if (other.gameObject.tag == "player") {
-            if (other == visionRange) {
+        if (other.gameObject.tag == "Player") {
+            if (!isAlert) {
                 // The animal enter the "State" Alert
                 isAlert = true;
-            } else if (other == awarenessRange) {
+            } else if (isAlert && !playerTooClose) {
                 playerTooClose = true;
             }
 
@@ -48,11 +48,11 @@ public class AgentProperty : MonoBehaviour {
 
     void OnTriggerExit(Collider other) {
         // If the exiting collider is the player...
-        if (other.gameObject.tag == "player") {
-            if (other == visionRange) {
+        if (other.gameObject.tag == "Player") {
+            if (isAlert && !playerTooClose) {
                 // The animal quit the "State" Alert
                 isAlert = false;
-            } else if (other == awarenessRange) {
+            } else if (isAlert && playerTooClose) {
                 playerTooClose = false;
             }
         }
