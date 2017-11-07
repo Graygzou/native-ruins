@@ -28,7 +28,7 @@ public class EvadeState : State<GameObject> {
         FSM.behavior.fleeOn = true;
 
         // Change the maxSpeed of the animal
-        //properties.maxSpeed = 
+        //  properties.maxSpeed = 
 
     }
 

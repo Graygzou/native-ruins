@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class State<T> {
+public abstract class State<T> : MonoBehaviour {
 
     private bool isFinished = false;
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.AI;
 using System;
 
@@ -9,6 +10,9 @@ public class StateMachine : MonoBehaviour {
     GameObject owner;                       // Reference to the agent that owns this instance
     public SteeringBehavior behavior;       // Reference to the behavior of the agent
     public Animator animator;
+    public State<GameObject> currentState = IdleState.Instance;
+    public State<GameObject> previousState = null;
+    public State<GameObject> globalState = ThreateningAgentGlobalState.Instance;
     //public Animation animation;
     //private AgentProperty properties;
 
@@ -17,19 +21,12 @@ public class StateMachine : MonoBehaviour {
     public float timeIdle = 1.0f;
     public float time = 0.0f;
 
-    public State<GameObject> currentState;
-    public State<GameObject> previousState;
-    public State<GameObject> globalState;
-
     void Awake() {
         // Pre-process
         behavior = GetComponent<SteeringBehavior>();
         animator = GetComponent<Animator>();
 
         owner = transform.root.gameObject;
-        currentState = IdleState.Instance;
-        previousState = null;
-        globalState = ThreateningAgentGlobalState.Instance;
     }
 
     void Start() {
@@ -96,5 +93,18 @@ public class StateMachine : MonoBehaviour {
     }
     public State<GameObject> getPreviousState() {
         return previousState;
+    }
+}
+
+[CustomEditor(typeof(StateMachine))]
+public class EditorStateMachine : Editor
+{
+    override public void OnInspectorGUI()
+    {
+        var myScript = target as StateMachine;
+
+        myScript.currentState = EditorGUILayout.ObjectField("CurrentState", myScript.currentState, typeof(State<GameObject>), true) as State<GameObject>;
+        myScript.previousState = EditorGUILayout.ObjectField("PreviousState", myScript.previousState, typeof(State<GameObject>), true) as State<GameObject>;
+        myScript.globalState = EditorGUILayout.ObjectField("GlobalState", myScript.globalState, typeof(State<GameObject>), true) as State<GameObject>;
     }
 }

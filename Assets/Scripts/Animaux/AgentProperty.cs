@@ -69,7 +69,7 @@ public class AgentProperty : MonoBehaviour {
 }
 
 [CustomEditor(typeof(AgentProperty))]
-public class MyScriptEditorAgent : Editor
+public class EditorAgentProperty : Editor
 {
     override public void OnInspectorGUI()
     {
