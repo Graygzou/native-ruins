@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class State<T> : MonoBehaviour {
-
-    private bool isFinished = false;
+public abstract class State<T> {
 
     //this will execute when the state is entered
     public abstract void Enter(T o);
@@ -15,7 +13,4 @@ public abstract class State<T> : MonoBehaviour {
     //this will execute when the state is exited. 
     public abstract void Exit(T o);
 
-    public void AnimationDone() {
-        isFinished = true;
-    }
 }

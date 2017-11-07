@@ -10,9 +10,9 @@ public class StateMachine : MonoBehaviour {
     GameObject owner;                       // Reference to the agent that owns this instance
     public SteeringBehavior behavior;       // Reference to the behavior of the agent
     public Animator animator;
-    public State<GameObject> currentState = IdleState.Instance;
-    public State<GameObject> previousState = null;
-    public State<GameObject> globalState = ThreateningAgentGlobalState.Instance;
+    public State<GameObject> currentState;
+    public State<GameObject> previousState;
+    public State<GameObject> globalState;
     //public Animation animation;
     //private AgentProperty properties;
 
@@ -25,8 +25,11 @@ public class StateMachine : MonoBehaviour {
         // Pre-process
         behavior = GetComponent<SteeringBehavior>();
         animator = GetComponent<Animator>();
-
         owner = transform.root.gameObject;
+
+        currentState = IdleState.Instance;
+        previousState = null;
+        globalState = ThreateningAgentGlobalState.Instance;
     }
 
     void Start() {
@@ -96,15 +99,15 @@ public class StateMachine : MonoBehaviour {
     }
 }
 
-[CustomEditor(typeof(StateMachine))]
-public class EditorStateMachine : Editor
-{
-    override public void OnInspectorGUI()
-    {
-        var myScript = target as StateMachine;
+//[CustomEditor(typeof(StateMachine))]
+//public class EditorStateMachine : Editor
+//{
+//    override public void OnInspectorGUI()
+//    {
+//        var myScript = target as StateMachine;
 
-        myScript.currentState = EditorGUILayout.ObjectField("CurrentState", myScript.currentState, typeof(State<GameObject>), true) as State<GameObject>;
-        myScript.previousState = EditorGUILayout.ObjectField("PreviousState", myScript.previousState, typeof(State<GameObject>), true) as State<GameObject>;
-        myScript.globalState = EditorGUILayout.ObjectField("GlobalState", myScript.globalState, typeof(State<GameObject>), true) as State<GameObject>;
-    }
-}
+//        //myScript.currentState = EditorGUILayout.ObjectField("CurrentState", myScript.currentState, typeof(State<GameObject>), true) as State<GameObject>;
+//        //myScript.previousState = EditorGUILayout.ObjectField("PreviousState", myScript.previousState, typeof(State<GameObject>), true) as State<GameObject>;
+//        //myScript.globalState = EditorGUILayout.ObjectField("GlobalState", myScript.globalState, typeof(State<GameObject>), true) as State<GameObject>;
+//    }
+//}
