@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MovementController : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class MovementController : MonoBehaviour {
 	[SerializeField] private Actions actions=null;
     [SerializeField] private Rigidbody m_rigidBody;
 	[SerializeField]private AudioSource m_footstep;
+    public GameObject EnergyBar;
 
 	private Transform m_cameraPivot = null;
 	private Vector3 initial_orientation;
@@ -27,10 +29,12 @@ public class MovementController : MonoBehaviour {
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
 
+    public bool energyIsAt0 = false;
 
 
 
-	public void Start(){
+
+    public void Start(){
 		m_cameraPivot = GameObject.Find ("CameraPivot").transform;
 		initial_orientation = transform.forward;
 		m_footstep.Play ();
@@ -172,6 +176,7 @@ public class MovementController : MonoBehaviour {
     }
 
 	private void Animate(Vector3 NextDir){
+
 		if (m_isGrounded) {
 			if (NextDir.Equals (Vector3.zero)) {
 				m_footstep.Pause ();
@@ -182,23 +187,39 @@ public class MovementController : MonoBehaviour {
 				}
 
 			} else {
-				if (Input.GetKey(KeyCode.LeftShift)) {
-					m_footstep.UnPause ();
-					m_footstep.pitch = 1.7f;
-					if (Input.GetKey (KeyCode.LeftControl)) {
-						actions.CrouchingRun ();
-					} else {
-						actions.Run ();
-					}
+				if (Input.GetKey(KeyCode.LeftShift) && !energyIsAt0) {
+                    if (EnergyBar.GetComponent<Scrollbar>().size > 0f)
+                    {
+                        m_footstep.UnPause ();
+					    m_footstep.pitch = 1.7f;
+                    
+                        if (Input.GetKey (KeyCode.LeftControl)) {
+						    actions.CrouchingRun ();
+					    } else {
+						    actions.Run ();
+					    }
+
+                    } else
+                    {
+                        energyIsAt0 = true;
+                    }
+					    
 				} else {
 					m_footstep.UnPause ();
 					m_footstep.pitch = 1f;
 					if (Input.GetKey (KeyCode.LeftControl)) {
 						actions.Sitting ();
-					} else {
-						actions.Walk ();
-					}
-				}
+					} else
+                    {
+                        actions.Walk();
+                    }
+
+                    if (EnergyBar.GetComponent<Scrollbar>().size >= 100f)
+                    {
+                        energyIsAt0 = false;
+                    }
+
+                }
 
 			}
 

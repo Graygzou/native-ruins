@@ -7,6 +7,7 @@ public class EnergyBar : MonoBehaviour {
 
     public GameObject Energy;
     public Color BarColor;
+    public GameObject Judy;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +16,7 @@ public class EnergyBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && !Judy.GetComponent<MovementController>().energyIsAt0)
         {
             Energy.GetComponent<Scrollbar>().size -= 0.001f;
         }
