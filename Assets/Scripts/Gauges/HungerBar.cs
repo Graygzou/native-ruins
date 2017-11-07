@@ -8,7 +8,8 @@ public class HungerBar : MonoBehaviour {
     public GameObject Hunger;
     public Color BarColor;
 
-    //taille barre de vie est 150 mais on fait les calculs pour qu'elle soit sur 100
+    private int currentTimeFaim = 0;
+    private int timeMaxFaim = 3600;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,11 @@ public class HungerBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Hunger.GetComponent<Scrollbar>().size -= 0.001f;
-	}
+        if (currentTimeFaim == timeMaxFaim)
+        {
+            Hunger.GetComponent<Scrollbar>().size -= 0.02f;
+            currentTimeFaim = 0;
+        }
+        currentTimeFaim++;
+    }
 }

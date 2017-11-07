@@ -8,8 +8,6 @@ public class EnergyBar : MonoBehaviour {
     public GameObject Energy;
     public Color BarColor;
 
-    //taille barre de vie est 150 mais on fait les calculs pour qu'elle soit sur 100
-
 	// Use this for initialization
 	void Start () {
         Energy.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.yellow;
@@ -17,6 +15,11 @@ public class EnergyBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Energy.GetComponent<Scrollbar>().size -= 0.001f;
+        if(Input.GetKey(KeyCode.LeftShift)) {
+            Energy.GetComponent<Scrollbar>().size -= 0.001f;
+        } else
+        {
+            Energy.GetComponent<Scrollbar>().size += 0.001f;
+        }
 	}
 }
