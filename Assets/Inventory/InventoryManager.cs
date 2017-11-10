@@ -7,7 +7,7 @@ public class InventoryManager : MonoBehaviour {
 	[SerializeField] private RectTransform m_canvas;
 	[SerializeField] private RectTransform m_bag;
 	[SerializeField]private RectTransform b_anchor;
-
+	[SerializeField]private AudioSource m_bagSound;
 
 
 	public static bool bag_open = false;
@@ -29,6 +29,7 @@ public class InventoryManager : MonoBehaviour {
 
 	private void GetInputs(){
 		if (Input.GetKeyDown (KeyCode.Tab)) {
+			m_bagSound.Play ();
 			if (!bag_open) {
 				bag_open = !bag_open;
 				m_bag.localScale = new Vector3(7f,3.5f,3.5f);
