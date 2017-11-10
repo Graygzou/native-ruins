@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class FireLaser : MonoBehaviour {
 
-    public float updateFrequency = 0.1f;
+    public float updateFrequency = 1f;
     public int laserDistance;
     public string bounceTag;
     public string splitTag;
@@ -17,46 +17,47 @@ public class FireLaser : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        timer = 0;
         line = gameObject.GetComponent<LineRenderer>();
-        line.enabled = true;
-	}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    if (gameObject.tag != spawnedBeamTag)
-    //    {
-    //        if (timer >= updateFrequency)
-    //        {
-    //            timer = 0;
-    //            //Debug.Log("Redrawing laser");
-    //            foreach (GameObject laserSplit in GameObject.FindGameObjectsWithTag(spawnedBeamTag))
-    //                Destroy(laserSplit);
-
-    //            StartCoroutine(RedrawLaser());
-    //        }
-    //        timer += Time.deltaTime;
-    //    }
-    //}
+        StartCoroutine(RedrawLaser());
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         //timer = 0;
         //line.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, Time.time);
-        StartCoroutine(RedrawLaser());
+        //if (gameObject.tag != "Laser")
+        //{
+            if (timer >= updateFrequency)
+            {
+                timer = 0;
+                //Debug.Log("Redrawing laser");
+                //foreach (GameObject laserSplit in GameObject.FindGameObjectsWithTag("Laser"))
+                //    Destroy(laserSplit);
+
+                StartCoroutine(RedrawLaser());
+            }
+            timer += Time.deltaTime;
+        //}
+        //else
+        //{
+        //    line = gameObject.GetComponent<LineRenderer>();
+        //    StartCoroutine(RedrawLaser());
+        //}
     }
 
     IEnumerator RedrawLaser()
     {
-        //int laserSplit = 1; //How many times it got split
-        //int laserReflected = 1; //How many times it got reflected
-        int vertexCounter = 0; //How many line segments are there
+        line.enabled = true;
+        int vertexCounter = 1; //How many line segments are there
         bool loopActive = true; //Is the reflecting loop active?
 
         Vector3 laserDirection = transform.forward; //direction of the next laser
         Vector3 lastLaserPosition = transform.position; //origin of the next laser
 
+        line.positionCount = vertexCounter;
+        line.SetPosition(0, lastLaserPosition);
         RaycastHit hit;
 
         while (loopActive)
@@ -67,52 +68,46 @@ public class FireLaser : MonoBehaviour {
             {
                 if (hit.transform.gameObject.tag == "Mirror")
                 {
-                    Debug.Log("Reflect");
-                    //print("Found an object - distance: " + hit.distance);
-                    //line.SetPosition(0, ray.origin);
-                    //line.SetPosition(1, hit.point);
+                    //Debug.DrawRay(lastLaserPosition, (laserDirection * 100), Color.green);
+                    //Debug.Log("Reflect");
 
-                    //laserReflected++;
                     vertexCounter += 3;
                     line.positionCount = vertexCounter;
-                    //line.SetPosition(vertexCounter - 3, Vector3.MoveTowards(hit.point, lastLaserPosition, 0.01f));
+                    line.SetPosition(vertexCounter - 3, Vector3.MoveTowards(hit.point, lastLaserPosition, 0.01f));
                     line.SetPosition(vertexCounter - 2, lastLaserPosition);
                     line.SetPosition(vertexCounter - 1, hit.point);
                     //line.SetWidth(.01f, .01f);
 
                     Vector3 prevDirection = lastLaserPosition;
-                    lastLaserPosition = Vector3.MoveTowards(hit.point, lastLaserPosition, 0.05f);
-                    Debug.Log("Test :" + Vector3.Angle(laserDirection, hit.normal));
+                    lastLaserPosition = hit.point;
 
-                    //laserDirection = Vector3.Reflect(laserDirection, -hit.normal);
-                    laserDirection = new Vector3(1, 0, 0);
-                    //if (Vector3.Angle(laserDirection, hit.normal) > 0)
-                    //{
-                    //    laserDirection = new Vector3(1, 0, 0);
-                    //}
-                    //else
-                    //{
-                    //    laserDirection = new Vector3(-1, 0, 0);
-                    //    //laserDirection = Vector3.Reflect(laserDirection, hit.normal);
-                    //}
+                    //laserDirection = Vector3.Reflect(laserDirection, -hit.normal)
+                    //laserDirection = new Vector3(-1, 0, 0);
+                    if (Vector3.Angle(laserDirection, hit.normal) > 0)
+                    {
+                        laserDirection = new Vector3(-1, 0, 0);
+                    }
+                    else
+                    {
+                        laserDirection = new Vector3(1, 0, 0);
+                        //laserdirection = vector3.reflect(laserdirection, hit.normal);
+                    }
                 }
                 else
                 {
-                    Debug.Log("Not Reflect");
+                    //Debug.DrawRay(lastLaserPosition, (laserDirection * 100), Color.red);
+                    //Debug.Log("Not Reflect");
                     //laserReflected++;
-                    vertexCounter += 2;
+                    vertexCounter += 1;
                     line.positionCount = vertexCounter;
                     //Vector3 lastPos = lastLaserPosition + (laserDirection.normalized * 10);
-                    //line.SetPosition(vertexCounter - 1, lastLaserPosition + (laserDirection.normalized * laserDistance));
-                    line.SetPosition(vertexCounter - 2, lastLaserPosition);
-                    line.SetPosition(vertexCounter - 1, hit.point);
+                    //line.SetPosition(vertexCounter - 2, lastLaserPosition);
+                    line.SetPosition(vertexCounter - 1, lastLaserPosition + (laserDirection.normalized * hit.distance));
+                    //line.SetPosition(vertexCounter - 2, lastLaserPosition);
+                    //line.SetPosition(vertexCounter - 1, hit.point);
 
                     loopActive = false;
                 }
-            }
-            else
-            {
-                loopActive = false;
             }
             yield return new WaitForEndOfFrame();
         }
