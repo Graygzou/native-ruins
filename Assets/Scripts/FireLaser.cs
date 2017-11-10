@@ -81,16 +81,18 @@ public class FireLaser : MonoBehaviour {
                     Vector3 prevDirection = lastLaserPosition;
                     lastLaserPosition = hit.point;
 
+                    Debug.DrawLine(hit.normal, hit.normal * 3, Color.green);
+                    Debug.Log(hit.normal);
                     //laserDirection = Vector3.Reflect(laserDirection, -hit.normal)
                     //laserDirection = new Vector3(-1, 0, 0);
-                    if (Vector3.Angle(laserDirection, hit.normal) > 0)
+                    Debug.Log(Vector3.AngleBetween(-hit.normal, laserDirection));
+                    if ( hit.normal.x < 0)
                     {
-                        laserDirection = new Vector3(-1, 0, 0);
+                        laserDirection = Quaternion.AngleAxis(90, Vector3.up) * laserDirection;
                     }
                     else
                     {
-                        laserDirection = new Vector3(1, 0, 0);
-                        //laserdirection = vector3.reflect(laserdirection, hit.normal);
+                        laserDirection = Quaternion.AngleAxis(-90, Vector3.up) * laserDirection;
                     }
                 }
                 else
