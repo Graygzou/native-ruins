@@ -86,7 +86,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4786974882223844}
   - component: {fileID: 54462363732348688}
-  - component: {fileID: 65596102620762078}
   m_Layer: 0
   m_Name: BearStatue
   m_TagString: Untagged
@@ -250,15 +249,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1843892126375636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 185.27707, y: 185.2774, z: 185.2774}
+  m_LocalRotation: {x: -0.0000006224107, y: -0.6835354, z: 0.0000010579822, w: 0.72991747}
+  m_LocalPosition: {x: 6.98999, y: -42.113968, z: -65.339966}
+  m_LocalScale: {x: 457.22784, y: 457.228, z: 457.2286}
   m_Children:
   - {fileID: 4551280626244780}
   - {fileID: 4531586877321074}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -86.241005, z: 0}
 --- !u!23 &23063301806174588
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -489,7 +488,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: a4dddb3b60f325a4e92d2fd0fc6ca9e1, type: 3}
@@ -517,18 +516,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 1.0000014, z: 1.0000006}
   m_Center: {x: -0.00000023841858, y: 0.0000019073486, z: 0}
---- !u!65 &65596102620762078
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1843892126375636}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.015258189, y: 0.03385541, z: 0.01226388}
-  m_Center: {x: 0, y: 0.0177, z: 0}
 --- !u!114 &114342637113119464
 MonoBehaviour:
   m_ObjectHideFlags: 1

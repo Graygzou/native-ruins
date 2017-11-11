@@ -14,6 +14,7 @@ public class FireLaser : MonoBehaviour {
     public int maxSplit;
     private float timer = 0;
     private LineRenderer line;
+    private bool redraw = true;
 
     // Use this for initialization
     void Start () {
@@ -23,13 +24,13 @@ public class FireLaser : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //timer = 0;
         //line.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, Time.time);
         //if (gameObject.tag != "Laser")
         //{
-            if (timer >= updateFrequency)
+            if (redraw && timer >= updateFrequency)
             {
                 timer = 0;
                 //Debug.Log("Redrawing laser");
@@ -60,7 +61,7 @@ public class FireLaser : MonoBehaviour {
         line.SetPosition(0, lastLaserPosition);
         RaycastHit hit;
 
-        while (loopActive)
+        while (loopActive && redraw)
         {
             Ray ray = new Ray(lastLaserPosition, laserDirection);
             // Get the first object hit
@@ -117,6 +118,11 @@ public class FireLaser : MonoBehaviour {
             }
             else
             {
+                if (hit.collider.transform.tag == "Switch")
+                {
+                    Debug.Log("Coucou");
+                    //yield break;
+                }
                 //Debug.DrawRay(lastLaserPosition, (laserDirection * 100), Color.red);
                 //Debug.Log("Not Reflect");
                 //laserReflected++;
