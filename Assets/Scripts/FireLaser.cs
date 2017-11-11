@@ -66,49 +66,60 @@ public class FireLaser : MonoBehaviour {
             // Get the first object hit
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.gameObject.tag == "Mirror")
+                GameObject mirror = null;
+                //Debug.Log(hit.transform.childCount);
+                //Debug.Log(this.gameObject.tag);
+                if (hit.transform.childCount >= 1)
                 {
-                    //Debug.DrawRay(lastLaserPosition, (laserDirection * 100), Color.green);
-                    //Debug.Log("Reflect");
-
-                    vertexCounter += 3;
-                    line.positionCount = vertexCounter;
-                    line.SetPosition(vertexCounter - 3, Vector3.MoveTowards(hit.point, lastLaserPosition, 0.01f));
-                    line.SetPosition(vertexCounter - 2, lastLaserPosition);
-                    line.SetPosition(vertexCounter - 1, hit.point);
-                    //line.SetWidth(.01f, .01f);
-
-                    Vector3 prevDirection = lastLaserPosition;
-                    lastLaserPosition = hit.point;
-
-                    Debug.DrawLine(hit.normal, hit.normal * 3, Color.green);
-                    Debug.Log(hit.normal);
-                    //laserDirection = Vector3.Reflect(laserDirection, -hit.normal)
-                    //laserDirection = new Vector3(-1, 0, 0);
-                    Debug.Log(Vector3.AngleBetween(-hit.normal, laserDirection));
-                    if ( hit.normal.x < 0)
+                    mirror = hit.transform.GetChild(0).gameObject;
+                    if (mirror.transform.tag == "Mirror")
                     {
-                        laserDirection = Quaternion.AngleAxis(90, Vector3.up) * laserDirection;
+                        //Debug.DrawRay(lastLaserPosition, (laserDirection * 100), Color.green);
+                        //Debug.Log("Reflect");
+
+                        vertexCounter += 3;
+                        line.positionCount = vertexCounter;
+                        line.SetPosition(vertexCounter - 3, Vector3.MoveTowards(hit.point, lastLaserPosition, 0.01f));
+                        line.SetPosition(vertexCounter - 2, lastLaserPosition);
+                        line.SetPosition(vertexCounter - 1, hit.point);
+                        //line.SetWidth(.01f, .01f);
+
+                        Vector3 prevDirection = lastLaserPosition;
+                        lastLaserPosition = hit.point;
+
+                        //Debug.DrawLine(hit.normal, hit.normal * 3, Color.green);
+                        //Debug.Log(hit.normal);
+                        //laserDirection = Vector3.Reflect(laserDirection, -hit.normal)
+                        //laserDirection = new Vector3(-1, 0, 0);
+                        //Debug.Log(Vector3.SignedAngle(laserDirection, hit.normal, Vector3.up));
+
+                        Vector3 res = Vector3.Cross(laserDirection, Vector3.up);
+                        if (Vector3.Dot(res, hit.normal) > 0)
+                        {
+                            laserDirection = res;
+                            //laserDirection = Quaternion.AngleAxis(-90, Vector3.up) * laserDirection;
+                        }
+                        else
+                        {
+                            laserDirection = -res;
+                            //laserDirection = Quaternion.AngleAxis(90, Vector3.up) * laserDirection;
+                        }
                     }
                     else
                     {
-                        laserDirection = Quaternion.AngleAxis(-90, Vector3.up) * laserDirection;
-                    }
-                }
-                else
-                {
-                    //Debug.DrawRay(lastLaserPosition, (laserDirection * 100), Color.red);
-                    //Debug.Log("Not Reflect");
-                    //laserReflected++;
-                    vertexCounter += 1;
-                    line.positionCount = vertexCounter;
-                    //Vector3 lastPos = lastLaserPosition + (laserDirection.normalized * 10);
-                    //line.SetPosition(vertexCounter - 2, lastLaserPosition);
-                    line.SetPosition(vertexCounter - 1, lastLaserPosition + (laserDirection.normalized * hit.distance));
-                    //line.SetPosition(vertexCounter - 2, lastLaserPosition);
-                    //line.SetPosition(vertexCounter - 1, hit.point);
+                        //Debug.DrawRay(lastLaserPosition, (laserDirection * 100), Color.red);
+                        //Debug.Log("Not Reflect");
+                        //laserReflected++;
+                        vertexCounter += 1;
+                        line.positionCount = vertexCounter;
+                        //Vector3 lastPos = lastLaserPosition + (laserDirection.normalized * 10);
+                        //line.SetPosition(vertexCounter - 2, lastLaserPosition);
+                        line.SetPosition(vertexCounter - 1, lastLaserPosition + (laserDirection.normalized * hit.distance));
+                        //line.SetPosition(vertexCounter - 2, lastLaserPosition);
+                        //line.SetPosition(vertexCounter - 1, hit.point);
 
-                    loopActive = false;
+                        loopActive = false;
+                    }
                 }
             }
             yield return new WaitForEndOfFrame();
