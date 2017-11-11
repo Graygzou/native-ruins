@@ -22,7 +22,11 @@ public class EnergyBar : MonoBehaviour {
         }
         else
         {
-            Energy.GetComponent<Scrollbar>().size += 0.001f;
+            Energy.GetComponent<Scrollbar>().size += 0.002f;
+            if(Energy.GetComponent<Scrollbar>().size >= 1f)
+            {
+                Judy.GetComponent<MovementController>().energyIsAt0 = false;
+            }
         }
 	}
 }

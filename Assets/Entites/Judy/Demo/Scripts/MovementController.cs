@@ -14,7 +14,7 @@ public class MovementController : MonoBehaviour {
 	[SerializeField]private AudioSource m_footstep;
     public GameObject EnergyBar;
 
-	private Transform m_cameraPivot = null;
+    private Transform m_cameraPivot = null;
 	private Vector3 initial_orientation;
 
 
@@ -187,7 +187,7 @@ public class MovementController : MonoBehaviour {
 				}
 
 			} else {
-				if (Input.GetKey(KeyCode.LeftShift) && !energyIsAt0) {
+				if (Input.GetKey(KeyCode.LeftShift) && energyIsAt0 == false) {
                     if (EnergyBar.GetComponent<Scrollbar>().size > 0f)
                     {
                         m_footstep.UnPause ();
@@ -212,11 +212,6 @@ public class MovementController : MonoBehaviour {
 					} else
                     {
                         actions.Walk();
-                    }
-
-                    if (EnergyBar.GetComponent<Scrollbar>().size >= 100f)
-                    {
-                        energyIsAt0 = false;
                     }
 
                 }

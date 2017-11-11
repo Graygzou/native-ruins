@@ -9,6 +9,7 @@ public class LifeBar : MonoBehaviour {
     public GameObject Hunger;
     public GameObject Judy;
     public Color BarColor;
+    public Actions actions;
 
     private int timeMaxFaim = 3600;
     private int currentTimeFaim = 0;
@@ -22,6 +23,13 @@ public class LifeBar : MonoBehaviour {
     // Update is called once per frame (60 frames)
     void FixedUpdate () {
         //*****************PERTE DE VIE******************//
+        //Si Judy a sa barre de vie à 0 : Mort*
+        //Life.GetComponent<Scrollbar>().size -= 0.005f;
+        if (Life.GetComponent<Scrollbar>().size <= 0f)
+        {
+            actions.Death();
+        }
+
         //Si Judy chute 
        if (Judy.GetComponent<Rigidbody>().velocity.y < 0 && Judy.GetComponent<Rigidbody>().velocity.magnitude > 100f)
         {
@@ -43,7 +51,7 @@ public class LifeBar : MonoBehaviour {
     //*****************RECUPERATION DE VIE******************//
     void JudyEatsSomething(float lifeBack)
     {
-        if (Hunger.GetComponent<Scrollbar>().size >= 100f)
+        if (Hunger.GetComponent<Scrollbar>().size >= 1f)
         {
             Life.GetComponent<Scrollbar>().size += lifeBack;
         } else
