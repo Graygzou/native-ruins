@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class HungerBar : MonoBehaviour {
 
     public GameObject Hunger;
-    public GameObject Judy;
     public Color BarColor;
 
     private int currentTimeFaim = 0;
     private int timeMaxFaim = 3600;
+	private GameObject Judy;
 
 	// Use this for initialization
 	void Start () {
+		Judy = GameObject.FindGameObjectWithTag ("Player");
         Hunger.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.green;
 	}
 	

@@ -17,7 +17,6 @@ public class InventoryManager : MonoBehaviour {
 	private static ArrayList inventaire = new ArrayList ();
 	// Use this for initialization
 	void Start () {
-		inventaire.Add (Object_Type.Mushroom);
 		deltaScreen = m_canvas.sizeDelta;
 	}
 	
@@ -51,5 +50,9 @@ public class InventoryManager : MonoBehaviour {
 				return;
 			}
 		}
+	}
+
+	public static void AddObjectOfType(Object_Type o){
+		inventaire.Add (o);
 	}
 }

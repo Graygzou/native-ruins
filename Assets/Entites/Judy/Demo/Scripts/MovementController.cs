@@ -12,11 +12,11 @@ public class MovementController : MonoBehaviour {
 	[SerializeField] private Actions actions=null;
     [SerializeField] private Rigidbody m_rigidBody;
 	[SerializeField]private AudioSource m_footstep;
-    public GameObject EnergyBar;
+   
 
     private Transform m_cameraPivot = null;
 	private Vector3 initial_orientation;
-
+	private GameObject EnergyBar;
 
 	private Vector3 lastMousePosition = Vector3.zero;
 
@@ -36,6 +36,7 @@ public class MovementController : MonoBehaviour {
 
     public void Start(){
 		m_cameraPivot = GameObject.Find ("CameraPivot").transform;
+		EnergyBar = GameObject.Find ("Gauges/Energy");
 		initial_orientation = transform.forward;
 		m_footstep.Play ();
 		m_footstep.loop = true;
