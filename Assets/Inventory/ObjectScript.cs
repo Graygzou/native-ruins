@@ -21,9 +21,11 @@
 
 	public InventoryManager.Object_Type o_type;
 	[SerializeField]private Rigidbody o_mushroom;
+	[SerializeField]private AudioSource m_pickSound;
 	 
      void Start()
      {
+		 m_pickSound.Play ();
 		 ParentRT =  (RectTransform)GameObject.Find ("Canvas").transform;
          myWidth = (MyRect.rect.width + 5) / 2;
          myHeight = (MyRect.rect.height + 5) / 2;

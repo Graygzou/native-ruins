@@ -10,6 +10,7 @@ public class InventoryManager : MonoBehaviour {
 	[SerializeField]private AudioSource m_bagSound;
 
 
+
 	public static bool bag_open = false;
 	private Vector2 deltaScreen;
 

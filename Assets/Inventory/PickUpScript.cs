@@ -9,6 +9,7 @@ public class PickUpScript : MonoBehaviour {
 	[SerializeField]private RectTransform o_object;
 
 
+
 	private bool o_isPickable = false;
 
 	// Use this for initialization
@@ -43,7 +44,6 @@ public class PickUpScript : MonoBehaviour {
 
 	private void GetInputs(){
 		if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {
-			//m_bagSound.Play ();
 			InventoryManager.AddObjectOfType(o_type);
 			InventoryManager.an_object_is_pickable = false;
 			RectTransform clone = Instantiate(o_object) as RectTransform;
