@@ -61,7 +61,7 @@ public class FireLaser : MonoBehaviour {
         line.SetPosition(0, lastLaserPosition);
         RaycastHit hit;
 
-        while (loopActive && redraw)
+        while (loopActive)
         {
             Ray ray = new Ray(lastLaserPosition, laserDirection);
             // Get the first object hit
@@ -99,9 +99,7 @@ public class FireLaser : MonoBehaviour {
                         laserDirection = -res;
                         //laserDirection = Quaternion.AngleAxis(90, Vector3.up) * laserDirection;
                     }
-                }
-                else
-                {
+                } else  {
                     //Debug.DrawRay(lastLaserPosition, (laserDirection * 100), Color.red);
                     //Debug.Log("Not Reflect");
                     //laserReflected++;
@@ -113,16 +111,19 @@ public class FireLaser : MonoBehaviour {
                     //line.SetPosition(vertexCounter - 2, lastLaserPosition);
                     //line.SetPosition(vertexCounter - 1, hit.point);
 
+                    if (hit.collider.transform.tag == "Switch") {
+                        // Cast the object
+                        SwitchObject crystal = hit.transform.GetComponent<SwitchObject>();
+                        // Call the method to active the mecanism
+                        crystal.Activate();
+                        redraw = false;
+                        //yield break;
+                    }
                     loopActive = false;
                 }
             }
             else
             {
-                if (hit.collider.transform.tag == "Switch")
-                {
-                    Debug.Log("Coucou");
-                    //yield break;
-                }
                 //Debug.DrawRay(lastLaserPosition, (laserDirection * 100), Color.red);
                 //Debug.Log("Not Reflect");
                 //laserReflected++;
