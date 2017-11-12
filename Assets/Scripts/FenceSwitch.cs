@@ -27,4 +27,11 @@ public class FenceSwitch : Switch {
         }
         yield return new WaitForSeconds(3f);
     }
+
+    //IEnumerator PlayCutScene(float time)
+    //{
+    //    // TODO
+    //    cameraCutScene.GetComponent<Animator>().enabled = false;
+    //    yield return null;
+    //}
 }

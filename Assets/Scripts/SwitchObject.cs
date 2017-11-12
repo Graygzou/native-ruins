@@ -13,13 +13,18 @@ public class SwitchObject : MonoBehaviour {
         // If the currentObject has a mecanism, active it.
         if (gameObject.GetComponent<Switch>() != null) {
             gameObject.GetComponent<Switch>().Activate();
+        } else {
+            ActivateChildren();
         }
+	}
+
+    public void ActivateChildren() {
         // Get all the children of the current component and activate all of them.
         Switch elem = null;
         foreach (Transform child in gameObject.transform)
             // Get the child C# script
             elem = child.GetComponent<Switch>();
-            // Call the method to active the mecanism
-            elem.Activate();
-	}
+        // Call the method to active the mecanism
+        elem.Activate();
+    }
 }
