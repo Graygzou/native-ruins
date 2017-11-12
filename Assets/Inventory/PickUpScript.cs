@@ -13,7 +13,6 @@ public class PickUpScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -24,15 +23,21 @@ public class PickUpScript : MonoBehaviour {
 
 	void OnTriggerExit(Collider other){
 		if (other.gameObject.tag.Equals ("Player")) {
-			o_isPickable = false;
-			renderer.material.shader = Shader.Find ("Mobile/Diffuse");
+			if (InventoryManager.an_object_is_pickable && o_isPickable) {
+				InventoryManager.an_object_is_pickable = false;
+				o_isPickable = false;
+				renderer.material.shader = Shader.Find ("Mobile/Diffuse");
+			}
 		}
 	}
 
-	void OnTriggerEnter(Collider other){
+	void OnTriggerStay(Collider other){
 		if (other.gameObject.tag.Equals ("Player")) {
-			o_isPickable = true;
-			renderer.material.shader = Shader.Find ("Outlined/Silhouetted Diffuse");
+			if (!InventoryManager.an_object_is_pickable) {
+				InventoryManager.an_object_is_pickable = true;
+				o_isPickable = true;
+				renderer.material.shader = Shader.Find ("Outlined/Silhouetted Diffuse");
+			}
 		}
 	}
 
@@ -40,6 +45,7 @@ public class PickUpScript : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {
 			//m_bagSound.Play ();
 			InventoryManager.AddObjectOfType(o_type);
+			InventoryManager.an_object_is_pickable = false;
 			RectTransform clone = Instantiate(o_object) as RectTransform;
 			clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
 			Destroy(this.gameObject);

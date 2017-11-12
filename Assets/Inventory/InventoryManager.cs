@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour {
 
 	public enum Object_Type {Mushroom, Meat, Flint, Wood, Bow, Arrow, Torch, Fire, Plank, Sail, Rope, Raft};
 	private static ArrayList inventaire = new ArrayList ();
+	public static bool an_object_is_pickable =false;
 	// Use this for initialization
 	void Start () {
 		deltaScreen = m_canvas.sizeDelta;
