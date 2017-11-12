@@ -16,7 +16,9 @@ public class BreakRocks : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         //if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.bear &&  other.gameObject.tag == "Breakable") {
-        if (other.gameObject.tag == "Player") { //ajouter condition si c'est un ours
+        if (other.gameObject.tag == "Player" && 
+            GameObject.FindWithTag("Player").GetComponent<Forms>().currentForm == (int)Forms.forms.bear &&
+            Input.GetKey(KeyCode.LeftShift)) {
             //GetComponent<AudioSource>().Play(44100); //retarde d'1 sec
             GameObject cubes = transform.parent.GetChild(1).gameObject;
             StartCoroutine(SmokeAnimation());
