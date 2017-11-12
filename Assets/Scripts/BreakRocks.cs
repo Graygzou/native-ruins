@@ -15,11 +15,10 @@ public class BreakRocks : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        //if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.bear &&  other.gameObject.tag == "Breakable") {
         if (other.gameObject.tag == "Player" && 
             GameObject.FindWithTag("Player").GetComponent<Forms>().currentForm == (int)Forms.forms.bear &&
             Input.GetKey(KeyCode.LeftShift)) {
-            //GetComponent<AudioSource>().Play(44100); //retarde d'1 sec
+            transform.parent.parent.GetChild(0).gameObject.SetActive(false); //desactive le gros collider
             GameObject cubes = transform.parent.GetChild(1).gameObject;
             StartCoroutine(SmokeAnimation());
             cubes.SetActive(true);
