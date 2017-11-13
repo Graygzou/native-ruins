@@ -24,8 +24,10 @@ public class SwitchObject : MonoBehaviour {
         foreach (Transform child in gameObject.transform) {
             // Get the child C# script
             elem = child.GetComponent<Switch>();
-            // Call the method to active the mecanism
-            elem.Activate();
+            if (elem != null) {
+                // Call the method to active the mecanism
+                elem.Activate();
+            }
         }
     }
 }
