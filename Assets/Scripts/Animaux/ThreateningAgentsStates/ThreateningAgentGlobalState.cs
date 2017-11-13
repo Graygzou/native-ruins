@@ -29,18 +29,15 @@ public class ThreateningAgentGlobalState : State<GameObject>
     override public void Execute(GameObject o)
     {
         AgentProperty properties = o.GetComponent<AgentProperty>();
+        GameObject player = GameObject.FindWithTag("Player");
 
-        if (properties.isAlert) {
-            // Get the ref of the play
-            GameObject player = GameObject.FindWithTag("Player");
-
-            // check if the player does have a wierd behavior
-            if(player.GetComponent<Rigidbody>().velocity.magnitude > 5.0f) {
+        // check if the player is too close or that he has a wierd behavior
+        if (properties.playerTooClose || (properties.isAlert && player.GetComponent<Rigidbody>().velocity.magnitude > 5.0f)) {
+            if (properties.isMean) {
+                o.GetComponent<StateMachine>().ChangeState(AttackState.Instance);
+            } else {
                 o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
             }
-        }
-        if (properties.playerTooClose) {
-            o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
         }
     }
 

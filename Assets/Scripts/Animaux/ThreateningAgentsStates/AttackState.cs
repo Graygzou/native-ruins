@@ -20,28 +20,38 @@ public class AttackState : State<GameObject>
         }
     }
 
-    override public void Enter(GameObject o)
-    {
-        // recupere le joueur a attaquer
-    }
-
-    override public void Execute(GameObject o)
-    {
-        // Tant que vivant && vie > 50% && joueur proche
+    override public void Enter(GameObject o) {
+        // change the music ?
         // Jouer l'animation (fumé qui sort de la tete / narines, par ex)
-        // Stocke la position du joueur et FONCE DEDANS !
-        // Se replacer pour reattaquer.
-        // Si vie < 50%
-        // => Evade
-        // Si !vivant
-        // => Death
-        // sinon
-        // => Eat
     }
 
-    override public void Exit(GameObject o)
-    {
-        // Desalocate le joueur
+    override public void Execute(GameObject o) {
+        StateMachine FSM = o.GetComponent<StateMachine>();
+        AgentProperty properties = o.GetComponent<AgentProperty>();
+        GameObject player = GameObject.FindWithTag("Player");
+        // Tant que vivant && vie > 50% && joueur proche
+
+        // Set the animation variables
+        FSM.animator.Play("Locomotion");
+        FSM.animator.SetFloat("Speed_f", 2f);
+
+        // Run in the direction of the player
+        FSM.behavior.target_p = GameObject.FindWithTag("Player").transform;
+        FSM.behavior.seekOn = true;
+
+        if (properties.health <= 0) {
+            o.GetComponent<StateMachine>().ChangeState(DeathState.Instance);
+        }
+        if ((properties.health * 100) / properties.maxHealth < 50) {
+            o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
+        }
+        if (!properties.isAlert) {
+            o.GetComponent<StateMachine>().ChangeState(EatingState.Instance);
+        }
+    }
+
+    override public void Exit(GameObject o) {
+        // Change music ?
     }
 
 }

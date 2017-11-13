@@ -405,7 +405,7 @@ Animator:
   m_GameObject: {fileID: 153970}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f000ecb3e2f790d45bb3459ad897cb3e, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2c635c4a73fa65c4c9271526dd38e163, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3e42f3ec6df238c46bb89e6d61e96c4a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1016,13 +1016,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a4ed356d357e74099aff0c98c7b11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  maxHealth: 0
   maxSpeed: 0
   mass: 0
   isMean: 0
   hungryIndicator: 0
+  damages: 0
   isAlert: 0
   playerTooClose: 0
+  health: 0
   visionRange: {fileID: 135133678125902320}
   awarenessRange: {fileID: 135384274842483022}
 --- !u!114 &114220392413720510

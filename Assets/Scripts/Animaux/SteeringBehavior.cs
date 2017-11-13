@@ -40,9 +40,9 @@ public class SteeringBehavior : MonoBehaviour {
     void Start() {
 
         // Get the animal
-        animal = GetComponent<NavMeshAgent>();
+        //animal = GetComponent<NavMeshAgent>();
 
-        maxSpeed = GetComponent<NavMeshAgent>().speed;
+        //maxSpeed = GetComponent<NavMeshAgent>().speed;
 
         // set Items
         dWanderRadius = 3.0f;

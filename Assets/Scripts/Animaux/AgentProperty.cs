@@ -4,19 +4,24 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.AI;
 
+[System.Serializable]
 public class AgentProperty : MonoBehaviour {
 
     // Attributes of the agent
-    public int health;
+    public int maxHealth;
     public int maxSpeed;
     public int mass;
 
     // To enable some transition
+    [SerializeField]
     public bool isMean;
     public float hungryIndicator = 0.0f;
+    public float damages;
 
     public bool isAlert;
     public bool playerTooClose;
+
+    public int health;
 
     public SphereCollider visionRange;
     public SphereCollider awarenessRange;
@@ -24,9 +29,9 @@ public class AgentProperty : MonoBehaviour {
     //public Animaux(float hea, float maxSpe, float mas) : this(hea, maxSpe, mas, 5) {
     //}
 
-    public AgentProperty(float hea, float maxSpe, float mas) {
+    //public AgentProperty(float hea, float maxSpe, float mas) {
         
-    }
+    //}
 
     void Start() {
         //animal = GetComponent<NavMeshAgent>();
@@ -76,10 +81,11 @@ public class EditorAgentProperty : Editor
         var myScript = target as AgentProperty;
 
         // For the behavior
-        myScript.health = EditorGUILayout.IntField("Health:", myScript.health);
+        myScript.maxHealth = EditorGUILayout.IntField("Max Health:", myScript.maxHealth);
         myScript.maxSpeed = EditorGUILayout.IntField("Max Speed:", myScript.maxSpeed);
         myScript.mass = EditorGUILayout.IntField("Mass:", myScript.mass);
         myScript.isMean = EditorGUILayout.Toggle("IsMean:", myScript.isMean);
+        myScript.damages = EditorGUILayout.FloatField("Damages :", myScript.damages);
         myScript.hungryIndicator = EditorGUILayout.FloatField("Hunger:", myScript.hungryIndicator);
 
         myScript.visionRange = EditorGUILayout.ObjectField("VisionRange:", myScript.visionRange, typeof(SphereCollider), true) as SphereCollider;
