@@ -2,27 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : State<GameObject>
+public class ThreatenedGlobalState : State<GameObject>
 {
-    private static AttackState instance;
-    private float timer;
+    private static ThreatenedGlobalState instance;
 
-    private AttackState() { }
+    private ThreatenedGlobalState() { }
 
-    public static AttackState Instance
-    {
+    public static ThreatenedGlobalState Instance {
         get
         {
-            if (instance == null)
-            {
-                instance = new AttackState();
+            if (instance == null) {
+                instance = new ThreatenedGlobalState();
             }
             return instance;
         }
     }
 
     override public void Enter(GameObject o) {
-        timer = 0.0f;
         // change the music ?
         // Jouer l'animation (fumé qui sort de la tete / narines, par ex)
     }
@@ -31,8 +27,11 @@ public class AttackState : State<GameObject>
         StateMachine FSM = o.GetComponent<StateMachine>();
         AgentProperties properties = o.GetComponent<AgentProperties>();
         GameObject player = GameObject.FindWithTag("Player");
-        // Tant que vivant && vie > 50% && joueur proche
 
+        // Tant que vivant && vie > 50% && joueur proche
+        if(player.GetComponent<AgentProperties>().isDead) {
+            FSM.ChangeState(WalkingState.Instance);
+        }
         if (properties.getCurrentHealth() <= 0) {
             FSM.ChangeState(DeathState.Instance);
         }
@@ -41,7 +40,7 @@ public class AttackState : State<GameObject>
         }
         if (!properties.isAlert) {
             FSM.ChangeState(WalkingState.Instance);
-            FSM.ChangeGlobalState(ThreateningAgentGlobalState.Instance);
+            FSM.ChangeGlobalState(ThreatenedGlobalState.Instance);
         }
     }
 

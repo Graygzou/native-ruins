@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class AgentProperties : MonoBehaviour {
 
     // Attributes of the agent
-    public int maxHealth;
+    public float maxHealth;
     public int maxSpeed;
     public int mass;
 
@@ -21,7 +21,8 @@ public class AgentProperties : MonoBehaviour {
     public bool isAlert;
     public bool playerTooClose;
 
-    private int currentHealth;
+    private float currentHealth;
+    public bool isDead;
     public float maxForce;
 
     public SphereCollider visionRange;
@@ -69,17 +70,38 @@ public class AgentProperties : MonoBehaviour {
         }
     }
 
-    public int getCurrentHealth() {
+    public float getCurrentHealth() {
         return currentHealth;
     }
 
-    // POLISH
-    //IEnumerator AccelerateWalk() {
-    //    for (float i = 0f; i < 0.5f; i += 0.1f) {
-    //        GetComponent<Animator>().SetFloat("Speed_f", i);
-    //        yield return null;
-    //    }
-    //}
+    public void takeDamages(float amount) {
+
+        Debug.Log("Outch !");
+
+        // If the enemy is dead...
+        if (isDead)
+            // ... no need to take damage so exit the function.
+            return;
+
+        // Play the hurt sound effect.
+        //enemyAudio.Play();
+
+        // Reduce the current health by the amount of damage sustained.
+        currentHealth -= amount;
+
+        // Set the position of the particle system to where the hit was sustained.
+        //hitParticles.transform.position = hitPoint;
+
+        // And play the particles.
+        //hitParticles.Play();
+
+        // If the current health is less than or equal to zero...
+        if (currentHealth <= 0) {
+            Debug.Log("Dead");
+            // the enemy is dead.
+            isDead = true;
+        }
+    }
 
 }
 
