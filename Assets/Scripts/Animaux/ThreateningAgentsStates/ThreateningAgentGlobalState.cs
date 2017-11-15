@@ -33,22 +33,18 @@ public class ThreateningAgentGlobalState : State<GameObject>
             o.GetComponent<StateMachine>().ChangeState(DeathState.Instance);
         }
 
-        if (o.GetComponent<StateMachine>().getCurrentState() != AttackState.Instance &&
-            o.GetComponent<StateMachine>().getCurrentState() != ChargeState.Instance &&
-            o.GetComponent<StateMachine>().getCurrentState() != EvadeState.Instance)
+        // check if the player is too close or that he has a weird behavior
+        if (properties.playerTooClose || (properties.isAlert &&
+        player.GetComponent<Rigidbody>().velocity.magnitude > 5.0f))
         {
-            // check if the player is too close or that he has a weird behavior
-            if (properties.playerTooClose || (properties.isAlert &&
-            player.GetComponent<Rigidbody>().velocity.magnitude > 5.0f))
+            if (properties.isMean)
             {
-                if (properties.isMean && o.GetComponent<StateMachine>().getCurrentState() != AttackState.Instance)
-                {
-                    o.GetComponent<StateMachine>().ChangeState(AttackState.Instance);
-                }
-                else if (!properties.isMean && o.GetComponent<StateMachine>().getCurrentState() != EvadeState.Instance)
-                {
-                    o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
-                }
+                o.GetComponent<StateMachine>().ChangeGlobalState(AttackState.Instance);
+                o.GetComponent<StateMachine>().ChangeState(PursuitState.Instance);
+            }
+            else if (!properties.isMean && o.GetComponent<StateMachine>().getCurrentState() != EvadeState.Instance)
+            {
+                o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
             }
         }
     }

@@ -82,6 +82,19 @@ public class StateMachine : MonoBehaviour {
         currentState.Enter(owner);
     }
 
+    //change to a new global state
+    public void ChangeGlobalState(State<GameObject> newState)
+    {
+        //call the exit method of the existing global state
+        globalState.Exit(owner);
+
+        //change state to the new global state
+        globalState = newState;
+
+        //call the entry method of the new global state
+        globalState.Enter(owner);
+    }
+
     //change state back to the previous state
     public void RevertToPreviousState() {
         ChangeState(previousState);

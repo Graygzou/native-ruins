@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackState : State<GameObject>
 {
     private static AttackState instance;
+    private float timer;
 
     private AttackState() { }
 
@@ -21,6 +22,7 @@ public class AttackState : State<GameObject>
     }
 
     override public void Enter(GameObject o) {
+        timer = 0.0f;
         // change the music ?
         // Jouer l'animation (fumé qui sort de la tete / narines, par ex)
     }
@@ -31,33 +33,17 @@ public class AttackState : State<GameObject>
         GameObject player = GameObject.FindWithTag("Player");
         // Tant que vivant && vie > 50% && joueur proche
 
-        FSM.behavior.seekOn = false;
-
-        // If the player is far away
-        if ((player.transform.position - o.transform.position).magnitude > 30.0f) {
-            // Run in the direction of the player
-            FSM.behavior.target_p = GameObject.FindWithTag("Player").transform.position;
-            FSM.behavior.seekOn = true;
-        } else {
-            o.GetComponent<StateMachine>().ChangeState(ChargeState.Instance);
-        }
-
-        //AttackPlayer(FSM);
-
         if (properties.getCurrentHealth() <= 0) {
-            o.GetComponent<StateMachine>().ChangeState(DeathState.Instance);
+            FSM.ChangeState(DeathState.Instance);
         }
         if ((properties.getCurrentHealth() * 100) / properties.maxHealth < 50) {
-            o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
+            FSM.ChangeState(EvadeState.Instance);
         }
         if (!properties.isAlert) {
-            o.GetComponent<StateMachine>().ChangeState(EatingState.Instance);
+            FSM.ChangeState(WalkingState.Instance);
+            FSM.ChangeGlobalState(ThreateningAgentGlobalState.Instance);
         }
     }
-
-    //IEnumerator AttackPlayer(StateMachine FSM) {
-        
-    //}
 
     override public void Exit(GameObject o) {
         // Change music ?
