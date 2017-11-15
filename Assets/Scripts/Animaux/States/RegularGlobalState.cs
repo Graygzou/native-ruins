@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
-public class ThreateningAgentGlobalState : State<GameObject>
+public class RegularGlobalState : State<GameObject>
 {
-    private static ThreateningAgentGlobalState instance;
+    private static RegularGlobalState instance;
 
-    private ThreateningAgentGlobalState() { }
+    private RegularGlobalState() { }
 
-    public static ThreateningAgentGlobalState Instance
+    public static RegularGlobalState Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new ThreateningAgentGlobalState();
+                instance = new RegularGlobalState();
             }
             return instance;
         }
@@ -29,7 +29,7 @@ public class ThreateningAgentGlobalState : State<GameObject>
         AgentProperties properties = o.GetComponent<AgentProperties>();
         GameObject player = GameObject.FindWithTag("Player");
 
-        if (properties.getCurrentHealth() <= 0) {
+        if (properties.isDead) {
             o.GetComponent<StateMachine>().ChangeState(DeathState.Instance);
         }
 
@@ -39,7 +39,7 @@ public class ThreateningAgentGlobalState : State<GameObject>
         {
             if (properties.isMean)
             {
-                o.GetComponent<StateMachine>().ChangeGlobalState(AttackState.Instance);
+                o.GetComponent<StateMachine>().ChangeGlobalState(ThreatenedGlobalState.Instance);
                 o.GetComponent<StateMachine>().ChangeState(PursuitState.Instance);
             }
             else if (!properties.isMean && o.GetComponent<StateMachine>().getCurrentState() != EvadeState.Instance)

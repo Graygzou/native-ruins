@@ -36,13 +36,14 @@ public class PursuitState : State<GameObject> {
 
         // If the player is not far away
         if ((player.transform.position - o.transform.position).magnitude < 30.0f) {
-            FSM.ChangeState(ChargeState.Instance);
+            FSM.ChangeState(TauntState.Instance);
+            //FSM.animator.SetBool("ReadyToCharge", true);
         }
     }
 
     override public void Exit(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
-
+        FSM.animator.SetFloat("Speed_f", 0.0f);
         FSM.behavior.seekOn = false;
         FSM.behavior.obstacleAvoidanceOn = false;
     }

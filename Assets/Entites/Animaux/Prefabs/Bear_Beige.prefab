@@ -77,8 +77,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152128}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.3122787, y: 0.000055313, z: 1.9341644}
+  m_LocalRotation: {x: 0.00053904403, y: 0.7071923, z: -0.00022880398, w: 0.707021}
+  m_LocalPosition: {x: 14.21, y: 2.92, z: -67.47209}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 458620}
@@ -86,7 +86,7 @@ Transform:
   - {fileID: 488692}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.062000003, y: 90.01401, z: 0.025}
 --- !u!4 &458620
 Transform:
   m_ObjectHideFlags: 1
@@ -136,7 +136,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: bd230207ae5490e448055f036d3af422, type: 3}
   m_Controller: {fileID: 9100000, guid: 36e4b8fa0a22eda409971f21346b710b, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
@@ -299,13 +299,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152128}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!64 &64379968303788458
 MeshCollider:
@@ -332,15 +332,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a4ed356d357e74099aff0c98c7b11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  maxSpeed: 0
-  mass: 0
-  isMean: 0
+  maxHealth: 100
+  maxSpeed: 2
+  mass: 4
+  isMean: 1
   hungryIndicator: 0
-  damages: 0
+  damages: 20
   isAlert: 0
   playerTooClose: 0
-  health: 0
+  isDead: 0
+  maxForce: 0
   visionRange: {fileID: 135842406857726034}
   awarenessRange: {fileID: 135229590690482880}
 --- !u!114 &114545863857528814
@@ -355,9 +356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vWanderTarget: {x: 0, y: 0, z: 0}
-  target_p: {fileID: 0}
+  target_p: {x: 0, y: 0, z: 0}
   minDetectionBoxLength: 7
-  maxForce: 0
   wallAvoidanceOn: 0
   obstacleAvoidanceOn: 0
   wanderOn: 0

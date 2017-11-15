@@ -19,13 +19,15 @@ public class ChargeState : State<GameObject>
     }
 
     override public void Enter(GameObject o) {
-        GameObject player = GameObject.FindWithTag("Player");
+        GameObject player = GameObject.FindWithTag("Player");   
         StateMachine FSM = o.GetComponent<StateMachine>();
+        // Set the animation variables
 
-        // Rush into the player
         FSM.animator.SetFloat("Speed_f", 2f);
         FSM.animator.Play("Locomotion");
         target_charge = GameObject.FindWithTag("Player").transform.position;
+
+        // Rush into the player
         FSM.behavior.target_p = target_charge;
         FSM.behavior.seekOn = true;
     }
@@ -33,17 +35,15 @@ public class ChargeState : State<GameObject>
     override public void Execute(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
         AgentProperties properties = o.GetComponent<AgentProperties>();
-        GameObject player = GameObject.FindWithTag("Player");
 
-        if ((o.transform.position - target_charge).magnitude < 1.0f) {
-            // do something ?
-            o.GetComponent<StateMachine>().ChangeState(IdleState.Instance);
+        if ((o.transform.position - target_charge).magnitude < 5.0f) {
+            FSM.ChangeState(AttackState.Instance);
         }
     }
 
     override public void Exit(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
-        FSM.animator.SetFloat("Speed_f", 0f);
+        FSM.animator.SetFloat("Speed_f", 0.0f);
         FSM.behavior.seekOn = false;
     }
 

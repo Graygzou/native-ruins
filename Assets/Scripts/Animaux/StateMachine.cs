@@ -29,7 +29,7 @@ public class StateMachine : MonoBehaviour {
 
         currentState = IdleState.Instance;
         previousState = null;
-        globalState = ThreateningAgentGlobalState.Instance;
+        globalState = RegularGlobalState.Instance;
     }
 
     void Start() {
@@ -62,7 +62,7 @@ public class StateMachine : MonoBehaviour {
         }
 
         //same for the steering behavior
-        if (behavior != null) {
+        if (behavior != null && behavior.enabled) {
             behavior.UpdateBehavior();
         }
     }
@@ -80,6 +80,13 @@ public class StateMachine : MonoBehaviour {
 
         //call the entry method of the new state
         currentState.Enter(owner);
+    }
+
+    public void DestroyFSM() {
+        //call the exit method of the existing state
+        currentState.Exit(owner);
+        //the state machine
+        Destroy(this);
     }
 
     //change to a new global state

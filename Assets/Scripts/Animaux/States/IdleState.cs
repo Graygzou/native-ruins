@@ -36,11 +36,7 @@ public class IdleState : State<GameObject>
         //         !animationClips[0].clip.name.Equals("Deer_Idle"));
 
         // Set the number of the the state is play
-        if(FSM.getGlobalState() != AttackState.Instance) {
-            FSM.timeIdle = (int)Mathf.Round(Random.Range(1.0f, 2.0f));
-        } else {
-            FSM.timeIdle = 1.0f;
-        }
+        FSM.timeIdle = (int)Mathf.Round(Random.Range(1.0f, 2.0f));
         FSM.time = animationState.normalizedTime;
     }
 
@@ -53,12 +49,9 @@ public class IdleState : State<GameObject>
         if (currTime >= FSM.time + FSM.timeIdle - 0.06) {
             // Launch a coroutine to accelerate POLISH
             // o.GetComponent<AgentProperty>().StartCoroutine("AccelerateWalk");
-            if (FSM.getGlobalState() == AttackState.Instance) {
-                FSM.ChangeState(PursuitState.Instance);
-            } else {
-                // Change state
-                FSM.ChangeState(WalkingState.Instance);
-            }
+
+            // Change state
+            FSM.ChangeState(WalkingState.Instance);
         }
     }
 
