@@ -18,12 +18,12 @@ public class EvadeState : State<GameObject> {
 
     override public void Enter(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
-        AgentProperty properties = o.GetComponent<AgentProperty>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
 
         FSM.animator.Play("Locomotion");
         // Set the animation variables
         FSM.animator.SetFloat("Speed_f", 1f);
-        FSM.behavior.target_p = GameObject.FindWithTag("Player").transform;
+        FSM.behavior.target_p = GameObject.FindWithTag("Player").transform.position;
         FSM.behavior.obstacleAvoidanceOn = true;
         FSM.behavior.fleeOn = true;
 
@@ -34,7 +34,7 @@ public class EvadeState : State<GameObject> {
 
     override public void Execute(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
-        AgentProperty properties = o.GetComponent<AgentProperty>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
         if (!properties.isAlert) {
             FSM.RevertToPreviousState();
         }

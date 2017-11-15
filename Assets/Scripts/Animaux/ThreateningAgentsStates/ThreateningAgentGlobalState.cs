@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
-
-
 public class ThreateningAgentGlobalState : State<GameObject>
 {
     private static ThreateningAgentGlobalState instance;
@@ -28,15 +26,29 @@ public class ThreateningAgentGlobalState : State<GameObject>
 
     override public void Execute(GameObject o)
     {
-        AgentProperty properties = o.GetComponent<AgentProperty>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
         GameObject player = GameObject.FindWithTag("Player");
 
-        // check if the player is too close or that he has a wierd behavior
-        if (properties.playerTooClose || (properties.isAlert && player.GetComponent<Rigidbody>().velocity.magnitude > 5.0f)) {
-            if (properties.isMean) {
-                o.GetComponent<StateMachine>().ChangeState(AttackState.Instance);
-            } else {
-                o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
+        if (properties.getCurrentHealth() <= 0) {
+            o.GetComponent<StateMachine>().ChangeState(DeathState.Instance);
+        }
+
+        if (o.GetComponent<StateMachine>().getCurrentState() != AttackState.Instance &&
+            o.GetComponent<StateMachine>().getCurrentState() != ChargeState.Instance &&
+            o.GetComponent<StateMachine>().getCurrentState() != EvadeState.Instance)
+        {
+            // check if the player is too close or that he has a weird behavior
+            if (properties.playerTooClose || (properties.isAlert &&
+            player.GetComponent<Rigidbody>().velocity.magnitude > 5.0f))
+            {
+                if (properties.isMean && o.GetComponent<StateMachine>().getCurrentState() != AttackState.Instance)
+                {
+                    o.GetComponent<StateMachine>().ChangeState(AttackState.Instance);
+                }
+                else if (!properties.isMean && o.GetComponent<StateMachine>().getCurrentState() != EvadeState.Instance)
+                {
+                    o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
+                }
             }
         }
     }

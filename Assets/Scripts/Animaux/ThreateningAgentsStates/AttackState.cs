@@ -27,28 +27,37 @@ public class AttackState : State<GameObject>
 
     override public void Execute(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
-        AgentProperty properties = o.GetComponent<AgentProperty>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
         GameObject player = GameObject.FindWithTag("Player");
         // Tant que vivant && vie > 50% && joueur proche
 
-        // Set the animation variables
-        FSM.animator.Play("Locomotion");
-        FSM.animator.SetFloat("Speed_f", 2f);
+        FSM.behavior.seekOn = false;
 
-        // Run in the direction of the player
-        FSM.behavior.target_p = GameObject.FindWithTag("Player").transform;
-        FSM.behavior.seekOn = true;
+        // If the player is far away
+        if ((player.transform.position - o.transform.position).magnitude > 30.0f) {
+            // Run in the direction of the player
+            FSM.behavior.target_p = GameObject.FindWithTag("Player").transform.position;
+            FSM.behavior.seekOn = true;
+        } else {
+            o.GetComponent<StateMachine>().ChangeState(ChargeState.Instance);
+        }
 
-        if (properties.health <= 0) {
+        //AttackPlayer(FSM);
+
+        if (properties.getCurrentHealth() <= 0) {
             o.GetComponent<StateMachine>().ChangeState(DeathState.Instance);
         }
-        if ((properties.health * 100) / properties.maxHealth < 50) {
+        if ((properties.getCurrentHealth() * 100) / properties.maxHealth < 50) {
             o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
         }
         if (!properties.isAlert) {
             o.GetComponent<StateMachine>().ChangeState(EatingState.Instance);
         }
     }
+
+    //IEnumerator AttackPlayer(StateMachine FSM) {
+        
+    //}
 
     override public void Exit(GameObject o) {
         // Change music ?

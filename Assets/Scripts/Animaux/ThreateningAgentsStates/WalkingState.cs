@@ -50,7 +50,7 @@ public class WalkingState : State<GameObject> {
 
     override public void Execute(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
-        AgentProperty properties = o.GetComponent<AgentProperty>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
 
         // Udpate variables
         properties.hungryIndicator += 0.1f;

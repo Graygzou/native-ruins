@@ -11,13 +11,11 @@ public class SteeringBehavior : MonoBehaviour {
     public float WanderDistance { get; set; }
     public float dWanderRadius { get; set; }
     public Vector3 vWanderTarget;
-    public Transform target_p;
+
+    public Vector3 target_p;
     public Vector3 desiredVelocity { get; set; }
-    public float maxSpeed { get; set; }
 
     public float minDetectionBoxLength = 7.0f;
-
-    public float maxForce;
 
     private float timer = 0;
 
@@ -34,12 +32,15 @@ public class SteeringBehavior : MonoBehaviour {
     public float obstacleMaxDistance;
     public Dictionary<Ray, float> senseurs;
 
+    private AgentProperties properties;
+
     // Maybe useless
-    NavMeshAgent animal;
+    //NavMeshAgent animal;
 
     void Start() {
 
-        // Get the animal
+        // Get the animal properties
+        properties = GetComponent<AgentProperties>();
         //animal = GetComponent<NavMeshAgent>();
 
         //maxSpeed = GetComponent<NavMeshAgent>().speed;
@@ -48,15 +49,13 @@ public class SteeringBehavior : MonoBehaviour {
         dWanderRadius = 3.0f;
         WanderDistance = 7.0f;
 
-        maxForce = 200;
-
         boundingSphereRadius = 1.0f;
         obstacleMaxDistance = 10.0f;
 
         senseurs = new Dictionary<Ray, float>();
 
         // Set velocity
-        Vector3 velocity = transform.forward * maxSpeed;
+        Vector3 velocity = transform.forward;
         velocity.y = GetComponent<Rigidbody>().velocity.y;
         GetComponent<Rigidbody>().velocity = velocity;
 
@@ -83,9 +82,9 @@ public class SteeringBehavior : MonoBehaviour {
 
         m_vSteeringForce.y = 0.0f;
         //make sure vehicle does not exceed maximum velocity
-        Vector3.ClampMagnitude(m_vSteeringForce, maxSpeed);
+        //Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
 
-        GetComponent<Rigidbody>().velocity = m_vSteeringForce.normalized * 5;
+        GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
 
         //update the heading if the vehicle has a non zero velocity
         if (GetComponent<Rigidbody>().velocity.sqrMagnitude > 0.000001)
@@ -124,60 +123,60 @@ public class SteeringBehavior : MonoBehaviour {
 
         if (wallAvoidanceOn) {
             force = WallAvoidance() * 5.0f;
-            if (force.magnitude < maxForce - steeringForceAverage.magnitude) {
+            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
 
         if (obstacleAvoidanceOn) {
             force = ObstaclesAvoidance() * 5.0f;
-            if (force.magnitude < maxForce - steeringForceAverage.magnitude) {
+            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
 
         if (wanderOn) {
             force = Wander() * 1.0f;
-            if (force.magnitude < maxForce - steeringForceAverage.magnitude) {
+            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
 
         if (fleeOn) {
             force = Flee() * 1.0f;
-            if (force.magnitude < maxForce - steeringForceAverage.magnitude) {
+            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
 
         if (seekOn) {
             force = Seek() * 1.0f;
-            if (force.magnitude < maxForce - steeringForceAverage.magnitude) {
+            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
@@ -216,7 +215,7 @@ public class SteeringBehavior : MonoBehaviour {
             // Calculate avoidance force
             if (Physics.Raycast(r, out hitInfo, senseurs[r]))
             {
-                avoidanceForce += Vector3.Reflect(transform.forward * maxSpeed, hitInfo.normal) * (senseurs[r] - hitInfo.distance);
+                avoidanceForce += Vector3.Reflect(transform.forward * properties.maxSpeed, hitInfo.normal) * (senseurs[r] - hitInfo.distance);
                 //avoidanceForce += hitInfo.normal * (m_Senseurs[r] - hitInfo.distance);
             }
         }
@@ -246,19 +245,21 @@ public class SteeringBehavior : MonoBehaviour {
 
     public Vector3 Seek() {
         Vector3 m_DesiredVelocity = Vector3.zero;
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        if (agent != null) {
-            agent.SetDestination(target_p.position);
-        } else {
+        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        //if (agent != null) {
+        //    agent.SetDestination(target_p.position);
+        //} else {
             // Redefinir A* ici ?
-            m_DesiredVelocity = target_p.position - transform.position;
-        }
+        m_DesiredVelocity = (target_p - transform.position) * properties.maxSpeed;
+        //}
         return m_DesiredVelocity;
     }
 
     public Vector3 Flee() {
-        Vector3 m_DesiredVelocity = (transform.position - target_p.position).normalized * maxSpeed;
-        return m_DesiredVelocity - GetComponent<Rigidbody>().velocity;
+        Vector3 m_DesiredVelocity = Vector3.zero;
+        //Vector3 m_DesiredVelocity = (transform.position - target_p.position).normalized * maxSpeed;
+        m_DesiredVelocity = (transform.position - target_p) * properties.maxSpeed;
+        return m_DesiredVelocity; // - GetComponent<Rigidbody>().velocity;
     }
 
     void OnDrawGizmos()
@@ -268,7 +269,7 @@ public class SteeringBehavior : MonoBehaviour {
 
 
         Gizmos.color = Color.black;
-        Gizmos.DrawLine(transform.position, transform.position + GetComponent<Rigidbody>().velocity.normalized * WanderDistance);
+        Gizmos.DrawLine(transform.position, transform.forward + GetComponent<Rigidbody>().velocity.normalized * WanderDistance);
         Gizmos.DrawWireSphere(transform.position + transform.forward * WanderDistance, dWanderRadius);
         Gizmos.DrawWireSphere(vWanderTarget, 0.33f);
 
@@ -287,33 +288,52 @@ public class SteeringBehavior : MonoBehaviour {
 [CustomEditor(typeof(SteeringBehavior))]
 public class MyScriptEditor : Editor
 {
+    SerializedProperty m_wallAvoidanceOn;
+    SerializedProperty m_obstacleAvoidanceOn;
+    SerializedProperty m_wanderOn;
+    SerializedProperty m_fleeOn;
+    SerializedProperty m_seekOn;
+    SerializedProperty m_boundingSphereRadius;
+    SerializedProperty m_obstacleMaxDistance;
+    SerializedProperty m_target_p;
+
+    void OnEnable()
+    {
+        // Fetch the objects from the GameObject script to display in the inspector
+        m_wallAvoidanceOn = serializedObject.FindProperty("wallAvoidanceOn");
+        m_obstacleAvoidanceOn = serializedObject.FindProperty("obstacleAvoidanceOn");
+        m_wanderOn = serializedObject.FindProperty("wanderOn");
+        m_fleeOn = serializedObject.FindProperty("fleeOn");
+        m_seekOn = serializedObject.FindProperty("seekOn");
+        m_boundingSphereRadius = serializedObject.FindProperty("boundingSphereRadius");
+        m_obstacleMaxDistance = serializedObject.FindProperty("obstacleMaxDistance");
+        m_target_p = serializedObject.FindProperty("target_p");
+    }
+
     override public void OnInspectorGUI()
     {
-        var myScript = target as SteeringBehavior;
+        //The variables and GameObject from the MyGameObject script are displayed in the Inspector with appropriate labels
+        EditorGUILayout.PropertyField(m_wallAvoidanceOn, new GUIContent("Wall Avoidance:"));
+        EditorGUILayout.PropertyField(m_obstacleAvoidanceOn, new GUIContent("Obstacle Avoidance:"));
+        EditorGUILayout.PropertyField(m_wanderOn, new GUIContent("Wander:"));
+        EditorGUILayout.PropertyField(m_fleeOn, new GUIContent("Flee:"));
+        EditorGUILayout.PropertyField(m_seekOn, new GUIContent("Seek:"));
+        EditorGUILayout.PropertyField(m_target_p, new GUIContent("Target:"));
+        // TODO le refaire
+        //using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(m_fleeOn || m_seekOn)))
+        //{
+        //    if (group.visible == true)
+        //    {
+        //        EditorGUI.indentLevel++;
+        //        EditorGUILayout.PropertyField(m_target_p, new GUIContent("Target:"));
+        //        EditorGUI.indentLevel--;
+        //    }
+        //}
 
-        // For the behavior
-        myScript.wallAvoidanceOn = EditorGUILayout.Toggle("Wall Avoidance:", myScript.wallAvoidanceOn);
-        myScript.obstacleAvoidanceOn = EditorGUILayout.Toggle("Obstacle Avoidance:", myScript.obstacleAvoidanceOn);
-        myScript.wanderOn = EditorGUILayout.Toggle("Wander:", myScript.wanderOn);
-        myScript.fleeOn = EditorGUILayout.Toggle("Flee:", myScript.fleeOn);
-        myScript.seekOn = EditorGUILayout.Toggle("Seek:", myScript.seekOn);
+        EditorGUILayout.PropertyField(m_boundingSphereRadius, new GUIContent("Detection Lenght:"));
+        EditorGUILayout.PropertyField(m_obstacleMaxDistance, new GUIContent("Wander Radius:"));
 
-        using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(myScript.fleeOn || myScript.seekOn)))
-        {
-            if (group.visible == true)
-            {
-                EditorGUI.indentLevel++;
-                myScript.target_p = EditorGUILayout.ObjectField("Target:", myScript.target_p, typeof(Transform), true) as Transform;
-                EditorGUI.indentLevel--;
-            }
-        }
-
-        //using (new EditorGUI.DisabledScope(myScript.fleeOn || myScript.seekOn))
-        //    myScript.target_p = EditorGUILayout.ObjectField("Target", myScript.target_p, typeof(Transform), true) as Transform;
-
-        // For parameters
-        myScript.minDetectionBoxLength = EditorGUILayout.FloatField("Detection Lenght:", myScript.minDetectionBoxLength);
-        myScript.dWanderRadius = EditorGUILayout.FloatField("Wander Radius:", myScript.dWanderRadius);
-
+        // Apply changes to the serializedProperty - always do this at the end of OnInspectorGUI.
+        serializedObject.ApplyModifiedProperties();
     }
 }

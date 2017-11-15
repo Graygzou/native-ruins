@@ -38,7 +38,7 @@ public class EatingState : State<GameObject>
     {
         // Get the current agent variables
         StateMachine FSM = o.GetComponent<StateMachine>();
-        AgentProperty properties = o.GetComponent<AgentProperty>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
 
         // Update of the variable if needed
         if (properties.hungryIndicator > 0.0f) {

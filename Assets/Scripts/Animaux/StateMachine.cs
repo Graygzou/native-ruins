@@ -10,9 +10,9 @@ public class StateMachine : MonoBehaviour {
     GameObject owner;                       // Reference to the agent that owns this instance
     public SteeringBehavior behavior;       // Reference to the behavior of the agent
     public Animator animator;
-    public State<GameObject> currentState;
-    public State<GameObject> previousState;
-    public State<GameObject> globalState;
+    private State<GameObject> currentState;
+    private State<GameObject> previousState;
+    private State<GameObject> globalState;
     //public Animation animation;
     //private AgentProperty properties;
 
@@ -52,7 +52,7 @@ public class StateMachine : MonoBehaviour {
    void Update()
    {
         //if a global state exists, call its execute method, else do nothing
-        if(globalState != null) {
+        if (globalState != null) {
             globalState.Execute(owner);
         }
 
