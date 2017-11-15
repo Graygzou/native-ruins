@@ -11,9 +11,13 @@ public class HelpSystem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(getkey)
+		if(Input.GetKey(KeyCode.Escape) && !this.gameObject.activeSelf)
         {
-
+            this.gameObject.SetActive(true);
         }
-	}
+        if (Input.GetKey(KeyCode.Escape) && this.gameObject.activeSelf) {
+            this.gameObject.SetActive(false);
+        }
+
+    }
 }
