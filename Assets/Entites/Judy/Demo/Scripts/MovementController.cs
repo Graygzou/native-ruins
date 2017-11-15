@@ -29,7 +29,7 @@ public class MovementController : MonoBehaviour {
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
 
-    public bool energyIsAt0 = false;
+    
 
 
 
@@ -188,7 +188,7 @@ public class MovementController : MonoBehaviour {
 				}
 
 			} else {
-				if (Input.GetKey(KeyCode.LeftShift) && energyIsAt0 == false) {
+				if (Input.GetKey(KeyCode.LeftShift) && !GameObject.FindWithTag("EnergyBar").GetComponent<EnergyBar>().energyIsAt0) {
                     if (EnergyBar.GetComponent<Scrollbar>().size > 0f)
                     {
                         m_footstep.UnPause ();
@@ -202,7 +202,7 @@ public class MovementController : MonoBehaviour {
 
                     } else
                     {
-                        energyIsAt0 = true;
+                        GameObject.FindWithTag("EnergyBar").GetComponent<EnergyBar>().energyIsAt0 = true;
                     }
 					    
 				} else {

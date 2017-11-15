@@ -14,7 +14,7 @@ public class HungerBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Judy = GameObject.FindGameObjectWithTag ("Player");
+		Judy = GameObject.FindWithTag ("Player");
         Hunger.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.green;
 	}
 	

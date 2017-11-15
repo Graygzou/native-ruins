@@ -9,8 +9,6 @@ public class LifeBar : MonoBehaviour {
     public GameObject Hunger;
     public Color BarColor;
 
-    
-
     private int timeMaxFaim = 3600;
     private int currentTimeFaim = 0;
 	private GameObject Judy;
@@ -18,7 +16,7 @@ public class LifeBar : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		Judy = GameObject.FindGameObjectWithTag ("Player");
+		Judy = GameObject.FindWithTag ("Player");
 		actions = Judy.GetComponent ("Actions") as Actions;
         Life.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.red;
 	}

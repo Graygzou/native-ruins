@@ -9,7 +9,7 @@ public class Forms : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        currentForm = (int)forms.human;
+        currentForm = (int)forms.bear;
 	}
 	
 	// Update is called once per frame
