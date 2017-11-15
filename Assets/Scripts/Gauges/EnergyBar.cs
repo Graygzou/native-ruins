@@ -8,11 +8,9 @@ public class EnergyBar : MonoBehaviour {
     public GameObject Energy;
     public Color BarColor;
     public bool energyIsAt0 = false;
-    private GameObject Player;
 
 	// Use this for initialization
 	void Start () {
-		Player = GameObject.FindWithTag ("Player");
         Energy.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.yellow;
 	}
 	

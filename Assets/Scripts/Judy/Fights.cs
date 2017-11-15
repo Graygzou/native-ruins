@@ -17,16 +17,16 @@ public class Fights : MonoBehaviour {
 		if(forms.GetComponent<Forms>().currentForm == (int)Forms.forms.bear && Input.GetMouseButton(0))
         {
             Debug.Log("coucou");
-            //GameObject.FindWithTag("Player").PlayAnimation();
+            //GameObject.FindWithTag("Player").animation.play(""); //joue animation attaque
             RaycastHit hit;
             distance = 1f; //distance de l'animal pour pouvoir lui infliger des degats
             Ray Judy = new Ray(GameObject.FindWithTag("Player").transform.position, Vector3.forward);
             if(Physics.Raycast(Judy,out hit,distance))
             {
-               
+                if (hit.collider.tag == "Animal") {
                     GameObject.FindWithTag("LifeBar").GetComponent<Scrollbar>().size -= 0.1f;
                     //Inflige degat a l'animal
-               
+                }
             }
         }
 	}

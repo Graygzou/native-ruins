@@ -10,11 +10,11 @@ public class HungerBar : MonoBehaviour {
 
     private int currentTimeFaim = 0;
     private int timeMaxFaim = 3600;
-	private GameObject Judy;
+	private GameObject forms;
 
 	// Use this for initialization
 	void Start () {
-		Judy = GameObject.FindWithTag ("Player");
+		forms = GameObject.Find("Forms");
         Hunger.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.green;
 	}
 	
@@ -22,7 +22,7 @@ public class HungerBar : MonoBehaviour {
 	void Update () {
         if (currentTimeFaim == timeMaxFaim)
         {
-            if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.puma)
+            if (forms.GetComponent<Forms>().currentForm == (int)Forms.forms.puma)
             {
                 Hunger.GetComponent<Scrollbar>().size -= 0.06f;
             }
