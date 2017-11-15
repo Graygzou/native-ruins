@@ -14,10 +14,9 @@ public class Fights : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(forms.GetComponent<Forms>().currentForm == (int)Forms.forms.bear && Input.GetMouseButton(0))
+		if(forms.GetComponent<Forms>().currentForm == (int)Forms.forms.bear && Input.GetMouseButton(0)) //clic gauche souris
         {
-            Debug.Log("coucou");
-            //GameObject.FindWithTag("Player").animation.play(""); //joue animation attaque
+            GameObject.FindWithTag("Player").GetComponent<Animation>().play("attack"); //joue animation attaque
             RaycastHit hit;
             distance = 1f; //distance de l'animal pour pouvoir lui infliger des degats
             Ray Judy = new Ray(GameObject.FindWithTag("Player").transform.position, Vector3.forward);
