@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MovementControllerAnimal : MonoBehaviour {
 
@@ -17,8 +18,9 @@ public class MovementControllerAnimal : MonoBehaviour {
 	private Transform m_cameraPivot = null;
 	private Vector3 initial_orientation;
 
+    private GameObject EnergyBar;
 
-	private Vector3 lastMousePosition = Vector3.zero;
+    private Vector3 lastMousePosition = Vector3.zero;
 
     private bool m_wasGrounded;
     private Vector3 m_currentDirection = Vector3.zero;
@@ -34,7 +36,8 @@ public class MovementControllerAnimal : MonoBehaviour {
 
 	public void Start(){
 		m_cameraPivot = GameObject.Find ("CameraPivot").transform;
-		initial_orientation = transform.forward;
+        EnergyBar = GameObject.Find("Gauges/Energy");
+        initial_orientation = transform.forward;
 		m_footstep.Play ();
 		m_footstep.loop = true;
 		m_footstep.Pause ();
@@ -178,11 +181,16 @@ public class MovementControllerAnimal : MonoBehaviour {
 	private void GetInputs(Vector3 NextDir){
 		if (m_isGrounded) {
 			if (!NextDir.Equals (Vector3.zero)) {
-				if (Input.GetKey (KeyCode.LeftShift)) {
-					m_moveSpeed = m_maxSpeed;
-					m_animator.SetFloat ("Speed_f", m_maxSpeed);
-					m_footstep.UnPause ();
-					m_footstep.pitch = 1.7f;
+				if (Input.GetKey (KeyCode.LeftShift) && !EnergyBar.GetComponent<EnergyBar>().energyIsAt0) {
+                    if (EnergyBar.GetComponent<Scrollbar>().size > 0f)
+                    {
+                        m_moveSpeed = m_maxSpeed;
+                        m_animator.SetFloat("Speed_f", m_maxSpeed);
+                        m_footstep.UnPause();
+                        m_footstep.pitch = 1.7f;
+                    } else {
+                        EnergyBar.GetComponent<EnergyBar>().energyIsAt0 = true;
+                    }
 				} else {
 					m_moveSpeed = m_minSpeed;
 					m_animator.SetFloat ("Speed_f", m_minSpeed);

@@ -188,7 +188,7 @@ public class MovementController : MonoBehaviour {
 				}
 
 			} else {
-				if (Input.GetKey(KeyCode.LeftShift) && !GameObject.FindWithTag("EnergyBar").GetComponent<EnergyBar>().energyIsAt0) {
+				if (Input.GetKey(KeyCode.LeftShift) && !EnergyBar.GetComponent<EnergyBar>().energyIsAt0) {
                     if (EnergyBar.GetComponent<Scrollbar>().size > 0f)
                     {
                         m_footstep.UnPause ();
@@ -202,7 +202,7 @@ public class MovementController : MonoBehaviour {
 
                     } else
                     {
-                        GameObject.FindWithTag("EnergyBar").GetComponent<EnergyBar>().energyIsAt0 = true;
+                        EnergyBar.GetComponent<EnergyBar>().energyIsAt0 = true;
                     }
 					    
 				} else {

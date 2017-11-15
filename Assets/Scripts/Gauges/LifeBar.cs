@@ -13,10 +13,12 @@ public class LifeBar : MonoBehaviour {
     private int currentTimeFaim = 0;
 	private GameObject Judy;
 	private Actions actions;
+    private GameObject forms;
 
     // Use this for initialization
     void Start () {
 		Judy = GameObject.FindWithTag ("Player");
+        forms = GameObject.Find("Forms");
 		actions = Judy.GetComponent ("Actions") as Actions;
         Life.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.red;
 	}
@@ -65,15 +67,15 @@ public class LifeBar : MonoBehaviour {
     void JudyIsHurtByAnAnimal(float lifeLoosed)
     {
         //si forme puma, 50% de degats en plus
-        if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.puma)
+        if (forms.GetComponent<Forms>().currentForm == (int)Forms.forms.puma)
         {
             Life.GetComponent<Scrollbar>().size -= lifeLoosed + lifeLoosed *0.5f;
         }
-        else if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.human)
+        else if (forms.GetComponent<Forms>().currentForm == (int)Forms.forms.human)
         {
             Life.GetComponent<Scrollbar>().size -= lifeLoosed;
         } //si forme ours, 25% de degats en moins
-        else if (Judy.GetComponent<Forms>().currentForm == (int)Forms.forms.bear)
+        else if (forms.GetComponent<Forms>().currentForm == (int)Forms.forms.bear)
         {
             Life.GetComponent<Scrollbar>().size -= lifeLoosed - lifeLoosed*0.25f;
         }

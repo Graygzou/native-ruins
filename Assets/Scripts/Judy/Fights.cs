@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class Fights : MonoBehaviour {
 
     private float distance;
+    private GameObject forms;
 	// Use this for initialization
 	void Start () {
-		
-	}
+		forms = GameObject.Find("Forms");
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		if(GameObject.FindWithTag("Player").GetComponent<Forms>().currentForm == (int)Forms.forms.bear && Input.GetMouseButton(0))
+		if(forms.GetComponent<Forms>().currentForm == (int)Forms.forms.bear && Input.GetMouseButton(0))
         {
             Debug.Log("coucou");
             //GameObject.FindWithTag("Player").PlayAnimation();
@@ -22,11 +23,10 @@ public class Fights : MonoBehaviour {
             Ray Judy = new Ray(GameObject.FindWithTag("Player").transform.position, Vector3.forward);
             if(Physics.Raycast(Judy,out hit,distance))
             {
-                if(hit.collider.tag == "Animal")
-                {
+               
                     GameObject.FindWithTag("LifeBar").GetComponent<Scrollbar>().size -= 0.1f;
                     //Inflige degat a l'animal
-                }
+               
             }
         }
 	}
