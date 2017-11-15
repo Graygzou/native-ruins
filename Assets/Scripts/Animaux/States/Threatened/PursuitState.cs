@@ -32,10 +32,11 @@ public class PursuitState : State<GameObject> {
 
     override public void Execute(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
         GameObject player = GameObject.FindWithTag("Player");
 
         // If the player is not far away
-        if ((player.transform.position - o.transform.position).magnitude < 30.0f) {
+        if ((player.transform.position - o.transform.position).magnitude < properties.tauntRange) {
             FSM.ChangeState(TauntState.Instance);
             //FSM.animator.SetBool("ReadyToCharge", true);
         }

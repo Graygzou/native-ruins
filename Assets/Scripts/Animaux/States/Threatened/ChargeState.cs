@@ -36,7 +36,7 @@ public class ChargeState : State<GameObject>
         StateMachine FSM = o.GetComponent<StateMachine>();
         AgentProperties properties = o.GetComponent<AgentProperties>();
 
-        if ((o.transform.position - target_charge).magnitude < 5.0f) {
+        if ((o.transform.position - target_charge).magnitude < properties.attackRange) {
             FSM.ChangeState(AttackState.Instance);
         }
     }

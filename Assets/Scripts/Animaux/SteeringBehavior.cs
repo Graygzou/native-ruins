@@ -269,7 +269,7 @@ public class SteeringBehavior : MonoBehaviour {
 
 
         Gizmos.color = Color.black;
-        Gizmos.DrawLine(transform.position, transform.forward + GetComponent<Rigidbody>().velocity.normalized * WanderDistance);
+        //Gizmos.DrawLine(transform.position, transform.forward + GetComponent<Rigidbody>().velocity.normalized * WanderDistance);
         Gizmos.DrawWireSphere(transform.position + transform.forward * WanderDistance, dWanderRadius);
         Gizmos.DrawWireSphere(vWanderTarget, 0.33f);
 

@@ -1,0 +1,5063 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Bear_Taunt
+  serializedVersion: 6
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_EulerCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: 0, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: -2.256, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: 0, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 88.117004, y: 0, z: -90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 81.677, y: 0, z: -90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 88.117004, y: 0, z: -90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: -4.361, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: -20.605001, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: -4.361, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: -3.127, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: -38.753002, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: -3.127, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: 16.002, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: 9.062, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: 16.002, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: -4.361, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: -60.013004, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: -4.361, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: 0, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -79.560005, y: 0, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: 0, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -8.472, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 69.11, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -8.472, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -81.486, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -34.257, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -81.486, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: 0.18400002, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: 33.451, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: 0.18400002, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: 0, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: 5.7720003, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: 0, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: 16.002, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: 5.8370004, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: 16.002, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: -37.009003, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: -16.231, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: -37.009003, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -81.486, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -51.636, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -81.486, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: -3.127, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: 18.217001, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: -3.127, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: 5.952, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -8.472, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 69.11, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -8.472, y: 0, z: 90.00001}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+  m_PositionCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.02086262, y: 6.2567116e-16, z: -0.00783415}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.038, y: 0, z: -0.012}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.02086262, y: 6.2567116e-16, z: -0.00783415}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 3.944304e-33, y: 0.008, z: 0.05289008}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: 0.005, z: 0.056}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 3.944304e-33, y: 0.008, z: 0.05289008}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.06258605, y: 6.897117e-19, z: -0.0001035395}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.067, y: 0, z: -0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.06258605, y: 6.897117e-19, z: -0.0001035395}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.08275755, y: 1.6890438e-15, z: 0.000559723}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.077, y: 0, z: 0.031}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.08275755, y: 1.6890438e-15, z: 0.000559723}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 1.687539e-16, y: 0.009673913, z: 3.907985e-16}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.025, y: 0.01, z: -0.008}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 1.687539e-16, y: 0.009673913, z: 3.907985e-16}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0.036131084, y: -2.6645352e-17, z: 0.01747408}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0.043002848, y: -0.007999998, z: 0.008999985}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0.036131084, y: -2.6645352e-17, z: 0.01747408}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.100751474, y: 2.1671554e-15, z: 2.2204459e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.105999865, y: -0.000004120171, z: -0.000999812}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.100751474, y: 2.1671554e-15, z: 2.2204459e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.036131084, y: -2.6645352e-17, z: 0.01747408}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.036, y: 0.003, z: 0.0077}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.036131084, y: -2.6645352e-17, z: 0.01747408}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.100751474, y: 2.3714362e-15, z: 1.3322676e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.09749997, y: -0.000000052154064, z: -0.002700068}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.100751474, y: 2.3714362e-15, z: 1.3322676e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -3.944304e-33, y: 0.23328762, z: -0.191412}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0, y: 0.231, z: -0.19141196}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -3.944304e-33, y: 0.23328762, z: -0.191412}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.05048152, y: -0.01, z: -0.002175574}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.05048152, y: -0.01, z: -0.002175574}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.05048152, y: -0.01, z: -0.002175574}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.022471186, y: -2.1689854e-18, z: 0.00009899238}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.021005962, y: 0.000002218866, z: 0.0050015375}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.022471186, y: -2.1689854e-18, z: 0.00009899238}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.018384526, y: 3.1064195e-16, z: -0.00020564176}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.021, y: -0, z: 0.015}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.018384526, y: 3.1064195e-16, z: -0.00020564176}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.06466369, y: 8.8733996e-16, z: -0.000035224024}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.06, y: 0, z: 0.01}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.06466369, y: 8.8733996e-16, z: -0.000035224024}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.045438856, y: 1.0391687e-15, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.034000363, y: -0.000004397528, z: 0.0009998962}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.045438856, y: 1.0391687e-15, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.04246489, y: 9.325873e-16, z: 2.6645352e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.042470947, y: -0.000008099486, z: -0.000003153691}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.04246489, y: 9.325873e-16, z: 2.6645352e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -2.1316282e-16, y: -0.009673913, z: -7.105427e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.0000000049368327, y: -0.00967131, z: -0.00000007657206}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -2.1316282e-16, y: -0.009673913, z: -7.105427e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.045438856, y: 1.0125234e-15, z: -8.881784e-18}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.0454389, y: -0.00000044703484, z: 0.000000038504368}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.045438856, y: 1.0125234e-15, z: -8.881784e-18}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: -0.04246489, y: 1.065814e-15, z: 3.5527136e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: -0.042465232, y: -0.000000022351742, z: -0.000000044703484}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: -0.04246489, y: 1.065814e-15, z: 3.5527136e-17}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0.028, y: 0, z: 0.009}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0.028, y: 0, z: 0.009}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 0.05048152, y: -0.01, z: -0.002175574}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 0.05048152, y: -0.01, z: -0.002175574}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 0.05048152, y: -0.01, z: -0.002175574}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+  m_ScaleCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: {x: 1, y: 1, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: {x: 1.1472204, y: 1, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: {x: 1, y: 1, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+  m_FloatCurves: []
+  m_PPtrCurves: []
+  m_SampleRate: 60
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - serializedVersion: 2
+      path: 2931124781
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 3298142429
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1289498902
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2747267302
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2924235961
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 4260481627
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 750513233
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2892508396
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2598887239
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 515658035
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 716711882
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 3112624375
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1187284721
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2543213869
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2570565859
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 912741093
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1289498902
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 3298142429
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2543213869
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2570565859
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2598887239
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 547498058
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 515658035
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 657912489
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 4260481627
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 716711882
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 3112624375
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 750513233
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2931124781
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2892508396
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 948666261
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 912741093
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 280542264
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 14
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 3298142429
+      attribute: 3
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 657912489
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 547498058
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 948666261
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 3713367827
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 280542264
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+    pptrCurveMapping: []
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_AdditiveReferencePoseClip: {fileID: 0}
+    m_AdditiveReferencePoseTime: 0
+    m_StartTime: 0
+    m_StopTime: 1
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_HasAdditiveReferencePose: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.02086262
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.038
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.02086262
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 6.2567116e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 6.2567116e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.00783415
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.012
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.00783415
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 3.944304e-33
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 3.944304e-33
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.008
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.005
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.008
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.05289008
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.056
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.05289008
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.06258605
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.067
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.06258605
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 6.897117e-19
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 6.897117e-19
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.0001035395
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.0001035395
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -2.256
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 88.117004
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 81.677
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 88.117004
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.08275755
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.077
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.08275755
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1.6890438e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 1.6890438e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.000559723
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.031
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.000559723
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1.687539e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.025
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 1.687539e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.009673913
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.01
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.009673913
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 3.907985e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.008
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 3.907985e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.036131084
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.043002848
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.036131084
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -2.6645352e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.007999998
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -2.6645352e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.01747408
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.008999985
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.01747408
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.100751474
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.105999865
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.100751474
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 2.1671554e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.000004120171
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 2.1671554e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 2.2204459e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.000999812
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 2.2204459e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -4.361
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -20.605001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -4.361
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -3.127
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -38.753002
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -3.127
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.036131084
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.036
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.036131084
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -2.6645352e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.003
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -2.6645352e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.01747408
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.0077
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.01747408
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.100751474
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.09749997
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.100751474
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 2.3714362e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.000000052154064
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 2.3714362e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1.3322676e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.002700068
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 1.3322676e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 16.002
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 9.062
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 16.002
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -4.361
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -60.013004
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -4.361
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -3.944304e-33
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -3.944304e-33
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.23328762
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.231
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.23328762
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.191412
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.19141196
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.191412
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.05048152
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.05048152
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.05048152
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.01
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.01
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.01
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.002175574
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.002175574
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.002175574
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -79.560005
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -8.472
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 69.11
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -8.472
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -81.486
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -34.257
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -81.486
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.18400002
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 33.451
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.18400002
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.022471186
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.021005962
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.022471186
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -2.1689854e-18
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.000002218866
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -2.1689854e-18
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.00009899238
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.0050015375
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.00009899238
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.018384526
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.021
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.018384526
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 3.1064195e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 3.1064195e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.00020564176
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.015
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.00020564176
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 5.7720003
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.06466369
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.06
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.06466369
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 8.8733996e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 8.8733996e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.000035224024
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.01
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.000035224024
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 16.002
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 5.8370004
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 16.002
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.045438856
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.034000363
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.045438856
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1.0391687e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.000004397528
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 1.0391687e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.0009998962
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.04246489
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.042470947
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.04246489
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 9.325873e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.000008099486
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 9.325873e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 2.6645352e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.000003153691
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 2.6645352e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -37.009003
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -16.231
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -37.009003
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -81.486
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -51.636
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -81.486
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -3.127
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 18.217001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -3.127
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 1.1472204
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalScale.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalScale.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalScale.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 5.952
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -2.1316282e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.0000000049368327
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -2.1316282e-16
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.009673913
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.00967131
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.009673913
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -7.105427e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.00000007657206
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -7.105427e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.045438856
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.0454389
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.045438856
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1.0125234e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.00000044703484
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 1.0125234e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -8.881784e-18
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.000000038504368
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -8.881784e-18
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.04246489
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.042465232
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.04246489
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1.065814e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.000000022351742
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 1.065814e-15
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 3.5527136e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.000000044703484
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 3.5527136e-17
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.028
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.028
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.009
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.009
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -8.472
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 69.11
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -8.472
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 90.00001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0.05048152
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: 0.05048152
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: 0.05048152
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.01
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.01
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.01
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: -0.002175574
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 0.5
+        value: -0.002175574
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 1
+        value: -0.002175574
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  m_EulerEditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt/CowRig_r_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt/CowRig_Neck_TopSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_r_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt/CowRig_l_FrontLeg_AnkleSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt/CowRig_l_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt/CowRig_Neck_02SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_Neck_01SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_l_Clavicle_01_01SHJnt/CowRig_l_FrontLeg_HipSHJnt/CowRig_l_FrontLeg_Knee1SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_Spine_01SHJnt/CowRig_Spine_02SHJnt/CowRig_Spine_03SHJnt/CowRig_Spine_TopSHJnt/CowRig_r_Clavicle_01_01SHJnt/CowRig_r_FrontLeg_HipSHJnt/CowRig_r_FrontLeg_Knee1SHJnt/CowRig_r_FrontLeg_Knee2SHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: CowRig/CowRig_SHJntGrp/CowRig_ROOTSHJnt/CowRig_l_HindLeg_HipSHJnt
+    classID: 4
+    script: {fileID: 0}
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_GenerateMotionCurves: 0
+  m_Events: []

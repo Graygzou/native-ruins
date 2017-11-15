@@ -52,7 +52,7 @@ public class LifeBar : MonoBehaviour {
 
     }
     //*****************RECUPERATION DE VIE******************//
-    void JudyEatsSomething(float lifeBack)
+    public void Eat(float lifeBack)
     {
         if (Hunger.GetComponent<Scrollbar>().size >= 1f)
         {
@@ -64,7 +64,7 @@ public class LifeBar : MonoBehaviour {
     }
 
     //*****************SE FAIT ATTAQUER******************//
-    void JudyIsHurtByAnAnimal(float lifeLoosed)
+    public void TakeDamages(float lifeLoosed)
     {
         //si forme puma, 50% de degats en plus
         if (forms.GetComponent<Forms>().currentForm == (int)Forms.forms.puma)

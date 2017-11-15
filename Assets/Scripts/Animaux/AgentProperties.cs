@@ -25,6 +25,9 @@ public class AgentProperties : MonoBehaviour {
     public bool isDead;
     public float maxForce;
 
+    public float attackRange;
+    public float tauntRange;
+
     public SphereCollider visionRange;
     public SphereCollider awarenessRange;
 
@@ -61,11 +64,11 @@ public class AgentProperties : MonoBehaviour {
     void OnTriggerExit(Collider other) {
         // If the exiting collider is the player...
         if (other.gameObject.tag == "Player") {
-            if (isAlert && !playerTooClose) {
+            if (isAlert && playerTooClose) {
+                playerTooClose = false;
+            } else if (isAlert && !playerTooClose) {
                 // The animal quit the "State" Alert
                 isAlert = false;
-            } else if (isAlert && playerTooClose) {
-                playerTooClose = false;
             }
         }
     }
@@ -109,14 +112,10 @@ public class AgentProperties : MonoBehaviour {
 [CanEditMultipleObjects]
 public class EditorAgentProperty : Editor
 {
-    SerializedProperty m_isMean;
-    SerializedProperty m_maxHealth;
-    SerializedProperty m_maxSpeed;
-    SerializedProperty m_mass;
-    SerializedProperty m_damages;
-    SerializedProperty m_hungryIndicator;
-    SerializedProperty m_visionRange;
-    SerializedProperty m_awarenessRange;
+    SerializedProperty m_isMean, m_maxHealth, m_maxSpeed, m_mass;
+    SerializedProperty m_damages, m_hungryIndicator;
+    SerializedProperty m_visionRange, m_awarenessRange;
+    SerializedProperty m_attackRange, m_tauntRange;
 
     void OnEnable() {
         // Fetch the objects from the GameObject script to display in the inspector
@@ -128,6 +127,8 @@ public class EditorAgentProperty : Editor
         m_hungryIndicator = serializedObject.FindProperty("hungryIndicator");
         m_visionRange = serializedObject.FindProperty("isAlert");
         m_awarenessRange = serializedObject.FindProperty("playerTooClose");
+        m_attackRange = serializedObject.FindProperty("attackRange");
+        m_tauntRange = serializedObject.FindProperty("tauntRange");
     }
 
     override public void OnInspectorGUI() {
@@ -141,6 +142,8 @@ public class EditorAgentProperty : Editor
 
         EditorGUILayout.PropertyField(m_visionRange, new GUIContent("VisionRange:"));
         EditorGUILayout.PropertyField(m_awarenessRange, new GUIContent("AwarenessRange:"));
+        EditorGUILayout.PropertyField(m_attackRange, new GUIContent("Attack Range:"));
+        EditorGUILayout.PropertyField(m_tauntRange, new GUIContent("Taunt Range:"));
 
         // Apply changes to the serializedProperty - always do this at the end of OnInspectorGUI.
         serializedObject.ApplyModifiedProperties();

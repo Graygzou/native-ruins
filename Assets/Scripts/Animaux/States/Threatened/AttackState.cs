@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AttackState : State<GameObject>
 {
@@ -39,14 +40,16 @@ public class AttackState : State<GameObject>
         {
             AgentProperties properties = o.GetComponent<AgentProperties>();
             GameObject player = GameObject.FindWithTag("Player");
+            GameObject lifeBar = GameObject.Find("Gauges/Life");
 
             // check if we can attack the player
-            if (!player.GetComponent<AgentProperties>().isDead &&
-                (player.transform.position - o.GetComponent<Transform>().position).magnitude < 5.0f) {
+            if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size != 0 &&
+                (player.transform.position - o.GetComponent<Transform>().position).magnitude < properties.attackRange) {
                 // Decrease the current life of the player
                 // Normalement => void JudyIsHurtByAnAnimal(float lifeLoosed)
+                lifeBar.GetComponent<LifeBar>().TakeDamages(properties.damages/100);
                 Debug.Log("Take that ! dmg:" + properties.damages);
-                player.GetComponent<AgentProperties>().takeDamages(properties.damages);
+                //player.GetComponent<AgentProperties>().takeDamages(properties.damages);
             }
             FSM.ChangeState(PursuitState.Instance);
         }
