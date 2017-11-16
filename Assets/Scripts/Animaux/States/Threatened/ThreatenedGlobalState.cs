@@ -30,16 +30,13 @@ public class ThreatenedGlobalState : State<GameObject>
         GameObject lifeBar = GameObject.Find("Gauges/Life");
 
         // Tant que vivant && vie > 50% && joueur proche
-        if(lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size == 0) {
-            FSM.ChangeState(WalkingState.Instance);
-        }
-        if (properties.getCurrentHealth() <= 0) {
+        if (properties.isDead) {
             FSM.ChangeState(DeathState.Instance);
-        }
-        if ((properties.getCurrentHealth() * 100) / properties.maxHealth < 50) {
+        } else if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size == 0) {
+            FSM.ChangeState(WalkingState.Instance);
+        } else if ((properties.getCurrentHealth() * 100) / properties.maxHealth < 50) {
             FSM.ChangeState(EvadeState.Instance);
-        }
-        if (!properties.isAlert) {
+        } else if (!properties.isAlert) {
             FSM.ChangeGlobalState(RegularGlobalState.Instance);
             FSM.ChangeState(WalkingState.Instance);
         }
