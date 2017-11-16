@@ -203,11 +203,48 @@ public class MovementControllerAnimal : MonoBehaviour {
 				m_footstep.Pause ();
 			}
 
-		}
-		m_animator.Play ("Locomotion");
+		} else if(Input.GetMouseButton(0)) //attaque
+        {
+            Attack();
+        } else
+        {
+            Animator judyAnim = this.gameObject.GetComponent<Animator>();
+            float currTime = judyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            if (currTime >= 1 - 0.06)       //si l'animation attack n'a pas fini on ne passe pas en locomotion
+            {
+                judyAnim.SetBool("Attack_state", false);
+                m_animator.Play("Locomotion");
+            }
+            
+        }
 	}
 
-	/*private void Animate(Vector3 NextDir){
+    private void Attack()
+    {
+        Animator judyAnim = this.gameObject.GetComponent<Animator>();
+        judyAnim.SetBool("Attack_state", true);
+        judyAnim.PlayInFixedTime("Attack"); //joue animation attaque
+
+        RaycastHit hit;
+        float distance = 25f; //distance de l'animal pour pouvoir lui infliger des degats
+        Ray Judy = new Ray(transform.position, transform.forward);
+        Debug.DrawRay(transform.position, transform.forward * distance);
+        if (Physics.SphereCast(Judy, 1.5f, out hit, distance))
+        {
+            if (hit.collider.tag == "Animal")
+            {
+                hit.transform.gameObject.GetComponent<AgentProperties>().takeDamages(30f);
+                //Inflige degat a l'animal
+            }
+        }
+        float currTime = judyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        if (currTime >= 1 - 0.06)
+        {
+            judyAnim.SetBool("Attack_state", false);
+        }
+    }
+
+    /*private void Animate(Vector3 NextDir){
 		if (m_isGrounded) {
 			if (NextDir.Equals (Vector3.zero)) {
 				if (Input.GetKey (KeyCode.LeftControl)) {
@@ -237,7 +274,7 @@ public class MovementControllerAnimal : MonoBehaviour {
 		}
 	}*/
 
-	float SignedAngleBetween(Vector3 a, Vector3 b, Vector3 n){
+    float SignedAngleBetween(Vector3 a, Vector3 b, Vector3 n){
 		// angle in [0,180]
 		float angle = Vector3.Angle(a,b);
 		float sign = Mathf.Sign(Vector3.Dot(n,Vector3.Cross(a,b)));
