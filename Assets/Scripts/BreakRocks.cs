@@ -15,8 +15,9 @@ public class BreakRocks : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
+        GameObject playerRoot = GameObject.Find("Player");
         if (other.gameObject.tag == "Player" && 
-            GameObject.FindWithTag("Player").GetComponent<Forms>().currentForm == (int)Forms.forms.bear &&
+            playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_bear &&
             Input.GetKey(KeyCode.LeftShift)) {
             transform.parent.parent.GetChild(0).gameObject.SetActive(false); //desactive le gros collider
             GameObject cubes = transform.parent.GetChild(1).gameObject;

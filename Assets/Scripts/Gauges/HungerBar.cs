@@ -14,15 +14,15 @@ public class HungerBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		forms = GameObject.Find("Forms");
         Hunger.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.green;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        GameObject playerRoot = GameObject.Find("Player");
         if (currentTimeFaim == timeMaxFaim)
         {
-            if (forms.GetComponent<Forms>().currentForm == (int)Forms.forms.puma)
+            if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma)
             {
                 Hunger.GetComponent<Scrollbar>().size -= 0.06f;
             }
