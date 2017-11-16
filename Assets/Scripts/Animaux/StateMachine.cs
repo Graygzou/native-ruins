@@ -49,7 +49,7 @@ public class StateMachine : MonoBehaviour {
     }
 
    //call this to update the FSM
-   void Update()
+   void FixedUpdate()
    {
         //if a global state exists, call its execute method, else do nothing
         if (globalState != null) {

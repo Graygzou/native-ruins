@@ -16,7 +16,7 @@ public class Fights : MonoBehaviour {
 	void Update () {
 		if(forms.GetComponent<Forms>().currentForm == (int)Forms.forms.bear && Input.GetMouseButton(0)) //clic gauche souris
         {
-            GameObject.FindWithTag("Player").GetComponent<Animation>().play("attack"); //joue animation attaque
+            //GameObject.FindWithTag("Player").GetComponent<Animation>().play("attack"); //joue animation attaque
             RaycastHit hit;
             distance = 1f; //distance de l'animal pour pouvoir lui infliger des degats
             Ray Judy = new Ray(GameObject.FindWithTag("Player").transform.position, Vector3.forward);

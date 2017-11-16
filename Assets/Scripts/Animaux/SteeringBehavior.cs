@@ -15,7 +15,7 @@ public class SteeringBehavior : MonoBehaviour {
     public Vector3 target_p;
     public Vector3 desiredVelocity { get; set; }
 
-    public float minDetectionBoxLength = 7.0f;
+    public float minDetectionBoxLength;
 
     private float timer = 0;
 
@@ -80,31 +80,30 @@ public class SteeringBehavior : MonoBehaviour {
         //StartCoroutine(UpdateSteer());
         Vector3 m_vSteeringForce = CalculatePrioritized();
 
-        m_vSteeringForce.y = 0.0f;
         //make sure vehicle does not exceed maximum velocity
-        //Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
+        m_vSteeringForce = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
 
-        GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
+        //GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
 
         //update the heading if the vehicle has a non zero velocity
-        if (GetComponent<Rigidbody>().velocity.sqrMagnitude > 0.000001)
+        if (m_vSteeringForce.sqrMagnitude > 0.000001)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation,
-                Quaternion.LookRotation(GetComponent<Rigidbody>().velocity), Time.deltaTime);
+            GetComponent<Rigidbody>().rotation = Quaternion.Lerp(transform.rotation,
+                Quaternion.LookRotation(m_vSteeringForce), Time.deltaTime);
         }
 
         //transform.Translate(GetComponent<Rigidbody>().velocity * Time.deltaTime);
         //transform.position = Vector3.Lerp(transform.position, transform.position + GetComponent<Rigidbody>().velocity, Time.deltaTime);
 
-        transform.position = Vector3.Lerp(transform.position, transform.position + GetComponent<Rigidbody>().velocity, Time.deltaTime);
+        //transform.position = Vector3.Lerp(transform.position, transform.position + GetComponent<Rigidbody>().velocity, Time.deltaTime);
 
         // -- A TESTER --
 
         // Normalise the movement vector and make it proportional to the speed per second.
-        // movement = movement.normalized * speed * Time.deltaTime;
+        Vector3 movement = m_vSteeringForce * GetComponent<AgentProperties>().maxSpeed * Time.deltaTime;
 
-        // Move the player to it's current position plus the movement.
-        // playerRigidbody.MovePosition(transform.position + movement);
+        //// Move the player to it's current position plus the movement.
+        GetComponent<Rigidbody>().MovePosition(transform.position + movement * Time.deltaTime);
 
         // -- Fin a tester ---
 
@@ -235,12 +234,13 @@ public class SteeringBehavior : MonoBehaviour {
         Debug.DrawRay(transform.position, transform.forward * minDetectionBoxLength);
 
         if (Physics.SphereCast(ray, 1.5f, out hitInfo, minDetectionBoxLength)) {
-            if (hitInfo.transform != transform) {
-                m_DesiredVelocity = hitInfo.point - hitInfo.collider.bounds.center;
-                m_DesiredVelocity = new Vector3(m_DesiredVelocity.x, 0f, 0f) / hitInfo.distance;
+            if (hitInfo.transform != transform && !(hitInfo.collider is TerrainCollider)) {
+                m_DesiredVelocity = (hitInfo.point - hitInfo.collider.bounds.center) * 50f;
+                //m_DesiredVelocity = hitInfo.normal * properties.maxSpeed;
+                //m_DesiredVelocity = new Vector3(m_DesiredVelocity.x, 0f, 0f) / hitInfo.distance;
             }
         }
-        return m_DesiredVelocity;
+        return m_DesiredVelocity * properties.maxSpeed;
     }
 
     public Vector3 Seek() {
@@ -249,8 +249,11 @@ public class SteeringBehavior : MonoBehaviour {
         //if (agent != null) {
         //    agent.SetDestination(target_p.position);
         //} else {
-            // Redefinir A* ici ?
-        m_DesiredVelocity = (target_p - transform.position) * properties.maxSpeed;
+        // Redefinir A* ici ?
+        //vWanderTarget = (target_p - transform.position).normalized * WanderDistance;
+
+        m_DesiredVelocity = target_p - transform.position;// * properties.maxSpeed;
+
         //}
         return m_DesiredVelocity;
     }
@@ -296,6 +299,7 @@ public class MyScriptEditor : Editor
     SerializedProperty m_boundingSphereRadius;
     SerializedProperty m_obstacleMaxDistance;
     SerializedProperty m_target_p;
+    SerializedProperty m_minDetectionBoxLength;
 
     void OnEnable()
     {
@@ -308,6 +312,7 @@ public class MyScriptEditor : Editor
         m_boundingSphereRadius = serializedObject.FindProperty("boundingSphereRadius");
         m_obstacleMaxDistance = serializedObject.FindProperty("obstacleMaxDistance");
         m_target_p = serializedObject.FindProperty("target_p");
+        m_minDetectionBoxLength = serializedObject.FindProperty("minDetectionBoxLength");
     }
 
     override public void OnInspectorGUI()
@@ -332,6 +337,7 @@ public class MyScriptEditor : Editor
 
         EditorGUILayout.PropertyField(m_boundingSphereRadius, new GUIContent("Detection Lenght:"));
         EditorGUILayout.PropertyField(m_obstacleMaxDistance, new GUIContent("Wander Radius:"));
+        EditorGUILayout.PropertyField(m_minDetectionBoxLength, new GUIContent("Lenght Box Detection:"));
 
         // Apply changes to the serializedProperty - always do this at the end of OnInspectorGUI.
         serializedObject.ApplyModifiedProperties();
