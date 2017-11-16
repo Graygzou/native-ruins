@@ -9,6 +9,7 @@ public class LifeBar : MonoBehaviour {
     public GameObject Hunger;
     public Color BarColor;
 
+    private AudioSource sonCri;
     private int timeMaxFaim = 3600;
     private int currentTimeFaim = 0;
 	private GameObject Judy;
@@ -17,6 +18,7 @@ public class LifeBar : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        sonCri = GetComponent<AudioSource>();
 		Judy = GameObject.FindWithTag ("Player");
         forms = GameObject.Find("Forms");
 		actions = Judy.GetComponent ("Actions") as Actions;
@@ -26,8 +28,7 @@ public class LifeBar : MonoBehaviour {
     // Update is called once per frame (60 frames)
     void FixedUpdate () {
         //*****************PERTE DE VIE******************//
-        //Si Judy a sa barre de vie à 0 : Mort*
-        //Life.GetComponent<Scrollbar>().size -= 0.005f;
+        //Si Judy a sa barre de vie à 0 : Mort
         if (Life.GetComponent<Scrollbar>().size <= 0f)
         {
             actions.Death();
@@ -66,6 +67,7 @@ public class LifeBar : MonoBehaviour {
     //*****************SE FAIT ATTAQUER******************//
     public void TakeDamages(float lifeLoosed)
     {
+        sonCri.Play();
         //si forme puma, 50% de degats en plus
         if (forms.GetComponent<Forms>().currentForm == (int)Forms.forms.puma)
         {
