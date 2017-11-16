@@ -16,6 +16,8 @@ public class LifeBar : MonoBehaviour {
 	private Actions actions;
     private GameObject forms;
 
+	[SerializeField]private AudioSource m_crunchSound;
+
     // Use this for initialization
     void Start () {
         sonCri = GetComponent<AudioSource>();
@@ -55,6 +57,7 @@ public class LifeBar : MonoBehaviour {
     //*****************RECUPERATION DE VIE******************//
     public void Eat(float lifeBack)
     {
+		m_crunchSound.Play ();
         if (Hunger.GetComponent<Scrollbar>().size >= 1f)
         {
             Life.GetComponent<Scrollbar>().size += lifeBack;

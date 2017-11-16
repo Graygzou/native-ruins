@@ -26,11 +26,11 @@
 	[SerializeField]private Rigidbody o_mushroom;
 	public bool is_usable=false;
 	[SerializeField]private AudioSource m_pickSound;
-	 
+
 
      void Start()
      {
-		 m_pickSound.Play ();
+		m_pickSound.Play();
 		 HungerBar = GameObject.Find ("Gauges/Hunger");
 		 LifeBar = GameObject.Find ("Gauges/Life");
 		 ParentRT =  (RectTransform)GameObject.Find ("Canvas").transform;
