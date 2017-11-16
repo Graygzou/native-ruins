@@ -9,7 +9,11 @@ public class InventoryManager : MonoBehaviour {
 	[SerializeField]private RectTransform b_anchor;
 	[SerializeField]private AudioSource m_bagSound;
 
+	[SerializeField]private RectTransform o_Bow;
+	[SerializeField]private RectTransform o_Torch;
 
+	public static bool isBowEquiped = false;
+	public static bool isTorchEquiped = false;
 
 	public static bool bag_open = false;
 	private Vector2 deltaScreen;
@@ -25,10 +29,11 @@ public class InventoryManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//print (inventaire.Count);
-		GetInputs ();
+		OpenOrCloseInventory ();
+		PutWeaponInBag ();
 	}
 
-	private void GetInputs(){
+	private void OpenOrCloseInventory(){
 		if (Input.GetKeyDown (KeyCode.Tab)) {
 			m_bagSound.Play ();
 			if (!bag_open) {
@@ -44,6 +49,26 @@ public class InventoryManager : MonoBehaviour {
 			}
 		}
 	}
+
+	public void PutWeaponInBag (){
+		if (Input.GetKeyDown (KeyCode.R)) {
+			RectTransform clone;
+			if (isTorchEquiped) {
+				AddObjectOfType (Object_Type.Torch);
+				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive(false);
+				clone = Instantiate(o_Torch) as RectTransform;
+				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+			}
+			if (isBowEquiped) {
+				AddObjectOfType (Object_Type.Bow);
+				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive(false);
+				clone = Instantiate(o_Bow) as RectTransform;
+				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+			}
+
+		}
+	}
+
 
 	public static void RemoveObjectOfType(Object_Type o){
 		foreach (Object_Type obj in inventaire) {

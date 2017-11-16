@@ -49,6 +49,7 @@ public class Actions : MonoBehaviour {
 	public void Damage () {
 		animator.SetBool ("Squat", false);
 		animator.SetBool("Aiming", false);
+		animator.SetBool("EquipWeapon", false);
 		if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Death")) return;
 		int id = Random.Range(0, countOfDamageAnimations);
 		if (countOfDamageAnimations > 1)
@@ -63,6 +64,7 @@ public class Actions : MonoBehaviour {
 		animator.SetBool ("Squat", false);
 		animator.SetFloat ("Speed", 0f);
 		animator.SetBool("Aiming", false);
+		animator.SetBool("EquipWeapon", false);
 		animator.Play ("Jump");
 	}
 
@@ -70,17 +72,20 @@ public class Actions : MonoBehaviour {
 		animator.SetBool ("Squat", false);
 		animator.SetFloat ("Speed", 0f);
 		animator.SetBool("Aiming", true);
+		animator.SetBool("EquipWeapon", false);
 	}
 
 	public void Sitting () {
 		animator.SetBool ("Squat", true);
 		animator.SetBool("Aiming", false);
+		animator.SetBool("EquipWeapon", false);
 		animator.Play ("Sneak");
 	}
 
 	public void Wary () {
 		animator.SetBool ("Squat", true);
 		animator.SetBool("Aiming", false);
+		animator.SetBool("EquipWeapon", false);
 		animator.Play ("Wary");
 	}
 
@@ -88,6 +93,21 @@ public class Actions : MonoBehaviour {
 	public void CrouchingRun () {
 		animator.SetBool ("Squat", true);
 		animator.SetBool("Aiming", false);
+		animator.SetBool("EquipWeapon", false);
 		animator.Play ("CrouchingRun");
+	}
+
+	public void EquipWeapon () {
+		animator.SetBool ("Squat", false);
+		animator.SetBool("Aiming", false);
+		animator.SetBool("EquipWeapon", true);
+		animator.Play ("EquipArme");
+	}
+
+	public void DisarmWeapon () {
+		animator.SetBool ("Squat", false);
+		animator.SetBool("Aiming", false);
+		animator.SetBool("EquipWeapon", false);
+		animator.Play ("DisarmArme");
 	}
 }

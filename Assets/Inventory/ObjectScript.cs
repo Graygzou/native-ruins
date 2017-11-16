@@ -19,13 +19,20 @@
      public RectTransform MyRect;
 	private Vector3 player_pos;
 
+	private GameObject LifeBar;
+	private GameObject HungerBar;
+
 	public InventoryManager.Object_Type o_type;
 	[SerializeField]private Rigidbody o_mushroom;
+	public bool is_usable=false;
 	[SerializeField]private AudioSource m_pickSound;
 	 
+
      void Start()
      {
 		 m_pickSound.Play ();
+		 HungerBar = GameObject.Find ("Gauges/Hunger");
+		 LifeBar = GameObject.Find ("Gauges/Life");
 		 ParentRT =  (RectTransform)GameObject.Find ("Canvas").transform;
          myWidth = (MyRect.rect.width + 5) / 2;
          myHeight = (MyRect.rect.height + 5) / 2;
@@ -33,8 +40,9 @@
  
 	void Update () 
 	{
-		if(InventoryManager.bag_open)
+		if (InventoryManager.bag_open) {
 			DragNDrop ();
+		}
 	}
 
 
@@ -99,10 +107,42 @@
 				Vector3 ypos = new Vector3 (transform.localPosition.x, fakeY, 0.0f);
 				transform.localPosition = ypos;
 			}
-
+			GetInputs ();
 		}
 	 }
 
+	private void GetInputs(){
+		if (Input.GetKeyDown (KeyCode.E) && is_usable) {
+			UseObject (o_type);
+			Destroy(this.gameObject);
+		}
+	}
 
+	//Ajouter la verification de si on ets humain pour arc et torche !!!
+	private void UseObject(InventoryManager.Object_Type o_type){
+		switch(o_type) {
+		case InventoryManager.Object_Type.Bow:
+			GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive (true);
+			GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive (false);
+			InventoryManager.isTorchEquiped = false;
+			InventoryManager.isBowEquiped = true;
+			break;
+		case InventoryManager.Object_Type.Fire:
+			break;
+		case InventoryManager.Object_Type.Meat:
+			LifeBar.GetComponent<LifeBar>().Eat(30);
+			break;
+		case InventoryManager.Object_Type.Mushroom:
+			LifeBar.GetComponent<LifeBar>().Eat(10);
+			break;
+		case InventoryManager.Object_Type.Torch:
+			GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive(false);
+			GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive(true);
+			InventoryManager.isBowEquiped = false;
+			InventoryManager.isTorchEquiped = true;
+			break;
+		}
+		InventoryManager.RemoveObjectOfType (o_type);
+	}
      
  }
