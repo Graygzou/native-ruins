@@ -27,6 +27,7 @@
 	public bool is_usable=false;
 	[SerializeField]private AudioSource m_pickSound;
 
+	private bool isUsed = false;
 
      void Start()
      {
@@ -67,6 +68,8 @@
      public void OnPointerUp(PointerEventData ped) 
      {
          mouseDown = false;
+		 GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
+		 HideInfo ();
      }
      
 	 private void DragNDrop(){
@@ -108,6 +111,12 @@
 				transform.localPosition = ypos;
 			}
 			GetInputs ();
+			if (is_usable && !isUsed) {
+				GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(true);
+				ShowInfo (o_type);
+			}
+			if(!is_usable)
+				ShowInfo (o_type);
 		}
 	 }
 
@@ -124,28 +133,99 @@
 			if (!InventoryManager.isTorchEquiped) {
 				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive (true);
 				InventoryManager.isBowEquiped = true;
+				GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
+				HideInfo ();
+				InventoryManager.RemoveObjectOfType (o_type);
+				isUsed = true;
 				Destroy(this.gameObject);
 			}
 			break;
 		case InventoryManager.Object_Type.Fire:
 			break;
 		case InventoryManager.Object_Type.Meat:
-			LifeBar.GetComponent<LifeBar>().Eat(30);
+			LifeBar.GetComponent<LifeBar> ().Eat (30);
+			GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive (false);
+			HideInfo ();
+			InventoryManager.RemoveObjectOfType (o_type);
+			isUsed = true;
 			Destroy(this.gameObject);
 			break;
 		case InventoryManager.Object_Type.Mushroom:
 			LifeBar.GetComponent<LifeBar>().Eat(10);
+			GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
+			HideInfo ();
+			InventoryManager.RemoveObjectOfType (o_type);
+			isUsed = true;
 			Destroy(this.gameObject);
 			break;
 		case InventoryManager.Object_Type.Torch:
 			if (!InventoryManager.isBowEquiped) {
 				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive (true);
 				InventoryManager.isTorchEquiped = true;
+				GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
+				HideInfo ();
+				InventoryManager.RemoveObjectOfType (o_type);
+				isUsed = true;
 				Destroy(this.gameObject);
 			}
 			break;
 		}
-		InventoryManager.RemoveObjectOfType (o_type);
+	}
+
+	private void ShowInfo(InventoryManager.Object_Type o_type){
+		switch (o_type) {
+		case InventoryManager.Object_Type.Arrow:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Arrow").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Mushroom:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Mushroom").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Bow:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bow").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Meat:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Meat").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Plank:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Plank").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Sail:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Sail").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Fire:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bonfire").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Raft:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Raft").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Wood:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Wood").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Rope:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Rope").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Flint:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Flint").SetActive(true);
+			break;
+		case InventoryManager.Object_Type.Torch:
+			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Torch").SetActive(true);
+			break;
+		}
+	}
+
+	private void HideInfo(){
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Mushroom").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Arrow").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Meat").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bow").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Plank").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Sail").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Raft").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Torch").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bonfire").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Wood").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Rope").SetActive(false);
+		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Flint").SetActive(false);
 	}
      
  }

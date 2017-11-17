@@ -28,6 +28,7 @@ public class PickUpScript : MonoBehaviour {
 				InventoryManager.an_object_is_pickable = false;
 				o_isPickable = false;
 				renderer.material.shader = Shader.Find ("Mobile/Diffuse");
+				GameObject.Find ("InventoryManager/Canvas/ButtonRamasser").SetActive(false);
 			}
 		}
 	}
@@ -38,6 +39,7 @@ public class PickUpScript : MonoBehaviour {
 				InventoryManager.an_object_is_pickable = true;
 				o_isPickable = true;
 				renderer.material.shader = Shader.Find ("Outlined/Silhouetted Diffuse");
+				GameObject.Find ("InventoryManager/Canvas/ButtonRamasser").SetActive(true);
 			}
 		}
 	}
@@ -48,6 +50,7 @@ public class PickUpScript : MonoBehaviour {
 			InventoryManager.an_object_is_pickable = false;
 			RectTransform clone = Instantiate(o_object) as RectTransform;
 			clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+			GameObject.Find ("InventoryManager/Canvas/ButtonRamasser").SetActive(false);
 			Destroy(this.gameObject);
 		}
 	}
