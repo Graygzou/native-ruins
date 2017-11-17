@@ -93,11 +93,6 @@ public class MovementControllerAnimal : MovementController {
                 //Inflige degat a l'animal
             }
         }
-        float currTime = judyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        if (currTime >= 1 - 0.06)
-        {
-            judyAnim.SetBool("Attack_state", false);
-        }
     }
 
     /*private void Animate(Vector3 NextDir){

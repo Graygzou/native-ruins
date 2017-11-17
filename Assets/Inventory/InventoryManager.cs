@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
 
@@ -11,8 +12,9 @@ public class InventoryManager : MonoBehaviour {
 
 	[SerializeField]private RectTransform o_Bow;
 	[SerializeField]private RectTransform o_Torch;
+    public Text nbArrowText;
 
-	public static bool isBowEquiped = false;
+    public static bool isBowEquiped = false;
 	public static bool isTorchEquiped = false;
 
 	public static bool bag_open = false;
@@ -20,7 +22,7 @@ public class InventoryManager : MonoBehaviour {
 
 	public enum Object_Type {Mushroom, Meat, Flint, Wood, Bow, Arrow, Torch, Fire, Plank, Sail, Rope, Raft};
 	private static ArrayList inventaire = new ArrayList ();
-	public static bool an_object_is_pickable =false;
+	public static bool an_object_is_pickable = false;
 	// Use this for initialization
 	void Start () {
 		deltaScreen = m_canvas.sizeDelta;
@@ -31,7 +33,8 @@ public class InventoryManager : MonoBehaviour {
 		//print (inventaire.Count);
 		OpenOrCloseInventory ();
 		PutWeaponInBag ();
-	}
+        NumberOfArrow();
+    }
 
 	private void OpenOrCloseInventory(){
 		if (Input.GetKeyDown (KeyCode.Tab)) {
@@ -47,7 +50,7 @@ public class InventoryManager : MonoBehaviour {
 					
 				//m_bag.transform.position += Vector3(-100f,0f,0f);
 			}
-		}
+        }
 	}
 
 	public void PutWeaponInBag (){
@@ -84,4 +87,17 @@ public class InventoryManager : MonoBehaviour {
 	public static void AddObjectOfType(Object_Type o){
 		inventaire.Add (o);
 	}
+
+    private void NumberOfArrow()
+    {
+        int nbArrow = 0;
+        foreach (Object_Type obj in inventaire)
+        {
+            if(obj.Equals(Object_Type.Arrow))
+            {
+                nbArrow++;
+            }
+        }
+        nbArrowText.text = "x " + nbArrow;
+    }
 }

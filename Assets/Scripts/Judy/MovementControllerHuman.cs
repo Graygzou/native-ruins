@@ -30,7 +30,15 @@ public class MovementControllerHuman : MovementController {
 	override protected void GetInputs(Vector3 NextDir){
 
 		if (m_isGrounded) {
-			if (NextDir.Equals (Vector3.zero)) {
+            if(Input.GetMouseButton(0))
+            {
+                if (GameObject.FindWithTag("Arme_torch").activeSelf) {
+                }
+                m_moveSpeed = 0f;
+                m_animator.SetFloat("Speed_f", 0f);
+                Attack();
+            }
+			else if (NextDir.Equals (Vector3.zero)) {
 				m_footstep.Pause ();
 				if (Input.GetKey (KeyCode.LeftControl)) {
 					actions.Wary ();
@@ -70,6 +78,34 @@ public class MovementControllerHuman : MovementController {
 			m_moveSpeed = m_animator.GetFloat ("Speed");
 		}
 	}
+
+    private void Attack()
+    {
+        Animator judyAnim = this.gameObject.GetComponent<Animator>();
+        judyAnim.SetBool("Fight", true);
+        judyAnim.Play("SwordSlash"); //joue animation attaque
+
+        RaycastHit hit;
+        float distance = 25f; //distance de l'animal pour pouvoir lui infliger des degats
+        Ray Judy = new Ray(transform.position, transform.forward);
+        Debug.DrawRay(transform.position, transform.forward * distance);
+        if (Physics.SphereCast(Judy, 1.5f, out hit, distance))
+        {
+            if (hit.collider.tag == "Animal")
+            {
+                hit.transform.gameObject.GetComponent<AgentProperties>().takeDamages(15f);
+                //Inflige degat a l'animal
+            }
+        }
+        float currTime = judyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        if (currTime >= 1 - 0.06)
+        {
+            judyAnim.SetBool("Fight", false);
+        } else
+        {
+
+        }
+    }
 }
 
 	
