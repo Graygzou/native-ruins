@@ -10,12 +10,9 @@ public class AttackState : State<GameObject>
 
     private AttackState() { }
 
-    public static AttackState Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
+    public static AttackState Instance {
+        get {
+            if (instance == null) {
                 instance = new AttackState();
             }
             return instance;
@@ -39,17 +36,17 @@ public class AttackState : State<GameObject>
         if (currTime >= FSM.timeIdle - 0.06)
         {
             AgentProperties properties = o.GetComponent<AgentProperties>();
+            GameObject playerRoot = GameObject.Find("Player");
             GameObject player = GameObject.FindWithTag("Player");
             GameObject lifeBar = GameObject.Find("Gauges/Life");
 
             // check if we can attack the player
             if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size != 0 &&
-                (player.transform.position - o.GetComponent<Transform>().position).magnitude < properties.attackRange) {
+                (player.transform.position - o.GetComponent<Transform>().position).magnitude < 
+                properties.attackRange[playerRoot.GetComponent<FormsController>().getCurrentForm()]) {
                 // Decrease the current life of the player
-                // Normalement => void JudyIsHurtByAnAnimal(float lifeLoosed)
                 lifeBar.GetComponent<LifeBar>().TakeDamages(properties.damages/100);
                 Debug.Log("Take that ! dmg:" + properties.damages);
-                //player.GetComponent<AgentProperties>().takeDamages(properties.damages);
             }
             FSM.ChangeState(PursuitState.Instance);
         }

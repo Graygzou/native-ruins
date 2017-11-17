@@ -35,8 +35,10 @@ public class ChargeState : State<GameObject>
     override public void Execute(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
         AgentProperties properties = o.GetComponent<AgentProperties>();
+        GameObject playerRoot = GameObject.Find("Player");
 
-        if ((o.transform.position - target_charge).magnitude < properties.attackRange) {
+        if ((o.transform.position - target_charge).magnitude <
+            properties.attackRange[playerRoot.GetComponent<FormsController>().getCurrentForm()]) {
             FSM.ChangeState(AttackState.Instance);
         }
     }

@@ -13,7 +13,6 @@ public class AgentProperties : MonoBehaviour {
     public int mass;
 
     // To enable some transition
-    [SerializeField]
     public bool isMean;
     public float hungryIndicator = 0.0f;
     public float damages;
@@ -24,9 +23,15 @@ public class AgentProperties : MonoBehaviour {
     private float currentHealth;
     public bool isDead;
     public float maxForce;
-
-    public float attackRange;
+    [SerializeField]
+    private float attackRangeVsPlayer;
+    [SerializeField]
+    private float attackRangeVsBear;
+    [SerializeField]
+    private float attackRangeVsWolf;
     public float tauntRange;
+
+    public float[] attackRange;
 
     public SphereCollider visionRange;
     public SphereCollider awarenessRange;
@@ -44,7 +49,10 @@ public class AgentProperties : MonoBehaviour {
 
     void Start() {
         currentHealth = maxHealth;
-        //animal = GetComponent<NavMeshAgent>();
+        attackRange = new float[3];
+        attackRange[0] = attackRangeVsPlayer;
+        attackRange[1] = attackRangeVsBear;
+        attackRange[2] = attackRangeVsWolf;
     }
 
     void OnTriggerEnter(Collider other) {
@@ -115,7 +123,7 @@ public class EditorAgentProperty : Editor
     SerializedProperty m_isMean, m_maxHealth, m_maxSpeed, m_mass;
     SerializedProperty m_damages, m_hungryIndicator;
     SerializedProperty m_visionRange, m_awarenessRange;
-    SerializedProperty m_attackRange, m_tauntRange;
+    SerializedProperty m_attackRangePlayer, m_attackRangeBear, m_attackRangeWolf, m_tauntRange;
 
     void OnEnable() {
         // Fetch the objects from the GameObject script to display in the inspector
@@ -127,7 +135,9 @@ public class EditorAgentProperty : Editor
         m_hungryIndicator = serializedObject.FindProperty("hungryIndicator");
         m_visionRange = serializedObject.FindProperty("isAlert");
         m_awarenessRange = serializedObject.FindProperty("playerTooClose");
-        m_attackRange = serializedObject.FindProperty("attackRange");
+        m_attackRangePlayer = serializedObject.FindProperty("attackRangeVsPlayer");
+        m_attackRangeBear = serializedObject.FindProperty("attackRangeVsBear");
+        m_attackRangeWolf = serializedObject.FindProperty("attackRangeVsWolf");
         m_tauntRange = serializedObject.FindProperty("tauntRange");
     }
 
@@ -142,7 +152,9 @@ public class EditorAgentProperty : Editor
 
         EditorGUILayout.PropertyField(m_visionRange, new GUIContent("VisionRange:"));
         EditorGUILayout.PropertyField(m_awarenessRange, new GUIContent("AwarenessRange:"));
-        EditorGUILayout.PropertyField(m_attackRange, new GUIContent("Attack Range:"));
+        EditorGUILayout.PropertyField(m_attackRangePlayer, new GUIContent("Attack Range Player:"));
+        EditorGUILayout.PropertyField(m_attackRangeBear, new GUIContent("Attack Range Bear:"));
+        EditorGUILayout.PropertyField(m_attackRangeWolf, new GUIContent("Attack Range Wolf:"));
         EditorGUILayout.PropertyField(m_tauntRange, new GUIContent("Taunt Range:"));
 
         // Apply changes to the serializedProperty - always do this at the end of OnInspectorGUI.
