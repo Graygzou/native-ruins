@@ -20,9 +20,11 @@ public class PursuitState : State<GameObject> {
     override public void Enter(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
         GameObject player = GameObject.FindWithTag("Player");
+        AgentProperties properties = o.GetComponent<AgentProperties>();
 
-        FSM.animator.Play("Locomotion");
+        properties.setSpeed(properties.maxSpeed);
         FSM.animator.SetFloat("Speed_f", 2f);
+        FSM.animator.Play("Locomotion");
 
         // Run in the direction of the player
         FSM.behavior.target_p = player.transform.position;
@@ -44,6 +46,9 @@ public class PursuitState : State<GameObject> {
 
     override public void Exit(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
+
+        properties.setSpeed(22);
         FSM.animator.SetFloat("Speed_f", 0.0f);
         FSM.behavior.seekOn = false;
         FSM.behavior.obstacleAvoidanceOn = false;

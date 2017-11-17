@@ -31,7 +31,9 @@ public class ThreatenedGlobalState : State<GameObject>
 
         // Tant que vivant && vie > 50% && joueur proche
         if (properties.isDead) {
-            FSM.ChangeState(DeathState.Instance);
+            if(o.GetComponent<StateMachine>().getCurrentState() != DeathState.Instance) {
+                FSM.ChangeState(DeathState.Instance);
+            }
         } else if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size == 0) {
             FSM.ChangeState(WalkingState.Instance);
         } else if ((properties.getCurrentHealth() * 100) / properties.maxHealth < 50) {

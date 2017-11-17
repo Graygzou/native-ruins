@@ -33,20 +33,23 @@ public class AttackState : State<GameObject>
         StateMachine FSM = o.GetComponent<StateMachine>();
 
         float currTime = o.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
-        if (currTime >= FSM.timeIdle - 0.06)
-        {
+        if (currTime >= FSM.timeIdle - 0.06) {
             AgentProperties properties = o.GetComponent<AgentProperties>();
             GameObject playerRoot = GameObject.Find("Player");
+            Transform nose = o.transform.GetChild(5).transform;
             GameObject player = GameObject.FindWithTag("Player");
             GameObject lifeBar = GameObject.Find("Gauges/Life");
 
-            // check if we can attack the player
-            if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size != 0 &&
-                (player.transform.position - o.GetComponent<Transform>().position).magnitude < 
-                properties.attackRange[playerRoot.GetComponent<FormsController>().getCurrentForm()]) {
-                // Decrease the current life of the player
-                lifeBar.GetComponent<LifeBar>().TakeDamages(properties.damages/100);
-                Debug.Log("Take that ! dmg:" + properties.damages);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(new Ray(nose.position, nose.forward), out hitInfo, 0.5f)) {
+                // check if we can attack the player
+                if (hitInfo.transform.tag == "Player") {
+                    if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size != 0) {
+                        // Decrease the current life of the player
+                        lifeBar.GetComponent<LifeBar>().TakeDamages(properties.damages / 100);
+                        Debug.Log("Take that ! dmg:" + properties.damages);
+                    }
+                }
             }
             FSM.ChangeState(PursuitState.Instance);
         }

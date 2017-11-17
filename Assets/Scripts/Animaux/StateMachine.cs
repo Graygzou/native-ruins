@@ -8,17 +8,17 @@ using System;
 public class StateMachine : MonoBehaviour {
 
     GameObject owner;                       // Reference to the agent that owns this instance
+    [NonSerialized]
     public SteeringBehavior behavior;       // Reference to the behavior of the agent
+    [NonSerialized]
     public Animator animator;
     private State<GameObject> currentState;
     private State<GameObject> previousState;
     private State<GameObject> globalState;
-    //public Animation animation;
-    //private AgentProperty properties;
 
-    private AnimatorStateInfo animationState;
-    private AnimatorClipInfo[] animationClips;
+    [NonSerialized]
     public float timeIdle = 1.0f;
+    [NonSerialized]
     public float time = 0.0f;
 
     void Awake() {
@@ -83,10 +83,8 @@ public class StateMachine : MonoBehaviour {
     }
 
     public void DestroyFSM() {
-        //call the exit method of the existing state
-        currentState.Exit(owner);
-        //the state machine
-        Destroy(this);
+        currentState = null;
+        globalState = null;
     }
 
     //change to a new global state
@@ -117,6 +115,7 @@ public class StateMachine : MonoBehaviour {
     public State<GameObject> getPreviousState() {
         return previousState;
     }
+
 }
 
 //[CustomEditor(typeof(StateMachine))]

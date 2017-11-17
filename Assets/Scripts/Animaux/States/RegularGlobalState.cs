@@ -24,27 +24,29 @@ public class RegularGlobalState : State<GameObject>
 
     override public void Enter(GameObject o) { /* Empty */ }
 
-    override public void Execute(GameObject o)
-    {
+    override public void Execute(GameObject o) {
         AgentProperties properties = o.GetComponent<AgentProperties>();
         GameObject player = GameObject.FindWithTag("Player");
+        StateMachine FSM = o.GetComponent<StateMachine>();
 
         if (properties.isDead) {
-            o.GetComponent<StateMachine>().ChangeState(DeathState.Instance);
-        }
-
-        // check if the player is too close or that he has a weird behavior
-        if (properties.playerTooClose || (properties.isAlert &&
-        player.GetComponent<MovementController>().getCurrentSpeed() > 30.0f))
-        {
-            if (properties.isMean)
-            {
-                o.GetComponent<StateMachine>().ChangeGlobalState(ThreatenedGlobalState.Instance);
-                o.GetComponent<StateMachine>().ChangeState(PursuitState.Instance);
+            if (FSM.getCurrentState() != DeathState.Instance) {
+                FSM.ChangeState(DeathState.Instance);
             }
-            else if (!properties.isMean && o.GetComponent<StateMachine>().getCurrentState() != EvadeState.Instance)
-            {
-                o.GetComponent<StateMachine>().ChangeState(EvadeState.Instance);
+        } else {
+            if (FSM.getCurrentState() != PursuitState.Instance && FSM.getCurrentState() != EvadeState.Instance) {
+                // check if the player is too close or that he has a weird behavior
+                if (properties.playerTooClose || (properties.isAlert &&
+                player.GetComponent<MovementController>().getCurrentSpeed() > 30.0f)) {
+                    if (properties.isMean) {
+                        FSM.ChangeGlobalState(ThreatenedGlobalState.Instance);
+                        FSM.ChangeState(PursuitState.Instance);
+                    }
+                    else if (FSM.getCurrentState() != EvadeState.Instance)
+                    {
+                        FSM.ChangeState(EvadeState.Instance);
+                    }
+                }
             }
         }
     }

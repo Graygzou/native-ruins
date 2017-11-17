@@ -5,87 +5,110 @@ using UnityEditor;
 using UnityEngine.AI;
 
 [System.Serializable]
-public class AgentProperties : MonoBehaviour {
+public class AgentProperties : MonoBehaviour
+{
 
     // Attributes of the agent
     public float maxHealth;
+    public float maxForce;
     public int maxSpeed;
+
     public int mass;
-
-    // To enable some transition
-    public bool isMean;
-    public float hungryIndicator = 0.0f;
     public float damages;
+    public float hungryIndicator = 0.0f;
+    public bool isMean;
+    public bool isDead;
 
+    public float tauntRange;
+
+    public SphereCollider visionRange;
+    public SphereCollider awarenessRange;
     public bool isAlert;
     public bool playerTooClose;
 
     private float currentHealth;
-    public bool isDead;
-    public float maxForce;
+    private float currentSpeed;
+
     [SerializeField]
     private float attackRangeVsPlayer;
     [SerializeField]
     private float attackRangeVsBear;
     [SerializeField]
     private float attackRangeVsWolf;
-    public float tauntRange;
 
     public float[] attackRange;
 
-    public SphereCollider visionRange;
-    public SphereCollider awarenessRange;
-
-    //public Animaux(float hea, float maxSpe, float mas) : this(hea, maxSpe, mas, 5) {
-    //}
-
-    //public AgentProperty(float hea, float maxSpe, float mas) {
-
-    //}
-
-    void Awake() {
+    void Awake()
+    {
+        isDead = false;
         maxForce = 200f;
+        currentSpeed = 22f;
     }
 
-    void Start() {
+    void Start()
+    {
         currentHealth = maxHealth;
         attackRange = new float[3];
         attackRange[0] = attackRangeVsPlayer;
         attackRange[1] = attackRangeVsBear;
         attackRange[2] = attackRangeVsWolf;
+
+        transform.GetComponentInChildren<ParticleSystem>().Stop();
     }
 
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider other)
+    {
 
         // If the entering collider is the player...
-        if (other.gameObject.tag == "Player") {
-            if (!isAlert) {
+        if (other.gameObject.tag == "Player")
+        {
+            if (!isAlert)
+            {
                 // The animal enter the "State" Alert
                 isAlert = true;
-            } else if (isAlert && !playerTooClose) {
+            }
+            else if (isAlert && !playerTooClose)
+            {
                 playerTooClose = true;
             }
 
         }
     }
 
-    void OnTriggerExit(Collider other) {
+    void OnTriggerExit(Collider other)
+    {
         // If the exiting collider is the player...
-        if (other.gameObject.tag == "Player") {
-            if (isAlert && playerTooClose) {
+        if (other.gameObject.tag == "Player")
+        {
+            if (isAlert && playerTooClose)
+            {
                 playerTooClose = false;
-            } else if (isAlert && !playerTooClose) {
+            }
+            else if (isAlert && !playerTooClose)
+            {
                 // The animal quit the "State" Alert
                 isAlert = false;
             }
         }
     }
 
-    public float getCurrentHealth() {
+    public float getCurrentHealth()
+    {
         return currentHealth;
     }
 
-    public void takeDamages(float amount) {
+    public float getCurrentSpeed()
+    {
+        return currentSpeed;
+    }
+
+    public void setSpeed(float speed)
+    {
+        currentSpeed = speed;
+    }
+
+    public void takeDamages(float amount)
+    {
 
         Debug.Log("Outch !");
 
@@ -107,13 +130,41 @@ public class AgentProperties : MonoBehaviour {
         //hitParticles.Play();
 
         // If the current health is less than or equal to zero...
-        if (currentHealth <= 0) {
+        if (currentHealth <= 0)
+        {
             Debug.Log("Dead");
             // the enemy is dead.
             isDead = true;
         }
     }
 
+    public void MakeAgentDisappear(GameObject o)
+    {
+        StartCoroutine(SmokeAnimation(o));
+    }
+
+    void DropItems()
+    {
+        transform.GetChild(4).gameObject.SetActive(true);
+    }
+
+    private IEnumerator SmokeAnimation(GameObject o)
+    {
+        yield return new WaitForSeconds(seconds: 1.0f);
+        transform.GetComponentInChildren<ParticleSystem>().Play();
+        yield return new WaitForSeconds(seconds: 1.0f);
+        transform.GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        // After 2 seconds destory the enemy.
+        transform.GetComponentInChildren<SkinnedMeshRenderer>().gameObject.SetActive(false);
+        DropItems();
+    }
+
+    void OnDrawGizmos() {
+        Transform nose = transform.GetChild(5).transform;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(nose.position, nose.position + nose.forward * 0.5f);
+    }
 }
 
 [CustomEditor(typeof(AgentProperties))]

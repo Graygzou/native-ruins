@@ -100,7 +100,7 @@ public class SteeringBehavior : MonoBehaviour {
         // -- A TESTER --
 
         // Normalise the movement vector and make it proportional to the speed per second.
-        Vector3 movement = m_vSteeringForce * GetComponent<AgentProperties>().maxSpeed * Time.deltaTime;
+        Vector3 movement = m_vSteeringForce * GetComponent<AgentProperties>().getCurrentSpeed() * Time.deltaTime;
 
         //// Move the player to it's current position plus the movement.
         GetComponent<Rigidbody>().MovePosition(transform.position + movement * Time.deltaTime);
@@ -214,7 +214,7 @@ public class SteeringBehavior : MonoBehaviour {
             // Calculate avoidance force
             if (Physics.Raycast(r, out hitInfo, senseurs[r]))
             {
-                avoidanceForce += Vector3.Reflect(transform.forward * properties.maxSpeed, hitInfo.normal) * (senseurs[r] - hitInfo.distance);
+                avoidanceForce += Vector3.Reflect(transform.forward * properties.getCurrentSpeed(), hitInfo.normal) * (senseurs[r] - hitInfo.distance);
                 //avoidanceForce += hitInfo.normal * (m_Senseurs[r] - hitInfo.distance);
             }
         }
@@ -240,7 +240,7 @@ public class SteeringBehavior : MonoBehaviour {
                 //m_DesiredVelocity = new Vector3(m_DesiredVelocity.x, 0f, 0f) / hitInfo.distance;
             }
         }
-        return m_DesiredVelocity * properties.maxSpeed;
+        return m_DesiredVelocity * properties.getCurrentSpeed();
     }
 
     public Vector3 Seek() {
@@ -261,7 +261,7 @@ public class SteeringBehavior : MonoBehaviour {
     public Vector3 Flee() {
         Vector3 m_DesiredVelocity = Vector3.zero;
         //Vector3 m_DesiredVelocity = (transform.position - target_p.position).normalized * maxSpeed;
-        m_DesiredVelocity = (transform.position - target_p) * properties.maxSpeed;
+        m_DesiredVelocity = transform.position - target_p; //) * properties.getCurrentSpeed();
         return m_DesiredVelocity; // - GetComponent<Rigidbody>().velocity;
     }
 

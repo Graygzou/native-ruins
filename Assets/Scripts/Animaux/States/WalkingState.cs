@@ -21,12 +21,11 @@ public class WalkingState : State<GameObject> {
     override public void Enter(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
 
-        FSM.animator.Play("Locomotion");
-
         // Set the animation variables
         FSM.animator.SetFloat("Speed_f", 0.5f);
         FSM.behavior.wanderOn = true;
         FSM.behavior.obstacleAvoidanceOn = true;
+        FSM.animator.Play("Locomotion");
 
         // make sure we're in the good state animation
         AnimatorStateInfo animationState = FSM.animator.GetCurrentAnimatorStateInfo(0);
@@ -66,7 +65,7 @@ public class WalkingState : State<GameObject> {
         else {
             float currTime = o.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
             if (currTime >= FSM.time + FSM.timeIdle - 0.06) {
-                o.GetComponent<StateMachine>().ChangeState(IdleState.Instance);
+                FSM.ChangeState(IdleState.Instance);
             }
         }
     }
@@ -74,6 +73,8 @@ public class WalkingState : State<GameObject> {
     override public void Exit(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
 
+        FSM.animator.SetBool("IsHungry", false);
+        FSM.animator.SetFloat("Speed_f", 0.0f);
         FSM.behavior.wanderOn = false;
         FSM.behavior.obstacleAvoidanceOn = false;
     }
