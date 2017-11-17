@@ -51,19 +51,21 @@ public class InventoryManager : MonoBehaviour {
 	}
 
 	public void PutWeaponInBag (){
-		if (Input.GetKeyDown (KeyCode.R)) {
+		if (Input.GetKeyDown (KeyCode.R) && !bag_open) {
 			RectTransform clone;
 			if (isTorchEquiped) {
 				AddObjectOfType (Object_Type.Torch);
 				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive(false);
 				clone = Instantiate(o_Torch) as RectTransform;
 				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+				isTorchEquiped = false;
 			}
 			if (isBowEquiped) {
 				AddObjectOfType (Object_Type.Bow);
 				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive(false);
 				clone = Instantiate(o_Bow) as RectTransform;
 				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+				isBowEquiped = false;
 			}
 
 		}

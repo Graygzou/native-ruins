@@ -114,7 +114,6 @@
 	private void GetInputs(){
 		if (Input.GetKeyDown (KeyCode.E) && is_usable) {
 			UseObject (o_type);
-			Destroy(this.gameObject);
 		}
 	}
 
@@ -122,24 +121,28 @@
 	private void UseObject(InventoryManager.Object_Type o_type){
 		switch(o_type) {
 		case InventoryManager.Object_Type.Bow:
-			GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive (true);
-			GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive (false);
-			InventoryManager.isTorchEquiped = false;
-			InventoryManager.isBowEquiped = true;
+			if (!InventoryManager.isTorchEquiped) {
+				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive (true);
+				InventoryManager.isBowEquiped = true;
+				Destroy(this.gameObject);
+			}
 			break;
 		case InventoryManager.Object_Type.Fire:
 			break;
 		case InventoryManager.Object_Type.Meat:
 			LifeBar.GetComponent<LifeBar>().Eat(30);
+			Destroy(this.gameObject);
 			break;
 		case InventoryManager.Object_Type.Mushroom:
 			LifeBar.GetComponent<LifeBar>().Eat(10);
+			Destroy(this.gameObject);
 			break;
 		case InventoryManager.Object_Type.Torch:
-			GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive(false);
-			GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive(true);
-			InventoryManager.isBowEquiped = false;
-			InventoryManager.isTorchEquiped = true;
+			if (!InventoryManager.isBowEquiped) {
+				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive (true);
+				InventoryManager.isTorchEquiped = true;
+				Destroy(this.gameObject);
+			}
 			break;
 		}
 		InventoryManager.RemoveObjectOfType (o_type);
