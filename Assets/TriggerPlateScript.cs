@@ -8,7 +8,6 @@ public class TriggerPlateScript : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Object Entered the trigger");
         if (other.gameObject.name == "BearPlayer")
         {
             ScriptRondin.StartRotation();
@@ -18,13 +17,11 @@ public class TriggerPlateScript : MonoBehaviour {
 
     public void OnTriggerStay(Collider other)
     {
-        Debug.Log("Object is within trigger");
         
     }
 
     public void OnTriggerExit(Collider other)
     {
-        Debug.Log("Object exited the trigger");
         ScriptRondin.CancelRotation();
     }
 }
