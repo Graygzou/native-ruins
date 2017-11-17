@@ -33,7 +33,7 @@ public class PickUpScript : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider other){
-		if (other.gameObject.tag.Equals ("Player")) {
+		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.bag_open) {
 			if (!InventoryManager.an_object_is_pickable) {
 				InventoryManager.an_object_is_pickable = true;
 				o_isPickable = true;
