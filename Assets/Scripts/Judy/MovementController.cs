@@ -38,7 +38,7 @@ public class MovementController : MonoBehaviour {
         m_footstep.Pause();
     }
 
-    private void LateUpdate() {
+    protected void LateUpdate() {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
         Vector3 dir = new Vector3(mouseX, mouseY, 0f);
@@ -50,7 +50,7 @@ public class MovementController : MonoBehaviour {
         cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
     }
 
-    private void UpdateCamera(float deltaX, float deltaY) {
+    protected void UpdateCamera(float deltaX, float deltaY) {
         m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position;
         if (deltaX == 0 && deltaY == 0) return;
 
@@ -62,7 +62,7 @@ public class MovementController : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter(Collision collision) {
+    protected void OnCollisionEnter(Collision collision) {
         ContactPoint[] contactPoints = collision.contacts;
         for (int i = 0; i < contactPoints.Length; i++)
         {
@@ -77,7 +77,7 @@ public class MovementController : MonoBehaviour {
         }
     }
 
-    private void OnCollisionStay(Collision collision) {
+    protected void OnCollisionStay(Collision collision) {
         ContactPoint[] contactPoints = collision.contacts;
         bool validSurfaceNormal = false;
         for (int i = 0; i < contactPoints.Length; i++) {
@@ -99,14 +99,14 @@ public class MovementController : MonoBehaviour {
         }
     }
 
-    private void OnCollisionExit(Collision collision) {
+    protected void OnCollisionExit(Collision collision) {
         if (m_collisions.Contains(collision.collider)) {
             m_collisions.Remove(collision.collider);
         }
         if (m_collisions.Count == 0) { m_isGrounded = false; }
     }
 
-    void Update() {
+    protected void Update() {
         DirectUpdate();
 
         m_wasGrounded = m_isGrounded;
@@ -119,7 +119,7 @@ public class MovementController : MonoBehaviour {
 
     //transform.forward.Set(projected_forward_camera.x, projected_forward_camera.y, projected_forward_camera.z);
     //transform.Rotate(0f,cameraTrans.eulerAngles.y-transform.eulerAngles.y,0f);
-    private void DirectUpdate() {
+    protected void DirectUpdate() {
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
 
