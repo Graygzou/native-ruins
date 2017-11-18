@@ -65,7 +65,7 @@ public class InventoryManager : MonoBehaviour {
 			}
 			if (isBowEquiped) {
 				AddObjectOfType (Object_Type.Bow);
-				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive(false);
+				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive(false);
 				clone = Instantiate(o_Bow) as RectTransform;
 				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
 				isBowEquiped = false;

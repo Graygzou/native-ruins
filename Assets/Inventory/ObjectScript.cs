@@ -131,7 +131,7 @@
 		switch(o_type) {
 		case InventoryManager.Object_Type.Bow:
 			if (!InventoryManager.isTorchEquiped) {
-				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Bow3D").SetActive (true);
+				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive (true);
 				InventoryManager.isBowEquiped = true;
 				GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
 				HideInfo ();
