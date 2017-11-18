@@ -13,7 +13,10 @@ public class MovementController : MonoBehaviour {
     [SerializeField] protected Rigidbody m_rigidBody;
     [SerializeField] protected AudioSource m_footstep;
 
+    // Cameras gestion
     protected Transform m_cameraPivot = null;
+    protected int currentCamera = 0;
+
     protected Vector3 initial_orientation;
     protected GameObject EnergyBar;
 
@@ -45,13 +48,23 @@ public class MovementController : MonoBehaviour {
         lastMousePosition = Input.mousePosition;
 
         UpdateCamera(dir.x, -dir.y);
-        Transform cameraTrans = m_cameraPivot.GetChild(0);
-        float z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, -32, -12);
-        cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
+        Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
+        float z;
+        if (currentCamera == 0) { 
+            z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, -32, -12);
+            cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
+        } else {
+            cameraTrans.position = this.transform.Find("UpAnchor").position + new Vector3(4, 0, -2);
+        }
+        
     }
 
-    protected void UpdateCamera(float deltaX, float deltaY) {
-        m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position;
+    protected void UpdateCamera(float deltaX, float deltaY) {   
+        if (currentCamera == 0) {
+            m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position;
+        } else {
+            m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position - new Vector3(5, 0, -5);
+        }
         if (deltaX == 0 && deltaY == 0) return;
 
         Vector3 rotate = m_cameraPivot.localEulerAngles + new Vector3(deltaY * m_cameraSpeed, deltaX * m_cameraSpeed, 0);
@@ -123,7 +136,8 @@ public class MovementController : MonoBehaviour {
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
 
-        Transform cameraTrans = m_cameraPivot.GetChild(0);
+        // Get the camera
+        Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
         Vector3 projected_forward_camera = Vector3.ProjectOnPlane(cameraTrans.forward, new Vector3(0, 1, 0));
 
         float angle = SignedAngleBetween(initial_orientation, projected_forward_camera, Vector3.up);

@@ -5,6 +5,11 @@ using UnityEngine.UI;
 public class MovementControllerHuman : MovementController {
 
 	[SerializeField] private Actions actions = null;
+    private Camera playerCamera;
+    private Camera   aimCamera;
+    private bool isAiming;
+
+    //public Transform aimCamHolder;
 
     new void Start() {
         base.Start();
@@ -12,6 +17,9 @@ public class MovementControllerHuman : MovementController {
         m_moveSpeed = 10;
         m_turnSpeed = 5;
         m_jumpForce = 5;
+        playerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        aimCamera = GameObject.Find("CameraPivot").transform.GetChild(1).GetComponent<Camera>();
+        isAiming = false;
     }
 
     // In this case, the vector3 NextDir is not used.
@@ -30,11 +38,26 @@ public class MovementControllerHuman : MovementController {
 	override protected void GetInputs(Vector3 NextDir){
 
 		if (m_isGrounded) {
-            if(Input.GetMouseButton(0) && InventoryManager.isTorchEquiped)
-            {
+            if(Input.GetMouseButton(0) && InventoryManager.isTorchEquiped && !isAiming) {
                 m_moveSpeed = 0f;
                 m_animator.SetFloat("Speed_f", 0f);
                 Attack();
+            } else if(Input.GetMouseButton(1)) {
+
+                Ray ray = new Ray(aimCamera.transform.position, aimCamera.transform.forward);
+                Vector3 lookPos = ray.GetPoint(20);
+
+                if (!isAiming) {
+                    Debug.Log("Click Aim !");
+                    isAiming = true;
+                    // change the camera for the aim
+                    SwitchToAim();
+                } else {
+                    Debug.Log("Click UnAim !");
+                    isAiming = false;
+                    // change the camera for the aim
+                    SwitchToRegular();
+                }
             }
 			else if (NextDir.Equals (Vector3.zero)) {
 				m_footstep.Pause ();
@@ -68,14 +91,31 @@ public class MovementControllerHuman : MovementController {
 					} else {
                         actions.Walk();
                     }
-
                 }
 
 			}
 
+            if(isAiming) {
+                GameObject.FindWithTag("Player").transform.rotation = Quaternion.LookRotation(NextDir);
+            }
+
 			m_moveSpeed = m_animator.GetFloat ("Speed");
 		}
 	}
+
+    public void  SwitchToAim() {
+        // Enable the right camera
+        playerCamera.enabled = false;
+        aimCamera.enabled = true;
+        currentCamera = 1;
+    }
+
+    public void SwitchToRegular()
+    {
+        playerCamera.enabled = true;
+        aimCamera.enabled = false;
+        currentCamera = 0;
+    }
 
     private void Attack()
     {
