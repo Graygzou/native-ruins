@@ -33,7 +33,7 @@ public class MovementControllerAnimal : MovementController {
         }
     }
 
-	override protected void GetInputs(Vector3 NextDir){
+	override protected void GetInputs(Vector3 NextDir, float h, float v){
 		if (m_isGrounded) {
             if (Input.GetMouseButton(0)) //attaque
             {

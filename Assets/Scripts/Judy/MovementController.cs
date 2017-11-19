@@ -148,14 +148,14 @@ public class MovementController : MonoBehaviour {
             transform.rotation = Quaternion.LookRotation(NextDir);
         transform.position += NextDir * m_moveSpeed * Time.deltaTime;
 
-        GetInputs(NextDir);
+        GetInputs(NextDir, h, v);
         JumpingAndLanding(NextDir);
 
     }
 
     protected virtual void JumpingAndLanding(Vector3 NextDir) { }
 
-    protected virtual void GetInputs(Vector3 NextDir) { }
+    protected virtual void GetInputs(Vector3 NextDir, float h, float v) { }
 
     float SignedAngleBetween(Vector3 a, Vector3 b, Vector3 n) {
         // angle in [0,180]

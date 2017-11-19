@@ -5,7 +5,7 @@ using System.Collections;
 
 public class MovementControllerHuman : MovementController {
 
-	[SerializeField] private Actions actions = null;
+	[SerializeField] private ActionsNew actions = null;
     private Camera playerCamera;
     private Camera   aimCamera;
     private bool isAiming;
@@ -24,8 +24,8 @@ public class MovementControllerHuman : MovementController {
         isAiming = false;
 
         // Disable the aim camera
-        aimCamera = GameObject.Find("AimedCamera").GetComponent<Camera>();
-        aimCamera.enabled = false;
+        //aimCamera = GameObject.Find("AimedCamera").GetComponent<Camera>();
+        //aimCamera.enabled = false;
     }
 
     // In this case, the vector3 NextDir is not used.
@@ -41,63 +41,77 @@ public class MovementControllerHuman : MovementController {
         }
     }
 
-	override protected void GetInputs(Vector3 NextDir){
-
+	override protected void GetInputs(Vector3 NextDir, float h, float v) {
 		if (m_isGrounded) {
-            if (isAiming) {
-                GameObject.FindWithTag("Player").transform.rotation = Quaternion.LookRotation(NextDir);
-            }
-
-            // If the player try to aim
+            // 1) Check if the player want to fight with the bow
             if (Input.GetMouseButton(1) && InventoryManager.isBowEquiped) {
-                Ray ray = new Ray(aimCamera.transform.position, aimCamera.transform.forward);
-                Vector3 lookPos = ray.GetPoint(20);
+                //Ray ray = new Ray(aimCamera.transform.position, aimCamera.transform.forward);
+                //Vector3 lookPos = ray.GetPoint(20);
                 if (!isAiming) {
-                    // Play the animation to take the bow and an arrow
+
+                    // To take the idle state
+                    actions.Aiming();
                     isAiming = true;
-                    m_animator.SetBool("Aiming", true);
-                    m_animator.Play("BowDrawArrow");
 
                     // SetActive the arrow
                     GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
 
                     // To stay in the idle bow state
-                    m_animator.SetBool("Reloading", false);
-                    m_animator.Play("BowDrawIdle");
+                    //m_animator.SetBool("Reloading", false);
+                    //m_animator.Play("BowDrawIdle");
 
                     // change the camera for the aim
                     //SwitchToAim();
                 } else {
                     // Play the animation
+                    actions.ReleaseAiming();
+
                     isAiming = false;
-                    m_animator.SetBool("Aiming", false);
-                    m_animator.Play("Idle");
 
                     // change the camera for the aim
                     //SwitchToRegular();
                 }
-            } else if(Input.GetMouseButton(0)) {
+            }
+
+            // 2) Check if the player want to hit something
+            if(Input.GetMouseButton(0)) {
                 if (InventoryManager.isBowEquiped && isAiming) {
                     Debug.Log("Fire !");
                     StartCoroutine("FireArrow");
                 } else if (InventoryManager.isTorchEquiped) {
                     m_moveSpeed = 0f;
-                    m_animator.SetFloat("Speed_f", 0f);
-                    m_animator.SetBool("Fight", true);
-                    m_animator.Play("SwordSlash"); //joue animation attaque
+                    actions.HitWithTorch();
                     // Attack(length ray);
                 }
-            } else if (NextDir.Equals (Vector3.zero)) {
-				m_footstep.Pause ();
-				if (Input.GetKey (KeyCode.LeftControl)) {
-					actions.Wary ();
-				} else {
-					actions.Stay ();
-				}
+            }
 
-			} else {
-                if (!isAiming) {
-				    if (Input.GetKey(KeyCode.LeftShift) && !EnergyBar.GetComponent<EnergyBar>().energyIsAt0) {
+            // 3) Check the movement of the player
+            if (isAiming) {
+                // Bow mode
+                if (NextDir.Equals(Vector3.zero)) {
+                    m_footstep.Pause();
+                    if (Input.GetKey(KeyCode.LeftControl)) {
+                        actions.Wary();
+                    } else {
+                        actions.Stay();
+                    }
+                } else {
+                    actions.MoveWithBow(h, v);
+                }
+                //GameObject.FindWithTag("Player").transform.rotation = Quaternion.LookRotation(NextDir);
+            } else {
+                // Regular mode
+                // If the player is not moving at all
+                if (NextDir.Equals(Vector3.zero)) {
+                    m_footstep.Pause();
+                    if (Input.GetKey(KeyCode.LeftControl)) {
+                        actions.Wary();
+                    } else {
+                        actions.Stay();
+                    }
+                } else {
+                    // If the player is running
+                    if (Input.GetKey(KeyCode.LeftShift) && !EnergyBar.GetComponent<EnergyBar>().energyIsAt0) {
                         if (EnergyBar.GetComponent<Scrollbar>().size > 0f) {
                             m_footstep.UnPause ();
 					        m_footstep.pitch = 1.7f;
@@ -107,11 +121,10 @@ public class MovementControllerHuman : MovementController {
 					        } else {
 						        actions.Run ();
 					        }
-
                         } else {
                             EnergyBar.GetComponent<EnergyBar>().energyIsAt0 = true;
                         }
-					    
+                    // If the player is walking
 				    } else {
 					    m_footstep.UnPause ();
 					    m_footstep.pitch = 1f;
@@ -122,7 +135,8 @@ public class MovementControllerHuman : MovementController {
                         }
                     }
                 }
-			}
+
+            }
 			m_moveSpeed = m_animator.GetFloat ("Speed");
         }
 	}
@@ -146,20 +160,16 @@ public class MovementControllerHuman : MovementController {
         // Fire the arrow
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(false);
         Attack();
-
         yield return new WaitForSeconds(.5f);
-        // Launch the animation to reload
-        m_animator.SetBool("Reloading", true);
-        m_animator.SetBool("Aiming", true);
-        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
-        m_animator.Play("BowDrawArrow");
 
+        // Launch the animation to reload
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
+        actions.Reloading();
         yield return new WaitForSeconds(1f);
         
     }
 
     private void Attack() {
-
         RaycastHit hit;
         float distance = 100f; //distance de l'animal pour pouvoir lui infliger des degats
         Ray Judy = new Ray(transform.position, transform.forward);
