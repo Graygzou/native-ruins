@@ -41,7 +41,53 @@ public class MovementControllerHuman : MovementController {
         }
     }
 
-	override protected void GetInputs(Vector3 NextDir, float h, float v) {
+    override protected void UpdateCamera(float deltaX, float deltaY) {   
+        if (!isAiming) {
+            // Regular mode
+            base.UpdateCamera(deltaX, deltaY);
+        } else {
+            // Aiming mode
+            Vector3 mousePositionVector3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            mousePositionVector3 = Camera.main.ScreenToWorldPoint(mousePositionVector3);
+
+            Vector3 targetdir = mousePositionVector3 - transform.position;
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
+
+
+            //m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position - new Vector3(-5, 0, 5);
+
+            //if (deltaX == 0 && deltaY == 0) return;
+
+            //Vector3 rotate = m_cameraPivot.localEulerAngles + new Vector3(deltaY * m_cameraSpeed, deltaX * m_cameraSpeed, 0);
+            //if (rotate.x >= 180f) rotate.x -= 360f;
+            //if (rotate.x > -20f && rotate.x < 90f)
+            //{
+            //    m_cameraPivot.localEulerAngles = rotate;
+            //    //Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+
+            //    // Set the player's rotation to this new rotation.
+            //    //GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3");
+            //    //upperBody.transform.Rotate(-deltaX, deltaY, 0);
+
+            //}
+        }
+    }
+
+    override protected void Move(Vector3 NextDir, float h, float v)
+    {
+        if(!isAiming) {
+            // Regular state
+            base.Move(NextDir, h, v);
+        } else {
+            // Aiming State
+            if (!NextDir.Equals(Vector3.zero))
+                transform.rotation = Quaternion.LookRotation(NextDir);
+            transform.position += Vector3.forward * m_moveSpeed * v * Time.deltaTime;
+            transform.position += Vector3.right * m_moveSpeed * h * Time.deltaTime;
+        }
+    }
+
+    override protected void GetInputs(Vector3 NextDir, float h, float v) {
 		if (m_isGrounded) {
             // 1) Check if the player want to fight with the bow
             if (Input.GetMouseButton(1) && InventoryManager.isBowEquiped) {
@@ -160,11 +206,11 @@ public class MovementControllerHuman : MovementController {
         // Fire the arrow
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(false);
         Attack();
-        yield return new WaitForSeconds(.5f);
+        //yield return new WaitForSeconds(.5f);
 
         // Launch the animation to reload
-        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
         actions.Reloading();
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
         yield return new WaitForSeconds(1f);
         
     }

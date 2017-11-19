@@ -72,8 +72,8 @@ public class ActionsNew : MonoBehaviour {
 		animator.SetFloat ("Speed", 0f);
 		animator.SetBool("Aiming", false);
 		animator.SetBool("EquipWeapon", false);
-        animator.SetTrigger("Jump");
-        //animator.Play ("Jump", MovementLayer);
+        //animator.SetTrigger("Jump");
+        animator.Play ("JumpMecanics", MovementLayer);
 	}
 
     // Aim with the bow
@@ -112,14 +112,14 @@ public class ActionsNew : MonoBehaviour {
 	public void Sitting () {
 		animator.SetBool ("Squat", true);
 		//animator.SetBool("Aiming", false);
-		animator.SetBool("EquipWeapon", false);
-		//animator.Play("CrouchMovement", MovementLayer);
+		//animator.SetBool("EquipWeapon", false);
+		animator.Play("CrouchMovement", MovementLayer);
 	}
 
 	public void Wary () {
 		animator.SetBool ("Squat", true);
 		//animator.SetBool("Aiming", false);
-		//animator.Play("CrouchMovement", MovementLayer);
+		animator.Play("CrouchMovement", MovementLayer);
 	}
 
 
@@ -127,7 +127,7 @@ public class ActionsNew : MonoBehaviour {
 		animator.SetBool ("Squat", true);
 		//animator.SetBool("Aiming", false);
 		animator.SetBool("EquipWeapon", false);
-		//animator.Play("CrouchMovement", MovementLayer);
+		animator.Play("CrouchMovement", MovementLayer);
 	}
 
 	public void EquipWeapon () {

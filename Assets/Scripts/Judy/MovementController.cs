@@ -59,7 +59,7 @@ public class MovementController : MonoBehaviour {
         
     }
 
-    protected void UpdateCamera(float deltaX, float deltaY) {   
+    protected virtual void UpdateCamera(float deltaX, float deltaY) {   
         if (currentCamera == 0) {
             m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position;
         } else {
@@ -140,17 +140,24 @@ public class MovementController : MonoBehaviour {
         Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
         Vector3 projected_forward_camera = Vector3.ProjectOnPlane(cameraTrans.forward, new Vector3(0, 1, 0));
 
+        // Calculated the movement vector
         float angle = SignedAngleBetween(initial_orientation, projected_forward_camera, Vector3.up);
         Vector3 NextDir = new Vector3(h, 0, v);
-
         NextDir = Quaternion.Euler(0f, angle, 0f) * NextDir;
+
+        // Control Judy's movement
+        Move(NextDir, h, v);
+        // Control Transition to animation states
+        GetInputs(NextDir, h, v);
+        // Control Judy's jump
+        JumpingAndLanding(NextDir);
+
+    }
+
+    protected virtual void Move(Vector3 NextDir, float h, float v) {
         if (!NextDir.Equals(Vector3.zero))
             transform.rotation = Quaternion.LookRotation(NextDir);
         transform.position += NextDir * m_moveSpeed * Time.deltaTime;
-
-        GetInputs(NextDir, h, v);
-        JumpingAndLanding(NextDir);
-
     }
 
     protected virtual void JumpingAndLanding(Vector3 NextDir) { }
