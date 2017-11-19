@@ -110,4 +110,43 @@ public class Actions : MonoBehaviour {
 		animator.SetBool("EquipWeapon", false);
 		animator.Play ("DisarmArme");
 	}
+
+    // Make transition for the following animation :
+    // celebrate (excited)
+    public void Celebrate()
+    {
+    }
+
+    // Make transition for the following animation :
+    // walking forward with the bow equipped
+    public void WalkFowardBow() { 
+    }
+
+    // Make transition for the following animation :
+    // walking backward with the bow equipped
+    public void WalkBackwardBow() {
+    }
+
+    // Make transition for the following animation :
+    // walking to the left with the bow equipped
+    public void WalkLeftBow() {
+    }
+
+    // Make transition for the following animation :
+    // walking to the right with the bow equipped
+    public void WalkRightBow() {
+    }
+
+    // Make transition for the following animation :
+    // (setting) save the game
+    public void SitDown() {
+        // TODO LATER
+    }
+
+    // Make transition for the following animation :
+    // leaving save the game
+    public void StandUp()
+    {
+        // TODO LATER
+    }
 }

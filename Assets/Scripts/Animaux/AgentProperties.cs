@@ -160,10 +160,10 @@ public class AgentProperties : MonoBehaviour
     }
 
     void OnDrawGizmos() {
-        Transform nose = transform.GetChild(5).transform;
+        //Transform nose = transform.GetChild(5).transform;
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(nose.position, nose.position + nose.forward * 0.5f);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawLine(nose.position, nose.position + nose.forward * 0.5f);
     }
 }
 
