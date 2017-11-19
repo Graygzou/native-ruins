@@ -73,8 +73,7 @@ public class MovementControllerHuman : MovementController {
         }
     }
 
-    override protected void Move(Vector3 NextDir, float h, float v)
-    {
+    override protected void Move(Vector3 NextDir, float h, float v) {
         if(!isAiming) {
             // Regular state
             base.Move(NextDir, h, v);
@@ -94,10 +93,10 @@ public class MovementControllerHuman : MovementController {
                 //Ray ray = new Ray(aimCamera.transform.position, aimCamera.transform.forward);
                 //Vector3 lookPos = ray.GetPoint(20);
                 if (!isAiming) {
+                    isAiming = true;
 
                     // To take the idle state
                     actions.Aiming();
-                    isAiming = true;
 
                     // SetActive the arrow
                     GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
@@ -109,10 +108,10 @@ public class MovementControllerHuman : MovementController {
                     // change the camera for the aim
                     //SwitchToAim();
                 } else {
+                    isAiming = false;
+
                     // Play the animation
                     actions.ReleaseAiming();
-
-                    isAiming = false;
 
                     // change the camera for the aim
                     //SwitchToRegular();
