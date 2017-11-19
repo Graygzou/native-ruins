@@ -23,7 +23,7 @@ public class ActionsNew : MonoBehaviour {
 		//animator.SetBool("Aiming", false);
 		animator.SetBool ("Squat", false);
 		animator.SetFloat ("Speed", 0f);
-        animator.Play("StandMovement", MovementLayer);
+        //animator.Play("StandMovement", MovementLayer);
     }
 
 	public void Walk () {
@@ -72,9 +72,9 @@ public class ActionsNew : MonoBehaviour {
 
 	public void Jump () {
 		animator.SetBool ("Squat", false);
-		animator.SetFloat ("Speed", 0f);
-		animator.SetBool("Aiming", false);
-		animator.SetBool("EquipWeapon", false);
+		animator.SetFloat ("Speed", 0.0f);
+		//animator.SetBool("Aiming", false);
+		//animator.SetBool("EquipWeapon", false);
         //animator.SetTrigger("Jump");
         animator.Play ("JumpMecanics", MovementLayer);
 	}
@@ -97,6 +97,7 @@ public class ActionsNew : MonoBehaviour {
         animator.SetBool("Aiming", true);
         animator.SetFloat("VelX", x);
         animator.SetFloat("VelY", y);
+        animator.SetFloat("Speed", 22f);
         animator.Play("BowMovement", MovementLayer);
     }
 
@@ -122,8 +123,9 @@ public class ActionsNew : MonoBehaviour {
 
 	public void Wary () {
 		animator.SetBool ("Squat", true);
-		//animator.SetBool("Aiming", false);
-		animator.Play("CrouchMovement", MovementLayer);
+        animator.SetFloat("Speed", 0.0f);
+        //animator.SetBool("Aiming", false);
+        animator.Play("CrouchMovement", MovementLayer);
 	}
 
 

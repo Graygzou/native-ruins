@@ -35,7 +35,7 @@ public class MovementControllerHuman : MovementController {
 
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space)) {
             m_jumpTimeStamp = Time.time;
-			actions.Jump ();
+			actions.Jump();
             m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
 
         }
@@ -51,7 +51,8 @@ public class MovementControllerHuman : MovementController {
             mousePositionVector3 = Camera.main.ScreenToWorldPoint(mousePositionVector3);
 
             Vector3 targetdir = mousePositionVector3 - transform.position;
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
+            GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
+            upperBody.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
 
 
             //m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position - new Vector3(-5, 0, 5);
@@ -79,17 +80,17 @@ public class MovementControllerHuman : MovementController {
             base.Move(NextDir, h, v);
         } else {
             // Aiming State
-            if (!NextDir.Equals(Vector3.zero))
-                transform.rotation = Quaternion.LookRotation(NextDir);
-            transform.position += Vector3.forward * m_moveSpeed * v * Time.deltaTime;
-            transform.position += Vector3.right * m_moveSpeed * h * Time.deltaTime;
+            //if (!NextDir.Equals(Vector3.zero))
+            //    transform.rotation = Quaternion.LookRotation(NextDir);
+            transform.position += (Vector3.forward * m_moveSpeed) * v * Time.deltaTime;
+            transform.position += (Vector3.right * m_moveSpeed) * h * Time.deltaTime;
         }
     }
 
     override protected void GetInputs(Vector3 NextDir, float h, float v) {
 		if (m_isGrounded) {
             // 1) Check if the player want to fight with the bow
-            if (Input.GetMouseButton(1) && InventoryManager.isBowEquiped) {
+            if (Input.GetMouseButtonDown(1) && InventoryManager.isBowEquiped) {
                 //Ray ray = new Ray(aimCamera.transform.position, aimCamera.transform.forward);
                 //Vector3 lookPos = ray.GetPoint(20);
                 if (!isAiming) {
@@ -119,12 +120,12 @@ public class MovementControllerHuman : MovementController {
             }
 
             // 2) Check if the player want to hit something
-            if(Input.GetMouseButton(0)) {
+            if(Input.GetMouseButtonDown(0)) {
                 if (InventoryManager.isBowEquiped && isAiming) {
                     Debug.Log("Fire !");
                     StartCoroutine("FireArrow");
                 } else if (InventoryManager.isTorchEquiped) {
-                    m_moveSpeed = 0f;
+                    //m_moveSpeed = 0f;
                     actions.HitWithTorch();
                     // Attack(length ray);
                 }
