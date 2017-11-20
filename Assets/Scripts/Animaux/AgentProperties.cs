@@ -36,6 +36,8 @@ public class AgentProperties : MonoBehaviour
     [SerializeField]
     private float attackRangeVsWolf;
 
+    private AudioSource sonCri;
+
     public float[] attackRange;
 
     void Awake()
@@ -47,6 +49,7 @@ public class AgentProperties : MonoBehaviour
 
     void Start()
     {
+        sonCri = GetComponent<AudioSource>();
         currentHealth = maxHealth;
         attackRange = new float[3];
         attackRange[0] = attackRangeVsPlayer;
@@ -64,6 +67,7 @@ public class AgentProperties : MonoBehaviour
         {
             if (!isAlert)
             {
+                sonCri.Play();
                 // The animal enter the "State" Alert
                 isAlert = true;
             }
@@ -109,6 +113,7 @@ public class AgentProperties : MonoBehaviour
 
     public void takeDamages(float amount)
     {
+        sonCri.Play();
 
         Debug.Log("Outch !");
 

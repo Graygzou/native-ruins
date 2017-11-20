@@ -9,18 +9,20 @@ public class LifeBar : MonoBehaviour {
     public GameObject Hunger;
     public Color BarColor;
 
+    private AudioSource[] sons;
     private AudioSource sonCri;
+    private AudioSource sonManger;
     private int timeMaxFaim = 3600;
     private int currentTimeFaim = 0;
 	private GameObject Judy;
 	private Actions actions;
     private GameObject forms;
 
-	[SerializeField]private AudioSource m_crunchSound;
-
     // Use this for initialization
     void Start () {
-        sonCri = GetComponent<AudioSource>();
+        sons = GetComponents<AudioSource>();
+        sonCri = sons[0];
+        sonManger = sons[1];
 		Judy = GameObject.FindWithTag ("Player");
         forms = GameObject.Find("Forms");
 		actions = Judy.GetComponent ("Actions") as Actions;
@@ -57,7 +59,7 @@ public class LifeBar : MonoBehaviour {
     //*****************RECUPERATION DE VIE******************//
     public void Eat(float lifeBack)
     {
-		m_crunchSound.Play ();
+		sonManger.Play ();
         if (Hunger.GetComponent<Scrollbar>().size >= 1f)
         {
             Life.GetComponent<Scrollbar>().size += lifeBack;

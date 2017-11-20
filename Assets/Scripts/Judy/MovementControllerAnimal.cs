@@ -7,8 +7,13 @@ public class MovementControllerAnimal : MovementController {
     [SerializeField] protected float m_minSpeed;
     [SerializeField] protected float m_maxSpeed;
 
+    private AudioSource[] sons;
+    private AudioSource sonAttaque;
+
     new void Start() {
         base.Start();
+        sons = GetComponents<AudioSource>();
+        sonAttaque = sons[1];
         // Set the attribute to the desire amount
         //m_moveSpeed = 1;
         //m_minSpeed = 1;
@@ -77,9 +82,11 @@ public class MovementControllerAnimal : MovementController {
 
     private void Attack()
     {
+        GameObject playerRoot = GameObject.Find("Player");
         Animator judyAnim = this.gameObject.GetComponent<Animator>();
         judyAnim.SetBool("Attack_state", true);
         judyAnim.Play("Attack"); //joue animation attaque
+        sonAttaque.Play();
 
         RaycastHit hit;
         float distance = 25f; //distance de l'animal pour pouvoir lui infliger des degats
