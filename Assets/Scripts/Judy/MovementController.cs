@@ -50,27 +50,19 @@ public class MovementController : MonoBehaviour {
         UpdateCamera(dir.x, -dir.y);
         Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
         float z;
-        if (currentCamera == 0) { 
-            z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, -32, -12);
-            cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
-        } else {
-            cameraTrans.position = this.transform.Find("UpAnchor").position + new Vector3(4, 0, -2);
-        }
+        z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, -32, -12);
+        cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
         
     }
 
-    protected virtual void UpdateCamera(float deltaX, float deltaY) {   
-        if (currentCamera == 0) {
-            m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position;
-        } else {
-            m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position - new Vector3(5, 0, -5);
-        }
+    protected virtual void UpdateCamera(float deltaX, float deltaY) {
+        m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position;
+
         if (deltaX == 0 && deltaY == 0) return;
 
         Vector3 rotate = m_cameraPivot.localEulerAngles + new Vector3(deltaY * m_cameraSpeed, deltaX * m_cameraSpeed, 0);
         if (rotate.x >= 180f) rotate.x -= 360f;
-        if (rotate.x > -20f && rotate.x < 90f)
-        {
+        if (rotate.x > -20f && rotate.x < 90f) {
             m_cameraPivot.localEulerAngles = rotate;
         }
     }
@@ -180,6 +172,13 @@ public class MovementController : MonoBehaviour {
 
     public float getCurrentSpeed() {
         return m_moveSpeed;
+    }
+
+    void OnDrawGizmosSelected() {
+        Camera camera = GameObject.Find("AimedCamera").GetComponent<Camera>();
+        Vector3 p = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(p, 0.1F);
     }
 
 }

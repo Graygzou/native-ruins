@@ -9,6 +9,7 @@ public class MovementControllerHuman : MovementController {
     private Camera playerCamera;
     private Camera   aimCamera;
     private bool isAiming;
+    private Vector3 offset;
 
     //public Transform aimCamHolder;
 
@@ -21,6 +22,9 @@ public class MovementControllerHuman : MovementController {
 
         // Get the regular camera
         playerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        aimCamera = GameObject.Find("AimedCamera").GetComponent<Camera>();
+        aimCamera.enabled = false;
+        offset = aimCamera.transform.position - GameObject.Find("Player").transform.position;
         isAiming = false;
 
         // Disable the aim camera
@@ -47,12 +51,79 @@ public class MovementControllerHuman : MovementController {
             base.UpdateCamera(deltaX, deltaY);
         } else {
             // Aiming mode
-            Vector3 mousePositionVector3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-            mousePositionVector3 = Camera.main.ScreenToWorldPoint(mousePositionVector3);
-
-            Vector3 targetdir = mousePositionVector3 - transform.position;
             GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
-            upperBody.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
+
+            // Debug
+            Vector3 mousePositionVector3 = Input.mousePosition;
+            mousePositionVector3.z = 10;
+            mousePositionVector3 = aimCamera.ScreenToWorldPoint(mousePositionVector3);
+            Vector3 targetdir = mousePositionVector3 - upperBody.transform.position;
+
+            Debug.Log(targetdir);
+
+            Vector3 p = aimCamera.ViewportToWorldPoint(new Vector3(1, 1, 10));
+
+            //Debug.Log(p.x - targetdir.x);
+            //Debug.Log(p.y - targetdir.y);
+
+
+            // method1
+            //Vector3 mousePositionVector3 = Input.mousePosition;
+            //mousePositionVector3.z = 10;
+            //mousePositionVector3 = aimCamera.ScreenToWorldPoint(mousePositionVector3);
+            //Vector3 targetdir = mousePositionVector3 - upperBody.transform.position;
+            //upperBody.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
+
+            //cam.ViewportToWorldPoint(Vector3(0.5, 0.5, cam.nearClipPlane));
+
+
+            // Emthod 2
+            Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y * 4.0f, targetdir.x * 4.0f, 0f);
+
+            if (rotate.x >= 180f) rotate.x -= 360f;
+            if (rotate.x > -20f && rotate.x < 90f) {
+                upperBody.transform.eulerAngles = rotate;
+            };
+
+            //upperBody.transform.rotation.x = Quaternion.Lerp(upperBody.transform.rotation, Quaternion.LookRotation(targetdir), Time.deltaTime);
+
+            // Aiming mode
+
+
+            //GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
+            //upperBody.transform.localEulerAngles = new Vector3(deltaX, deltaY, 0); // = Quaternion.AngleAxis(deltaX, Vector3.right);
+            //aimCamera.transform.Rotate(deltaY, 0, 0);
+
+            //aimCamera.transform.localRotation = Quaternion.AngleAxis(deltaY, aimCamera.transform.up);
+            //transform.localRotation = Quaternion.AngleAxis(-deltaY, Vector3.right);
+
+
+            //Vector3 mousePositionVector3 = new Vector3(deltaX, deltaY, 0);
+            //mousePositionVector3 = aimCamera.ScreenToWorldPoint(mousePositionVector3);
+            //Vector3 targetdir = mousePositionVector3 - transform.position;
+
+            //GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
+            //upperBody.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
+
+
+            //aimCamera.transform.position = GameObject.FindWithTag("Player").transform.position + offset;
+            ////GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
+
+            //Vector3 rotate = aimCamera.transform.localEulerAngles + new Vector3(deltaY * m_cameraSpeed, deltaX * m_cameraSpeed, 0);
+            //if (rotate.x >= 180f) rotate.x -= 360f;
+            //if (rotate.x > -20f && rotate.x < 90f)
+            //{
+            //    aimCamera.transform.localEulerAngles = rotate;
+            //}
+
+            //aimCamera.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
+
+            //Vector3 mousePositionVector3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            //mousePositionVector3 = Camera.main.ScreenToWorldPoint(mousePositionVector3);
+
+            //Vector3 targetdir = mousePositionVector3 - transform.position;
+            //GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
+            //upperBody.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
 
 
             //m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position - new Vector3(-5, 0, 5);
@@ -80,6 +151,7 @@ public class MovementControllerHuman : MovementController {
             base.Move(NextDir, h, v);
         } else {
             // Aiming State
+
             //if (!NextDir.Equals(Vector3.zero))
             //    transform.rotation = Quaternion.LookRotation(NextDir);
             transform.position += (Vector3.forward * m_moveSpeed) * v * Time.deltaTime;
@@ -103,6 +175,8 @@ public class MovementControllerHuman : MovementController {
                     GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
 
                     // To stay in the idle bow state
+                    aimCamera.enabled = true;
+                    playerCamera.enabled = false;
                     //m_animator.SetBool("Reloading", false);
                     //m_animator.Play("BowDrawIdle");
 
@@ -115,6 +189,9 @@ public class MovementControllerHuman : MovementController {
                     actions.ReleaseAiming();
 
                     // change the camera for the aim
+                    aimCamera.enabled = false;
+                    playerCamera.enabled = true;
+                    
                     //SwitchToRegular();
                 }
             }
