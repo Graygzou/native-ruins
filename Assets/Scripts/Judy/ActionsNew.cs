@@ -89,7 +89,7 @@ public class ActionsNew : MonoBehaviour {
 	public void ReleaseAiming () {
 		animator.SetBool("Aiming", false);
         animator.Play("Null", FightLayer);
-        //animator.Play("BowAimIdle", 1);
+        animator.Play("StandMovement", MovementLayer);
     }
 
     // Reload the bow

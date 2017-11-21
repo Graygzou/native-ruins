@@ -42,7 +42,7 @@ public class FormsController : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(currentForm);
+        //Debug.Log(currentForm);
         if (Input.GetKey(KeyCode.A))
         {
             OpenTransformationWheel();

@@ -11,10 +11,22 @@ public class MovementControllerHuman : MovementController {
     private Camera aimCamera;
     private bool isAiming;
     private Vector3 offset;
+    public Rigidbody m_Arrow;                               // Prefab of the arrow.
+    public Transform m_FireTransform;                       // Where the arrow should spawn
+    public AudioSource m_ShootingAudio;                     // Reference to the audio source used to play the shooting audio.
+    public AudioClip m_FireClip;                            // Audio that plays when each arrow is fired.
+
+    private Vector3 targetDirection;                        // Direction toward the target (mouse position in the World)
 
     //public Transform aimCamHolder;
     Vector3 initLargeurCrossHair;
     Vector3 initHauteurCrossHair;
+
+    private Quaternion initUpperBody;
+    private Quaternion initEpaule;
+    private Quaternion initMain;
+    private Quaternion initMainD;
+    private Quaternion initFleche;
 
     new void Start() {
         base.Start();
@@ -39,6 +51,14 @@ public class MovementControllerHuman : MovementController {
 
         initLargeurCrossHair = largeurCrossHair.GetComponent<RectTransform>().localPosition;
         initHauteurCrossHair = hauteurCrossHair.GetComponent<RectTransform>().localPosition;
+
+        // Keep initial rotation for the animation
+        initUpperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2").transform.rotation;
+        initEpaule = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone").transform.rotation;
+        initMain = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3").transform.rotation;
+        initMainD = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3").transform.rotation;
+        initFleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").transform.rotation;
+
     }
 
     // In this case, the vector3 NextDir is not used.
@@ -65,6 +85,7 @@ public class MovementControllerHuman : MovementController {
             GameObject main = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3");
             GameObject mainD = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3");
             GameObject fleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D");
+            GameObject head = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigNeck/RigHead");
             // TODO : add the head
 
             // Debug
@@ -102,35 +123,47 @@ public class MovementControllerHuman : MovementController {
                 Debug.DrawLine(main.transform.position, hitInfo.point);
                 Debug.DrawLine(mainD.transform.position, hitInfo.point);
 
-                Vector3 targetdir = hitInfo.point - upperBody.transform.position;
-                Vector3 targetdir2 = hitInfo.point - main.transform.position;
-                Vector3 targetdir3 = hitInfo.point - epaule.transform.position;
-                Vector3 targetdir4 = hitInfo.point - mainD.transform.position;
-                Vector3 targetdir5 = hitInfo.point - fleche.transform.position;
+                targetDirection = hitInfo.point - fleche.transform.position;
 
-                Quaternion rotate = Quaternion.LookRotation(targetdir, GameObject.FindWithTag("Player").transform.right);
-                //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
-                upperBody.transform.rotation = rotate;
+                if (m_animator.GetCurrentAnimatorClipInfo(1)[0].clip.name != "New Standing Draw Arrow") {
 
-                // Rotation Epaule
-                Vector3 bis2 = Vector3.Cross(targetdir2, Vector3.right);
-                Quaternion rotate3 = Quaternion.LookRotation(-bis2, Vector3.Cross(bis2, targetdir3));
-                //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
-                epaule.transform.rotation = rotate3;
+                    Vector3 targetdir = hitInfo.point - upperBody.transform.position;
+                    Vector3 targetdir2 = hitInfo.point - main.transform.position;
+                    Vector3 targetdir3 = hitInfo.point - epaule.transform.position;
+                    Vector3 targetdir4 = hitInfo.point - mainD.transform.position;
+                    Vector3 targetdir5 = hitInfo.point - fleche.transform.position;
+                    Vector3 targetdir6 = hitInfo.point - head.transform.position;
 
-                // Rotation Main
-                Vector3 bis = Vector3.Cross(targetdir2, Vector3.right);
-                Quaternion rotate2 = Quaternion.LookRotation(bis, -Vector3.Cross(bis, targetdir2));
-                main.transform.rotation = rotate2;
+                    Quaternion rotate = Quaternion.LookRotation(targetdir, GameObject.FindWithTag("Player").transform.right);
+                    //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
+                    upperBody.transform.rotation = rotate;
 
-                // Rotation mainD
-                Vector3 bis3 = Vector3.Cross(targetdir4, Vector3.right);
-                Quaternion rotate4 = Quaternion.LookRotation(-bis3, Vector3.Cross(bis3, targetdir4));
-                mainD.transform.rotation = rotate4;
+                    // Rotation Epaule
+                    Vector3 bis2 = Vector3.Cross(targetdir2, GameObject.FindWithTag("Player").transform.right);
+                    Quaternion rotate3 = Quaternion.LookRotation(-bis2, Vector3.Cross(bis2, targetdir3));
+                    //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
+                    epaule.transform.rotation = rotate3;
 
-                // Rotation fleche
-                fleche.transform.rotation = Quaternion.LookRotation(targetdir5);
+                    // Rotation Main
+                    Vector3 bis = Vector3.Cross(targetdir2, GameObject.FindWithTag("Player").transform.right);
+                    Quaternion rotate2 = Quaternion.LookRotation(bis, -Vector3.Cross(bis, targetdir2));
+                    main.transform.rotation = rotate2;
 
+                    // Rotation mainD
+                    Vector3 bis3 = Vector3.Cross(targetdir4, GameObject.FindWithTag("Player").transform.right);
+                    Quaternion rotate4 = Quaternion.LookRotation(-bis3, Vector3.Cross(bis3, targetdir4));
+                    mainD.transform.rotation = rotate4;
+
+                    // Rotation fleche
+                    fleche.transform.rotation = Quaternion.LookRotation(targetdir5);
+
+                    // Rotation head
+                    Vector3 bis4 = Vector3.Cross(targetdir6, GameObject.FindWithTag("Player").transform.right);
+                    head.transform.rotation = Quaternion.LookRotation(-Vector3.Cross(bis4, targetdir4), targetdir6);
+                }
+                else {
+                    Debug.Log("OOOOHOHOHOHOHOHOHOH");
+                }
             }
             else {
                 Vector3 targetdir = (ray.origin + ray.direction.normalized * 10) - upperBody.transform.position;
@@ -372,17 +405,32 @@ public class MovementControllerHuman : MovementController {
         Debug.Log("Fire !");
         // Fire the arrow
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(false);
-        Attack();
+
+        //Fire()
+        GameObject fleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D");
+        Rigidbody arrowInstance = Instantiate(m_Arrow, fleche.transform.position + targetDirection.normalized*2, fleche.transform.rotation) as Rigidbody;
+        arrowInstance.velocity = 200f * targetDirection.normalized;
+
+        // Change the clip to the firing clip and play it.
+        m_ShootingAudio.clip = m_FireClip;
+        m_ShootingAudio.Play();
+
         //yield return new WaitForSeconds(.5f);
 
+        // Come back in the original settings for a smooth animation
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2").transform.rotation = initUpperBody;
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone").transform.rotation = initEpaule;
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3").transform.rotation = initMain;
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3").transform.rotation = initMainD;
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").transform.rotation = initFleche;
         // Launch the animation to reload
         actions.Reloading();
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         
     }
 
-    private void Attack() {
+    private void Fire() {
         RaycastHit hit;
         float distance = 100f; //distance de l'animal pour pouvoir lui infliger des degats
         Ray Judy = new Ray(transform.position, transform.forward);
