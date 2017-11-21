@@ -6,12 +6,15 @@ using System.Collections;
 public class MovementControllerHuman : MovementController {
 
 	[SerializeField] private ActionsNew actions = null;
+    public float mouseSmoothness = 5.0f;
     private Camera playerCamera;
-    private Camera   aimCamera;
+    private Camera aimCamera;
     private bool isAiming;
     private Vector3 offset;
 
     //public Transform aimCamHolder;
+    Vector3 initLargeurCrossHair;
+    Vector3 initHauteurCrossHair;
 
     new void Start() {
         base.Start();
@@ -19,17 +22,23 @@ public class MovementControllerHuman : MovementController {
         m_moveSpeed = 10;
         m_turnSpeed = 5;
         m_jumpForce = 5;
+        isAiming = false;
 
         // Get the regular camera
         playerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        aimCamera = GameObject.Find("AimedCamera").GetComponent<Camera>();
-        aimCamera.enabled = false;
-        offset = aimCamera.transform.position - GameObject.Find("Player").transform.position;
-        isAiming = false;
 
         // Disable the aim camera
-        //aimCamera = GameObject.Find("AimedCamera").GetComponent<Camera>();
-        //aimCamera.enabled = false;
+        aimCamera = GameObject.Find("AimedCamera").GetComponent<Camera>();
+        offset = aimCamera.transform.position - GameObject.Find("Player").transform.position;
+        aimCamera.enabled = false;
+
+        // Get the initial position of the crosshair (to print it correctly)
+        GameObject crosshair = GameObject.Find("Arrow_aim").gameObject;
+        Transform largeurCrossHair = crosshair.transform.GetChild(0);
+        Transform hauteurCrossHair = crosshair.transform.GetChild(1);
+
+        initLargeurCrossHair = largeurCrossHair.GetComponent<RectTransform>().localPosition;
+        initHauteurCrossHair = hauteurCrossHair.GetComponent<RectTransform>().localPosition;
     }
 
     // In this case, the vector3 NextDir is not used.
@@ -52,38 +61,102 @@ public class MovementControllerHuman : MovementController {
         } else {
             // Aiming mode
             GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
+            GameObject epaule = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone");
+            GameObject main = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3");
+            GameObject mainD = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3");
+            GameObject fleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D");
+            // TODO : add the head
 
             // Debug
-            Vector3 mousePositionVector3 = Input.mousePosition;
-            mousePositionVector3.z = 10;
-            mousePositionVector3 = aimCamera.ScreenToWorldPoint(mousePositionVector3);
-            Vector3 targetdir = mousePositionVector3 - upperBody.transform.position;
-
-            Debug.Log(targetdir);
-
-            Vector3 p = aimCamera.ViewportToWorldPoint(new Vector3(1, 1, 10));
-
-            //Debug.Log(p.x - targetdir.x);
-            //Debug.Log(p.y - targetdir.y);
-
-
-            // method1
             //Vector3 mousePositionVector3 = Input.mousePosition;
             //mousePositionVector3.z = 10;
             //mousePositionVector3 = aimCamera.ScreenToWorldPoint(mousePositionVector3);
             //Vector3 targetdir = mousePositionVector3 - upperBody.transform.position;
-            //upperBody.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
 
-            //cam.ViewportToWorldPoint(Vector3(0.5, 0.5, cam.nearClipPlane));
+            //Debug.Log(Input.mousePosition);
 
+            //// Method 2
+            //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-Input.mousePosition.y * mouseSmoothness, Input.mousePosition.x * mouseSmoothness, 0f);
+            //upperBody.transform.eulerAngles = rotate;
 
-            // Emthod 2
-            Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y * 4.0f, targetdir.x * 4.0f, 0f);
+            // Move the crosshair
+            GameObject crosshair = GameObject.Find("Arrow_aim").gameObject;
+            Transform largeurCrossHair = crosshair.transform.GetChild(0);
+            Transform hauteurCrossHair = crosshair.transform.GetChild(1);
 
-            if (rotate.x >= 180f) rotate.x -= 360f;
-            if (rotate.x > -20f && rotate.x < 90f) {
+            // Set his first position
+            largeurCrossHair.transform.position = Input.mousePosition + initLargeurCrossHair;
+            hauteurCrossHair.transform.position = Input.mousePosition + initHauteurCrossHair;
+
+            // Point the body toward the crosshair. We use Raycast
+            Ray ray = aimCamera.ScreenPointToRay(Input.mousePosition);
+            //Ray ray = new Ray(upperBody.transform.position, Vector3.forward);
+            RaycastHit hitInfo;
+
+            // Use layer to avoidJudy
+
+            if (Physics.Raycast(ray, out hitInfo, 1000)) {
+                Debug.DrawLine(ray.origin, hitInfo.point);
+                Debug.DrawLine(upperBody.transform.position, hitInfo.point);
+                Debug.DrawLine(epaule.transform.position, hitInfo.point);
+                Debug.DrawLine(main.transform.position, hitInfo.point);
+                Debug.DrawLine(mainD.transform.position, hitInfo.point);
+
+                Vector3 targetdir = hitInfo.point - upperBody.transform.position;
+                Vector3 targetdir2 = hitInfo.point - main.transform.position;
+                Vector3 targetdir3 = hitInfo.point - epaule.transform.position;
+                Vector3 targetdir4 = hitInfo.point - mainD.transform.position;
+                Vector3 targetdir5 = hitInfo.point - fleche.transform.position;
+
+                Quaternion rotate = Quaternion.LookRotation(targetdir, GameObject.FindWithTag("Player").transform.right);
+                //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
+                upperBody.transform.rotation = rotate;
+
+                // Rotation Epaule
+                Vector3 bis2 = Vector3.Cross(targetdir2, Vector3.right);
+                Quaternion rotate3 = Quaternion.LookRotation(-bis2, Vector3.Cross(bis2, targetdir3));
+                //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
+                epaule.transform.rotation = rotate3;
+
+                // Rotation Main
+                Vector3 bis = Vector3.Cross(targetdir2, Vector3.right);
+                Quaternion rotate2 = Quaternion.LookRotation(bis, -Vector3.Cross(bis, targetdir2));
+                main.transform.rotation = rotate2;
+
+                // Rotation mainD
+                Vector3 bis3 = Vector3.Cross(targetdir4, Vector3.right);
+                Quaternion rotate4 = Quaternion.LookRotation(-bis3, Vector3.Cross(bis3, targetdir4));
+                mainD.transform.rotation = rotate4;
+
+                // Rotation fleche
+                fleche.transform.rotation = Quaternion.LookRotation(targetdir5);
+
+            }
+            else {
+                Vector3 targetdir = (ray.origin + ray.direction.normalized * 10) - upperBody.transform.position;
+
+                Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
                 upperBody.transform.eulerAngles = rotate;
-            };
+            }
+
+
+            //Vector3 mousePositionVector3 = Input.mousePosition + initLargeurCrossHair;
+            //mousePositionVector3.z = 80;
+            //Vector3 mousePositionVector32 = aimCamera.ScreenToWorldPoint(mousePositionVector3);
+
+            //Vector3 targetdir = mousePositionVector32 - upperBody.transform.position;
+
+            //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
+            //upperBody.transform.eulerAngles = rotate;
+
+
+
+
+
+
+
+
+
 
             //upperBody.transform.rotation.x = Quaternion.Lerp(upperBody.transform.rotation, Quaternion.LookRotation(targetdir), Time.deltaTime);
 
@@ -154,8 +227,8 @@ public class MovementControllerHuman : MovementController {
 
             //if (!NextDir.Equals(Vector3.zero))
             //    transform.rotation = Quaternion.LookRotation(NextDir);
-            transform.position += (Vector3.forward * m_moveSpeed) * v * Time.deltaTime;
-            transform.position += (Vector3.right * m_moveSpeed) * h * Time.deltaTime;
+            transform.position += (GameObject.FindWithTag("Player").transform.forward * m_moveSpeed) * v * Time.deltaTime;
+            transform.position += (GameObject.FindWithTag("Player").transform.right * m_moveSpeed) * h * Time.deltaTime;
         }
     }
 
@@ -177,16 +250,33 @@ public class MovementControllerHuman : MovementController {
                     // To stay in the idle bow state
                     aimCamera.enabled = true;
                     playerCamera.enabled = false;
-                    //m_animator.SetBool("Reloading", false);
-                    //m_animator.Play("BowDrawIdle");
+
+                    // Activate the crosshair
+                    GameObject crosshair = GameObject.Find("Arrow_aim").gameObject;
+                    Transform largeurCrossHair = crosshair.transform.GetChild(0);
+                    Transform hauteurCrossHair = crosshair.transform.GetChild(1);
+                    largeurCrossHair.gameObject.SetActive(true);
+                    hauteurCrossHair.gameObject.SetActive(true);
+
+                    // Set his first position
+                    largeurCrossHair.transform.position = Input.mousePosition + initLargeurCrossHair;
+                    hauteurCrossHair.transform.position = Input.mousePosition + initHauteurCrossHair;
 
                     // change the camera for the aim
                     //SwitchToAim();
-                } else {
+                }
+                else {
                     isAiming = false;
 
                     // Play the animation
                     actions.ReleaseAiming();
+
+                    // Desactivate the crosshair
+                    GameObject crosshair = GameObject.Find("Arrow_aim").gameObject;
+                    Transform largeurCrossHair = crosshair.transform.GetChild(0);
+                    Transform hauteurCrossHair = crosshair.transform.GetChild(1);
+                    largeurCrossHair.gameObject.SetActive(false);
+                    hauteurCrossHair.gameObject.SetActive(false);
 
                     // change the camera for the aim
                     aimCamera.enabled = false;
@@ -266,14 +356,14 @@ public class MovementControllerHuman : MovementController {
 
     public void  SwitchToAim() {
         // Enable the right camera
-        playerCamera.enabled = false;
+        //playerCamera.enabled = false;
         aimCamera.enabled = true;
         currentCamera = 1;
     }
 
     public void SwitchToRegular()
     {
-        playerCamera.enabled = true;
+        //playerCamera.enabled = true;
         aimCamera.enabled = false;
         currentCamera = 0;
     }
