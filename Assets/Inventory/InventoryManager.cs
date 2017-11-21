@@ -38,6 +38,10 @@ public class InventoryManager : MonoBehaviour {
         //NumberOfArrow();
     }
 
+	public ArrayList GetInventory(){
+		return inventaire;
+	}
+
 	private void OpenOrCloseInventory(){
 		if (Input.GetKeyDown (KeyCode.Tab)) {
 			m_bagSound.Play ();
@@ -45,11 +49,12 @@ public class InventoryManager : MonoBehaviour {
 				bag_open = !bag_open;
 				m_bag.localScale = new Vector3(7f,3.5f,3.5f);
 				m_bag.transform.localPosition =  new Vector3(0f, 0f, 0f);
+				GameObject.Find ("InventoryManager/Canvas/Craft").SetActive (true);
 			} else {
 				bag_open = !bag_open;
 				m_bag.localScale = new Vector3(2f,1f,1f);
 				m_bag.localPosition = b_anchor.localPosition;
-					
+				GameObject.Find ("InventoryManager/Canvas/Craft").SetActive (false);
 				//m_bag.transform.position += Vector3(-100f,0f,0f);
 			}
         }
