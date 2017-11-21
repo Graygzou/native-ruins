@@ -12,7 +12,8 @@ public class InventoryManager : MonoBehaviour {
 
 	[SerializeField]private RectTransform o_Bow;
 	[SerializeField]private RectTransform o_Torch;
-    public Text nbArrowText;
+
+    private static int nbArrow;
 
     public static bool isBowEquiped = false;
 	public static bool isTorchEquiped = false;
@@ -20,20 +21,21 @@ public class InventoryManager : MonoBehaviour {
 	public static bool bag_open = false;
 	private Vector2 deltaScreen;
 
-	public enum Object_Type {Mushroom, Meat, Flint, Wood, Bow, Arrow, Torch, Fire, Plank, Sail, Rope, Raft};
 	private static ArrayList inventaire = new ArrayList ();
 	public static bool an_object_is_pickable = false;
 	// Use this for initialization
 	void Start () {
 		deltaScreen = m_canvas.sizeDelta;
-	}
+        nbArrow = 0;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		//print (inventaire.Count);
 		OpenOrCloseInventory ();
 		PutWeaponInBag ();
-        NumberOfArrow();
+        //NumberOfArrow();
     }
 
 	private void OpenOrCloseInventory(){
@@ -57,14 +59,14 @@ public class InventoryManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.R) && !bag_open) {
 			RectTransform clone;
 			if (isTorchEquiped) {
-				AddObjectOfType (Object_Type.Torch);
+				AddObjectOfType (ObjectsType.Torch);
 				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive(false);
 				clone = Instantiate(o_Torch) as RectTransform;
 				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
 				isTorchEquiped = false;
 			}
 			if (isBowEquiped) {
-				AddObjectOfType (Object_Type.Bow);
+				AddObjectOfType (ObjectsType.Bow);
 				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive(false);
 				clone = Instantiate(o_Bow) as RectTransform;
 				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
@@ -75,29 +77,68 @@ public class InventoryManager : MonoBehaviour {
 	}
 
 
-	public static void RemoveObjectOfType(Object_Type o){
-		foreach (Object_Type obj in inventaire) {
+	public static void RemoveObjectOfType(ObjectsType o){
+		foreach (ObjectsType obj in inventaire) {
 			if (obj == o) {
 				inventaire.Remove (o);
-				return;
+                if (o.Equals(ObjectsType.Arrow)) {
+                    nbArrow--;
+                    GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x " + nbArrow;
+                }
+                return;
 			}
 		}
 	}
 
-	public static void AddObjectOfType(Object_Type o){
-		inventaire.Add (o);
-	}
-
-    private void NumberOfArrow()
-    {
-        int nbArrow = 0;
-        foreach (Object_Type obj in inventaire)
-        {
-            if(obj.Equals(Object_Type.Arrow))
-            {
-                nbArrow++;
+    public static void DrawArrow() {
+        DestroyArrow();
+        foreach (ObjectsType obj in inventaire) {
+            if (obj.Equals(ObjectsType.Arrow)) {
+                inventaire.Remove(obj);
+                nbArrow--;
+                GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x " + nbArrow;
+                return;
             }
         }
-        nbArrowText.text = "x " + nbArrow;
     }
+
+    private static void DestroyArrow() {
+        Transform bag = GameObject.Find("Affichages/InventoryManager/Canvas/Bag").transform;
+        int i = 0;
+        bool trouve = false;
+        while (i < bag.childCount && !trouve) {
+            if(trouve = (bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Arrow)) {
+                Destroy(bag.GetChild(i).gameObject);
+            }
+            i++;
+        }
+    }
+
+    public static bool hasArrowLeft() {
+        foreach (ObjectsType obj in inventaire) {
+            if(obj.Equals(ObjectsType.Arrow)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void AddObjectOfType(ObjectsType o){
+		inventaire.Add (o);
+        // Update the arrow indicator
+        if (o.Equals(ObjectsType.Arrow)) {
+            nbArrow++;
+            GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x " + nbArrow;
+        }
+    }
+
+    //private void NumberOfArrow() {
+    //    int nbArrow = 0;
+    //    foreach (Object_Type obj in inventaire) {
+    //        if(obj.Equals(Object_Type.Arrow)) {
+    //            nbArrow++;
+    //        }
+    //    }
+    //    nbArrowText.text = "x " + nbArrow;
+    //}
 }

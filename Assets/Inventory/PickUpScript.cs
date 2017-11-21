@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickUpScript : MonoBehaviour {
 	
 	public Renderer renderer;
-	public InventoryManager.Object_Type o_type;
+	public ObjectsType o_type;
 	[SerializeField]private RectTransform o_object;
 
 

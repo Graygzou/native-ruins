@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 54902542769894204}
   - component: {fileID: 135478642564409756}
   - component: {fileID: 114043975637183930}
+  - component: {fileID: 114567453660819488}
   m_Layer: 0
   m_Name: Arrow3D
   m_TagString: 3DObjectForInventory
@@ -133,6 +134,18 @@ MonoBehaviour:
   renderer: {fileID: 23227119558956774}
   o_type: 5
   o_object: {fileID: 224507697386379926, guid: 97c2424a8ad745a4bab097bf19f3a44a, type: 2}
+--- !u!114 &114567453660819488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1080450375749342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5db0cb0ed6795419eea2bcd6d6bb31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraCutScene: {fileID: 0}
 --- !u!135 &135478642564409756
 SphereCollider:
   m_ObjectHideFlags: 1

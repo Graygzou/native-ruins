@@ -12,7 +12,6 @@ public class MovementControllerHuman : MovementController {
     private bool isAiming;
     private Vector3 offset;
     public Rigidbody m_Arrow;                               // Prefab of the arrow.
-    public Transform m_FireTransform;                       // Where the arrow should spawn
     public AudioSource m_ShootingAudio;                     // Reference to the audio source used to play the shooting audio.
     public AudioClip m_FireClip;                            // Audio that plays when each arrow is fired.
 
@@ -28,6 +27,8 @@ public class MovementControllerHuman : MovementController {
     private Quaternion initMainD;
     private Quaternion initFleche;
 
+    bool hasArrowLeft;
+
     new void Start() {
         base.Start();
         // Set the attribute to the desire amount
@@ -35,12 +36,13 @@ public class MovementControllerHuman : MovementController {
         m_turnSpeed = 5;
         m_jumpForce = 5;
         isAiming = false;
+        hasArrowLeft = false;
 
         // Get the regular camera
         playerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
         // Disable the aim camera
-        aimCamera = GameObject.Find("AimedCamera").GetComponent<Camera>();
+        aimCamera = GameObject.Find("SportyGirl/AimedCamera").GetComponent<Camera>();
         offset = aimCamera.transform.position - GameObject.Find("Player").transform.position;
         aimCamera.enabled = false;
 
@@ -116,7 +118,7 @@ public class MovementControllerHuman : MovementController {
 
             // Use layer to avoidJudy
 
-            if (Physics.Raycast(ray, out hitInfo, 1000)) {
+            if (Physics.Raycast(ray, out hitInfo, 10000)) {
                 Debug.DrawLine(ray.origin, hitInfo.point);
                 Debug.DrawLine(upperBody.transform.position, hitInfo.point);
                 Debug.DrawLine(epaule.transform.position, hitInfo.point);
@@ -277,9 +279,12 @@ public class MovementControllerHuman : MovementController {
                     // To take the idle state
                     actions.Aiming();
 
-                    // SetActive the arrow
-                    GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
-
+                    // Find if their is an arrow left in the bag
+                    hasArrowLeft = InventoryManager.hasArrowLeft();
+                    if (hasArrowLeft) {
+                        // SetActive the arrow
+                        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
+                    }
                     // To stay in the idle bow state
                     aimCamera.enabled = true;
                     playerCamera.enabled = false;
@@ -320,7 +325,7 @@ public class MovementControllerHuman : MovementController {
             }
 
             // 2) Check if the player want to hit something
-            if(Input.GetMouseButtonDown(0)) {
+            if(Input.GetMouseButtonDown(0) && hasArrowLeft) {
                 if (InventoryManager.isBowEquiped && isAiming) {
                     Debug.Log("Fire !");
                     StartCoroutine("FireArrow");
@@ -409,13 +414,15 @@ public class MovementControllerHuman : MovementController {
         //Fire()
         GameObject fleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D");
         Rigidbody arrowInstance = Instantiate(m_Arrow, fleche.transform.position + targetDirection.normalized*2, fleche.transform.rotation) as Rigidbody;
-        arrowInstance.velocity = 200f * targetDirection.normalized;
+        arrowInstance.velocity = 150f * targetDirection.normalized;
+
+        arrowInstance.GetComponent<ArrowSwitch>().enabled = true;
 
         // Change the clip to the firing clip and play it.
         m_ShootingAudio.clip = m_FireClip;
         m_ShootingAudio.Play();
 
-        //yield return new WaitForSeconds(.5f);
+        InventoryManager.DrawArrow();
 
         // Come back in the original settings for a smooth animation
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2").transform.rotation = initUpperBody;
@@ -423,9 +430,14 @@ public class MovementControllerHuman : MovementController {
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3").transform.rotation = initMain;
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3").transform.rotation = initMainD;
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").transform.rotation = initFleche;
+        
         // Launch the animation to reload
         actions.Reloading();
-        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
+        hasArrowLeft = InventoryManager.hasArrowLeft();
+        if (hasArrowLeft) {
+            // SetActive the arrow
+            GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
+        }
         yield return new WaitForSeconds(0.8f);
         
     }

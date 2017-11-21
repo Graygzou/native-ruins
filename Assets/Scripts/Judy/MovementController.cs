@@ -175,10 +175,10 @@ public class MovementController : MonoBehaviour {
     }
 
     void OnDrawGizmosSelected() {
-        Camera camera = GameObject.Find("AimedCamera").GetComponent<Camera>();
-        Vector3 p = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(p, 0.1F);
+        //Camera camera = GameObject.Find("AimedCamera").GetComponent<Camera>();
+        //Vector3 p = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawSphere(p, 0.1F);
     }
 
 }

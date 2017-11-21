@@ -22,7 +22,7 @@
 	private GameObject LifeBar;
 	private GameObject HungerBar;
 
-	public InventoryManager.Object_Type o_type;
+	public ObjectsType o_type;
 	[SerializeField]private Rigidbody o_mushroom;
 	public bool is_usable=false;
 	[SerializeField]private AudioSource m_pickSound;
@@ -127,9 +127,9 @@
 	}
 
 	//Ajouter la verification de si on ets humain pour arc et torche !!!
-	private void UseObject(InventoryManager.Object_Type o_type){
+	private void UseObject(ObjectsType o_type){
 		switch(o_type) {
-		case InventoryManager.Object_Type.Bow:
+		case ObjectsType.Bow:
 			if (!InventoryManager.isTorchEquiped) {
 				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive (true);
 				InventoryManager.isBowEquiped = true;
@@ -140,9 +140,9 @@
 				Destroy(this.gameObject);
 			}
 			break;
-		case InventoryManager.Object_Type.Fire:
+		case ObjectsType.Fire:
 			break;
-		case InventoryManager.Object_Type.Meat:
+		case ObjectsType.Meat:
 			LifeBar.GetComponent<LifeBar> ().Eat (30);
 			GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive (false);
 			HideInfo ();
@@ -150,7 +150,7 @@
 			isUsed = true;
 			Destroy(this.gameObject);
 			break;
-		case InventoryManager.Object_Type.Mushroom:
+		case ObjectsType.Mushroom:
 			LifeBar.GetComponent<LifeBar>().Eat(10);
 			GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
 			HideInfo ();
@@ -158,7 +158,7 @@
 			isUsed = true;
 			Destroy(this.gameObject);
 			break;
-		case InventoryManager.Object_Type.Torch:
+		case ObjectsType.Torch:
 			if (!InventoryManager.isBowEquiped) {
 				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive (true);
 				InventoryManager.isTorchEquiped = true;
@@ -172,42 +172,42 @@
 		}
 	}
 
-	private void ShowInfo(InventoryManager.Object_Type o_type){
+	private void ShowInfo(ObjectsType o_type){
 		switch (o_type) {
-		case InventoryManager.Object_Type.Arrow:
+		case ObjectsType.Arrow:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Arrow").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Mushroom:
+		case ObjectsType.Mushroom:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Mushroom").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Bow:
+		case ObjectsType.Bow:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bow").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Meat:
+		case ObjectsType.Meat:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Meat").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Plank:
+		case ObjectsType.Plank:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Plank").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Sail:
+		case ObjectsType.Sail:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Sail").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Fire:
+		case ObjectsType.Fire:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bonfire").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Raft:
+		case ObjectsType.Raft:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Raft").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Wood:
+		case ObjectsType.Wood:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Wood").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Rope:
+		case ObjectsType.Rope:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Rope").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Flint:
+		case ObjectsType.Flint:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Flint").SetActive(true);
 			break;
-		case InventoryManager.Object_Type.Torch:
+		case ObjectsType.Torch:
 			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Torch").SetActive(true);
 			break;
 		}

@@ -111,6 +111,7 @@ public class ActionsNew : MonoBehaviour {
     public void HitWithTorch () {
         animator.SetFloat("Speed_f", 0f);
         animator.SetTrigger("Hit");
+        animator.Play("SwordSlash", MovementLayer);
     }
 
 	public void Sitting () {
