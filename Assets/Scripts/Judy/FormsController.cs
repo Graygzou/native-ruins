@@ -16,6 +16,39 @@ public class FormsController : MonoBehaviour
     private int selectedForm;
     public GameObject transformationWheel;
 
+    public int isPumaUnlocked()
+    {
+        if (PumaUnlocked == true)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public int isBearUnlocked()
+    {
+        if(BearUnlocked ==  true)
+        {
+            return 1;
+        } else
+        {
+            return 0;
+        }
+    }
+
+    public void setPumaUnlocked(bool Puma)
+    {
+        PumaUnlocked = Puma;
+    }
+
+    public void setBearUnlocked(bool Ours)
+    {
+        BearUnlocked = Ours;
+    }
+
     // Use this for initialization
     void Start()
     {

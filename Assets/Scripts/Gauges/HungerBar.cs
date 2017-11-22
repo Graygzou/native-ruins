@@ -34,4 +34,14 @@ public class HungerBar : MonoBehaviour {
         }
         currentTimeFaim++;
     }
+
+    public float getSizeHungerBar()
+    {
+        return Hunger.GetComponent<Scrollbar>().size;
+    }
+
+    public void setSizeHungerBar(float size)
+    {
+        Hunger.GetComponent<Scrollbar>().size = size;
+    }
 }

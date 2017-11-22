@@ -6,6 +6,14 @@ public class DialogueTrigger : MonoBehaviour {
 
     public Dialogue dialogue;
 
+    public void TriggerSauvegarde()
+    {
+        dialogue.name = "Menu";
+        dialogue.sentences = new string[1];
+        dialogue.sentences[0] = "Votre partie a bien été sauvegardée.";
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+    }
+
     public void TriggerDialogueDebut()
     {
         dialogue.name = "Judy";
