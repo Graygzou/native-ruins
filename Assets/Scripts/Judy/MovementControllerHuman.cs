@@ -262,8 +262,8 @@ public class MovementControllerHuman : MovementController {
 
             //if (!NextDir.Equals(Vector3.zero))
             //    transform.rotation = Quaternion.LookRotation(NextDir);
-            transform.position += (GameObject.FindWithTag("Player").transform.forward * m_moveSpeed) * v * Time.deltaTime;
-            transform.position += (GameObject.FindWithTag("Player").transform.right * m_moveSpeed) * h * Time.deltaTime;
+            transform.parent.position += (GameObject.FindWithTag("Player").transform.forward * m_moveSpeed) * v * Time.deltaTime;
+            transform.parent.position += (GameObject.FindWithTag("Player").transform.right * m_moveSpeed) * h * Time.deltaTime;
         }
     }
 

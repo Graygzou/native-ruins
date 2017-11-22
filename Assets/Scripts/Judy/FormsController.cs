@@ -16,6 +16,8 @@ public class FormsController : MonoBehaviour
     private int selectedForm;
     public GameObject transformationWheel;
 
+    private Color ColorStartHuman;
+
     public int isPumaUnlocked()
     {
         if (PumaUnlocked == true)
@@ -52,6 +54,8 @@ public class FormsController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
+
         PumaUnlocked = false;
         BearUnlocked = true;
         transformationWheel.SetActive(false);
@@ -179,6 +183,7 @@ public class FormsController : MonoBehaviour
         // Desactiver forme actuelle
         if (currentForm == 0)
         {
+            //StartCoroutine("Fade");
             HumanForm.SetActive(false);
         }
         if (currentForm == 1)
@@ -207,4 +212,19 @@ public class FormsController : MonoBehaviour
             currentForm = 2;
         }
     }
+
+    //IEnumerator Fade()
+    //{
+
+    //    Color colorEnd = new Color(0, 0, 0, 0);
+    //    float t = 0.0f;
+    //    float duration = 1.0f;
+    //    for (t = 0.0f; t < duration; t += Time.deltaTime)
+    //    {
+    //        HumanForm.GetComponentInChildren<Renderer>().material.color = Color.Lerp(ColorStartHuman, colorEnd, t / duration);
+    //        Debug.Log(HumanForm.GetComponentInChildren<Renderer>().material.color.ToString());
+    //        yield return null;
+    //    }
+    //    HumanForm.SetActive(false);
+    //}
 }

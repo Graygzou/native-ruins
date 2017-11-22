@@ -148,8 +148,8 @@ public class MovementController : MonoBehaviour {
 
     protected virtual void Move(Vector3 NextDir, float h, float v) {
         if (!NextDir.Equals(Vector3.zero))
-            transform.rotation = Quaternion.LookRotation(NextDir);
-        transform.position += NextDir * m_moveSpeed * Time.deltaTime;
+            transform.parent.rotation = Quaternion.LookRotation(NextDir);
+        transform.parent.position += NextDir * m_moveSpeed * Time.deltaTime;
     }
 
     protected virtual void JumpingAndLanding(Vector3 NextDir) { }
