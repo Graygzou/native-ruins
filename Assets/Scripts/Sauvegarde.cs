@@ -61,6 +61,27 @@ public class Sauvegarde : MonoBehaviour {
 
     private void addInInventory(ObjectsType obj)
     {
+        if(PlayerPrefs.GetInt("" + obj) > 0)
+        {
+            if(obj.Equals(ObjectsType.Bow))
+            {
+                GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
+                GameObject.Find("Terrain/Bow/Bow3D").SetActive(false);
+            }
+
+            if (obj.Equals(ObjectsType.Rope))
+            {
+                GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
+                GameObject.Find("EnigmeCorde/Corde/Rope3D").SetActive(false);
+            }
+
+            if (obj.Equals(ObjectsType.Sail))
+            {
+                GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
+                GameObject.Find("EnigmeVoile/Voile/Fabric3D").SetActive(false);
+            }
+        }
+        
         int indice = 0;
         RectTransform obj2D = GetObject2D(obj);
         Debug.Log("obj = " + obj + " " + obj2D);
@@ -103,13 +124,13 @@ public class Sauvegarde : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Debug.Log("Lancement scene");
         Player = GameObject.Find("Player");
-        LifeBar = GameObject.Find("Gauges/Life");
-        HungerBar = GameObject.Find("Gauges/Hunger");
-        Inventory = GameObject.Find("InventoryManager");
+        LifeBar = GameObject.Find("Affichages/Gauges/Life");
+        HungerBar = GameObject.Find("Affichages/Gauges/Hunger");
+        Inventory = GameObject.Find("Affichages/InventoryManager");
+        int r = PlayerPrefs.GetInt("load_scene");
         //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
-        if (PlayerPrefs.GetInt("load")==1)
+        if (PlayerPrefs.GetInt("load_scene")==1)
         {
             Debug.Log("Chargement scene");
 
@@ -217,5 +238,28 @@ public class Sauvegarde : MonoBehaviour {
         //Afficher message de sauvegarde
         dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
         dialogue.TriggerSauvegarde();
+    }
+
+    //Permet de revenir au menu demarrer pour quitter le jeu
+    public void QuitterMapIsland()
+    {
+        SceneManager.LoadScene("Menu_demarrer");
+    }
+
+    //Recommencer permet de relancer le jeu avant la mort du personnage
+    public void Recommencer()
+    {
+        //Permet de verifier qu'il y ait bien une sauvegarde
+        if (PlayerPrefs.HasKey("xPlayer"))
+        {
+            PlayerPrefs.SetInt("load_scene", 1);
+            //Chargement de la scene
+            SceneManager.LoadScene(PlayerPrefs.GetString("scene"));
+
+        }
+        else //creer une nouvelle partie
+        {
+            SceneManager.LoadScene("Map Island - final");
+        }
     }
 }

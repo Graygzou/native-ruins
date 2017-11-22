@@ -142,6 +142,18 @@ public class InventoryManager : MonoBehaviour {
             nbArrow++;
             GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x " + nbArrow;
         }
+        if(o.Equals(ObjectsType.Bow))
+        {
+            GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
+        }
+        if (o.Equals(ObjectsType.Rope))
+        {
+            GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
+        }
+        if (o.Equals(ObjectsType.Sail))
+        {
+            GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
+        }
     }
 
 	private void ActiveRedCross(){
