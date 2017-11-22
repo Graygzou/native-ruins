@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ArrowSwitch : Switch {
 
-
+    private bool hasBeenActivated;
+    private Transform colliderTransform;
 
     void Awake() {
         enabled = false;
+        hasBeenActivated = false;
     }
 
     void OnCollisionEnter(Collision other) {
@@ -15,9 +17,16 @@ public class ArrowSwitch : Switch {
             transform.position = other.contacts[0].point;
             GetComponent<Rigidbody>().isKinematic = true;
         }
+        if (other.collider.tag == "Animal") {
+            colliderTransform = other.transform;
+            ActivateSwitch();
+        }
     }
 
     protected override void ActivateSwitch() {
-        GetComponent<Rigidbody>().isKinematic = true;
+        if (!hasBeenActivated) {
+            hasBeenActivated = true;
+            colliderTransform.gameObject.GetComponent<AgentProperties>().takeDamages(15f);
+        }
     }
 }

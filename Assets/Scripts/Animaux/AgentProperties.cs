@@ -28,34 +28,21 @@ public class AgentProperties : MonoBehaviour
 
     private float currentHealth;
     private float currentSpeed;
-
-    [SerializeField]
-    private float attackRangeVsPlayer;
-    [SerializeField]
-    private float attackRangeVsBear;
-    [SerializeField]
-    private float attackRangeVsWolf;
+    private Transform front;
 
     private AudioSource sonCri;
 
-    public float[] attackRange;
-
-    void Awake()
-    {
+    void Awake() {
         isDead = false;
         maxForce = 200f;
         currentSpeed = 22f;
     }
 
-    void Start()
-    {
+    void Start() {
         sonCri = GetComponent<AudioSource>();
         currentHealth = maxHealth;
-        attackRange = new float[3];
-        attackRange[0] = attackRangeVsPlayer;
-        attackRange[1] = attackRangeVsBear;
-        attackRange[2] = attackRangeVsWolf;
 
+        front = transform.GetChild(5).transform;
         transform.GetComponentInChildren<ParticleSystem>().Stop();
     }
 
@@ -111,9 +98,7 @@ public class AgentProperties : MonoBehaviour
         currentSpeed = speed;
     }
 
-    public void takeDamages(float amount)
-    {
-        sonCri.Play();
+    public void takeDamages(float amount) {
 
         Debug.Log("Outch !");
 
@@ -123,7 +108,7 @@ public class AgentProperties : MonoBehaviour
             return;
 
         // Play the hurt sound effect.
-        //enemyAudio.Play();
+        sonCri.Play();
 
         // Reduce the current health by the amount of damage sustained.
         currentHealth -= amount;
@@ -135,21 +120,18 @@ public class AgentProperties : MonoBehaviour
         //hitParticles.Play();
 
         // If the current health is less than or equal to zero...
-        if (currentHealth <= 0)
-        {
+        if (currentHealth <= 0) {
             Debug.Log("Dead");
             // the enemy is dead.
             isDead = true;
         }
     }
 
-    public void MakeAgentDisappear(GameObject o)
-    {
+    public void MakeAgentDisappear(GameObject o) {
         StartCoroutine(SmokeAnimation(o));
     }
 
-    void DropItems()
-    {
+    void DropItems() {
         transform.GetChild(4).gameObject.SetActive(true);
     }
 
@@ -179,7 +161,7 @@ public class EditorAgentProperty : Editor
     SerializedProperty m_isMean, m_maxHealth, m_maxSpeed, m_mass;
     SerializedProperty m_damages, m_hungryIndicator;
     SerializedProperty m_visionRange, m_awarenessRange;
-    SerializedProperty m_attackRangePlayer, m_attackRangeBear, m_attackRangeWolf, m_tauntRange;
+    SerializedProperty m_tauntRange;
 
     void OnEnable() {
         // Fetch the objects from the GameObject script to display in the inspector
@@ -191,9 +173,6 @@ public class EditorAgentProperty : Editor
         m_hungryIndicator = serializedObject.FindProperty("hungryIndicator");
         m_visionRange = serializedObject.FindProperty("isAlert");
         m_awarenessRange = serializedObject.FindProperty("playerTooClose");
-        m_attackRangePlayer = serializedObject.FindProperty("attackRangeVsPlayer");
-        m_attackRangeBear = serializedObject.FindProperty("attackRangeVsBear");
-        m_attackRangeWolf = serializedObject.FindProperty("attackRangeVsWolf");
         m_tauntRange = serializedObject.FindProperty("tauntRange");
     }
 
@@ -205,12 +184,8 @@ public class EditorAgentProperty : Editor
         EditorGUILayout.PropertyField(m_isMean, new GUIContent("IsMean:"));
         EditorGUILayout.PropertyField(m_damages, new GUIContent("Damages:"));
         EditorGUILayout.PropertyField(m_hungryIndicator, new GUIContent("Hunger:"));
-
         EditorGUILayout.PropertyField(m_visionRange, new GUIContent("VisionRange:"));
         EditorGUILayout.PropertyField(m_awarenessRange, new GUIContent("AwarenessRange:"));
-        EditorGUILayout.PropertyField(m_attackRangePlayer, new GUIContent("Attack Range Player:"));
-        EditorGUILayout.PropertyField(m_attackRangeBear, new GUIContent("Attack Range Bear:"));
-        EditorGUILayout.PropertyField(m_attackRangeWolf, new GUIContent("Attack Range Wolf:"));
         EditorGUILayout.PropertyField(m_tauntRange, new GUIContent("Taunt Range:"));
 
         // Apply changes to the serializedProperty - always do this at the end of OnInspectorGUI.

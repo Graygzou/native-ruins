@@ -37,7 +37,6 @@ public class AttackState : State<GameObject>
             AgentProperties properties = o.GetComponent<AgentProperties>();
             GameObject playerRoot = GameObject.Find("Player");
             Transform nose = o.transform.GetChild(5).transform;
-            GameObject player = GameObject.FindWithTag("Player");
             GameObject lifeBar = GameObject.Find("Gauges/Life");
 
             RaycastHit hitInfo;

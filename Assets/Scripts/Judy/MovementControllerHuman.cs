@@ -116,9 +116,11 @@ public class MovementControllerHuman : MovementController {
             //Ray ray = new Ray(upperBody.transform.position, Vector3.forward);
             RaycastHit hitInfo;
 
-            // Use layer to avoidJudy
+            // Judy is in the layer 8.We need to avoid this layer
+            int layerMask = 1 << 8;
+            layerMask = ~layerMask;
 
-            if (Physics.Raycast(ray, out hitInfo, 10000)) {
+            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask)) {
                 Debug.DrawLine(ray.origin, hitInfo.point);
                 Debug.DrawLine(upperBody.transform.position, hitInfo.point);
                 Debug.DrawLine(epaule.transform.position, hitInfo.point);
@@ -409,11 +411,11 @@ public class MovementControllerHuman : MovementController {
     IEnumerator FireArrow() {
         Debug.Log("Fire !");
         // Fire the arrow
-        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(false);
 
         //Fire()
         GameObject fleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D");
-        Rigidbody arrowInstance = Instantiate(m_Arrow, fleche.transform.position + targetDirection.normalized*2, fleche.transform.rotation) as Rigidbody;
+        fleche.SetActive(false);
+		Rigidbody arrowInstance = Instantiate(m_Arrow, fleche.transform.position + targetDirection.normalized*2, fleche.transform.rotation) as Rigidbody;
         arrowInstance.velocity = 150f * targetDirection.normalized;
 
         arrowInstance.GetComponent<ArrowSwitch>().enabled = true;
@@ -440,26 +442,6 @@ public class MovementControllerHuman : MovementController {
         }
         yield return new WaitForSeconds(0.8f);
         
-    }
-
-    private void Fire() {
-        RaycastHit hit;
-        float distance = 100f; //distance de l'animal pour pouvoir lui infliger des degats
-        Ray Judy = new Ray(transform.position, transform.forward);
-        GameObject arrow = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D");
-        Debug.DrawRay(arrow.transform.position, arrow.transform.forward * distance);
-        if (Physics.SphereCast(Judy, 1.5f, out hit, distance)) {
-            if (hit.collider.tag == "Animal") {
-                //Inflige degat a l'animal
-                hit.transform.gameObject.GetComponent<AgentProperties>().takeDamages(15f);
-            }
-        }
-        //float currTime = m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        //if (currTime >= 1 - 0.06)
-        //{
-        //    m_animator.SetBool("Fight", false);
-        //    m_animator.Play("Idle");
-        //}
     }
 }
 
