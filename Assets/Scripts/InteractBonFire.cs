@@ -6,9 +6,11 @@ public class InteractBonFire : MonoBehaviour {
 
 
 	private bool o_isBonFire = false;
+    private AudioSource sonFeu;
 
 	// Use this for initialization
 	void Start () {
+        sonFeu = this.GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -18,9 +20,10 @@ public class InteractBonFire : MonoBehaviour {
 
 	void OnTriggerExit(Collider other){
 		if (other.gameObject.tag.Equals ("Player") && o_isBonFire) {
+            sonFeu.Stop();
 			o_isBonFire = false;
 			GameObject.Find ("Affichages/Interaction/ButtonInteragir").SetActive(false);
-            Debug.Log("Sort");
+            GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(false);
         }
 	}
 
@@ -31,13 +34,17 @@ public class InteractBonFire : MonoBehaviour {
 		}
 	}
 
-	private void GetInputs(){
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Player")) sonFeu.Play(); 
+    }
+
+        private void GetInputs(){
 		if (Input.GetKeyDown (KeyCode.E) && o_isBonFire) {
             //Range arme avant d'ouvrir le menu de sauvegarde
             GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();
-            //Apparition du menu de 
+
             GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
-            Debug.Log("E appuyé");
         }
 	}
 }
