@@ -3,7 +3,7 @@ guid: f000ecb3e2f790d45bb3459ad897cb3e
 timeCreated: 1485651326
 licenseType: Store
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
     100002: GoatRig
@@ -168,17 +168,15 @@ ModelImporter:
     13700018: SM_Wolf_01
     13700020: SM_Wolf_02
     13700022: SM_Wolf_03
-  externalObjects: {}
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -186,7 +184,6 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5

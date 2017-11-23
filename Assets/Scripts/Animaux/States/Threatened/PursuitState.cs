@@ -26,7 +26,8 @@ public class PursuitState : State<GameObject> {
         FSM.animator.SetFloat("Speed_f", 2f);
         FSM.animator.Play("Locomotion");
 
-        // Run in the direction of the player
+        // Look and Run in the direction of the player
+        o.transform.rotation = Quaternion.LookRotation(player.transform.position);
         FSM.behavior.target_p = player.transform.position;
         FSM.behavior.seekOn = true;
         FSM.behavior.obstacleAvoidanceOn = true;

@@ -42,7 +42,7 @@ public class AgentProperties : MonoBehaviour
         sonCri = GetComponent<AudioSource>();
         currentHealth = maxHealth;
 
-        front = transform.GetChild(5).transform;
+        front = transform.GetChild(transform.childCount-1).transform;
         transform.GetComponentInChildren<ParticleSystem>().Stop();
     }
 
@@ -98,6 +98,10 @@ public class AgentProperties : MonoBehaviour
         currentSpeed = speed;
     }
 
+    public Transform getFront() {
+        return front;
+    }
+
     public void takeDamages(float amount) {
 
         Debug.Log("Outch !");
@@ -132,7 +136,7 @@ public class AgentProperties : MonoBehaviour
     }
 
     void DropItems() {
-        transform.GetChild(4).gameObject.SetActive(true);
+        transform.GetChild(transform.childCount-2).gameObject.SetActive(true);
     }
 
     private IEnumerator SmokeAnimation(GameObject o)

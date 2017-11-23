@@ -36,11 +36,10 @@ public class AttackState : State<GameObject>
         if (currTime >= FSM.timeIdle - 0.06) {
             AgentProperties properties = o.GetComponent<AgentProperties>();
             GameObject playerRoot = GameObject.Find("Player");
-            Transform nose = o.transform.GetChild(5).transform;
             GameObject lifeBar = GameObject.Find("Gauges/Life");
 
             RaycastHit hitInfo;
-            if (Physics.Raycast(new Ray(nose.position, nose.forward), out hitInfo, 0.5f)) {
+            if (Physics.Raycast(new Ray(properties.getFront().position, properties.getFront().forward), out hitInfo, 0.5f)) {
                 // check if we can attack the player
                 if (hitInfo.transform.tag == "Player") {
                     if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size != 0) {
@@ -50,7 +49,7 @@ public class AttackState : State<GameObject>
                     }
                 }
             }
-            FSM.ChangeState(PursuitState.Instance);
+            FSM.ChangeState(TauntState.Instance);
         }
         
     }

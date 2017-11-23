@@ -37,6 +37,7 @@ public class TauntState : State<GameObject>
     {
         // Get the current agent variables
         StateMachine FSM = o.GetComponent<StateMachine>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
 
         AnimatorStateInfo animationState = FSM.animator.GetCurrentAnimatorStateInfo(0);
 
@@ -45,7 +46,12 @@ public class TauntState : State<GameObject>
         float currTime = o.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
         if (currTime >= FSM.timeIdle - 0.06) {
             // Change state
-            FSM.ChangeState(ChargeState.Instance);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(new Ray(properties.getFront().position, properties.getFront().forward), out hitInfo, 0.5f)) {
+                FSM.ChangeState(AttackState.Instance);
+            } else {
+                FSM.ChangeState(ChargeState.Instance);
+            }
         }
     }
 

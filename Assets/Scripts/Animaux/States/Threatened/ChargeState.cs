@@ -38,12 +38,11 @@ public class ChargeState : State<GameObject>
     override public void Execute(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
         AgentProperties properties = o.GetComponent<AgentProperties>();
-        Transform nose = o.transform.GetChild(5).transform;
         GameObject player = GameObject.FindWithTag("Player");
         GameObject playerRoot = GameObject.Find("Player");
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(new Ray(nose.position, nose.forward), out hitInfo, 0.5f)) {
+        if (Physics.Raycast(new Ray(properties.getFront().position, properties.getFront().forward), out hitInfo, 0.5f)) {
             // check if we can attack the player
             if (hitInfo.transform.tag == "Player") {
                 FSM.ChangeState(AttackState.Instance);
