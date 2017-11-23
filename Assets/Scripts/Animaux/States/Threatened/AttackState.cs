@@ -39,7 +39,7 @@ public class AttackState : State<GameObject>
             GameObject lifeBar = GameObject.Find("Gauges/Life");
 
             RaycastHit hitInfo;
-            if (Physics.Raycast(new Ray(properties.getFront().position, properties.getFront().forward), out hitInfo, 0.5f)) {
+            if (Physics.SphereCast(new Ray(properties.getFront().position, properties.getFront().forward), 5f, out hitInfo, 0.5f)) {
                 // check if we can attack the player
                 if (hitInfo.transform.tag == "Player") {
                     if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size != 0) {

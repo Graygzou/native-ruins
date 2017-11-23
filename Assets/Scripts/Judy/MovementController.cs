@@ -31,8 +31,13 @@ public class MovementController : MonoBehaviour {
     protected bool m_isGrounded;
     protected List<Collider> m_collisions = new List<Collider>();
 
+    // Death of the player
+    private bool m_isDead;
+
     // Use this for initialization
     public void Start() {
+        m_isDead = false;
+
         m_cameraPivot = GameObject.Find("CameraPivot").transform;
         EnergyBar = GameObject.Find("Gauges/Energy");
         initial_orientation = transform.forward;
@@ -133,25 +138,27 @@ public class MovementController : MonoBehaviour {
     //transform.forward.Set(projected_forward_camera.x, projected_forward_camera.y, projected_forward_camera.z);
     //transform.Rotate(0f,cameraTrans.eulerAngles.y-transform.eulerAngles.y,0f);
     protected void DirectUpdate() {
-        float v = Input.GetAxis("Vertical");
-        float h = Input.GetAxis("Horizontal");
+       if (!m_isDead) {
+            float v = Input.GetAxis("Vertical");
+            float h = Input.GetAxis("Horizontal");
 
-        // Get the camera
-        Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
-        Vector3 projected_forward_camera = Vector3.ProjectOnPlane(cameraTrans.forward, new Vector3(0, 1, 0));
+            // Get the camera
+            Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
+            Vector3 projected_forward_camera = Vector3.ProjectOnPlane(cameraTrans.forward, new Vector3(0, 1, 0));
 
-        // Calculated the movement vector
-        float angle = SignedAngleBetween(initial_orientation, projected_forward_camera, Vector3.up);
-        Vector3 NextDir = new Vector3(h, 0, v);
-        NextDir = Quaternion.Euler(0f, angle, 0f) * NextDir;
+            // Calculated the movement vector
+            float angle = SignedAngleBetween(initial_orientation, projected_forward_camera, Vector3.up);
+            Vector3 NextDir = new Vector3(h, 0, v);
+            NextDir = Quaternion.Euler(0f, angle, 0f) * NextDir;
 
-        // Control Judy's movement
-        Move(NextDir, h, v);
-        // Control Transition to animation states
-        GetInputs(NextDir, h, v);
-        // Control Judy's jump
-        JumpingAndLanding(NextDir);
 
+            // Control Judy's movement
+            Move(NextDir, h, v);
+            // Control Transition to animation states
+            GetInputs(NextDir, h, v);
+            // Control Judy's jump
+            JumpingAndLanding(NextDir);
+        }
     }
 
     protected virtual void Move(Vector3 NextDir, float h, float v) {
@@ -180,6 +187,10 @@ public class MovementController : MonoBehaviour {
 
     public float getCurrentSpeed() {
         return m_moveSpeed;
+    }
+    
+    public void setDeath(bool isDead) {
+        m_isDead = isDead;
     }
 
     void OnDrawGizmosSelected() {

@@ -14,7 +14,7 @@ public class LifeBar : MonoBehaviour {
     private int timeMaxFaim = 3600;
     private int currentTimeFaim = 0;
 	private GameObject Judy;
-	private Actions actions;
+	private ActionsNew actions;
     private GameObject forms;
 
     // Use this for initialization
@@ -24,7 +24,7 @@ public class LifeBar : MonoBehaviour {
         sonManger = sons[1];
 		Judy = GameObject.FindWithTag ("Player");
         forms = GameObject.Find("Forms");
-		actions = Judy.GetComponent ("Actions") as Actions;
+		actions = Judy.GetComponent ("ActionsNew") as ActionsNew;
         Life.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.red;
 	}
 
@@ -32,8 +32,8 @@ public class LifeBar : MonoBehaviour {
     void FixedUpdate () {
         //*****************PERTE DE VIE******************//
         //Si Judy a sa barre de vie à 0 : Mort
-        if (Life.GetComponent<Scrollbar>().size <= 0f)
-        {
+        if (Life.GetComponent<Scrollbar>().size <= 0f) {
+            Judy.GetComponent<MovementController>().setDeath(true);
             actions.Death();
         }
 
@@ -84,6 +84,7 @@ public class LifeBar : MonoBehaviour {
     {
         GameObject playerRoot = GameObject.Find("Player");
         sonCri.Play();
+        actions.Damage();
         //si forme puma, 50% de degats en plus
         if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma)
         {

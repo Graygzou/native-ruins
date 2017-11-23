@@ -21,13 +21,16 @@ public class TauntState : State<GameObject>
     override public void Enter(GameObject o) {
         // Get the current agent variables
         StateMachine FSM = o.GetComponent<StateMachine>();
+         GameObject player = GameObject.FindWithTag("Player");
 
         // Set the animation variables
         FSM.animator.SetBool("Taunt", true);
         FSM.animator.Play("Taunt");
         AnimatorStateInfo animationState = FSM.animator.GetCurrentAnimatorStateInfo(0);
 
-        AnimatorClipInfo[] an = FSM.animator.GetCurrentAnimatorClipInfo(0);
+        // Look in the direction of the player
+        Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - o.transform.position);
+        o.transform.rotation = Quaternion.Slerp(o.transform.rotation, targetRotation, 5.0f * Time.deltaTime);
 
         // Set the number of the the state is play
         FSM.timeIdle = 1f;
@@ -38,10 +41,6 @@ public class TauntState : State<GameObject>
         // Get the current agent variables
         StateMachine FSM = o.GetComponent<StateMachine>();
         AgentProperties properties = o.GetComponent<AgentProperties>();
-
-        AnimatorStateInfo animationState = FSM.animator.GetCurrentAnimatorStateInfo(0);
-
-        AnimatorClipInfo[] an = FSM.animator.GetCurrentAnimatorClipInfo(0);
 
         float currTime = o.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
         if (currTime >= FSM.timeIdle - 0.06) {

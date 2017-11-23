@@ -67,7 +67,7 @@ public class ActionsNew : MonoBehaviour {
 				id = Random.Range(0, countOfDamageAnimations);
 		lastDamageAnimation = id;
 		animator.SetInteger ("DamageID", id);
-		animator.Play ("Damage", DamageLayer);
+		animator.Play ("Damage"+id, DamageLayer);
 	}
 
 	public void Jump () {

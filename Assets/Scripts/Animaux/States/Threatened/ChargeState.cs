@@ -30,7 +30,9 @@ public class ChargeState : State<GameObject>
         FSM.animator.Play("Locomotion");
         target_charge = GameObject.FindWithTag("Player").transform.position;
 
-        // Rush into the player
+        // Look and Rush in the direction of the player
+        Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - o.transform.position);
+        o.transform.rotation = Quaternion.Slerp(o.transform.rotation, targetRotation, 5.0f * Time.deltaTime);
         FSM.behavior.target_p = target_charge;
         FSM.behavior.seekOn = true;
     }
@@ -42,7 +44,7 @@ public class ChargeState : State<GameObject>
         GameObject playerRoot = GameObject.Find("Player");
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(new Ray(properties.getFront().position, properties.getFront().forward), out hitInfo, 0.5f)) {
+        if (Physics.SphereCast(new Ray(properties.getFront().position, properties.getFront().forward), 5f, out hitInfo, 0.5f)) {
             // check if we can attack the player
             if (hitInfo.transform.tag == "Player") {
                 FSM.ChangeState(AttackState.Instance);
