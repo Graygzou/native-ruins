@@ -84,18 +84,15 @@ public class LifeBar : MonoBehaviour {
     {
         GameObject playerRoot = GameObject.Find("Player");
         sonCri.Play();
-        actions.Damage();
         //si forme puma, 50% de degats en plus
-        if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma)
-        {
+        if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma) {
             Life.GetComponent<Scrollbar>().size -= lifeLoosed + lifeLoosed *0.5f;
         }
-        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_human)
-        {
+        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_human) {
+            actions.Damage();
             Life.GetComponent<Scrollbar>().size -= lifeLoosed;
         } //si forme ours, 25% de degats en moins
-        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_bear)
-        {
+        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_bear) {
             Life.GetComponent<Scrollbar>().size -= lifeLoosed - lifeLoosed*0.25f;
         }
     }
