@@ -44,7 +44,7 @@ public class ChargeState : State<GameObject>
         GameObject playerRoot = GameObject.Find("Player");
 
         RaycastHit hitInfo;
-        if (Physics.SphereCast(new Ray(properties.getFront().position, properties.getFront().forward), 5f, out hitInfo, 0.5f)) {
+        if (Physics.Raycast(new Ray(properties.getFront().position, properties.getFront().forward), out hitInfo, 0.5f)) {
             // check if we can attack the player
             if (hitInfo.transform.tag == "Player") {
                 FSM.ChangeState(AttackState.Instance);

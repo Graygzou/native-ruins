@@ -160,7 +160,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1203026229533890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3759.3374, y: 22.530043, z: 2384.2654}
+  m_LocalPosition: {x: 3791.1572, y: 25.800581, z: 2382.8328}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 4924016296126994}
@@ -177,7 +177,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428855137659278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2268, z: 0.2468}
+  m_LocalPosition: {x: 0, y: 0.2324, z: 0.2512}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4676473460972724}
@@ -526,7 +526,7 @@ MonoBehaviour:
   mass: 4
   damages: 30
   hungryIndicator: 0
-  isMean: 0
+  isMean: 1
   isDead: 0
   tauntRange: 50
   visionRange: {fileID: 135921849914656774}
@@ -599,7 +599,7 @@ SphereCollider:
   m_GameObject: {fileID: 1203026229533890}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
@@ -623,7 +623,7 @@ SphereCollider:
   m_GameObject: {fileID: 1203026229533890}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}

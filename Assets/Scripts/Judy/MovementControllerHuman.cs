@@ -12,8 +12,6 @@ public class MovementControllerHuman : MovementController {
     private bool isAiming;
     private Vector3 offset;
     public Rigidbody m_Arrow;                               // Prefab of the arrow.
-    public AudioSource m_ShootingAudio;                     // Reference to the audio source used to play the shooting audio.
-    public AudioClip m_FireClip;                            // Audio that plays when each arrow is fired.
 
     private Vector3 targetDirection;                        // Direction toward the target (mouse position in the World)
 
@@ -88,15 +86,6 @@ public class MovementControllerHuman : MovementController {
             GameObject mainD = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3");
             GameObject fleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D");
             GameObject head = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigNeck/RigHead");
-            // TODO : add the head
-
-            // Debug
-            //Vector3 mousePositionVector3 = Input.mousePosition;
-            //mousePositionVector3.z = 10;
-            //mousePositionVector3 = aimCamera.ScreenToWorldPoint(mousePositionVector3);
-            //Vector3 targetdir = mousePositionVector3 - upperBody.transform.position;
-
-            //Debug.Log(Input.mousePosition);
 
             //// Method 2
             //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-Input.mousePosition.y * mouseSmoothness, Input.mousePosition.x * mouseSmoothness, 0f);
@@ -165,9 +154,6 @@ public class MovementControllerHuman : MovementController {
                     Vector3 bis4 = Vector3.Cross(targetdir6, GameObject.FindWithTag("Player").transform.right);
                     head.transform.rotation = Quaternion.LookRotation(-Vector3.Cross(bis4, targetdir4), targetdir6);
                 }
-                else {
-                    Debug.Log("OOOOHOHOHOHOHOHOHOH");
-                }
             }
             else {
                 Vector3 targetdir = (ray.origin + ray.direction.normalized * 10) - upperBody.transform.position;
@@ -175,83 +161,6 @@ public class MovementControllerHuman : MovementController {
                 Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
                 upperBody.transform.eulerAngles = rotate;
             }
-
-
-            //Vector3 mousePositionVector3 = Input.mousePosition + initLargeurCrossHair;
-            //mousePositionVector3.z = 80;
-            //Vector3 mousePositionVector32 = aimCamera.ScreenToWorldPoint(mousePositionVector3);
-
-            //Vector3 targetdir = mousePositionVector32 - upperBody.transform.position;
-
-            //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
-            //upperBody.transform.eulerAngles = rotate;
-
-
-
-
-
-
-
-
-
-
-            //upperBody.transform.rotation.x = Quaternion.Lerp(upperBody.transform.rotation, Quaternion.LookRotation(targetdir), Time.deltaTime);
-
-            // Aiming mode
-
-
-            //GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
-            //upperBody.transform.localEulerAngles = new Vector3(deltaX, deltaY, 0); // = Quaternion.AngleAxis(deltaX, Vector3.right);
-            //aimCamera.transform.Rotate(deltaY, 0, 0);
-
-            //aimCamera.transform.localRotation = Quaternion.AngleAxis(deltaY, aimCamera.transform.up);
-            //transform.localRotation = Quaternion.AngleAxis(-deltaY, Vector3.right);
-
-
-            //Vector3 mousePositionVector3 = new Vector3(deltaX, deltaY, 0);
-            //mousePositionVector3 = aimCamera.ScreenToWorldPoint(mousePositionVector3);
-            //Vector3 targetdir = mousePositionVector3 - transform.position;
-
-            //GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
-            //upperBody.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
-
-
-            //aimCamera.transform.position = GameObject.FindWithTag("Player").transform.position + offset;
-            ////GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
-
-            //Vector3 rotate = aimCamera.transform.localEulerAngles + new Vector3(deltaY * m_cameraSpeed, deltaX * m_cameraSpeed, 0);
-            //if (rotate.x >= 180f) rotate.x -= 360f;
-            //if (rotate.x > -20f && rotate.x < 90f)
-            //{
-            //    aimCamera.transform.localEulerAngles = rotate;
-            //}
-
-            //aimCamera.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
-
-            //Vector3 mousePositionVector3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-            //mousePositionVector3 = Camera.main.ScreenToWorldPoint(mousePositionVector3);
-
-            //Vector3 targetdir = mousePositionVector3 - transform.position;
-            //GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2");
-            //upperBody.transform.rotation = Quaternion.LookRotation(Vector3.forward, targetdir);
-
-
-            //m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position - new Vector3(-5, 0, 5);
-
-            //if (deltaX == 0 && deltaY == 0) return;
-
-            //Vector3 rotate = m_cameraPivot.localEulerAngles + new Vector3(deltaY * m_cameraSpeed, deltaX * m_cameraSpeed, 0);
-            //if (rotate.x >= 180f) rotate.x -= 360f;
-            //if (rotate.x > -20f && rotate.x < 90f)
-            //{
-            //    m_cameraPivot.localEulerAngles = rotate;
-            //    //Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-
-            //    // Set the player's rotation to this new rotation.
-            //    //GameObject upperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3");
-            //    //upperBody.transform.Rotate(-deltaX, deltaY, 0);
-
-            //}
         }
     }
 
@@ -261,15 +170,8 @@ public class MovementControllerHuman : MovementController {
             base.Move(NextDir, h, v);
         } else {
             // Aiming State
-
-            //if (!NextDir.Equals(Vector3.zero))
-            //    transform.rotation = Quaternion.LookRotation(NextDir);
-
-			//transform.position += NextDir * m_moveSpeed * Time.deltaTime;
-
             transform.position += (GameObject.FindWithTag("Player").transform.forward * m_moveSpeed) * v * Time.deltaTime;
             transform.position += (GameObject.FindWithTag("Player").transform.right * m_moveSpeed) * h * Time.deltaTime;
-
         }
     }
 
@@ -331,14 +233,12 @@ public class MovementControllerHuman : MovementController {
             }
 
             // 2) Check if the player want to hit something
-            if(Input.GetMouseButtonDown(0) && hasArrowLeft) {
-                if (InventoryManager.isBowEquiped && isAiming) {
+            if(Input.GetMouseButtonDown(0)) {
+                if (InventoryManager.isBowEquiped && isAiming && hasArrowLeft) {
                     Debug.Log("Fire !");
                     StartCoroutine("FireArrow");
                 } else if (InventoryManager.isTorchEquiped) {
-                    //m_moveSpeed = 0f;
-                    actions.HitWithTorch();
-                    // Attack(length ray);
+                    HitWithStick();
                 }
             }
 
@@ -412,6 +312,25 @@ public class MovementControllerHuman : MovementController {
         currentCamera = 0;
     }
 
+    public void HitWithStick() {
+
+        // Launch the animation
+        actions.HitWithTorch();
+
+        // Change the clip to the firing clip and play it.
+        GameObject torch = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D");
+        torch.GetComponent<AudioSource>().Play();
+
+        RaycastHit hitInfo;
+        Debug.DrawRay(GameObject.Find("UpAnchor").transform.position, GameObject.Find("UpAnchor").transform.forward * 100f, Color.red);
+        Vector3 rayPosition = transform.position + transform.forward * 1.5f + transform.up * 3f;
+        if (Physics.Raycast(new Ray(rayPosition, rayPosition + transform.forward), out hitInfo, 10.0f)) {
+            if (hitInfo.transform.tag == "Animal") {
+                hitInfo.transform.gameObject.GetComponent<AgentProperties>().takeDamages(10.0f);
+            }
+        }
+    }
+
     IEnumerator FireArrow() {
         Debug.Log("Fire !");
         // Fire the arrow
@@ -425,8 +344,8 @@ public class MovementControllerHuman : MovementController {
         arrowInstance.GetComponent<ArrowSwitch>().enabled = true;
 
         // Change the clip to the firing clip and play it.
-        m_ShootingAudio.clip = m_FireClip;
-        m_ShootingAudio.Play();
+        GameObject bow = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D");
+        bow.GetComponent<AudioSource>().Play();
 
         InventoryManager.DrawArrow();
 
@@ -446,6 +365,19 @@ public class MovementControllerHuman : MovementController {
         }
         yield return new WaitForSeconds(0.8f);
         
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        //Camera camera = GameObject.Find("AimedCamera").GetComponent<Camera>();
+        //Vector3 p = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawSphere(p, 0.1F);
+        Vector3 r = GameObject.Find("UpAnchor").transform.position;
+        Vector3 r2 = GameObject.Find("UpAnchor").transform.forward;
+        Debug.DrawRay(GameObject.Find("UpAnchor").transform.position, GameObject.Find("UpAnchor").transform.forward, Color.green);
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
+        Debug.DrawRay(transform.position + transform.forward * 2 + transform.up * 4, transform.forward, Color.blue);
     }
 
 }

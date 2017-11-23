@@ -50,7 +50,7 @@ public class AgentProperties : MonoBehaviour
     {
 
         // If the entering collider is the player...
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !isDead)
         {
             if (!isAlert)
             {
@@ -69,7 +69,7 @@ public class AgentProperties : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         // If the exiting collider is the player...
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !isDead)
         {
             if (isAlert && playerTooClose)
             {

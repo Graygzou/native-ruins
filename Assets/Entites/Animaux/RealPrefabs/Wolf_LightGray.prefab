@@ -216,7 +216,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1881738154749308}
   m_LocalRotation: {x: -0, y: 0.052911628, z: -0, w: 0.99859923}
-  m_LocalPosition: {x: 0, y: 0.12349, z: 0.1757}
+  m_LocalPosition: {x: 0.0004, y: 0.1205, z: 0.1795}
   m_LocalScale: {x: 0.6995498, y: 0.6995498, z: 0.6995499}
   m_Children: []
   m_Father: {fileID: 4630787255459100}
@@ -242,7 +242,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745191563097654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2305.7786, y: 131.32352, z: 1946.5665}
+  m_LocalPosition: {x: 3690.7, y: 22.549006, z: 2405.3535}
   m_LocalScale: {x: 25.730839, y: 25.730833, z: 25.730833}
   m_Children:
   - {fileID: 4893207240464678}
@@ -564,11 +564,11 @@ MonoBehaviour:
   maxForce: 0
   maxSpeed: 40
   mass: 4
-  damages: 0
+  damages: 10
   hungryIndicator: 0
-  isMean: 0
+  isMean: 1
   isDead: 0
-  tauntRange: 0
+  tauntRange: 50
   visionRange: {fileID: 135575464773034928}
   awarenessRange: {fileID: 135747030626954486}
   isAlert: 0
@@ -640,7 +640,7 @@ SphereCollider:
   m_GameObject: {fileID: 1745191563097654}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -652,7 +652,7 @@ SphereCollider:
   m_GameObject: {fileID: 1745191563097654}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
@@ -759,7 +759,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -909734289
+  randomSeed: -1587654701
   InitialModule:
     serializedVersion: 3
     enabled: 1

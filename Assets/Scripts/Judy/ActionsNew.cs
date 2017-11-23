@@ -28,13 +28,15 @@ public class ActionsNew : MonoBehaviour {
 
 	public void Walk () {
 		animator.SetBool("Aiming", false);
+        animator.ResetTrigger("Hit");
         animator.SetBool("Squat", false);
         animator.SetFloat ("Speed", 16.5f);
 		//animator.Play ("StandMovement", MovementLayer);
 	}
 
 	public void Run () {
-		animator.SetBool("Aiming", false);
+        animator.SetBool("Aiming", false);
+        animator.ResetTrigger("Hit");
         animator.SetBool("Squat", false);
         animator.SetFloat ("Speed", 44f);
 		//animator.Play ("StandMovement", MovementLayer);
@@ -111,7 +113,8 @@ public class ActionsNew : MonoBehaviour {
     public void HitWithTorch () {
         animator.SetFloat("Speed_f", 0f);
         animator.SetTrigger("Hit");
-        animator.Play("SwordSlash", MovementLayer);
+        animator.Play("SwordAttack", MovementLayer);
+        animator.Play("SwordAttack", FightLayer);
     }
 
 	public void Sitting () {
