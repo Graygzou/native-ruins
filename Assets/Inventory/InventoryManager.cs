@@ -95,7 +95,7 @@ public class InventoryManager : MonoBehaviour {
 				inventaire.Remove (o);
                 if (o.Equals(ObjectsType.Arrow)) {
                     nbArrow--;
-                    GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x " + nbArrow;
+                    displayNumberArrow();
                 }
                 return;
 			}
@@ -108,7 +108,7 @@ public class InventoryManager : MonoBehaviour {
             if (obj.Equals(ObjectsType.Arrow)) {
                 inventaire.Remove(obj);
                 nbArrow--;
-                GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x " + nbArrow;
+                displayNumberArrow();
                 return;
             }
         }
@@ -135,12 +135,20 @@ public class InventoryManager : MonoBehaviour {
         return false;
     }
 
+    private static void displayNumberArrow() {
+        if (nbArrow < 10) {
+            GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x " + nbArrow;
+        } else {
+            GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x" + nbArrow;
+        }
+    }
+
     public static void AddObjectOfType(ObjectsType o){
 		inventaire.Add (o);
         // Update the arrow indicator
         if (o.Equals(ObjectsType.Arrow)) {
             nbArrow++;
-            GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x " + nbArrow;
+            displayNumberArrow();
         }
         if(o.Equals(ObjectsType.Bow))
         {
