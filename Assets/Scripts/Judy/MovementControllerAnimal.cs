@@ -89,13 +89,15 @@ public class MovementControllerAnimal : MovementController {
         sonAttaque.Play();
 
         RaycastHit hit;
-        float distance = 25f; //distance de l'animal pour pouvoir lui infliger des degats
-        Ray Judy = new Ray(transform.position, transform.forward);
-        Debug.DrawRay(transform.position, transform.forward * distance);
-        if (Physics.SphereCast(Judy, 1.5f, out hit, distance))
-        {
-            if (hit.collider.tag == "Animal")
-            {
+        float distance = 2f; //distance de l'animal pour pouvoir lui infliger des degats
+        // For the bear
+        //Ray Judy = new Ray(transform.position + transform.forward * 6f + transform.up * 4, transform.forward);
+        //Debug.DrawRay(transform.position + transform.forward * 6f + transform.up * 4, transform.forward * distance);
+        // For the wolf
+        Ray Judy = new Ray(transform.position + transform.forward * 7.5f + transform.up * 3, transform.forward);
+        Debug.DrawRay(transform.position + transform.forward * 7.5f + transform.up * 3, transform.forward * distance);
+        if (Physics.Raycast(Judy, out hit, distance)) {
+            if (hit.collider.tag == "Animal") {
                 hit.transform.gameObject.GetComponent<AgentProperties>().takeDamages(30f);
                 //Inflige degat a l'animal
             }
@@ -132,6 +134,14 @@ public class MovementControllerAnimal : MovementController {
 		}
 	}*/
 
+    void OnDrawGizmosSelected()
+    {
+        //Camera camera = GameObject.Find("AimedCamera").GetComponent<Camera>();
+        //Vector3 p = camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane));
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawSphere(p, 0.1F);
+        //Debug.DrawRay(transform.position + transform.forward * 6 + transform.up * 5, transform.forward, Color.blue);
+    }
 
 }
 
