@@ -25,7 +25,7 @@ public class StateMachine : MonoBehaviour {
         // Pre-process
         behavior = GetComponent<SteeringBehavior>();
         animator = GetComponent<Animator>();
-        owner = transform.root.gameObject;
+        owner = transform.gameObject;
 
         currentState = IdleState.Instance;
         previousState = null;
