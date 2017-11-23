@@ -43,7 +43,7 @@ public class MovementControllerHuman : MovementController {
 
         // Disable the aim camera
         aimCamera = GameObject.Find("SportyGirl/AimedCamera").GetComponent<Camera>();
-        offset = aimCamera.transform.position - GameObject.Find("Player").transform.position;
+        offset = aimCamera.transform.position - GameObject.FindWithTag("Player").transform.position;
         aimCamera.enabled = false;
 
         // Get the initial position of the crosshair (to print it correctly)
@@ -264,8 +264,12 @@ public class MovementControllerHuman : MovementController {
 
             //if (!NextDir.Equals(Vector3.zero))
             //    transform.rotation = Quaternion.LookRotation(NextDir);
-            transform.parent.position += (GameObject.FindWithTag("Player").transform.forward * m_moveSpeed) * v * Time.deltaTime;
-            transform.parent.position += (GameObject.FindWithTag("Player").transform.right * m_moveSpeed) * h * Time.deltaTime;
+
+			//transform.position += NextDir * m_moveSpeed * Time.deltaTime;
+
+            transform.position += (GameObject.FindWithTag("Player").transform.forward * m_moveSpeed) * v * Time.deltaTime;
+            transform.position += (GameObject.FindWithTag("Player").transform.right * m_moveSpeed) * h * Time.deltaTime;
+
         }
     }
 
@@ -443,6 +447,7 @@ public class MovementControllerHuman : MovementController {
         yield return new WaitForSeconds(0.8f);
         
     }
+
 }
 
 	

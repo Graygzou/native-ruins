@@ -83,6 +83,11 @@ public class MovementController : MonoBehaviour {
     }
 
     protected void OnCollisionStay(Collision collision) {
+		if (collision.gameObject.tag.Equals ("Terrain")) {
+			m_rigidBody.velocity.Set(0f, 0f, 0f);
+			m_rigidBody.useGravity = false;
+		}	
+
         ContactPoint[] contactPoints = collision.contacts;
         bool validSurfaceNormal = false;
         for (int i = 0; i < contactPoints.Length; i++) {
@@ -105,6 +110,9 @@ public class MovementController : MonoBehaviour {
     }
 
     protected void OnCollisionExit(Collision collision) {
+		if (collision.gameObject.tag.Equals ("Terrain")) {
+			m_rigidBody.useGravity = true;
+		}
         if (m_collisions.Contains(collision.collider)) {
             m_collisions.Remove(collision.collider);
         }
@@ -113,7 +121,7 @@ public class MovementController : MonoBehaviour {
 
     protected void Update() {
         DirectUpdate();
-
+		//m_rigidBody.rotation.Set (m_rigidBody.rotation.x, 0f, m_rigidBody.rotation.z, m_rigidBody.rotation.w);
         m_wasGrounded = m_isGrounded;
     }
 
@@ -148,8 +156,8 @@ public class MovementController : MonoBehaviour {
 
     protected virtual void Move(Vector3 NextDir, float h, float v) {
         if (!NextDir.Equals(Vector3.zero))
-            transform.parent.rotation = Quaternion.LookRotation(NextDir);
-        transform.parent.position += NextDir * m_moveSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(NextDir);
+        transform.position += NextDir * m_moveSpeed * Time.deltaTime;
     }
 
     protected virtual void JumpingAndLanding(Vector3 NextDir) { }
@@ -180,5 +188,6 @@ public class MovementController : MonoBehaviour {
         //Gizmos.color = Color.yellow;
         //Gizmos.DrawSphere(p, 0.1F);
     }
+		
 
 }
