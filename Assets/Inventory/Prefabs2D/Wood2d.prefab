@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114209086760204270}
   - component: {fileID: 50390310338266346}
   - component: {fileID: 60246775512522018}
-  - component: {fileID: 82310801978886828}
+  - component: {fileID: 82348839569997146}
   m_Layer: 5
   m_Name: Wood2d
   m_TagString: 2DObjectForInventory
@@ -50,7 +50,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!60 &60246775512522018
 PolygonCollider2D:
@@ -85,7 +85,7 @@ PolygonCollider2D:
       - {x: 34.152885, y: 51.076633}
       - {x: -17.266146, y: 29.917244}
       - {x: -49.95685, y: 11.683115}
---- !u!82 &82310801978886828
+--- !u!82 &82348839569997146
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,7 +96,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 12d621999ede7ae49b7ebfe88dc7ed81, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.48
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   o_mushroom: {fileID: 54914538600494768, guid: 659b1fb6f1795eb49b5e2ae94b335405,
     type: 2}
   is_usable: 0
-  m_pickSound: {fileID: 82310801978886828}
+  m_pickSound: {fileID: 82348839569997146}
 --- !u!222 &222791834005756270
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -230,5 +230,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -21, y: 61.4}
-  m_SizeDelta: {x: 256, y: 128}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

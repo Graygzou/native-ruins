@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114683191749674964}
   - component: {fileID: 50064425125062334}
   - component: {fileID: 60458188131781118}
-  - component: {fileID: 82020235753924932}
+  - component: {fileID: 82547929997013292}
   m_Layer: 5
   m_Name: Bow2d
   m_TagString: 2DObjectForInventory
@@ -50,7 +50,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!60 &60458188131781118
 PolygonCollider2D:
@@ -88,7 +88,7 @@ PolygonCollider2D:
       - {x: -7.065728, y: 15.199375}
       - {x: -7.8028183, y: 40.41075}
       - {x: -14.939062, y: 51.834835}
---- !u!82 &82020235753924932
+--- !u!82 &82547929997013292
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -99,7 +99,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 12d621999ede7ae49b7ebfe88dc7ed81, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.48
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   o_mushroom: {fileID: 54584360016543648, guid: 2ab4cd42c80a3cc4d8336004e609d06f,
     type: 2}
   is_usable: 1
-  m_pickSound: {fileID: 82020235753924932}
+  m_pickSound: {fileID: 82547929997013292}
 --- !u!222 &222810354613323978
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -233,5 +233,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 23.2, y: 128.34}
-  m_SizeDelta: {x: 1024, y: 256}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
