@@ -42,7 +42,7 @@ public class InventoryManager : MonoBehaviour {
 		OpenOrCloseInventory ();
 		PutWeaponInBag ();
         //NumberOfArrow();
-		ActiveRedCross();
+		StartCoroutine(ActiveRedCross());
     }
 
 	public ArrayList GetInventory(){
@@ -164,7 +164,7 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-	private void ActiveRedCross(){
+	private IEnumerator ActiveRedCross(){
 		int wood = 0;
 		int flint = 0;
 		int plank = 0;
@@ -222,6 +222,7 @@ public class InventoryManager : MonoBehaviour {
 			GameObject.Find ("InventoryManager/Canvas/Craft/Raft/RedCross").SetActive (true);
 			GameObject.Find ("InventoryManager/Canvas/Craft/Raft/Button").SetActive (false);
 		}
+		yield return new WaitForSeconds (0.2f);
 	}
 
 	public void CraftArrow(){
