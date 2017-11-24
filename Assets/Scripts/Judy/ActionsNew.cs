@@ -74,7 +74,7 @@ public class ActionsNew : MonoBehaviour {
 
 	public void Jump () {
 		animator.SetBool ("Squat", false);
-		animator.SetFloat ("Speed", 0.0f);
+		//animator.SetFloat ("Speed", 0.0f);
 		//animator.SetBool("Aiming", false);
 		//animator.SetBool("EquipWeapon", false);
         //animator.SetTrigger("Jump");

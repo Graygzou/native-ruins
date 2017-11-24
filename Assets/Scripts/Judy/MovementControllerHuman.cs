@@ -69,9 +69,17 @@ public class MovementControllerHuman : MovementController {
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space)) {
             m_jumpTimeStamp = Time.time;
 			actions.Jump();
-            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+            
+            m_rigidBody.AddForce(Vector3.up * 45, ForceMode.Impulse);
+            //StartCoroutine("Jump");
+            //GetComponent<BoxCollider>().transform.position = Vector3.Lerp(GetComponent<BoxCollider>().transform.position,
+            //    GetComponent<BoxCollider>().transform.position + Vector3.up * m_jumpForce, m_jumpTimeStamp);
 
         }
+    }
+
+    IEnumerator Jump() {
+        yield return new WaitForSeconds(0.5f);
     }
 
     override protected void UpdateCamera(float deltaX, float deltaY) {   
