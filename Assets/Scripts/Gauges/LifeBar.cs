@@ -35,6 +35,8 @@ public class LifeBar : MonoBehaviour {
         if (Life.GetComponent<Scrollbar>().size <= 0f) {
             Judy.GetComponent<MovementController>().setDeath(true);
             actions.Death();
+            sonCri.Stop();
+            GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_game_over").activeSelf);
         }
 
         //Si Judy chute 

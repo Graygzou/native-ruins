@@ -17,11 +17,15 @@ public class DialogueTrigger : MonoBehaviour {
     public void TriggerDialogueDebut()
     {
         dialogue.name = "Judy";
-        dialogue.sentences = new string[4];
+        dialogue.sentences = new string[7];
         dialogue.sentences[0] = "Ouuuuhhhhh ......... J'ai mal à la tête ..... Qu'est ce qu'il m'est arrivé ? Ou est ce que je suis ?";
         dialogue.sentences[1] = "Je suis sur une île ?! Mais comment c'est possible ? Je ne me souviens de rien.. Ca ne m'a pas l'air très habité..";
         dialogue.sentences[2] = "Comment je vais partir d'ici ? ... Mmmmmhhhh ... Et si je construisais un radeau !";
-        dialogue.sentences[3] = "Il doit bien y avoir de quoi construire un radeau ici! Commençons par explorer cette plage !";
+        dialogue.sentences[3] = "Bon ne nous emballons pas trop...  Commençons par explorer cette plage !";
+        dialogue.name = "Aide";
+        dialogue.sentences[4] = "Judy peut se déplacer à l'aide des touches ZQSD du clavier. Elle peut déplacer la caméra à l'aide de la SOURIS.";
+        dialogue.sentences[5] = "La barre d'ESPACE permet de la faire sauter. Pour la faire courir, maintenir la touche SHIFT. Elle peut également s'accroupir à l'aide de CTRL";
+        dialogue.sentences[6] = "Un menu d'aide est à votre disposition en appuyant sur ECHAP pour vous rappelez les interactions principales.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
 
@@ -40,7 +44,7 @@ public class DialogueTrigger : MonoBehaviour {
         dialogue.sentences = new string[3];
         dialogue.sentences[0] = "Félicitation! Vous venez de trouver le totem Ours. Cet item vous permets de vous transformer en ours.";
         dialogue.sentences[1] = "Dans cette forme, vous êtes plus résistante et vous pourrez accéder à de nouvelles énigmes.";
-        dialogue.sentences[2] = "Une roue de transformation est maintenant accéssible si vous maintenez A. Vous pouvez choisir votre forme à l'aide du clic gauche de la souris";
+        dialogue.sentences[2] = "Une roue de transformation est maintenant accéssible si vous maintenez A. Vous pouvez choisir votre forme en passant la souris sur celle désirée.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
 
@@ -72,10 +76,10 @@ public class DialogueTrigger : MonoBehaviour {
     public void TriggerDialogueArc()
     {
         dialogue.name = "Judy";
-        dialogue.sentences = new string[6];
+        dialogue.sentences = new string[3];
         dialogue.sentences[0] = "Félicitation! Vous venez de trouver un arc. Cet item vous permettra de chasser et de vous défendre.";
         dialogue.sentences[1] = "Des éléments sur l'île vous permettront de créer des flèches.";
-        dialogue.sentences[2] = "Pour l'utiliser: ";
+        dialogue.sentences[2] = "Pour l'utiliser: Le CLIC DROIT de la souris vous permet de viser et le CLIC GAUCHE vous permet de tirer une flèche.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
 
