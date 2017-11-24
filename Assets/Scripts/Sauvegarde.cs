@@ -130,7 +130,6 @@ public class Sauvegarde : MonoBehaviour {
         Inventory = GameObject.Find("Affichages/InventoryManager");
         int r = PlayerPrefs.GetInt("load_scene");
         dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
-
         //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
         if (PlayerPrefs.GetInt("load_scene")==1)
         {
