@@ -60,12 +60,16 @@ public class FireLaser : MonoBehaviour {
         line.positionCount = vertexCounter;
         line.SetPosition(0, lastLaserPosition);
         RaycastHit hit;
+        // We need to ignore bears in the layer 9.
+        int layerMask = 1 << 9;
+        layerMask = ~layerMask;
 
         while (loopActive)
         {
+
             Ray ray = new Ray(lastLaserPosition, laserDirection);
             // Get the first object hit
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.collider.transform.tag == "Mirror")
                 {
