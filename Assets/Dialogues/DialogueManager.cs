@@ -10,15 +10,21 @@ public class DialogueManager : MonoBehaviour {
     public Animator animator;
 
     private Queue<string> sentences;
+    private AudioSource sonDialog;
+    private AudioSource sonLettre;
 
 	// Use this for initialization
 	void Start () {
         sentences = new Queue<string>();
-	}
+        AudioSource[] son = this.GetComponents<AudioSource>();
+        sonDialog = son[0];
+        sonLettre = son[1];
+    }
 	
     //Lancer le dialogue
 	public void StartDialogue (Dialogue dialogue)
     {
+        sonDialog.Play();
         animator.SetBool("isOpen",true);
         nameText.text = dialogue.name;
         sentences.Clear();
@@ -31,7 +37,7 @@ public class DialogueManager : MonoBehaviour {
     //Afficher les phrases suivantes du dialogue
     public void DisplayNextSentence()
     {
-        if(sentences.Count == 0)
+        if (sentences.Count == 0)
         {
             EndDialogue();
             return;
@@ -47,6 +53,7 @@ public class DialogueManager : MonoBehaviour {
         dialogueText.text = "";
         foreach(char letter in sentence.ToCharArray())
         {
+            sonLettre.Play();
             dialogueText.text += letter;
             yield return null;
         }
@@ -55,6 +62,8 @@ public class DialogueManager : MonoBehaviour {
     //Fin du dialogue
     public void EndDialogue()
     {
+        sonLettre.Stop();
+        sonDialog.Play();
         animator.SetBool("isOpen", false);
     }
 }

@@ -6,7 +6,7 @@ public class PickUpScript : MonoBehaviour {
 	
 	public Renderer renderer;
 	public ObjectsType o_type;
-	[SerializeField]private RectTransform o_object;
+    [SerializeField]private RectTransform o_object;
 
 	private bool o_isPickable = false;
     private DialogueTrigger dialogue;
@@ -45,29 +45,28 @@ public class PickUpScript : MonoBehaviour {
 	}
 
 	private void GetInputs(){
-		if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {
-            if (o_type.Equals(ObjectsType.Bow))
+        AudioSource son;
+
+        if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {
+            if (o_type.Equals(ObjectsType.Bow) && GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").activeSelf)
             {
-                if (GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").activeSelf == true)
-                {  
-                    dialogue.TriggerDialogueArc();
-                }
+                son = this.GetComponent<AudioSource>();
+                son.Play();
+                dialogue.TriggerDialogueArc();     
                 GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
             }
-            if (o_type.Equals(ObjectsType.Rope))
+            if (o_type.Equals(ObjectsType.Rope) && GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").activeSelf)
             {
-                if(GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies") == true)
-                {
-                    dialogue.TriggerDialogueCorde();
-                }
+                son = this.GetComponent<AudioSource>();
+                son.Play();
+                dialogue.TriggerDialogueCorde();
                 GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
             }
-            if (o_type.Equals(ObjectsType.Sail))
+            if (o_type.Equals(ObjectsType.Sail) && GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").activeSelf)
             {
-                if(GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies") == true)
-                {
-                    dialogue.TriggerDialogueVoile();
-                }
+                son = this.GetComponent<AudioSource>();
+                son.Play();
+                dialogue.TriggerDialogueVoile();
                 GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
             }
             InventoryManager.AddObjectOfType(o_type);
