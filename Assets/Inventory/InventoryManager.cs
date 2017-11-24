@@ -19,6 +19,7 @@ public class InventoryManager : MonoBehaviour {
 	[SerializeField]private RectTransform o_Arrow;
 
     private static int nbArrow;
+    private DialogueTrigger dialogue;
 
     public static bool isBowEquiped = false;
 	public static bool isTorchEquiped = false;
@@ -33,7 +34,7 @@ public class InventoryManager : MonoBehaviour {
 		deltaScreen = m_canvas.sizeDelta;
         nbArrow = 0;
 		ActiveRedCross();
-
+        dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
     }
 	
 	// Update is called once per frame
@@ -149,18 +150,6 @@ public class InventoryManager : MonoBehaviour {
         if (o.Equals(ObjectsType.Arrow)) {
             nbArrow++;
             displayNumberArrow();
-        }
-        if(o.Equals(ObjectsType.Bow))
-        {
-            GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
-        }
-        if (o.Equals(ObjectsType.Rope))
-        {
-            GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
-        }
-        if (o.Equals(ObjectsType.Sail))
-        {
-            GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
         }
     }
 
@@ -360,6 +349,8 @@ public class InventoryManager : MonoBehaviour {
 		InventoryManager.AddObjectOfType(ObjectsType.Raft);
 		RectTransform clone1 = Instantiate(o_Raft) as RectTransform;
 		clone1.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+
+        dialogue.TriggerDialogueFin();
 	}
 
     //private void NumberOfArrow() {

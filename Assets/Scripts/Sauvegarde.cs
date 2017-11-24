@@ -129,6 +129,8 @@ public class Sauvegarde : MonoBehaviour {
         HungerBar = GameObject.Find("Affichages/Gauges/Hunger");
         Inventory = GameObject.Find("Affichages/InventoryManager");
         int r = PlayerPrefs.GetInt("load_scene");
+        dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
+
         //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
         if (PlayerPrefs.GetInt("load_scene")==1)
         {
@@ -171,6 +173,9 @@ public class Sauvegarde : MonoBehaviour {
             }
             //Reactualisation des animaux et des objets sur la map
 
+        } else
+        {
+            dialogue.TriggerDialogueDebut();
         }
     }
 
@@ -236,7 +241,6 @@ public class Sauvegarde : MonoBehaviour {
         PlayerPrefs.SetInt("bearUnlocked", Player.GetComponent<FormsController>().isBearUnlocked());
 
         //Afficher message de sauvegarde
-        dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
         dialogue.TriggerSauvegarde();
     }
 

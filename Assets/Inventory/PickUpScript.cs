@@ -8,13 +8,13 @@ public class PickUpScript : MonoBehaviour {
 	public ObjectsType o_type;
 	[SerializeField]private RectTransform o_object;
 
-
-
 	private bool o_isPickable = false;
+    private DialogueTrigger dialogue;
 
-	// Use this for initialization
-	void Start () {
-	}
+    // Use this for initialization
+    void Start () {
+        dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -46,7 +46,31 @@ public class PickUpScript : MonoBehaviour {
 
 	private void GetInputs(){
 		if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {
-			InventoryManager.AddObjectOfType(o_type);
+            if (o_type.Equals(ObjectsType.Bow))
+            {
+                if (GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").activeSelf == true)
+                {  
+                    dialogue.TriggerDialogueArc();
+                }
+                GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
+            }
+            if (o_type.Equals(ObjectsType.Rope))
+            {
+                if(GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies") == true)
+                {
+                    dialogue.TriggerDialogueCorde();
+                }
+                GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
+            }
+            if (o_type.Equals(ObjectsType.Sail))
+            {
+                if(GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies") == true)
+                {
+                    dialogue.TriggerDialogueVoile();
+                }
+                GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
+            }
+            InventoryManager.AddObjectOfType(o_type);
 			InventoryManager.an_object_is_pickable = false;
 			RectTransform clone = Instantiate(o_object) as RectTransform;
 			clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
