@@ -67,7 +67,7 @@ public class Collectable : MonoBehaviour {
 			GetInputs ();
 			yield return 0;
 		} else {
-			yield return new WaitForSeconds (5);
+			yield return new WaitForSeconds (900);
 			isActive = true;
 			this.gameObject.GetComponent<MeshRenderer>().enabled=true;
 			this.gameObject.GetComponent<SphereCollider>().enabled=true;
