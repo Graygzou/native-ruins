@@ -15,7 +15,6 @@ public class LifeBar : MonoBehaviour {
     private int currentTimeFaim = 0;
 	private GameObject Judy;
 	private ActionsNew actions;
-    private GameObject forms;
 
     // Use this for initialization
     void Start () {
@@ -23,7 +22,6 @@ public class LifeBar : MonoBehaviour {
         sonCri = sons[0];
         sonManger = sons[1];
 		Judy = GameObject.FindWithTag ("Player");
-        forms = GameObject.Find("Forms");
 		actions = Judy.GetComponent ("ActionsNew") as ActionsNew;
         Life.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.red;
 	}
@@ -34,6 +32,8 @@ public class LifeBar : MonoBehaviour {
         //Si Judy a sa barre de vie à 0 : Mort
         if (Life.GetComponent<Scrollbar>().size <= 0f) {
             Judy.GetComponent<MovementController>().setDeath(true);
+            GameObject playerRoot = GameObject.Find("Player");
+            playerRoot.GetComponent<FormsController>().Transformation(0);
             actions.Death();
             sonCri.Stop();
             GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_game_over").activeSelf);

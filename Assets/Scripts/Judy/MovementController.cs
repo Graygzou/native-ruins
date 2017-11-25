@@ -33,11 +33,13 @@ public class MovementController : MonoBehaviour {
 
     // Death of the player
     private bool m_isDead;
+    //Dialogue on
+    private bool m_dialogueOn;
 
     // Use this for initialization
     public void Start() {
         m_isDead = false;
-
+        m_dialogueOn = false;
         m_cameraPivot = GameObject.Find("CameraPivot").transform;
         EnergyBar = GameObject.Find("Gauges/Energy");
         initial_orientation = transform.forward;
@@ -138,7 +140,7 @@ public class MovementController : MonoBehaviour {
     //transform.forward.Set(projected_forward_camera.x, projected_forward_camera.y, projected_forward_camera.z);
     //transform.Rotate(0f,cameraTrans.eulerAngles.y-transform.eulerAngles.y,0f);
     protected void DirectUpdate() {
-       if (!m_isDead) {
+       if (!m_isDead && !m_dialogueOn) {
             float v = Input.GetAxis("Vertical");
             float h = Input.GetAxis("Horizontal");
 
@@ -191,6 +193,11 @@ public class MovementController : MonoBehaviour {
     
     public void setDeath(bool isDead) {
         m_isDead = isDead;
+    }
+
+    public void setDialogue(bool isDialogueOn)
+    {
+        m_dialogueOn = isDialogueOn;
     }
 
     void OnDrawGizmosSelected() {

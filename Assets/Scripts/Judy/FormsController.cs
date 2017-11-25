@@ -230,7 +230,7 @@ public class FormsController : MonoBehaviour
         }
     }
 
-    private void Transformation(int i)
+    public void Transformation(int i)
     {
         selectedForm = i;
         // Memorisation position et orientation actuelle

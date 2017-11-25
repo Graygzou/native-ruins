@@ -42,7 +42,9 @@ public class InteractBonFire : MonoBehaviour {
         private void GetInputs(){
 		if (Input.GetKeyDown (KeyCode.E) && o_isBonFire) {
             //Range arme avant d'ouvrir le menu de sauvegarde
-            GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();            
+            GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();
+            GameObject playerRoot = GameObject.Find("Player");
+            playerRoot.GetComponent<FormsController>().Transformation(0);
             GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
         }
 	}
