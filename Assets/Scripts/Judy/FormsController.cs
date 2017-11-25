@@ -54,7 +54,7 @@ public class FormsController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
+        //ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
 
         PumaUnlocked = false;
         BearUnlocked = true;
@@ -109,8 +109,8 @@ public class FormsController : MonoBehaviour
         }
 
 
-        // Temps ralenti
-        Time.timeScale = 0.1f;
+        // Temps arrêté
+        Time.timeScale = 0f;
 
         // Affichage de la roue
         transformationWheel.SetActive(true);
@@ -180,34 +180,104 @@ public class FormsController : MonoBehaviour
 
     private void Transformation()
     {
+        // Memorisation position et orientation actuelle
+        Vector3 positionCourant = new Vector3();
+        Quaternion rotationCourant = new Quaternion();
         // Desactiver forme actuelle
         if (currentForm == 0)
         {
-            //StartCoroutine("Fade");
+            positionCourant = HumanForm.transform.position;
+            rotationCourant = HumanForm.transform.rotation;
+            //FormFadeOut(HumanForm);
+            //SetMaterialTransparent(HumanForm);
+            //iTween.FadeTo(HumanForm, 0, 1);
             HumanForm.SetActive(false);
         }
         if (currentForm == 1)
         {
+            positionCourant = BearForm.transform.position;
+            rotationCourant = BearForm.transform.rotation;
             BearForm.SetActive(false);
         }
         if (currentForm == 2)
         {
+            positionCourant = PumaForm.transform.position;
+            rotationCourant = PumaForm.transform.rotation;
             PumaForm.SetActive(false);
         }
 
         // Activation nouvelle forme
         if (selectedForm == 0)
         {
+            HumanForm.transform.position = positionCourant;
+            HumanForm.transform.rotation = rotationCourant;
             HumanForm.SetActive(true);
             currentForm = 0;
         }
         if (selectedForm == 1)
         {
+            BearForm.transform.position = positionCourant;
+            BearForm.transform.rotation = rotationCourant;
             BearForm.SetActive(true);
             currentForm = 1;
         }
         if (selectedForm == 2)
         {
+            PumaForm.transform.position = positionCourant;
+            PumaForm.transform.rotation = rotationCourant;
+            PumaForm.SetActive(true);
+            currentForm = 2;
+        }
+    }
+
+    private void Transformation(int i)
+    {
+        selectedForm = i;
+        // Memorisation position et orientation actuelle
+        Vector3 positionCourant = new Vector3();
+        Quaternion rotationCourant = new Quaternion();
+        // Desactiver forme actuelle
+        if (currentForm == 0)
+        {
+            positionCourant = HumanForm.transform.position;
+            rotationCourant = HumanForm.transform.rotation;
+            //FormFadeOut(HumanForm);
+            //SetMaterialTransparent(HumanForm);
+            //iTween.FadeTo(HumanForm, 0, 1);
+            HumanForm.SetActive(false);
+        }
+        if (currentForm == 1)
+        {
+            positionCourant = BearForm.transform.position;
+            rotationCourant = BearForm.transform.rotation;
+            BearForm.SetActive(false);
+        }
+        if (currentForm == 2)
+        {
+            positionCourant = PumaForm.transform.position;
+            rotationCourant = PumaForm.transform.rotation;
+            PumaForm.SetActive(false);
+        }
+
+        // Activation nouvelle forme
+        if (selectedForm == 0)
+        {
+            HumanForm.transform.position = positionCourant;
+            HumanForm.transform.rotation = rotationCourant;
+            HumanForm.SetActive(true);
+            currentForm = 0;
+        }
+        if (selectedForm == 1)
+        {
+            BearForm.transform.position = positionCourant;
+            BearForm.transform.rotation = rotationCourant;
+            BearForm.SetActive(true);
+            currentForm = 1;
+        }
+        if (selectedForm == 2)
+        {
+            PumaForm.transform.position = positionCourant;
+            PumaForm.transform.rotation = rotationCourant;
             PumaForm.SetActive(true);
             currentForm = 2;
         }
@@ -227,4 +297,43 @@ public class FormsController : MonoBehaviour
     //    }
     //    HumanForm.SetActive(false);
     //}
+
+
+    private void SetMaterialTransparent(GameObject Form)
+    {
+        foreach (Material m in Form.GetComponentInChildren<Renderer>().materials)
+        {
+            m.SetFloat("_Mode", 2);
+            m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            m.SetInt("_ZWrite", 0);
+            m.DisableKeyword("_ALPHATEST_ON");
+            m.EnableKeyword("_ALPHABLEND_ON");
+            m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            m.renderQueue = 3000;
+
+        }
+    }
+
+    private void SetMaterialOpaque(GameObject Form)
+    {
+        foreach (Material m in Form.GetComponent<Renderer>().materials)
+        {
+            m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            m.SetInt("_ZWrite", 1);
+            m.DisableKeyword("_ALPHATEST_ON");
+            m.DisableKeyword("_ALPHABLEND_ON");
+            m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            m.renderQueue = -1;
+        }
+    }
+
+    private void FormFadeOut(GameObject Form)
+    {
+        SetMaterialTransparent(HumanForm);
+        iTween.FadeTo(HumanForm, 0, 1);
+
+    }
+
 }
