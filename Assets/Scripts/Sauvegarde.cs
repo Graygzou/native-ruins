@@ -161,7 +161,7 @@ public class Sauvegarde : MonoBehaviour {
             checkTotem(PlayerPrefs.GetInt("pumaUnlocked"), 0);
             checkTotem(PlayerPrefs.GetInt("bearUnlocked"), 1);
 
-            //Enleve les totems, voile et corde deja trouves
+            //Enleve les totems deja trouves
             if(PlayerPrefs.GetInt("pumaUnlocked") == 1)
             {
                 GameObject.FindWithTag("TotemPuma").SetActive(false);
@@ -170,7 +170,6 @@ public class Sauvegarde : MonoBehaviour {
             {
                 GameObject.FindWithTag("TotemOurs").SetActive(false);
             }
-            //Reactualisation des animaux et des objets sur la map
 
         } else
         {

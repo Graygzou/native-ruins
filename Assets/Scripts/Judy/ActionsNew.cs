@@ -38,7 +38,7 @@ public class ActionsNew : MonoBehaviour {
         animator.SetBool("Aiming", false);
         animator.ResetTrigger("Hit");
         animator.SetBool("Squat", false);
-        animator.SetFloat ("Speed", 44f);
+        animator.SetFloat ("Speed", 25f);
 		//animator.Play ("StandMovement", MovementLayer);
 	}
 
