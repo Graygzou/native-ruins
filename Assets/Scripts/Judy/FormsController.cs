@@ -182,12 +182,12 @@ public class FormsController : MonoBehaviour
     {
         // Memorisation position et orientation actuelle
         Vector3 positionCourant = new Vector3();
-        Quaternion rotationCourant = new Quaternion();
+        //Quaternion rotationCourant = new Quaternion();
         // Desactiver forme actuelle
         if (currentForm == 0)
         {
             positionCourant = HumanForm.transform.position;
-            rotationCourant = HumanForm.transform.rotation;
+            //rotationCourant = HumanForm.transform.rotation;
             //FormFadeOut(HumanForm);
             //SetMaterialTransparent(HumanForm);
             //iTween.FadeTo(HumanForm, 0, 1);
@@ -196,13 +196,13 @@ public class FormsController : MonoBehaviour
         if (currentForm == 1)
         {
             positionCourant = BearForm.transform.position;
-            rotationCourant = BearForm.transform.rotation;
+            //rotationCourant = BearForm.transform.rotation;
             BearForm.SetActive(false);
         }
         if (currentForm == 2)
         {
             positionCourant = PumaForm.transform.position;
-            rotationCourant = PumaForm.transform.rotation;
+            //rotationCourant = PumaForm.transform.rotation;
             PumaForm.SetActive(false);
         }
 
@@ -210,21 +210,21 @@ public class FormsController : MonoBehaviour
         if (selectedForm == 0)
         {
             HumanForm.transform.position = positionCourant;
-            HumanForm.transform.rotation = rotationCourant;
+            //HumanForm.transform.rotation = rotationCourant;
             HumanForm.SetActive(true);
             currentForm = 0;
         }
         if (selectedForm == 1)
         {
             BearForm.transform.position = positionCourant;
-            BearForm.transform.rotation = rotationCourant;
+            //BearForm.transform.rotation = rotationCourant;
             BearForm.SetActive(true);
             currentForm = 1;
         }
         if (selectedForm == 2)
         {
             PumaForm.transform.position = positionCourant;
-            PumaForm.transform.rotation = rotationCourant;
+            //PumaForm.transform.rotation = rotationCourant;
             PumaForm.SetActive(true);
             currentForm = 2;
         }
@@ -235,12 +235,12 @@ public class FormsController : MonoBehaviour
         selectedForm = i;
         // Memorisation position et orientation actuelle
         Vector3 positionCourant = new Vector3();
-        Quaternion rotationCourant = new Quaternion();
+        //Quaternion rotationCourant = new Quaternion();
         // Desactiver forme actuelle
         if (currentForm == 0)
         {
             positionCourant = HumanForm.transform.position;
-            rotationCourant = HumanForm.transform.rotation;
+            //rotationCourant = HumanForm.transform.rotation;
             //FormFadeOut(HumanForm);
             //SetMaterialTransparent(HumanForm);
             //iTween.FadeTo(HumanForm, 0, 1);
@@ -249,13 +249,13 @@ public class FormsController : MonoBehaviour
         if (currentForm == 1)
         {
             positionCourant = BearForm.transform.position;
-            rotationCourant = BearForm.transform.rotation;
+            //rotationCourant = BearForm.transform.rotation;
             BearForm.SetActive(false);
         }
         if (currentForm == 2)
         {
             positionCourant = PumaForm.transform.position;
-            rotationCourant = PumaForm.transform.rotation;
+            //rotationCourant = PumaForm.transform.rotation;
             PumaForm.SetActive(false);
         }
 
@@ -263,21 +263,21 @@ public class FormsController : MonoBehaviour
         if (selectedForm == 0)
         {
             HumanForm.transform.position = positionCourant;
-            HumanForm.transform.rotation = rotationCourant;
+            //HumanForm.transform.rotation = rotationCourant;
             HumanForm.SetActive(true);
             currentForm = 0;
         }
         if (selectedForm == 1)
         {
             BearForm.transform.position = positionCourant;
-            BearForm.transform.rotation = rotationCourant;
+            //BearForm.transform.rotation = rotationCourant;
             BearForm.SetActive(true);
             currentForm = 1;
         }
         if (selectedForm == 2)
         {
             PumaForm.transform.position = positionCourant;
-            PumaForm.transform.rotation = rotationCourant;
+            //PumaForm.transform.rotation = rotationCourant;
             PumaForm.SetActive(true);
             currentForm = 2;
         }
