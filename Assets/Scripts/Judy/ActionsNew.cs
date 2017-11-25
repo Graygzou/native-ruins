@@ -162,11 +162,19 @@ public class ActionsNew : MonoBehaviour {
 
     // Sitting (save the game)
     public void SitDown() {
-        // TODO LATER
+        animator.SetFloat("Speed", 0.0f);
+        animator.SetBool("Sit", true);
+        animator.SetBool("Aiming", false);
+        animator.SetBool("EquipWeapon", false);
+        animator.Play("IdleToSit", MovementLayer);
     }
 
     // Standing up (leaving save the game)
     public void StandUp() {
-        // TODO LATER
+        animator.SetFloat("Speed", 0.0f);
+        animator.SetBool("Sit", false);
+        animator.SetBool("Aiming", false);
+        animator.SetBool("EquipWeapon", false);
+        animator.Play("SitToIdle", MovementLayer);
     }
 }

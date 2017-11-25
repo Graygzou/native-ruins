@@ -45,7 +45,38 @@ public class InteractBonFire : MonoBehaviour {
             GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();
             GameObject playerRoot = GameObject.Find("Player");
             playerRoot.GetComponent<FormsController>().Transformation(0);
-            GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
+
+            // Play the sitting animation before
+            if (!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf) {
+                StartCoroutine("SitDownNearFire");
+            } else {
+                StartCoroutine("StandUpNearFire");
+                
+                
+            }
         }
 	}
+
+    IEnumerator SitDownNearFire() {
+        GameObject judy = GameObject.FindWithTag("Player");
+        judy.GetComponent<ActionsNew>().SitDown();
+        // Remove control of judy
+        judy.GetComponent<MovementController>().setIsSaving(true);
+        yield return new WaitForSeconds(3.6f);
+        // Enable the save menu
+        GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
+    }
+
+    IEnumerator StandUpNearFire()
+    {
+        GameObject judy = GameObject.FindWithTag("Player");
+        judy.GetComponent<ActionsNew>().StandUp();
+        // Disable the save menu
+        GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
+        yield return new WaitForSeconds(4.4f);
+        // Can control judy
+        judy.GetComponent<MovementController>().setIsSaving(false);
+        
+        
+    }
 }

@@ -304,20 +304,6 @@ public class MovementControllerHuman : MovementController {
         }
 	}
 
-    public void  SwitchToAim() {
-        // Enable the right camera
-        //playerCamera.enabled = false;
-        aimCamera.enabled = true;
-        currentCamera = 1;
-    }
-
-    public void SwitchToRegular()
-    {
-        //playerCamera.enabled = true;
-        aimCamera.enabled = false;
-        currentCamera = 0;
-    }
-
     public void HitWithStick() {
 
         // Launch the animation

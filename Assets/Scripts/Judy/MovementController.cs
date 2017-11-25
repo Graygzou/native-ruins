@@ -33,6 +33,8 @@ public class MovementController : MonoBehaviour {
 
     // Death of the player
     private bool m_isDead;
+    // The player is saving his game
+    private bool m_isSaving;
     //Dialogue on
     private bool m_dialogueOn;
 
@@ -40,6 +42,7 @@ public class MovementController : MonoBehaviour {
     public void Start() {
         m_isDead = false;
         m_dialogueOn = false;
+        m_isSaving = false;
         m_cameraPivot = GameObject.Find("CameraPivot").transform;
         EnergyBar = GameObject.Find("Gauges/Energy");
         initial_orientation = transform.forward;
@@ -140,7 +143,7 @@ public class MovementController : MonoBehaviour {
     //transform.forward.Set(projected_forward_camera.x, projected_forward_camera.y, projected_forward_camera.z);
     //transform.Rotate(0f,cameraTrans.eulerAngles.y-transform.eulerAngles.y,0f);
     protected void DirectUpdate() {
-       if (!m_isDead && !m_dialogueOn) {
+       if (!m_isDead && !m_dialogueOn && !m_isSaving) {
             float v = Input.GetAxis("Vertical");
             float h = Input.GetAxis("Horizontal");
 
@@ -195,9 +198,12 @@ public class MovementController : MonoBehaviour {
         m_isDead = isDead;
     }
 
-    public void setDialogue(bool isDialogueOn)
-    {
+    public void setDialogue(bool isDialogueOn) {
         m_dialogueOn = isDialogueOn;
+    }
+
+    public void setIsSaving(bool isSaving) {
+        m_isSaving = isSaving;
     }
 
     void OnDrawGizmosSelected() {
