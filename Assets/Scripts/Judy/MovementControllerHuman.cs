@@ -117,6 +117,7 @@ public class MovementControllerHuman : MovementController {
             int layerMask = 1 << 8;
             layerMask = ~layerMask;
 
+            Vector3 targetPoint = Vector3.zero;
             if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask)) {
                 Debug.DrawLine(ray.origin, hitInfo.point);
                 Debug.DrawLine(upperBody.transform.position, hitInfo.point);
@@ -125,49 +126,46 @@ public class MovementControllerHuman : MovementController {
                 Debug.DrawLine(mainD.transform.position, hitInfo.point);
 
                 targetDirection = hitInfo.point - fleche.transform.position;
-
-                if (m_animator.GetCurrentAnimatorClipInfo(1)[0].clip.name != "New Standing Draw Arrow") {
-
-                    Vector3 targetdir = hitInfo.point - upperBody.transform.position;
-                    Vector3 targetdir2 = hitInfo.point - main.transform.position;
-                    Vector3 targetdir3 = hitInfo.point - epaule.transform.position;
-                    Vector3 targetdir4 = hitInfo.point - mainD.transform.position;
-                    Vector3 targetdir5 = hitInfo.point - fleche.transform.position;
-                    Vector3 targetdir6 = hitInfo.point - head.transform.position;
-
-                    Quaternion rotate = Quaternion.LookRotation(targetdir, GameObject.FindWithTag("Player").transform.right);
-                    //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
-                    upperBody.transform.rotation = rotate;
-
-                    // Rotation Epaule
-                    Vector3 bis2 = Vector3.Cross(targetdir2, GameObject.FindWithTag("Player").transform.right);
-                    Quaternion rotate3 = Quaternion.LookRotation(-bis2, Vector3.Cross(bis2, targetdir3));
-                    //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
-                    epaule.transform.rotation = rotate3;
-
-                    // Rotation Main
-                    Vector3 bis = Vector3.Cross(targetdir2, GameObject.FindWithTag("Player").transform.right);
-                    Quaternion rotate2 = Quaternion.LookRotation(bis, -Vector3.Cross(bis, targetdir2));
-                    main.transform.rotation = rotate2;
-
-                    // Rotation mainD
-                    Vector3 bis3 = Vector3.Cross(targetdir4, GameObject.FindWithTag("Player").transform.right);
-                    Quaternion rotate4 = Quaternion.LookRotation(-bis3, Vector3.Cross(bis3, targetdir4));
-                    mainD.transform.rotation = rotate4;
-
-                    // Rotation fleche
-                    fleche.transform.rotation = Quaternion.LookRotation(targetdir5);
-
-                    // Rotation head
-                    Vector3 bis4 = Vector3.Cross(targetdir6, GameObject.FindWithTag("Player").transform.right);
-                    head.transform.rotation = Quaternion.LookRotation(-Vector3.Cross(bis4, targetdir4), targetdir6);
-                }
+                
+                targetPoint = hitInfo.point;
+            } else {
+                targetPoint = (ray.origin + ray.direction.normalized * 100);
             }
-            else {
-                Vector3 targetdir = (ray.origin + ray.direction.normalized * 10) - upperBody.transform.position;
 
-                Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
-                upperBody.transform.eulerAngles = rotate;
+            if (m_animator.GetCurrentAnimatorClipInfo(1)[0].clip.name != "New Standing Draw Arrow") {
+                Vector3 targetdir = targetPoint - upperBody.transform.position;
+                Vector3 targetdir2 = targetPoint - main.transform.position;
+                Vector3 targetdir3 = targetPoint - epaule.transform.position;
+                Vector3 targetdir4 = targetPoint - mainD.transform.position;
+                Vector3 targetdir5 = targetPoint - fleche.transform.position;
+                Vector3 targetdir6 = targetPoint - head.transform.position;
+
+                Quaternion rotate = Quaternion.LookRotation(targetdir, GameObject.FindWithTag("Player").transform.right);
+                //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
+                upperBody.transform.rotation = rotate;
+
+                // Rotation Epaule
+                Vector3 bis2 = Vector3.Cross(targetdir2, GameObject.FindWithTag("Player").transform.right);
+                Quaternion rotate3 = Quaternion.LookRotation(-bis2, Vector3.Cross(bis2, targetdir3));
+                //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
+                epaule.transform.rotation = rotate3;
+
+                // Rotation Main
+                Vector3 bis = Vector3.Cross(targetdir2, GameObject.FindWithTag("Player").transform.right);
+                Quaternion rotate2 = Quaternion.LookRotation(bis, -Vector3.Cross(bis, targetdir2));
+                main.transform.rotation = rotate2;
+
+                // Rotation mainD
+                Vector3 bis3 = Vector3.Cross(targetdir4, GameObject.FindWithTag("Player").transform.right);
+                Quaternion rotate4 = Quaternion.LookRotation(-bis3, Vector3.Cross(bis3, targetdir4));
+                mainD.transform.rotation = rotate4;
+
+                // Rotation fleche
+                fleche.transform.rotation = Quaternion.LookRotation(targetdir5);
+
+                // Rotation head
+                Vector3 bis4 = Vector3.Cross(targetdir6, GameObject.FindWithTag("Player").transform.right);
+                head.transform.rotation = Quaternion.LookRotation(-Vector3.Cross(bis4, targetdir4), targetdir6);
             }
         }
     }

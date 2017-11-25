@@ -67,6 +67,7 @@ public class DialogueManager : MonoBehaviour {
     public void EndDialogue()
     {
         Judy.GetComponent<MovementController>().setDialogue(false);
+        StopAllCoroutines();
         sonLettre.Stop();
         sonDialog.Play();
         animator.SetBool("isOpen", false);
