@@ -50,21 +50,21 @@ public class PickUpScript : MonoBehaviour {
         if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {
             if (o_type.Equals(ObjectsType.Bow) && GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").activeSelf)
             {
-                son = this.GetComponent<AudioSource>();
+                son = this.GetComponentInParent<AudioSource>();
                 son.Play();
                 dialogue.TriggerDialogueArc();     
                 GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
             }
             if (o_type.Equals(ObjectsType.Rope) && GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").activeSelf)
             {
-                son = this.GetComponent<AudioSource>();
+                son = this.GetComponentInParent<AudioSource>();
                 son.Play();
                 dialogue.TriggerDialogueCorde();
                 GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
             }
             if (o_type.Equals(ObjectsType.Sail) && GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").activeSelf)
             {
-                son = this.GetComponent<AudioSource>();
+                son = this.GetComponentInParent<AudioSource>();
                 son.Play();
                 dialogue.TriggerDialogueVoile();
                 GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
