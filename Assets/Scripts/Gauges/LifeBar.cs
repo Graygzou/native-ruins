@@ -36,7 +36,7 @@ public class LifeBar : MonoBehaviour {
             playerRoot.GetComponent<FormsController>().Transformation(0);
             actions.Death();
             sonCri.Stop();
-            GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_game_over").activeSelf);
+            GameObject.Find("Affichages/Menus/Menu_game_over").SetActive(!GameObject.Find("Affichages/Menus/Menu_game_over").activeSelf);
         }
 
         //Si Judy chute 
