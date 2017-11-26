@@ -56,8 +56,10 @@ public class MovementController : MonoBehaviour {
         float mouseY = Input.GetAxis("Mouse Y");
         Vector3 dir = new Vector3(mouseX, mouseY, 0f);
         lastMousePosition = Input.mousePosition;
-
-        UpdateCamera(dir.x, -dir.y);
+        if (!GameObject.Find("Player").GetComponent<FormsController>().transformationWheelOpen)
+        {
+            UpdateCamera(dir.x, -dir.y);
+        }
         Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
         float z;
         z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, -32, -12);

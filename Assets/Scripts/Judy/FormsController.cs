@@ -16,6 +16,8 @@ public class FormsController : MonoBehaviour
     private int selectedForm;
     public GameObject transformationWheel;
 
+    public bool transformationWheelOpen;
+
     private Color ColorStartHuman;
 
     public int isPumaUnlocked()
@@ -56,7 +58,7 @@ public class FormsController : MonoBehaviour
     {
         //ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
 
-        PumaUnlocked = false;
+        PumaUnlocked = true;
         BearUnlocked = true;
         transformationWheel.SetActive(false);
         GameObject playerRoot = GameObject.Find("Player");
@@ -95,6 +97,7 @@ public class FormsController : MonoBehaviour
 
     private void OpenTransformationWheel()
     {
+        transformationWheelOpen = true;
         // Verification des formes disponibles
         if (!PumaUnlocked)
         {
@@ -174,6 +177,7 @@ public class FormsController : MonoBehaviour
 
     private void CloseTransformationWheel()
     {
+        transformationWheelOpen = false;
         Time.timeScale = 1;
         transformationWheel.SetActive(false);
     }
@@ -206,6 +210,7 @@ public class FormsController : MonoBehaviour
             PumaForm.SetActive(false);
         }
 
+        StartCoroutine(ExplosionAnimation(positionCourant));
         // Activation nouvelle forme
         if (selectedForm == 0)
         {
@@ -334,6 +339,17 @@ public class FormsController : MonoBehaviour
         SetMaterialTransparent(HumanForm);
         iTween.FadeTo(HumanForm, 0, 1);
 
+    }
+
+
+
+    private IEnumerator ExplosionAnimation(Vector3 position)
+    {
+        GameObject explosion = GameObject.Find("Affichages/TransformationSystem/PlasmaExplosionEffect");
+        explosion.transform.position = position;
+        explosion.SetActive(true);
+        yield return new WaitForSeconds(seconds: 1f);
+        explosion.SetActive(false);
     }
 
 }
