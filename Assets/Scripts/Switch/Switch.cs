@@ -25,12 +25,15 @@ public abstract class Switch : MonoBehaviour {
     // Used to launch the real mechanism
     protected abstract void ActivateSwitch();
 
+    // Used to cancel the mechanism
+    protected virtual void DiactivateSwitch() { }
+
     // Used to launch a cutscene
     public virtual void StartCutScene() {
         // Pre-process
         GameObject.Find("SportyGirl").GetComponent<PlayerController>().enabled = false;
         GameObject.Find("SportyGirl").GetComponent<MovementController>().enabled = false;
-        GameObject.Find("SportyGirl").transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().enabled = false;
+        //GameObject.Find("SportyGirl").transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().enabled = false;
         // Enable the right camera
         playerCamera.enabled = false;
         cameraCutScene.enabled = true;
@@ -43,7 +46,7 @@ public abstract class Switch : MonoBehaviour {
     public virtual void StopCutScene() {
         cameraCutScene.enabled = false;
         playerCamera.enabled = true;
-        GameObject.Find("SportyGirl").transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().enabled = true;
+        //GameObject.Find("SportyGirl").transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().enabled = true;
         GameObject.Find("SportyGirl").GetComponent<PlayerController>().enabled = true;
         GameObject.Find("SportyGirl").GetComponent<MovementController>().enabled = true;
     }
