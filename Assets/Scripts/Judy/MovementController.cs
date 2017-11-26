@@ -95,10 +95,10 @@ public class MovementController : MonoBehaviour {
     }
 
     protected void OnCollisionStay(Collision collision) {
-		if (collision.gameObject.tag.Equals ("Terrain")) {
-			m_rigidBody.velocity.Set(0f, 0f, 0f);
-			m_rigidBody.useGravity = false;
-		}	
+		//if (collision.gameObject.tag.Equals ("Terrain")) {
+		//	m_rigidBody.velocity.Set(0f, 0f, 0f);
+		//	m_rigidBody.useGravity = false;
+		//}	
 
         ContactPoint[] contactPoints = collision.contacts;
         bool validSurfaceNormal = false;
@@ -122,9 +122,9 @@ public class MovementController : MonoBehaviour {
     }
 
     protected void OnCollisionExit(Collision collision) {
-		if (collision.gameObject.tag.Equals ("Terrain")) {
-			m_rigidBody.useGravity = true;
-		}
+		//if (collision.gameObject.tag.Equals ("Terrain")) {
+		//	m_rigidBody.useGravity = true;
+		//}
         if (m_collisions.Contains(collision.collider)) {
             m_collisions.Remove(collision.collider);
         }
