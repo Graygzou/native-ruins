@@ -98,7 +98,7 @@ public class MovementControllerAnimal : MovementController {
         Debug.DrawRay(transform.position + transform.forward * 7.5f + transform.up * 3, transform.forward * distance);
         if (Physics.Raycast(Judy, out hit, distance)) {
             if (hit.collider.tag == "Animal") {
-                hit.transform.gameObject.GetComponent<AgentProperties>().takeDamages(30f);
+                hit.transform.gameObject.GetComponent<AgentProperties>().takeDamages(50f);
                 //Inflige degat a l'animal
             }
         }

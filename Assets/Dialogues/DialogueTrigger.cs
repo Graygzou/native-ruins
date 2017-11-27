@@ -41,7 +41,7 @@ public class DialogueTrigger : MonoBehaviour {
     {
         dialogue.name = "Aide";
         dialogue.sentences = new string[3];
-        dialogue.sentences[0] = "Félicitation! Vous venez de trouver le totem Ours. Cet item vous permets de vous transformer en ours.";
+        dialogue.sentences[0] = "Félicitations ! Vous venez de trouver le totem Ours. Cet item vous permets de vous transformer en ours.";
         dialogue.sentences[1] = "Dans cette forme, vous êtes plus résistante et vous pourrez accéder à de nouvelles énigmes.";
         dialogue.sentences[2] = "Une roue de transformation est maintenant accéssible si vous maintenez A. Vous pouvez choisir votre forme en passant la souris sur celle désirée.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
@@ -51,7 +51,7 @@ public class DialogueTrigger : MonoBehaviour {
     {
         dialogue.name = "Aide";
         dialogue.sentences = new string[2];
-        dialogue.sentences[0] = "Félicitation! Vous venez de trouver le totem Puma. Cet item vous permets de vous transformer en puma.";
+        dialogue.sentences[0] = "Félicitations ! Vous venez de trouver le totem Puma. Cet item vous permet de vous transformer en puma.";
         dialogue.sentences[1] = "Dans cette forme, vous êtes moins résistante mais vous pourrez obtenir de meilleurs mouvements et ainsi accéder à de nouvelles énigmes.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
@@ -60,7 +60,7 @@ public class DialogueTrigger : MonoBehaviour {
     {
         dialogue.name = "Aide";
         dialogue.sentences = new string[1];
-        dialogue.sentences[0] = "Félicitation! Vous venez de trouver une voile. Cet item vous permettra de construire un radeau.";
+        dialogue.sentences[0] = "Félicitations ! Vous venez de trouver une voile. Cet item vous permettra de construire un radeau.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
 
@@ -68,7 +68,7 @@ public class DialogueTrigger : MonoBehaviour {
     {
         dialogue.name = "Aide";
         dialogue.sentences = new string[1];
-        dialogue.sentences[0] = "Félicitation! Vous venez de trouver une corde. Cet item vous permettra de construire un radeau.";
+        dialogue.sentences[0] = "Félicitations ! Vous venez de trouver une corde. Cet item vous permettra de construire un radeau.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
 
@@ -76,9 +76,9 @@ public class DialogueTrigger : MonoBehaviour {
     {
         dialogue.name = "Aide";
         dialogue.sentences = new string[3];
-        dialogue.sentences[0] = "Félicitation! Vous venez de trouver un arc. Cet item vous permettra de chasser et de vous défendre.";
+        dialogue.sentences[0] = "Félicitations ! Vous venez de trouver un arc. Cet item vous permettra de chasser et de vous défendre.";
         dialogue.sentences[1] = "Des éléments sur l'île vous permettront de créer des flèches.";
-        dialogue.sentences[2] = "Pour l'utiliser: Le CLIC DROIT de la souris vous permet de viser et le CLIC GAUCHE vous permet de tirer une flèche.";
+        dialogue.sentences[2] = "Pour l'utiliser : Le CLIC DROIT de la souris vous permet de viser et le CLIC GAUCHE vous permet de tirer une flèche.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
 

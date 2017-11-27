@@ -233,7 +233,9 @@ public class MovementControllerHuman : MovementController {
                     // change the camera for the aim
                     aimCamera.enabled = false;
                     playerCamera.enabled = true;
-                    
+
+                    GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(false);
+
                     //SwitchToRegular();
                 }
             }

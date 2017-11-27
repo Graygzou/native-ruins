@@ -58,7 +58,7 @@ public class FormsController : MonoBehaviour
     {
         //ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
 
-        PumaUnlocked = true;
+        PumaUnlocked = false;
         BearUnlocked = true;
         transformationWheel.SetActive(false);
         GameObject playerRoot = GameObject.Find("Player");
@@ -104,12 +104,22 @@ public class FormsController : MonoBehaviour
             GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPuma").SetActive(false);
             GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPumaLocked").SetActive(true);
         }
+        else
+        {
+            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPuma").SetActive(true);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPumaLocked").SetActive(false);
+        }
 
         if (!BearUnlocked)
         {
             GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconBear").SetActive(false);
             GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconBearLocked").SetActive(true);
         }
+        //else
+        //{
+        //    GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPuma").SetActive(true);
+        //    GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPumaLocked").SetActive(false);
+        //}
 
 
         // Temps arrêté
@@ -210,7 +220,11 @@ public class FormsController : MonoBehaviour
             PumaForm.SetActive(false);
         }
 
-        StartCoroutine(ExplosionAnimation(positionCourant));
+        if (currentForm != selectedForm)
+        {
+            StartCoroutine(ExplosionAnimation(positionCourant));
+        }
+        
         // Activation nouvelle forme
         if (selectedForm == 0)
         {
