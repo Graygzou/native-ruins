@@ -31,8 +31,8 @@ public abstract class Switch : MonoBehaviour {
     // Used to launch a cutscene
     public virtual void StartCutScene() {
         // Pre-process
-        GameObject.Find("SportyGirl").GetComponent<PlayerController>().enabled = false;
-        GameObject.Find("SportyGirl").GetComponent<MovementController>().enabled = false;
+        //GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = false;
+        GameObject.FindWithTag("Player").GetComponent<MovementController>().enabled = false;
         //GameObject.Find("SportyGirl").transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().enabled = false;
         // Enable the right camera
         playerCamera.enabled = false;
@@ -47,8 +47,8 @@ public abstract class Switch : MonoBehaviour {
         cameraCutScene.enabled = false;
         playerCamera.enabled = true;
         //GameObject.Find("SportyGirl").transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().enabled = true;
-        GameObject.Find("SportyGirl").GetComponent<PlayerController>().enabled = true;
-        GameObject.Find("SportyGirl").GetComponent<MovementController>().enabled = true;
+        //GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = true;
+        GameObject.FindWithTag("Player").GetComponent<MovementController>().enabled = true;
     }
 
 }
