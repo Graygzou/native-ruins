@@ -191,7 +191,12 @@ public class MovementControllerHuman : MovementController {
                     isAiming = true;
 
                     // To take the idle state
-                    actions.Aiming();
+                    if (Input.GetKey(KeyCode.LeftControl)) {
+                        actions.AimingCrouch();
+                    } else {
+                        actions.Aiming();
+                    }
+                    
 
                     // Find if their is an arrow left in the bag
                     hasArrowLeft = InventoryManager.hasArrowLeft();
@@ -261,7 +266,11 @@ public class MovementControllerHuman : MovementController {
                         actions.Stay();
                     }
                 } else {
-                    actions.MoveWithBow(h, v);
+                    if (Input.GetKey(KeyCode.LeftControl)) {
+                        actions.MoveWithBowCrouch(h, v);
+                    } else {
+                        actions.MoveWithBow(h, v);
+                    }
                 }
                 //GameObject.FindWithTag("Player").transform.rotation = Quaternion.LookRotation(NextDir);
             } else {

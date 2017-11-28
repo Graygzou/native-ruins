@@ -27,7 +27,7 @@ public class ActionsNew : MonoBehaviour {
     }
 
 	public void Walk () {
-		animator.SetBool("Aiming", false);
+        //animator.SetBool("Aiming", false);
         animator.ResetTrigger("Hit");
         animator.SetBool("Squat", false);
         animator.SetFloat ("Speed", 16.5f);
@@ -87,6 +87,12 @@ public class ActionsNew : MonoBehaviour {
         animator.Play("BowAimIdle", FightLayer);
     }
 
+    // Aim with the bow
+	public void AimingCrouch () {
+		animator.SetBool("Aiming", true);
+        animator.Play("BowAimIdleCrouch", FightLayer);
+    }
+
     // Release aim with the bow
 	public void ReleaseAiming () {
 		animator.SetBool("Aiming", false);
@@ -94,7 +100,7 @@ public class ActionsNew : MonoBehaviour {
         animator.Play("StandMovement", MovementLayer);
     }
 
-    // Reload the bow
+    // Move with the bow equipped
     public void MoveWithBow(float x, float y) {
         animator.SetBool("Aiming", true);
         animator.SetFloat("VelX", x);
@@ -103,7 +109,15 @@ public class ActionsNew : MonoBehaviour {
         animator.Play("BowMovement", MovementLayer);
     }
 
-    // Move with the bow equipped
+    // Reload the bow
+    public void MoveWithBowCrouch(float x, float y) {
+        animator.SetFloat("VelX", x);
+        animator.SetFloat("VelY", y);
+        animator.SetFloat("Speed", 22f);
+        animator.Play("BowMovementCrouch", MovementLayer);
+    }
+
+    // Reload the bow
     public void Reloading() {
         animator.SetBool("Aiming", true);
         animator.SetTrigger("Reloading");
