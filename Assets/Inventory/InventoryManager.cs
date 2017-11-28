@@ -73,14 +73,18 @@ public class InventoryManager : MonoBehaviour {
 			RectTransform clone;
 			if (isTorchEquiped) {
 				AddObjectOfType (ObjectsType.Torch);
-				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive(false);
+                GameObject player = GameObject.FindWithTag("Player");
+                player.GetComponent<ActionsNew>().DisarmWeapon();
+                StartCoroutine("DisarmTorch");
 				clone = Instantiate(o_Torch) as RectTransform;
 				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
 				isTorchEquiped = false;
 			}
 			if (isBowEquiped) {
 				AddObjectOfType (ObjectsType.Bow);
-				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive(false);
+                GameObject player = GameObject.FindWithTag("Player");
+                player.GetComponent<ActionsNew>().DisarmWeapon();
+                StartCoroutine("DisarmBow");
 				clone = Instantiate(o_Bow) as RectTransform;
 				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
 				isBowEquiped = false;
@@ -89,8 +93,18 @@ public class InventoryManager : MonoBehaviour {
 		}
 	}
 
+    private IEnumerator DisarmTorch() {
+        yield return new WaitForSeconds(0.6f);
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive(false);
+    }
 
-	public static void RemoveObjectOfType(ObjectsType o){
+    private IEnumerator DisarmBow() {
+        yield return new WaitForSeconds(0.6f);
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive(false);
+    }
+
+
+        public static void RemoveObjectOfType(ObjectsType o){
 		foreach (ObjectsType obj in inventaire) {
 			if (obj == o) {
 				inventaire.Remove (o);

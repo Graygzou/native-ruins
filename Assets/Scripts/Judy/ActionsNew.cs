@@ -144,15 +144,15 @@ public class ActionsNew : MonoBehaviour {
 	public void EquipWeapon () {
 		//animator.SetBool ("Squat", false);
 		animator.SetBool("Aiming", false);
-		animator.SetBool("EquipWeapon", true);
-		animator.Play("EquipArme", FightLayer);
+		//animator.SetBool("EquipWeapon", true);
+		animator.Play("EquipArme", MovementLayer);
 	}
 
 	public void DisarmWeapon () {
 		//animator.SetBool ("Squat", false);
 		animator.SetBool("Aiming", false);
-		animator.SetBool("EquipWeapon", false);
-		animator.Play ("DisarmArme", FightLayer);
+		//animator.SetBool("EquipWeapon", false);
+		animator.Play ("DisarmArme", MovementLayer);
 	}
 
     // Celebrate (excited)

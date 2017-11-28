@@ -131,14 +131,16 @@
 		switch(o_type) {
 		case ObjectsType.Bow:
 			if (!InventoryManager.isTorchEquiped) {
-				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive (true);
 				InventoryManager.isBowEquiped = true;
 				GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
 				HideInfo ();
 				InventoryManager.RemoveObjectOfType (o_type);
 				isUsed = true;
-				Destroy(this.gameObject);
-			}
+                GameObject player = GameObject.FindWithTag("Player");
+                player.GetComponent<ActionsNew>().EquipWeapon();
+                GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive (true);
+			    Destroy(this.gameObject);
+            }
 			break;
 		case ObjectsType.Fire:
 			break;
@@ -160,12 +162,14 @@
 			break;
 		case ObjectsType.Torch:
 			if (!InventoryManager.isBowEquiped) {
-				GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive (true);
 				InventoryManager.isTorchEquiped = true;
 				GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
 				HideInfo ();
 				InventoryManager.RemoveObjectOfType (o_type);
 				isUsed = true;
+                GameObject player = GameObject.FindWithTag("Player");
+                player.GetComponent<ActionsNew>().EquipWeapon();
+                GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive (true);
 				Destroy(this.gameObject);
 			}
 			break;
