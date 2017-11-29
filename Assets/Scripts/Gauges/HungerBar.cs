@@ -11,24 +11,16 @@ public class HungerBar : MonoBehaviour {
     private int currentTimeFaim = 0;
     private int timeMaxFaim = 1500;
 	private GameObject forms;
-    private bool setterDemo;
 
 	// Use this for initialization
 	void Start () {
         Hunger.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.green;
-        setterDemo = true;
-        
     }
 
 
 	
 	// Update is called once per frame
 	void Update () {
-        if (setterDemo)
-        {
-            Hunger.GetComponent<Scrollbar>().size = 0.4f;
-            setterDemo = false;
-        }
         GameObject playerRoot = GameObject.Find("Player");
         if (currentTimeFaim == timeMaxFaim)
         {

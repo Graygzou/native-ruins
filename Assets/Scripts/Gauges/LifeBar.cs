@@ -15,7 +15,6 @@ public class LifeBar : MonoBehaviour {
     private int currentTimeFaim = 0;
 	private GameObject Judy;
 	private ActionsNew actions;
-    private bool setterDemo;
 
     // Use this for initialization
     void Start () {
@@ -25,17 +24,11 @@ public class LifeBar : MonoBehaviour {
 		Judy = GameObject.FindWithTag ("Player");
 		actions = Judy.GetComponent ("ActionsNew") as ActionsNew;
         Life.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.red;
-        
-        setterDemo = true;
+      
     }
 
     // Update is called once per frame (60 frames)
     void FixedUpdate () {
-        if (setterDemo)
-        {
-            Life.GetComponent<Scrollbar>().size = 0.7f;
-            setterDemo = false;
-        }
         //*****************PERTE DE VIE******************//
         //Si Judy a sa barre de vie à 0 : Mort
         if (Life.GetComponent<Scrollbar>().size <= 0f) {
