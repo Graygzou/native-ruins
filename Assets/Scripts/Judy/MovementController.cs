@@ -19,6 +19,7 @@ public class MovementController : MonoBehaviour {
 
     protected Vector3 initial_orientation;
     protected GameObject EnergyBar;
+    protected GameObject LifeBar;
 
     protected Vector3 lastMousePosition = Vector3.zero;
 
@@ -45,6 +46,7 @@ public class MovementController : MonoBehaviour {
         m_isSaving = false;
         m_cameraPivot = GameObject.Find("CameraPivot").transform;
         EnergyBar = GameObject.Find("Gauges/Energy");
+        LifeBar = GameObject.Find("Gauges/Life");
         initial_orientation = transform.forward;
         m_footstep.Play();
         m_footstep.loop = true;

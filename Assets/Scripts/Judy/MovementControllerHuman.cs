@@ -255,22 +255,43 @@ public class MovementControllerHuman : MovementController {
                 }
             }
 
+            if(Input.GetKeyDown(KeyCode.I)) {
+                actions.OpenChest();
+            }
+
+            if(Input.GetKeyDown(KeyCode.O)) {
+                actions.Celebrate();
+            }
+
+            if(Input.GetKeyDown(KeyCode.P)) {
+                actions.DanceHipHop();
+            }
+
+            if(Input.GetKeyDown(KeyCode.L)) {
+                actions.DanceSamba();
+            }
+
+            if(Input.GetKeyDown(KeyCode.M)) {
+                actions.LookAround();
+            }
+
             // 3) Check the movement of the player
             if (isAiming) {
                 // Bow mode
                 if (NextDir.Equals(Vector3.zero)) {
                     m_footstep.Pause();
                     if (Input.GetKey(KeyCode.LeftControl)) {
+                        aimCamera.transform.localPosition = GameObject.Find("OriginCamera").transform.localPosition - GameObject.Find("OriginCamera").transform.up * 0.15f;
                         actions.Wary();
+                        actions.AimingCrouch();
                     } else {
-                        actions.Stay();
+                        aimCamera.transform.localPosition = GameObject.Find("OriginCamera").transform.localPosition;
+                        actions.Stay(LifeBar.GetComponent<LifeBar>().getSizeLifeBar());
+                        actions.Aiming();
                     }
                 } else {
-                    if (Input.GetKey(KeyCode.LeftControl)) {
-                        actions.MoveWithBowCrouch(h, v);
-                    } else {
-                        actions.MoveWithBow(h, v);
-                    }
+                    aimCamera.transform.localPosition = GameObject.Find("OriginCamera").transform.localPosition;
+                    actions.MoveWithBow(h, v);
                 }
                 //GameObject.FindWithTag("Player").transform.rotation = Quaternion.LookRotation(NextDir);
             } else {
@@ -281,7 +302,7 @@ public class MovementControllerHuman : MovementController {
                     if (Input.GetKey(KeyCode.LeftControl)) {
                         actions.Wary();
                     } else {
-                        actions.Stay();
+                        actions.Stay(LifeBar.GetComponent<LifeBar>().getSizeLifeBar());
                     }
                 } else {
                     // If the player is running

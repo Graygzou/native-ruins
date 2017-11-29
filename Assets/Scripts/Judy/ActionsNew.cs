@@ -19,10 +19,11 @@ public class ActionsNew : MonoBehaviour {
         DamageLayer = animator.GetLayerIndex("Damage Layer");
     }
 
-	public void Stay () {
+	public void Stay (float health) {
 		//animator.SetBool("Aiming", false);
 		animator.SetBool ("Squat", false);
 		animator.SetFloat ("Speed", 0f);
+        animator.SetFloat("Health", health);
         //animator.Play("StandMovement", MovementLayer);
     }
 
@@ -50,7 +51,7 @@ public class ActionsNew : MonoBehaviour {
 
 	public void Death () {
 		//animator.SetBool ("Squat", false);
-        Stay();
+        Stay(0f);
         animator.SetTrigger("Death");
 		//if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Death"))
 		//	animator.Play("Idle", 0);
@@ -84,12 +85,14 @@ public class ActionsNew : MonoBehaviour {
     // Aim with the bow
 	public void Aiming () {
 		animator.SetBool("Aiming", true);
+        animator.SetBool("Squat", false);
         animator.Play("BowAimIdle", FightLayer);
     }
 
     // Aim with the bow
 	public void AimingCrouch () {
 		animator.SetBool("Aiming", true);
+        animator.SetBool("Squat", true);
         animator.Play("BowAimIdleCrouch", FightLayer);
     }
 
@@ -103,18 +106,12 @@ public class ActionsNew : MonoBehaviour {
     // Move with the bow equipped
     public void MoveWithBow(float x, float y) {
         animator.SetBool("Aiming", true);
+        animator.SetBool("Squat", false);
         animator.SetFloat("VelX", x);
         animator.SetFloat("VelY", y);
         animator.SetFloat("Speed", 22f);
+        animator.Play("BowAimIdle", FightLayer);
         animator.Play("BowMovement", MovementLayer);
-    }
-
-    // Reload the bow
-    public void MoveWithBowCrouch(float x, float y) {
-        animator.SetFloat("VelX", x);
-        animator.SetFloat("VelY", y);
-        animator.SetFloat("Speed", 22f);
-        animator.Play("BowMovementCrouch", MovementLayer);
     }
 
     // Reload the bow
@@ -171,7 +168,30 @@ public class ActionsNew : MonoBehaviour {
 
     // Celebrate (excited)
     public void Celebrate() {
-        // TODO LATER
+        animator.SetTrigger("isExcited");
+        animator.Play("Excited", MovementLayer);
+    }
+
+    // Celebrate (dance hiphop)
+    public void DanceHipHop(){
+        animator.SetTrigger("HipHop");
+        animator.Play("HipHop", MovementLayer);
+    }
+
+    // Celebrate (dance samba)
+    public void DanceSamba() {
+        animator.SetTrigger("Samba");
+        animator.Play("Samba", MovementLayer);
+    }
+
+    public void OpenChest() {
+        animator.SetTrigger("OpeningChest");
+        animator.Play("OpeningLid", MovementLayer);
+    }
+
+    public void LookAround() {
+        animator.SetTrigger("LookAround");
+        animator.Play("LookAround", MovementLayer);
     }
 
     // Sitting (save the game)
