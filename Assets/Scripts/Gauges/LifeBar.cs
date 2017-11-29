@@ -8,23 +8,29 @@ public class LifeBar : MonoBehaviour {
     public GameObject Life;
     public GameObject Hunger;
     public Color BarColor;
+    public Animator animator;
 
     private AudioSource sonCri;
     private AudioSource sonManger;
+    private AudioSource sonVieBasse;
     private int timeMaxFaim = 3600;
     private int currentTimeFaim = 0;
-	private GameObject Judy;
+    private int timeMaxHeart = 60;
+    private int currentTimeHeart = 0;
+    private GameObject Judy;
 	private ActionsNew actions;
+    private bool isWeak;
 
     // Use this for initialization
     void Start () {
         AudioSource[] sons = GetComponents<AudioSource>();
         sonCri = sons[0];
         sonManger = sons[1];
+        sonVieBasse = sons[2];
 		Judy = GameObject.FindWithTag ("Player");
 		actions = Judy.GetComponent ("ActionsNew") as ActionsNew;
         Life.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.red;
-      
+        isWeak = false;
     }
 
     // Update is called once per frame (60 frames)
@@ -57,6 +63,27 @@ public class LifeBar : MonoBehaviour {
             currentTimeFaim++;
         }
 
+        weak();
+
+    }
+
+    public void weak()
+    {
+        if (Life.GetComponent<Scrollbar>().size <= 0.3f)
+        {
+            if (currentTimeHeart == timeMaxHeart)
+            {
+                isWeak = !isWeak;
+                if(!isWeak)
+                {
+                    sonVieBasse.Play();
+                }
+                animator.SetBool("isWeak", isWeak);
+                currentTimeHeart = 0;
+            }
+            currentTimeHeart++;
+               
+        }
     }
 
     public float getSizeLifeBar()
@@ -99,4 +126,5 @@ public class LifeBar : MonoBehaviour {
             Life.GetComponent<Scrollbar>().size -= lifeLoosed - lifeLoosed*0.25f;
         }
     }
+
 }

@@ -31,6 +31,9 @@ public class AgentProperties : MonoBehaviour
     private Transform front;
 
     private AudioSource sonCri;
+    private AudioSource sonCombat;
+
+    public static bool soundIsPlaying;
 
     void Awake() {
         isDead = false;
@@ -39,7 +42,10 @@ public class AgentProperties : MonoBehaviour
     }
 
     void Start() {
-        sonCri = GetComponent<AudioSource>();
+        AgentProperties.soundIsPlaying = false;
+        AudioSource[] sons = GetComponents<AudioSource>();
+        sonCri = sons[0];
+        sonCombat = sons[1];
         currentHealth = maxHealth;
 
         front = transform.GetChild(transform.childCount-1).transform;
@@ -48,21 +54,24 @@ public class AgentProperties : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-
         // If the entering collider is the player...
         if (other.gameObject.tag == "Player" && !isDead)
         {
             if (!isAlert)
             {
-                sonCri.Play();
+                if(!AgentProperties.soundIsPlaying)
+                {
+                    sonCombat.Play();
+                    AgentProperties.soundIsPlaying = true;
+                }   
                 // The animal enter the "State" Alert
                 isAlert = true;
             }
             else if (isAlert && !playerTooClose)
             {
                 playerTooClose = true;
+                sonCri.Play();
             }
-
         }
     }
 
@@ -79,6 +88,12 @@ public class AgentProperties : MonoBehaviour
             {
                 // The animal quit the "State" Alert
                 isAlert = false;
+                if (AgentProperties.soundIsPlaying)
+                {
+                    sonCombat.Stop();
+                    AgentProperties.soundIsPlaying = false;
+                }
+                
             }
         }
     }

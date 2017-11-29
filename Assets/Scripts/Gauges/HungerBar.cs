@@ -9,7 +9,7 @@ public class HungerBar : MonoBehaviour {
     public Color BarColor;
 
     private int currentTimeFaim = 0;
-    private int timeMaxFaim = 1500;
+    private int timeMaxFaim = 3600;
 	private GameObject forms;
 
 	// Use this for initialization
