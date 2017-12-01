@@ -43,11 +43,11 @@ public class ActionsNew : MonoBehaviour {
 		//animator.Play ("StandMovement", MovementLayer);
 	}
 
-	public void Attack () {
-		animator.SetBool ("Squat", false);
-		Aiming ();
-		animator.Play ("Attack");
-	}
+	//public void Attack () {
+	//	animator.SetBool ("Squat", false);
+	//	Aiming ();
+	//	animator.Play ("Attack");
+	//}
 
 	public void Death () {
 		//animator.SetBool ("Squat", false);
@@ -84,14 +84,16 @@ public class ActionsNew : MonoBehaviour {
 
     // Aim with the bow
 	public void Aiming () {
-		animator.SetBool("Aiming", true);
+        animator.SetBool("HasArrowLeft", false);
+        animator.SetBool("Aiming", true);
         animator.SetBool("Squat", false);
-        animator.Play("BowAimIdle", FightLayer);
+        //animator.Play("BowAimIdle", FightLayer);
     }
 
     // Aim with the bow
 	public void AimingCrouch () {
-		animator.SetBool("Aiming", true);
+        animator.SetBool("HasArrowLeft", false);
+        animator.SetBool("Aiming", true);
         animator.SetBool("Squat", true);
         animator.Play("BowAimIdleCrouch", FightLayer);
     }
@@ -110,14 +112,15 @@ public class ActionsNew : MonoBehaviour {
         animator.SetFloat("VelX", x);
         animator.SetFloat("VelY", y);
         animator.SetFloat("Speed", 22f);
-        animator.Play("BowAimIdle", FightLayer);
+        //animator.Play("BowAimIdle", FightLayer);
         animator.Play("BowMovement", MovementLayer);
     }
 
     // Reload the bow
     public void Reloading() {
+        animator.SetBool("HasArrowLeft", true);
         animator.SetBool("Aiming", true);
-        animator.SetTrigger("Reloading");
+        //animator.SetTrigger("Reloading");
         animator.Play("BowDrawArrow", FightLayer);
     }
 
@@ -152,11 +155,11 @@ public class ActionsNew : MonoBehaviour {
 		animator.Play("CrouchMovement", MovementLayer);
 	}
 
-	public void EquipWeapon () {
-		//animator.SetBool ("Squat", false);
-		animator.SetBool("Aiming", false);
-		//animator.SetBool("EquipWeapon", true);
-		animator.Play("EquipArme", MovementLayer);
+    public void EquipWeapon() {
+        //animator.SetBool ("Squat", false);
+        animator.SetBool("Aiming", false);
+        //animator.SetBool("EquipWeapon", true);
+        animator.Play("EquipArme", MovementLayer);
 	}
 
 	public void DisarmWeapon () {

@@ -9,6 +9,10 @@ public class PickUpScript : MonoBehaviour {
     [SerializeField]private RectTransform o_object;
 
 	private bool o_isPickable = false;
+    private bool hasDiscoveredBow = false;
+    private bool hasDiscoveredRope = false;
+    private bool hasDiscoveredSail = false;
+
     private DialogueTrigger dialogue;
 
     // Use this for initialization
@@ -48,22 +52,25 @@ public class PickUpScript : MonoBehaviour {
         AudioSource son;
 
         if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {
-            if (o_type.Equals(ObjectsType.Bow) && GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").activeSelf)
+            if (o_type.Equals(ObjectsType.Bow) && hasDiscoveredBow)
             {
-                son = this.GetComponentInParent<AudioSource>();
-                son.Play();
+                hasDiscoveredBow = true;
+                //son = this.GetComponentInParent<AudioSource>();
+                //son.Play();
                 dialogue.TriggerDialogueArc();     
                 GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
             }
-            if (o_type.Equals(ObjectsType.Rope) && GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").activeSelf)
+            if (o_type.Equals(ObjectsType.Rope) && hasDiscoveredRope)
             {
+                hasDiscoveredRope = true;
                 son = this.GetComponentInParent<AudioSource>();
                 son.Play();
                 dialogue.TriggerDialogueCorde();
                 GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
             }
-            if (o_type.Equals(ObjectsType.Sail) && GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").activeSelf)
+            if (o_type.Equals(ObjectsType.Sail) && hasDiscoveredSail)
             {
+                hasDiscoveredSail = true;
                 son = this.GetComponentInParent<AudioSource>();
                 son.Play();
                 dialogue.TriggerDialogueVoile();

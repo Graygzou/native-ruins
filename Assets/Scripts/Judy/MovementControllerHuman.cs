@@ -5,11 +5,12 @@ using System.Collections;
 
 public class MovementControllerHuman : MovementController {
 
-	[SerializeField] private ActionsNew actions = null;
+    [SerializeField] private ActionsNew actions = null;
     public float mouseSmoothness = 5.0f;
     private Camera playerCamera;
     private Camera aimCamera;
     private bool isAiming;
+    private bool isReloading;
     private Vector3 offset;
     public Rigidbody m_Arrow;                               // Prefab of the arrow.
 
@@ -34,6 +35,7 @@ public class MovementControllerHuman : MovementController {
         m_turnSpeed = 5;
         m_jumpForce = 5;
         isAiming = false;
+        isReloading = false;
         hasArrowLeft = false;
 
         // Get the regular camera
@@ -52,6 +54,11 @@ public class MovementControllerHuman : MovementController {
         initLargeurCrossHair = largeurCrossHair.GetComponent<RectTransform>().localPosition;
         initHauteurCrossHair = hauteurCrossHair.GetComponent<RectTransform>().localPosition;
 
+        // Get all the audio clips of the bow
+        GameObject bow = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D");
+        bow.GetComponent<AudioSource>().Play();
+
+
         // Keep initial rotation for the animation
         initUpperBody = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2").transform.rotation;
         initEpaule = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone").transform.rotation;
@@ -68,8 +75,8 @@ public class MovementControllerHuman : MovementController {
 
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space)) {
             m_jumpTimeStamp = Time.time;
-			actions.Jump();
-            
+            actions.Jump();
+
             m_rigidBody.AddForce(Vector3.up * 45, ForceMode.Impulse);
             //StartCoroutine("Jump");
             //GetComponent<BoxCollider>().transform.position = Vector3.Lerp(GetComponent<BoxCollider>().transform.position,
@@ -82,7 +89,7 @@ public class MovementControllerHuman : MovementController {
         yield return new WaitForSeconds(0.5f);
     }
 
-    override protected void UpdateCamera(float deltaX, float deltaY) {   
+    override protected void UpdateCamera(float deltaX, float deltaY) {
         if (!isAiming) {
             // Regular mode
             base.UpdateCamera(deltaX, deltaY);
@@ -94,6 +101,7 @@ public class MovementControllerHuman : MovementController {
             GameObject mainD = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3");
             GameObject fleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D");
             GameObject head = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigNeck/RigHead");
+            GameObject bow = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D");
 
             //// Method 2
             //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-Input.mousePosition.y * mouseSmoothness, Input.mousePosition.x * mouseSmoothness, 0f);
@@ -124,21 +132,24 @@ public class MovementControllerHuman : MovementController {
                 Debug.DrawLine(epaule.transform.position, hitInfo.point);
                 Debug.DrawLine(main.transform.position, hitInfo.point);
                 Debug.DrawLine(mainD.transform.position, hitInfo.point);
+                Debug.DrawLine(bow.transform.position, hitInfo.point);
 
                 targetDirection = hitInfo.point - fleche.transform.position;
-                
+
                 targetPoint = hitInfo.point;
             } else {
                 targetPoint = (ray.origin + ray.direction.normalized * 100);
             }
 
-            if (m_animator.GetCurrentAnimatorClipInfo(1)[0].clip.name != "New Standing Draw Arrow") {
+            // TODO garder la tete vers la cible ?
+
+            if (m_animator.GetCurrentAnimatorClipInfo(1).Length > 0 && m_animator.GetCurrentAnimatorClipInfo(1)[0].clip.name != "New Standing Draw Arrow") {
                 Vector3 targetdir = targetPoint - upperBody.transform.position;
                 Vector3 targetdir2 = targetPoint - main.transform.position;
                 Vector3 targetdir3 = targetPoint - epaule.transform.position;
                 Vector3 targetdir4 = targetPoint - mainD.transform.position;
                 Vector3 targetdir5 = targetPoint - fleche.transform.position;
-                Vector3 targetdir6 = targetPoint - head.transform.position;
+                Vector3 targetdir7 = (targetPoint - GameObject.FindWithTag("Player").transform.right) - bow.transform.position;
 
                 Quaternion rotate = Quaternion.LookRotation(targetdir, GameObject.FindWithTag("Player").transform.right);
                 //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-targetdir.y, targetdir.x, 0f);
@@ -163,10 +174,16 @@ public class MovementControllerHuman : MovementController {
                 // Rotation fleche
                 fleche.transform.rotation = Quaternion.LookRotation(targetdir5);
 
-                // Rotation head
-                Vector3 bis4 = Vector3.Cross(targetdir6, GameObject.FindWithTag("Player").transform.right);
-                head.transform.rotation = Quaternion.LookRotation(-Vector3.Cross(bis4, targetdir4), targetdir6);
+
+
+                // Bow head
+                Vector3 bis5 = Vector3.Cross(targetdir7, GameObject.FindWithTag("Player").transform.right);
+                bow.transform.rotation = Quaternion.LookRotation(-targetdir7, GameObject.FindWithTag("Player").transform.right);
             }
+            Vector3 targetdir6 = targetPoint - head.transform.position;
+            // Rotation head
+            Vector3 bis4 = Vector3.Cross(targetdir6, GameObject.FindWithTag("Player").transform.right);
+            head.transform.rotation = Quaternion.LookRotation(-Vector3.Cross(bis4, targetdir6), targetdir6);
         }
     }
 
@@ -190,21 +207,35 @@ public class MovementControllerHuman : MovementController {
                 if (!isAiming) {
                     isAiming = true;
 
-                    // To take the idle state
-                    if (Input.GetKey(KeyCode.LeftControl)) {
-                        actions.AimingCrouch();
-                    } else {
-                        actions.Aiming();
-                    }
-                    
+                    //hasArrowLeft = InventoryManager.hasArrowLeft();
+                    //if (hasArrowLeft) {
+                    //    // SetActive the arrow
+                    //    GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
+                    //}
 
-                    // Find if their is an arrow left in the bag
-                    hasArrowLeft = InventoryManager.hasArrowLeft();
-                    if (hasArrowLeft) {
-                        // SetActive the arrow
-                        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
-                    }
-                    // To stay in the idle bow state
+                    StartCoroutine("DrawArrow");
+
+                    //actions.Reloading();
+
+                    // Make the string bend
+                    //GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D/BowRig_tex/Root/String").GetComponent<BowString>().Stretch();
+
+                    // To take the idle state
+                    //if (Input.GetKey(KeyCode.LeftControl)) {
+                    //    if (hasArrowLeft) {
+                    //        actions.Reloading();
+                    //    } else {
+                    //        actions.AimingCrouch();
+                    //    }
+                    //} else {
+                    //    if (hasArrowLeft) {
+                    //        actions.Reloading();
+                    //    } else {
+                    //        actions.Aiming();
+                    //    }
+                    //}
+
+                    // change the camera for the aim
                     aimCamera.enabled = true;
                     playerCamera.enabled = false;
 
@@ -218,12 +249,11 @@ public class MovementControllerHuman : MovementController {
                     // Set his first position
                     largeurCrossHair.transform.position = Input.mousePosition + initLargeurCrossHair;
                     hauteurCrossHair.transform.position = Input.mousePosition + initHauteurCrossHair;
-
-                    // change the camera for the aim
-                    //SwitchToAim();
-                }
-                else {
+                } else {
                     isAiming = false;
+
+                    // unbend the string
+                    GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D/BowRig_tex/Root/String").GetComponent<BowString>().Release();
 
                     // Play the animation
                     actions.ReleaseAiming();
@@ -247,9 +277,8 @@ public class MovementControllerHuman : MovementController {
 
             // 2) Check if the player want to hit something
             if(Input.GetMouseButtonDown(0)) {
-                if (InventoryManager.isBowEquiped && isAiming && hasArrowLeft) {
-                    Debug.Log("Fire !");
-                    StartCoroutine("FireArrow");
+                if (InventoryManager.isBowEquiped && isAiming && !isReloading && hasArrowLeft) {
+                    FireArrow();
                 } else if (InventoryManager.isTorchEquiped) {
                     HitWithStick();
                 }
@@ -275,6 +304,11 @@ public class MovementControllerHuman : MovementController {
                 actions.LookAround();
             }
 
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D/BowRig_tex/Root/String").GetComponent<BowString>().Stretch();
+            }
+
             // 3) Check the movement of the player
             if (isAiming) {
                 // Bow mode
@@ -283,11 +317,15 @@ public class MovementControllerHuman : MovementController {
                     if (Input.GetKey(KeyCode.LeftControl)) {
                         aimCamera.transform.localPosition = GameObject.Find("OriginCamera").transform.localPosition - GameObject.Find("OriginCamera").transform.up * 0.15f;
                         actions.Wary();
-                        actions.AimingCrouch();
+                        if(!isReloading) {
+                            actions.AimingCrouch();
+                        }
                     } else {
                         aimCamera.transform.localPosition = GameObject.Find("OriginCamera").transform.localPosition;
                         actions.Stay(LifeBar.GetComponent<LifeBar>().getSizeLifeBar());
-                        actions.Aiming();
+                        if(!isReloading) {
+                            actions.Aiming();
+                        }
                     }
                 } else {
                     aimCamera.transform.localPosition = GameObject.Find("OriginCamera").transform.localPosition;
@@ -310,7 +348,6 @@ public class MovementControllerHuman : MovementController {
                         if (EnergyBar.GetComponent<Scrollbar>().size > 0f) {
                             m_footstep.UnPause ();
 					        m_footstep.pitch = 1.7f;
-                    
                             if (Input.GetKey (KeyCode.LeftControl)) {
 						        actions.CrouchingRun ();
 					        } else {
@@ -355,21 +392,39 @@ public class MovementControllerHuman : MovementController {
         }
     }
 
-    IEnumerator FireArrow() {
+    private IEnumerator DrawArrow()
+    {
+        // Launch the animation to reload
+        isReloading = true;
+        actions.Reloading();
+        hasArrowLeft = InventoryManager.hasArrowLeft();
+        if (hasArrowLeft)
+        {
+            // SetActive the arrow
+            GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
+        }
+        yield return new WaitForSeconds(0.80f);
+
+        // Make the string bend
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D/BowRig_tex/Root/String").GetComponent<BowString>().Stretch();
+
+        yield return new WaitForSeconds(0.05f);
+        isReloading = false;
+    }
+
+    private void FireArrow() {
         Debug.Log("Fire !");
         // Fire the arrow
-
-        //Fire()
         GameObject fleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D");
         fleche.SetActive(false);
 		Rigidbody arrowInstance = Instantiate(m_Arrow, fleche.transform.position + targetDirection.normalized*2, fleche.transform.rotation) as Rigidbody;
         arrowInstance.velocity = 150f * targetDirection.normalized;
-
         arrowInstance.GetComponent<ArrowSwitch>().enabled = true;
 
-        // Change the clip to the firing clip and play it.
-        GameObject bow = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D");
-        bow.GetComponent<AudioSource>().Play();
+        // unbend the string
+        GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D/BowRig_tex/Root/String").GetComponent<BowString>().Release();
+
+
 
         InventoryManager.DrawArrow();
 
@@ -379,16 +434,8 @@ public class MovementControllerHuman : MovementController {
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3").transform.rotation = initMain;
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3").transform.rotation = initMainD;
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").transform.rotation = initFleche;
-        
-        // Launch the animation to reload
-        actions.Reloading();
-        hasArrowLeft = InventoryManager.hasArrowLeft();
-        if (hasArrowLeft) {
-            // SetActive the arrow
-            GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);
-        }
-        yield return new WaitForSeconds(0.8f);
-        
+
+        StartCoroutine("DrawArrow");
     }
 
     void OnDrawGizmosSelected()
