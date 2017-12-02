@@ -104,7 +104,7 @@ public class InventoryManager : MonoBehaviour {
     }
 
 
-        public static void RemoveObjectOfType(ObjectsType o){
+    public static void RemoveObjectOfType(ObjectsType o){
 		foreach (ObjectsType obj in inventaire) {
 			if (obj == o) {
 				inventaire.Remove (o);
