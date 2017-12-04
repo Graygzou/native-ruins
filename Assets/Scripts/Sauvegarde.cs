@@ -124,6 +124,7 @@ public class Sauvegarde : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         Player = GameObject.Find("Player");
         LifeBar = GameObject.Find("Affichages/Gauges/Life");
         HungerBar = GameObject.Find("Affichages/Gauges/Hunger");

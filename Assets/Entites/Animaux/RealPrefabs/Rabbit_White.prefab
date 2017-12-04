@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1271818056171836}
   m_IsPrefabParent: 1
+--- !u!1 &1050815507359234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4941488587697312}
+  - component: {fileID: 135559081671862938}
+  m_Layer: 0
+  m_Name: Zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1271818056171836
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,7 +39,6 @@ GameObject:
   - component: {fileID: 54136244361884522}
   - component: {fileID: 114034197566512536}
   - component: {fileID: 64978692044567962}
-  - component: {fileID: 135906100719085986}
   - component: {fileID: 135827595227331886}
   - component: {fileID: 114443913602491850}
   - component: {fileID: 114278257882595196}
@@ -174,6 +189,7 @@ Transform:
   - {fileID: 4131120130553978}
   - {fileID: 4092249268284498}
   - {fileID: 4615528135206120}
+  - {fileID: 4941488587697312}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -202,6 +218,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4340983106209980}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4941488587697312
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050815507359234}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.05406407, z: 0}
+  m_LocalScale: {x: 0.04761905, y: 0.04761905, z: 0.04761905}
+  m_Children: []
+  m_Father: {fileID: 4340983106209980}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23421810814715984
 MeshRenderer:
@@ -495,7 +524,7 @@ MonoBehaviour:
   isMean: 0
   isDead: 0
   tauntRange: 0
-  visionRange: {fileID: 135906100719085986}
+  visionRange: {fileID: 0}
   awarenessRange: {fileID: 135827595227331886}
   isAlert: 0
   playerTooClose: 0
@@ -545,6 +574,18 @@ MonoBehaviour:
   seekOn: 0
   boundingSphereRadius: 0
   obstacleMaxDistance: 0
+--- !u!135 &135559081671862938
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050815507359234}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 60
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135715492679323172
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -565,21 +606,9 @@ SphereCollider:
   m_GameObject: {fileID: 1271818056171836}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135906100719085986
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1271818056171836}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137702863864588168
 SkinnedMeshRenderer:

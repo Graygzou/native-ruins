@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 54749827349840854}
   - component: {fileID: 114790598724380606}
   - component: {fileID: 64576646492704340}
-  - component: {fileID: 135265434844444776}
   - component: {fileID: 135293688041645532}
   - component: {fileID: 114608507300786926}
   - component: {fileID: 114716225407118232}
@@ -91,6 +90,22 @@ GameObject:
   m_Layer: 0
   m_Name: Steak3D
   m_TagString: 3DObjectForInventory
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1553570868735564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4750563240969318}
+  - component: {fileID: 135120454831343404}
+  m_Layer: 0
+  m_Name: Zone
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,14 +214,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1008984214244400}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3759.58, y: 28.26, z: 2482.4}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -417.4148, y: 423.132, z: 1152.4492}
   m_LocalScale: {x: 23, y: 23, z: 23}
   m_Children:
   - {fileID: 4025836100810596}
   - {fileID: 4125427206835756}
   - {fileID: 4727897997587386}
   - {fileID: 4449803775717232}
+  - {fileID: 4750563240969318}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -237,6 +253,19 @@ Transform:
   - {fileID: 4449972052677656}
   m_Father: {fileID: 4458529163863984}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4750563240969318
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553570868735564}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.10575003, z: 0.0017302139}
+  m_LocalScale: {x: 0.043478258, y: 0.043478258, z: 0.043478258}
+  m_Children: []
+  m_Father: {fileID: 4458529163863984}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23047617251448646
 MeshRenderer:
@@ -656,7 +685,7 @@ MonoBehaviour:
   isMean: 1
   isDead: 0
   tauntRange: 50
-  visionRange: {fileID: 135265434844444776}
+  visionRange: {fileID: 0}
   awarenessRange: {fileID: 135293688041645532}
   isAlert: 0
   playerTooClose: 0
@@ -672,17 +701,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135265434844444776
+--- !u!135 &135120454831343404
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1008984214244400}
+  m_GameObject: {fileID: 1553570868735564}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 90
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135293688041645532
 SphereCollider:
