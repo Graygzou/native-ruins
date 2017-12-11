@@ -14,7 +14,7 @@ public class CrystalSwitch : Switch
             cameraCutScene.enabled = false;
     }
 
-    override public IEnumerator PlayCutScene() {
+    override public IEnumerator PlayCutSceneStart() {
         yield return new WaitForSeconds(1f);
         ActivateSwitch();
         yield return new WaitForSeconds(1f);

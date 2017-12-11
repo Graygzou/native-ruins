@@ -23,8 +23,7 @@ public class TotemPumaSwitch : Switch {
         }
     }
 
-    override public IEnumerator PlayCutScene()
-    {
+    override public IEnumerator PlayCutSceneStart() {
         cameraCutScene.GetComponent<Animator>().Play("CutscenePuma");
         cameraCutScene.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(10f);

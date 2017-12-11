@@ -30,7 +30,7 @@ public class FenceSwitch : Switch {
         yield return new WaitForSeconds(3f);
     }
 
-    override public IEnumerator PlayCutScene()
+    override public IEnumerator PlayCutSceneStart()
     {
         yield return new WaitForSeconds(1f);
         ActivateSwitch();

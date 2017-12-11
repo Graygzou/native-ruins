@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class TotemSwitch : Switch {
 
-    // Use this for initialization
-    void Start () {
-        if (cameraCutScene != null)
-            cameraCutScene.enabled = false;
-    }
-
     public void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
             Activate();
         }
     }
 
-    override public IEnumerator PlayCutScene()
+    override public IEnumerator PlayCutSceneStart()
     {
         yield return new WaitForSeconds(1f);
         ActivateSwitch();
-        cameraCutScene.GetComponent<Animator>().Play("CutsceneOurs");
+        cameraCutScene.GetComponent<Animation>().clip = cutSceneStart;
+        cameraCutScene.GetComponent<Animation>().Play();
         yield return new WaitForSeconds(12f);
         StopCutScene();
         if (gameObject.GetComponent<SwitchObject>() != null) {

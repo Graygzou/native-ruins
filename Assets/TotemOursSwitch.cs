@@ -23,8 +23,7 @@ public class TotemOursSwitch : Switch {
         }
     }
 
-    override public IEnumerator PlayCutScene()
-    {
+    override public IEnumerator PlayCutSceneStart() {
         cameraCutScene.GetComponent<Animator>().Play("CutsceneOurs");
         cameraCutScene.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(10f);

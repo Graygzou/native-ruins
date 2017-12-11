@@ -4,20 +4,40 @@ using UnityEngine;
 
 public abstract class Switch : MonoBehaviour {
 
-    protected Camera playerCamera;
-    public Camera cameraCutScene;
+    protected Camera        playerCamera;
+    protected bool          isActived;
+
+    public Camera           cameraCutScene;
+    public AnimationClip    cutSceneStart;
+    public AnimationClip    cutSceneEnd;
+    public AudioClip        cutSceneMusic;
+    public bool             loop;
+    public bool             triggerZone;
 
     void Awake() {
         // Get the camera of the player
         playerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
     }
 
+    // Use this for initialization
+    void Start() {
+        isActived = false;
+        if (cameraCutScene != null )
+            cameraCutScene.enabled = false;
+    }
+
     public void Activate() {
         // If the switch got a camera, switch to activate it
-        if (cameraCutScene != null) {
-            StartCutScene();
-            StartCoroutine("PlayCutScene");
+        if (cameraCutScene != null && !isActived) {
+            // Call a cut-scene to start the switch
+            SetupCutSceneStart();
+            StartCoroutine("PlayCutSceneStart");
+        }
+        else if (cameraCutScene != null && isActived) {
+            // Call a cut-scene to end the switch
+            StartCoroutine("PlayCutSceneEnd");
         } else {
+            // Simply activate the desired switch
             ActivateSwitch();
         }
     }
@@ -28,18 +48,23 @@ public abstract class Switch : MonoBehaviour {
     // Used to cancel the mechanism
     protected virtual void DiactivateSwitch() { }
 
-    // Used to launch a cutscene
-    public virtual void StartCutScene() {
-        // Pre-process
+    // Used to setup a cutscene
+    public virtual void SetupCutSceneStart() {
+        isActived = true;
         //GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = false;
         GameObject.FindWithTag("Player").GetComponent<MovementController>().enabled = false;
-        //GameObject.Find("SportyGirl").transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().enabled = false;
+        GameObject.FindWithTag("Player").GetComponent<ActionsNew>().Stay(100f);
         // Enable the right camera
         playerCamera.enabled = false;
         cameraCutScene.enabled = true;
     }
 
-    public virtual IEnumerator PlayCutScene() {
+    public virtual IEnumerator PlayCutSceneStart() {
+        yield return null;
+    }
+
+    public virtual IEnumerator PlayCutSceneEnd()
+    {
         yield return null;
     }
 

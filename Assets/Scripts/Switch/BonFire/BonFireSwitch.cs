@@ -4,32 +4,26 @@ using UnityEngine;
 
 public class BonFireSwitch : Switch {
 
-    private bool isActived;
+    override public IEnumerator PlayCutSceneStart() {
+        ActivateSwitch();
+        yield return new WaitForSeconds(3.6f);
+        // Enable the save menu
+        GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
 
-    // Use this for initialization
-    void Start() {
-        isActived = false;
-        if (cameraCutScene != null)
-            cameraCutScene.enabled = false;
+        if (gameObject.GetComponent<SwitchObject>() != null) {
+            // Activate all his children
+            gameObject.GetComponent<SwitchObject>().ActivateChildren();
+        }
     }
 
-    override public IEnumerator PlayCutScene() {
-        if (!isActived) {
-            isActived = true;
-            ActivateSwitch();
-            yield return new WaitForSeconds(3.6f);
-            // Enable the save menu
-            GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
-        } else {
-            isActived = false;
-            DiactivateSwitch();
-            GameObject judy = GameObject.FindWithTag("Player");
-            yield return new WaitForSeconds(4.4f);
-            judy.GetComponent<MovementController>().setIsSaving(false);
-            StopCutScene();
-        }
-        if (gameObject.GetComponent<SwitchObject>() != null)
-        {
+    override public IEnumerator PlayCutSceneEnd() {
+        DiactivateSwitch();
+        GameObject judy = GameObject.FindWithTag("Player");
+        yield return new WaitForSeconds(4.4f);
+        judy.GetComponent<MovementController>().setIsSaving(false);
+        StopCutScene();
+
+        if (gameObject.GetComponent<SwitchObject>() != null) {
             // Activate all his children
             gameObject.GetComponent<SwitchObject>().ActivateChildren();
         }
