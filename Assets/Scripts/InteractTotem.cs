@@ -56,7 +56,7 @@ public class InteractTotem : MonoBehaviour {
                 son.Play();
                 GameObject.Find("EnigmeTotemOurs/pfb_EarthTotem").SetActive(false);
                 Judy.GetComponent<FormsController>().setBearUnlocked(true);
-                dialogue.TriggerDialogueTotemOurs();
+                dialogue.TriggerDialogueTotemOurs(null);
             } else //le totem ours a deja ete recupere donc il ne reste que celui du puma
             {
                 //Range arme avant d'ouvrir le menu de sauvegarde
@@ -66,7 +66,7 @@ public class InteractTotem : MonoBehaviour {
                 son.Play();
                 GameObject.Find("EnigmeTotemPuma/pfb_AirTotem").SetActive(false);
                 Judy.GetComponent<FormsController>().setPumaUnlocked(true);
-                dialogue.TriggerDialogueTotemPuma();
+                dialogue.TriggerDialogueTotemPuma(null);
             }
             o_isTotem = false;
             GameObject.Find("Affichages/Interaction/ButtonInteragir").SetActive(false);

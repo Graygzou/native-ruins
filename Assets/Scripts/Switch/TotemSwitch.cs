@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TotemSwitch : Switch {
+public class TotemSwitch {
 
+    /*
     public void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
             Activate();
@@ -14,7 +15,7 @@ public class TotemSwitch : Switch {
     {
         yield return new WaitForSeconds(1f);
         ActivateSwitch();
-        cameraCutScene.GetComponent<Animation>().clip = cutSceneStart;
+        //cameraCutScene.GetComponent<Animation>().clip = cutSceneStart;
         cameraCutScene.GetComponent<Animation>().Play();
         yield return new WaitForSeconds(12f);
         StopCutScene();
@@ -26,6 +27,6 @@ public class TotemSwitch : Switch {
 
     protected override void ActivateSwitch() {
         //throw new System.NotImplementedException();
-    }
+    }*/
 
 }

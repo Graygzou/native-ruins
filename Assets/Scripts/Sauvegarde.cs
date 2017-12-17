@@ -125,57 +125,67 @@ public class Sauvegarde : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        //Player = GameObject.Find("Player");
-        //LifeBar = GameObject.Find("Affichages/Gauges/Life");
-        //HungerBar = GameObject.Find("Affichages/Gauges/Hunger");
-        //Inventory = GameObject.Find("Affichages/InventoryManager");
-        //int r = PlayerPrefs.GetInt("load_scene");
-        //dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
-        ////Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
-        //if (PlayerPrefs.GetInt("load_scene")==1)
-        //{
-        //    Debug.Log("Chargement scene");
+        Player = GameObject.Find("Player");
+        LifeBar = GameObject.Find("Affichages/Gauges/Life");
+        HungerBar = GameObject.Find("Affichages/Gauges/Hunger");
+        Inventory = GameObject.Find("Affichages/InventoryManager");
+        dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
+        //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
+        if (PlayerPrefs.GetInt("load_scene") == 1)
+        {
+            Debug.Log("Chargement scene");
 
-        //    //Positionnement du joueur
-        //    Player.transform.position = new Vector3(PlayerPrefs.GetFloat("xPlayer"), PlayerPrefs.GetFloat("yPlayer"), PlayerPrefs.GetFloat("zPlayer"));
+            //Positionnement du joueur
+            Player.transform.position = new Vector3(PlayerPrefs.GetFloat("xPlayer"), PlayerPrefs.GetFloat("yPlayer"), PlayerPrefs.GetFloat("zPlayer"));
 
-        //    //Jauges de vie et faim
-        //    LifeBar.GetComponent<LifeBar>().setSizeLifeBar(PlayerPrefs.GetFloat("life"));
-        //    HungerBar.GetComponent<HungerBar>().setSizeHungerBar(PlayerPrefs.GetFloat("hunger"));
+            //Jauges de vie et faim
+            LifeBar.GetComponent<LifeBar>().setSizeLifeBar(PlayerPrefs.GetFloat("life"));
+            HungerBar.GetComponent<HungerBar>().setSizeHungerBar(PlayerPrefs.GetFloat("hunger"));
 
-        //    //Chargement de l'inventaire
-        //    Inventory.GetComponent<InventoryManager>().GetInventory().Clear();
-        //    addInInventory(ObjectsType.Arrow);
-        //    addInInventory(ObjectsType.Bow);
-        //    addInInventory(ObjectsType.Fire);
-        //    addInInventory(ObjectsType.Flint);
-        //    addInInventory(ObjectsType.Meat);
-        //    addInInventory(ObjectsType.Mushroom);
-        //    addInInventory(ObjectsType.Plank);
-        //    addInInventory(ObjectsType.Raft);
-        //    addInInventory(ObjectsType.Sail);
-        //    addInInventory(ObjectsType.Rope);
-        //    addInInventory(ObjectsType.Torch);
-        //    addInInventory(ObjectsType.Wood);
+            //Chargement de l'inventaire
+            Inventory.GetComponent<InventoryManager>().GetInventory().Clear();
+            addInInventory(ObjectsType.Arrow);
+            addInInventory(ObjectsType.Bow);
+            addInInventory(ObjectsType.Fire);
+            addInInventory(ObjectsType.Flint);
+            addInInventory(ObjectsType.Meat);
+            addInInventory(ObjectsType.Mushroom);
+            addInInventory(ObjectsType.Plank);
+            addInInventory(ObjectsType.Raft);
+            addInInventory(ObjectsType.Sail);
+            addInInventory(ObjectsType.Rope);
+            addInInventory(ObjectsType.Torch);
+            addInInventory(ObjectsType.Wood);
 
-        //    //Chargement totems obtenus
-        //    checkTotem(PlayerPrefs.GetInt("pumaUnlocked"), 0);
-        //    checkTotem(PlayerPrefs.GetInt("bearUnlocked"), 1);
+            //Chargement totems obtenus
+            checkTotem(PlayerPrefs.GetInt("pumaUnlocked"), 0);
+            checkTotem(PlayerPrefs.GetInt("bearUnlocked"), 1);
 
-        //    //Enleve les totems deja trouves
-        //    if(PlayerPrefs.GetInt("pumaUnlocked") == 1)
-        //    {
-        //        GameObject.FindWithTag("TotemPuma").SetActive(false);
-        //    }
-        //    if (PlayerPrefs.GetInt("pumaUnlocked") == 1)
-        //    {
-        //        GameObject.FindWithTag("TotemOurs").SetActive(false);
-        //    }
+            //Enleve les totems deja trouves
+            if (PlayerPrefs.GetInt("pumaUnlocked") == 1)
+            {
+                GameObject.FindWithTag("TotemPuma").SetActive(false);
+            }
+            if (PlayerPrefs.GetInt("pumaUnlocked") == 1)
+            {
+                GameObject.FindWithTag("TotemOurs").SetActive(false);
+            }
 
-        //} else
-        //{
-        //    dialogue.TriggerDialogueDebut();
-        //}
+        } else {
+            // Setting up the scene
+            GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
+            GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
+            GameObject.FindWithTag("Player").GetComponent<ActionsNew>().enabled = false;
+            GameObject.FindWithTag("MainCamera").GetComponent<Camera>().enabled = false;
+
+            // Call dialogues
+            dialogue.TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
+            dialogue.TriggerDialogueDebut2(GameObject.Find("SecondCutSceneCamera").GetComponent<StandUpCutScene>());
+            dialogue.TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
+            dialogue.TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
+            dialogue.TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
+            dialogue.TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());
+        }
     }
 
 
@@ -240,7 +250,7 @@ public class Sauvegarde : MonoBehaviour {
         PlayerPrefs.SetInt("bearUnlocked", Player.GetComponent<FormsController>().isBearUnlocked());
 
         //Afficher message de sauvegarde
-        dialogue.TriggerSauvegarde();
+        dialogue.TriggerSauvegarde(null);
     }
 
     //Permet de revenir au menu demarrer pour quitter le jeu

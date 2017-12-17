@@ -214,4 +214,24 @@ public class ActionsNew : MonoBehaviour {
         animator.SetBool("EquipWeapon", false);
         animator.Play("SitToIdle", MovementLayer);
     }
+
+    // Getting up (For the intro of the game)
+    public void GettingUp() {
+        animator.Play("GettingUp", MovementLayer);
+    }
+
+    // Lost (For the intro of the game)
+    public void Lost() {
+        animator.Play("Lost", MovementLayer);
+    }
+
+    // Focus (For the intro of the game)
+    public void Focus() {
+        animator.Play("Focus", MovementLayer);
+    }
+
+    public void FinIntro() {
+        animator.SetBool("FinCutScene", true);
+        Stay(100f);
+    }
 }

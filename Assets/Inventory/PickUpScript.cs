@@ -57,7 +57,7 @@ public class PickUpScript : MonoBehaviour {
                 hasDiscoveredBow = true;
                 //son = this.GetComponentInParent<AudioSource>();
                 //son.Play();
-                dialogue.TriggerDialogueArc();     
+                dialogue.TriggerDialogueArc(null);     
                 GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
             }
             if (o_type.Equals(ObjectsType.Rope) && hasDiscoveredRope)
@@ -65,7 +65,7 @@ public class PickUpScript : MonoBehaviour {
                 hasDiscoveredRope = true;
                 son = this.GetComponentInParent<AudioSource>();
                 son.Play();
-                dialogue.TriggerDialogueCorde();
+                dialogue.TriggerDialogueCorde(null);
                 GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
             }
             if (o_type.Equals(ObjectsType.Sail) && hasDiscoveredSail)
@@ -73,7 +73,7 @@ public class PickUpScript : MonoBehaviour {
                 hasDiscoveredSail = true;
                 son = this.GetComponentInParent<AudioSource>();
                 son.Play();
-                dialogue.TriggerDialogueVoile();
+                dialogue.TriggerDialogueVoile(null);
                 GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
             }
             InventoryManager.AddObjectOfType(o_type);

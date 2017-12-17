@@ -364,7 +364,7 @@ public class InventoryManager : MonoBehaviour {
 		RectTransform clone1 = Instantiate(o_Raft) as RectTransform;
 		clone1.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
 
-        dialogue.TriggerDialogueFin();
+        dialogue.TriggerDialogueFin(null);
 	}
 
     //private void NumberOfArrow() {

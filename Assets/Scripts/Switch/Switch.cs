@@ -4,15 +4,10 @@ using UnityEngine;
 
 public abstract class Switch : MonoBehaviour {
 
-    protected Camera        playerCamera;
-    protected bool          isActived;
+    protected Camera playerCamera;
+    protected bool isActived;
 
-    public Camera           cameraCutScene;
-    public AnimationClip    cutSceneStart;
-    public AnimationClip    cutSceneEnd;
-    public AudioClip        cutSceneMusic;
-    public bool             loop;
-    public bool             triggerZone;
+    public Camera cameraCutScene;
 
     void Awake() {
         // Get the camera of the player

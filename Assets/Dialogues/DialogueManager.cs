@@ -9,30 +9,52 @@ public class DialogueManager : MonoBehaviour {
 
     public Animator animator;
 
+    private Queue<Dialogue> dialoguesQueue;
+    private Queue<Switch> actionsQueue;
     private Queue<string> sentences;
+
     private AudioSource sonDialog;
     private AudioSource sonLettre;
     private GameObject Judy;
 
-	// Use this for initialization
-	void Start () {
+    private bool isTyping;
+    private bool isProcessing;
+    private string currentSentence;
+
+    // Use this for initialization
+    void Start () {
+        this.dialoguesQueue = new Queue<Dialogue>();
+        this.actionsQueue = new Queue<Switch>();
+        this.sentences = new Queue<string>();
+
+        isTyping = false;
+        isProcessing = false;
         Judy = GameObject.FindWithTag("Player");
-        sentences = new Queue<string>();
         AudioSource[] son = this.GetComponents<AudioSource>();
         sonDialog = son[0];
         sonLettre = son[1];
     }
 	
     //Lancer le dialogue
-	public void StartDialogue (Dialogue dialogue)
-    {
-        Judy.GetComponent<MovementController>().setDialogue(true);
-        sonDialog.Play();
-        animator.SetBool("isOpen",true);
-        nameText.text = dialogue.name;
-        sentences.Clear();
-        foreach(string sentence in dialogue.sentences) {
-            sentences.Enqueue(sentence);
+	public void StartDialogue (Dialogue dialogue, Switch action) {
+        // Put the dialogue in the queue ans the switch
+        this.dialoguesQueue.Enqueue(dialogue);
+        this.actionsQueue.Enqueue(action);
+
+        // if the dialogueManager is empty at the moment
+        if (this.dialoguesQueue.Count == 1 && !isProcessing) {
+            // Process the current dialogue
+            Judy.GetComponent<MovementController>().setDialogue(true);
+            sonDialog.Play();
+            animator.SetBool("isOpen", true);
+            FillSentences(this.dialoguesQueue.Dequeue());
+        }
+    }
+
+    private void FillSentences(Dialogue dialogue) {
+        isProcessing = true;
+        foreach (string sentence in dialogue.sentences) {
+            this.sentences.Enqueue(sentence);
         }
         DisplayNextSentence();
     }
@@ -40,20 +62,28 @@ public class DialogueManager : MonoBehaviour {
     //Afficher les phrases suivantes du dialogue
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
-        {
-            EndDialogue();
-            return;
+        // if the sentence isn't finished, fast print it.
+        if (isTyping) {
+            StopAllCoroutines();
+            dialogueText.text = currentSentence;
+            isTyping = false;
+        } else {
+            if (sentences.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }
+            this.currentSentence = sentences.Dequeue();
+            StopAllCoroutines();
+            StartCoroutine(TypeSentence(this.currentSentence));
+            sonLettre.Stop();
         }
-        string sentence = sentences.Dequeue();
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
-        sonLettre.Stop();
     }
 
     //Afficher lettre par lettre les phrases dans le dialogue
     IEnumerator TypeSentence(string sentence)
     {
+        isTyping = true;
         dialogueText.text = "";
         foreach(char letter in sentence.ToCharArray())
         {
@@ -61,15 +91,28 @@ public class DialogueManager : MonoBehaviour {
             dialogueText.text += letter;
             yield return null;
         }
+        isTyping = false;
     }
 
     //Fin du dialogue
-    public void EndDialogue()
-    {
-        Judy.GetComponent<MovementController>().setDialogue(false);
-        StopAllCoroutines();
-        sonLettre.Stop();
-        sonDialog.Play();
-        animator.SetBool("isOpen", false);
+    public void EndDialogue() {
+        // Play the corresponding switch
+        Switch action;
+        if((action = this.actionsQueue.Dequeue()) != null) {
+            SwitchManager.StartAction(action);
+        }
+
+        // Check if a dialogue need to be played.
+        if (this.dialoguesQueue.Count >= 1) {
+            this.FillSentences(this.dialoguesQueue.Dequeue());
+        } else {
+            // Stop the dialogue
+            isProcessing = false;
+            Judy.GetComponent<MovementController>().setDialogue(false);
+            StopAllCoroutines();
+            sonLettre.Stop();
+            sonDialog.Play();
+            animator.SetBool("isOpen", false);
+        }
     }
 }
