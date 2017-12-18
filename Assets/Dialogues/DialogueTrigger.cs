@@ -8,6 +8,7 @@ public class DialogueTrigger : MonoBehaviour {
 
     public void TriggerSauvegarde(Switch action)
     {
+        dialogue = new Dialogue();
         dialogue.name = "Menu";
         dialogue.sentences = new string[1];
         dialogue.sentences[0] = "Votre partie a bien été sauvegardée.";
@@ -70,20 +71,22 @@ public class DialogueTrigger : MonoBehaviour {
 
     public void TriggerDialogueInstructions(Switch action)
     {
+        dialogue = new Dialogue();
         dialogue.name = "Aide";
         dialogue.sentences = new string[6];
-        dialogue.sentences[0] = "** Judy peut se déplacer à l'aide des touches ZQSD du clavier. **";
-        dialogue.sentences[1] = "** Elle peut déplacer la caméra à l'aide de la SOURIS. **";
-        dialogue.sentences[2] = " ** La barre d'ESPACE permet de la faire sauter. Pour la faire courir, maintenir la touche SHIFT. Elle peut également s'accroupir à l'aide de CTRL **";
-        dialogue.sentences[3] = " ** Pour la faire courir, maintenir la touche SHIFT. **";
-        dialogue.sentences[4] = " ** Elle peut également s'accroupir à l'aide de CTRL. **";
-        dialogue.sentences[5] = " ** Un menu d'aide est à votre disposition en appuyant sur ECHAP pour vous rappelez les interactions principales. **";
+        dialogue.sentences[0] = "Judy peut se déplacer à l'aide des touches ZQSD du clavier.";
+        dialogue.sentences[1] = "Elle peut déplacer la caméra à l'aide de la SOURIS.";
+        dialogue.sentences[2] = "La barre d'ESPACE permet de la faire sauter. Pour la faire courir, maintenir la touche SHIFT. Elle peut également s'accroupir à l'aide de CTRL";
+        dialogue.sentences[3] = "Pour la faire courir, maintenir la touche SHIFT.";
+        dialogue.sentences[4] = "Elle peut également s'accroupir à l'aide de CTRL.";
+        dialogue.sentences[5] = "Un menu d'aide est à votre disposition en appuyant sur ECHAP pour vous rappelez les interactions principales.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
 
-        public void TriggerDialogueFin(Switch action)
+    public void TriggerDialogueFin(Switch action)
     {
+        dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[1];
         dialogue.sentences[0] = "Ca y est !!!! Je peux enfin quitter cette île !!!!!!!!! Il était temps ...";
@@ -93,6 +96,7 @@ public class DialogueTrigger : MonoBehaviour {
 
     public void TriggerDialogueTotemOurs(Switch action)
     {
+        dialogue = new Dialogue();
         dialogue.name = "Aide";
         dialogue.sentences = new string[3];
         dialogue.sentences[0] = "Félicitations ! Vous venez de trouver le totem Ours. Cet item vous permets de vous transformer en ours.";
@@ -103,6 +107,7 @@ public class DialogueTrigger : MonoBehaviour {
 
     public void TriggerDialogueTotemPuma(Switch action)
     {
+        dialogue = new Dialogue();
         dialogue.name = "Aide";
         dialogue.sentences = new string[2];
         dialogue.sentences[0] = "Félicitations ! Vous venez de trouver le totem Puma. Cet item vous permet de vous transformer en puma.";
@@ -112,6 +117,7 @@ public class DialogueTrigger : MonoBehaviour {
 
     public void TriggerDialogueVoile(Switch action)
     {
+        dialogue = new Dialogue();
         dialogue.name = "Aide";
         dialogue.sentences = new string[1];
         dialogue.sentences[0] = "Félicitations ! Vous venez de trouver une voile. Cet item vous permettra de construire un radeau.";
@@ -120,6 +126,7 @@ public class DialogueTrigger : MonoBehaviour {
 
     public void TriggerDialogueCorde(Switch action)
     {
+        dialogue = new Dialogue();
         dialogue.name = "Aide";
         dialogue.sentences = new string[1];
         dialogue.sentences[0] = "Félicitations ! Vous venez de trouver une corde. Cet item vous permettra de construire un radeau.";
@@ -128,6 +135,7 @@ public class DialogueTrigger : MonoBehaviour {
 
     public void TriggerDialogueArc(Switch action)
     {
+        dialogue = new Dialogue();
         dialogue.name = "Aide";
         dialogue.sentences = new string[3];
         dialogue.sentences[0] = "Félicitations ! Vous venez de trouver un arc. Cet item vous permettra de chasser et de vous défendre.";

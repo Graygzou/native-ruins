@@ -8,22 +8,19 @@ public class PickUpScript : MonoBehaviour {
 	public ObjectsType o_type;
     [SerializeField]private RectTransform o_object;
 
-	private bool o_isPickable = false;
-    private bool hasDiscoveredBow = false;
-    private bool hasDiscoveredRope = false;
-    private bool hasDiscoveredSail = false;
+	private bool o_isPickable;
 
     private DialogueTrigger dialogue;
 
     // Use this for initialization
     void Start () {
         dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
+        o_isPickable = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
 		GetInputs ();
-		
 	}
 
 	void OnTriggerExit(Collider other){
@@ -51,26 +48,28 @@ public class PickUpScript : MonoBehaviour {
 	private void GetInputs(){
         AudioSource son;
 
+
+        PlayerAknowledge brain = GameObject.Find("Player").GetComponent<PlayerAknowledge>();
         if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {
-            if (o_type.Equals(ObjectsType.Bow) && hasDiscoveredBow)
+            if (o_type.Equals(ObjectsType.Bow) && !brain.HasDiscoveredBow)
             {
-                hasDiscoveredBow = true;
-                //son = this.GetComponentInParent<AudioSource>();
-                //son.Play();
+                brain.HasDiscoveredBow = true;
+                son = this.GetComponentInParent<AudioSource>();
+                son.Play();
                 dialogue.TriggerDialogueArc(null);     
                 GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
             }
-            if (o_type.Equals(ObjectsType.Rope) && hasDiscoveredRope)
+            if (o_type.Equals(ObjectsType.Rope) && !brain.HasDiscoveredRope)
             {
-                hasDiscoveredRope = true;
+                brain.HasDiscoveredRope = true;
                 son = this.GetComponentInParent<AudioSource>();
                 son.Play();
                 dialogue.TriggerDialogueCorde(null);
                 GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
             }
-            if (o_type.Equals(ObjectsType.Sail) && hasDiscoveredSail)
+            if (o_type.Equals(ObjectsType.Sail) && !brain.HasDiscoveredSail)
             {
-                hasDiscoveredSail = true;
+                brain.HasDiscoveredSail = true;
                 son = this.GetComponentInParent<AudioSource>();
                 son.Play();
                 dialogue.TriggerDialogueVoile(null);

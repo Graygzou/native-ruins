@@ -91,5 +91,8 @@ public class TitleGameCutScene : Switch {
         songs.SetActive(true);
 
         Sauvegarde.EnableUI();
+
+        yield return new WaitForEndOfFrame();
+        GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>().TriggerDialogueInstructions(null);
     }
 }

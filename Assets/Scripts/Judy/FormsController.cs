@@ -58,8 +58,8 @@ public class FormsController : MonoBehaviour
     {
         //ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
 
-        PumaUnlocked = false;
-        BearUnlocked = false;   
+        PumaUnlocked = true;
+        BearUnlocked = true;   
         transformationWheel.SetActive(false);
         GameObject playerRoot = GameObject.Find("Player");
         int i = 0;

@@ -6,20 +6,20 @@ using System.Linq;
 
 public class CharacterPanel : MonoBehaviour {
 
-	public GameObject character;
-	public Transform weaponsPanel;
-	public Transform actionsPanel;
-	public Transform camerasPanel;
-	public Button buttonPrefab;
-	public Slider motionSpeed;
+    public GameObject character;
+    public Transform weaponsPanel;
+    public Transform actionsPanel;
+    public Transform camerasPanel;
+    public Button buttonPrefab;
+    public Slider motionSpeed;
 
-	Actions actions;
+    Actions actions;
 	PlayerController controller;
 	Camera[] cameras;
 
 	void Start () {
 		Initialize ();
-	}
+    }
 
 	void Initialize () {
 		actions = character.GetComponent<Actions> ();
