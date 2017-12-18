@@ -183,9 +183,11 @@ public class Sauvegarde : MonoBehaviour {
             // Setting up the scene
             GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
             GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
-            GameObject.FindWithTag("Player").GetComponent<ActionsNew>().enabled = false;
             GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
             GameObject.FindWithTag("MainCamera").GetComponent<Camera>().enabled = false;
+
+            // Execute the sleeping action
+            GameObject.FindWithTag("Player").GetComponent<ActionsNew>().StartIntro();
 
             // Disabled UI
             Sauvegarde.DisableUI();

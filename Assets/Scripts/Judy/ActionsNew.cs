@@ -230,8 +230,14 @@ public class ActionsNew : MonoBehaviour {
         animator.Play("Focus", MovementLayer);
     }
 
+    public void StartIntro()
+    {
+        animator.SetBool("startCutScene", true);
+        animator.Play("SleepingIdle", MovementLayer);
+    }
+
     public void FinIntro() {
-        animator.SetBool("FinCutScene", true);
+        animator.SetBool("startCutScene", false);
         Stay(100f);
         animator.Play("StandMovement", MovementLayer);
     }
