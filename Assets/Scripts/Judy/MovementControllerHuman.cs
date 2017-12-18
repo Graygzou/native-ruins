@@ -32,8 +32,8 @@ public class MovementControllerHuman : MovementController {
     bool relache;
     bool zooming;
 
-    new void Start() {
-        base.Start();
+    protected override void Awake() {
+        base.Awake();
         // Set the attribute to the desire amount
         m_moveSpeed = 10;
         m_turnSpeed = 5;
@@ -81,17 +81,10 @@ public class MovementControllerHuman : MovementController {
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space)) {
             m_jumpTimeStamp = Time.time;
             actions.Jump();
+            print(m_rigidBody.velocity.magnitude);  
 
             m_rigidBody.AddForce(Vector3.up * 45, ForceMode.Impulse);
-            //StartCoroutine("Jump");
-            //GetComponent<BoxCollider>().transform.position = Vector3.Lerp(GetComponent<BoxCollider>().transform.position,
-            //    GetComponent<BoxCollider>().transform.position + Vector3.up * m_jumpForce, m_jumpTimeStamp);
-
         }
-    }
-
-    IEnumerator Jump() {
-        yield return new WaitForSeconds(0.5f);
     }
 
     override protected void UpdateCamera(float deltaX, float deltaY) {

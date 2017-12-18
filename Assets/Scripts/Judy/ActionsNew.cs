@@ -233,5 +233,6 @@ public class ActionsNew : MonoBehaviour {
     public void FinIntro() {
         animator.SetBool("FinCutScene", true);
         Stay(100f);
+        animator.Play("StandMovement", MovementLayer);
     }
 }

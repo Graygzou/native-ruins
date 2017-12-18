@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class Sauvegarde : MonoBehaviour {
 
+    // Used to save and load the game
     private DialogueTrigger dialogue;
-    private GameObject Player;
-    private GameObject LifeBar;
-    private GameObject HungerBar;
-    private GameObject Inventory;
+    private static GameObject Player;
+    private static GameObject LifeBar;
+    private static GameObject HungerBar;
+    private static GameObject Inventory;
+
+    // Used to start the game after the first cutscene
+    private static GameObject EnergyBar;
+    private static GameObject ArrowUI;
 
     [SerializeField] private RectTransform arrow2D;
     [SerializeField] private RectTransform bow2D;
@@ -130,6 +135,9 @@ public class Sauvegarde : MonoBehaviour {
         HungerBar = GameObject.Find("Affichages/Gauges/Hunger");
         Inventory = GameObject.Find("Affichages/InventoryManager");
         dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
+
+        EnergyBar = GameObject.Find("Affichages/Gauges/Energy");
+        ArrowUI = GameObject.Find("Affichages/Arrow");
         //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
         if (PlayerPrefs.GetInt("load_scene") == 1)
         {
@@ -176,7 +184,11 @@ public class Sauvegarde : MonoBehaviour {
             GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
             GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
             GameObject.FindWithTag("Player").GetComponent<ActionsNew>().enabled = false;
+            GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
             GameObject.FindWithTag("MainCamera").GetComponent<Camera>().enabled = false;
+
+            // Disabled UI
+            Sauvegarde.DisableUI();
 
             // Call dialogues
             dialogue.TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
@@ -186,6 +198,22 @@ public class Sauvegarde : MonoBehaviour {
             dialogue.TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
             dialogue.TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());
         }
+    }
+
+    public static void DisableUI() {
+        LifeBar.SetActive(false);
+        HungerBar.SetActive(false);
+        Inventory.SetActive(false);
+        EnergyBar.SetActive(false);
+        ArrowUI.SetActive(false);
+    }
+
+    public static void EnableUI() {
+        LifeBar.SetActive(true);
+        HungerBar.SetActive(true);
+        Inventory.SetActive(true);
+        EnergyBar.SetActive(true);
+        ArrowUI.SetActive(true);
     }
 
 

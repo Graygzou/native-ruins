@@ -27,7 +27,7 @@ public class MovementController : MonoBehaviour {
     protected Vector3 m_currentDirection = Vector3.zero;
 
     protected float m_jumpTimeStamp = 0;
-    protected float m_minJumpInterval = 1.40f;
+    protected float m_minJumpInterval = 1.50f;
 
     protected bool m_isGrounded;
     protected List<Collider> m_collisions = new List<Collider>();
@@ -40,14 +40,14 @@ public class MovementController : MonoBehaviour {
     private bool m_dialogueOn;
 
     // Use this for initialization
-    public void Start() {
+    protected virtual void Awake() {
         m_isDead = false;
         m_dialogueOn = false;
         m_isSaving = false;
         m_cameraPivot = GameObject.Find("CameraPivot").transform;
         EnergyBar = GameObject.Find("Gauges/Energy");
         LifeBar = GameObject.Find("Gauges/Life");
-        initial_orientation = transform.forward;
+        initial_orientation = Vector3.forward;
         m_footstep.Play();
         m_footstep.loop = true;
         m_footstep.Pause();
@@ -159,7 +159,6 @@ public class MovementController : MonoBehaviour {
             float angle = SignedAngleBetween(initial_orientation, projected_forward_camera, Vector3.up);
             Vector3 NextDir = new Vector3(h, 0, v);
             NextDir = Quaternion.Euler(0f, angle, 0f) * NextDir;
-
 
             // Control Judy's movement
             Move(NextDir, h, v);

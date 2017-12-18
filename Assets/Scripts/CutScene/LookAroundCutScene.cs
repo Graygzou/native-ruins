@@ -7,8 +7,6 @@ public class LookAroundCutScene : Switch {
     protected override void ActivateSwitch() {
         // Setting up
         GameObject.Find("ThirdCutSceneCamera").GetComponent<Camera>().enabled = true;
-        GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
-        GameObject.FindWithTag("MainCamera").GetComponent<Camera>().enabled = false;
         GameObject.Find("SecondCutSceneCamera").GetComponent<Camera>().enabled = false;
 
         // Execute the desired action

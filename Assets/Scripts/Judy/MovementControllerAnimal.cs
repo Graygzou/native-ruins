@@ -10,12 +10,12 @@ public class MovementControllerAnimal : MovementController {
     private AudioSource[] sons;
     private AudioSource sonAttaque;
 
-    new void Start() {
-        base.Start();
+    new void Awake() {
+        base.Awake();
         sons = GetComponents<AudioSource>();
         sonAttaque = sons[1];
         // Set the attribute to the desire amount
-        //m_moveSpeed = 1;
+        m_moveSpeed = 1;
         //m_minSpeed = 1;
         //m_maxSpeed = 3;
         //m_turnSpeed = 1;

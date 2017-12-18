@@ -66,8 +66,6 @@ public abstract class Switch : MonoBehaviour {
     public virtual void StopCutScene() {
         cameraCutScene.enabled = false;
         playerCamera.enabled = true;
-        //GameObject.Find("SportyGirl").transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().enabled = true;
-        //GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = true;
         GameObject.FindWithTag("Player").GetComponent<MovementController>().enabled = true;
     }
 

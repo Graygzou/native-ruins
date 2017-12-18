@@ -9,12 +9,9 @@ public class TitleGameCutScene : Switch {
 
     protected override void ActivateSwitch() {
         // Setting up
+        GameObject.Find("ThirdCutSceneCamera").GetComponent<Camera>().enabled = false;
         cameraCutScene = GameObject.Find("ForthCutSceneCamera").GetComponent<Camera>();
         cameraCutScene.enabled = true;
-        GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
-        GameObject.FindWithTag("Player").GetComponent<ActionsNew>().enabled = false;
-        GameObject.FindWithTag("MainCamera").GetComponent<Camera>().enabled = false;
-        GameObject.Find("ThirdCutSceneCamera").GetComponent<Camera>().enabled = false;
 
         // Execute the desired action
         StartCoroutine("StartStandUp");
@@ -30,7 +27,9 @@ public class TitleGameCutScene : Switch {
         }
         yield return new WaitForSeconds(15f);
         StopCutScene();
+        GameObject.Find("Player").GetComponent<FormsController>().enabled = true;
         GameObject.FindWithTag("Player").GetComponent<ActionsNew>().FinIntro();
+        
+        Sauvegarde.EnableUI();
     }
-
 }
