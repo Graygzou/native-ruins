@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 4285366756856644}
   - component: {fileID: 198725337953058536}
   - component: {fileID: 199546122282603708}
+  - component: {fileID: 82558263588322244}
   m_Layer: 0
   m_Name: PlasmaExplosionEffect
   m_TagString: Untagged
@@ -376,6 +377,86 @@ Transform:
   m_Father: {fileID: 4285366756856644}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82558263588322244
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267855779899208}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: db5bb75b2fcc44f45a17f14f20f97c0d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114029557920712178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -781,8 +862,8 @@ MonoBehaviour:
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
+  m_FallbackScreenDPI: 800
+  m_DefaultSpriteDPI: 800
   m_DynamicPixelsPerUnit: 1
 --- !u!198 &198230125093723736
 ParticleSystem:
@@ -17934,7 +18015,7 @@ RectTransform:
   m_GameObject: {fileID: 1987915380276796}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000015, y: 0.999999, z: 0.9999981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224367189462186414}
   m_RootOrder: 1
@@ -17952,7 +18033,7 @@ RectTransform:
   m_GameObject: {fileID: 1556397374454588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000015, y: 0.999999, z: 0.9999981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224367189462186414}
   m_RootOrder: 2
@@ -17970,7 +18051,7 @@ RectTransform:
   m_GameObject: {fileID: 1735775356438010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000015, y: 0.999999, z: 0.9999981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224367189462186414}
   m_RootOrder: 6
@@ -17988,7 +18069,7 @@ RectTransform:
   m_GameObject: {fileID: 1986596609234260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4855977, y: 1.1834512, z: 1.1541423}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224808919507113226}
   - {fileID: 224095552963099034}
@@ -18004,7 +18085,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -240, y: 0}
+  m_SizeDelta: {x: -552, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224627772419284798
 RectTransform:
@@ -18014,7 +18095,7 @@ RectTransform:
   m_GameObject: {fileID: 1727729956721592}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000015, y: 0.999999, z: 0.9999981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224367189462186414}
   m_RootOrder: 4
@@ -18032,7 +18113,7 @@ RectTransform:
   m_GameObject: {fileID: 1410950776792830}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000015, y: 0.999999, z: 0.9999981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224367189462186414}
   m_RootOrder: 3
@@ -18050,7 +18131,7 @@ RectTransform:
   m_GameObject: {fileID: 1047474959385094}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.000061035156, y: 0.000045776367, z: 0}
-  m_LocalScale: {x: 1.0000015, y: 0.999999, z: 0.9999981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224367189462186414}
   m_RootOrder: 5
@@ -18068,7 +18149,7 @@ RectTransform:
   m_GameObject: {fileID: 1235075815266568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.000061035156, y: 0.000045776367, z: 0}
-  m_LocalScale: {x: 1.0000015, y: 0.999999, z: 0.9999981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224367189462186414}
   m_RootOrder: 7

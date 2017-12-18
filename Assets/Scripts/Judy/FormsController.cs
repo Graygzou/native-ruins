@@ -115,11 +115,6 @@ public class FormsController : MonoBehaviour
             GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconBear").SetActive(false);
             GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconBearLocked").SetActive(true);
         }
-        //else
-        //{
-        //    GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPuma").SetActive(true);
-        //    GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPumaLocked").SetActive(false);
-        //}
 
 
         // Temps arrêté
@@ -196,27 +191,20 @@ public class FormsController : MonoBehaviour
     {
         // Memorisation position et orientation actuelle
         Vector3 positionCourant = new Vector3();
-        //Quaternion rotationCourant = new Quaternion();
         // Desactiver forme actuelle
         if (currentForm == 0)
         {
             positionCourant = HumanForm.transform.position;
-            //rotationCourant = HumanForm.transform.rotation;
-            //FormFadeOut(HumanForm);
-            //SetMaterialTransparent(HumanForm);
-            //iTween.FadeTo(HumanForm, 0, 1);
             HumanForm.SetActive(false);
         }
         if (currentForm == 1)
         {
             positionCourant = BearForm.transform.position;
-            //rotationCourant = BearForm.transform.rotation;
             BearForm.SetActive(false);
         }
         if (currentForm == 2)
         {
             positionCourant = PumaForm.transform.position;
-            //rotationCourant = PumaForm.transform.rotation;
             PumaForm.SetActive(false);
         }
 
@@ -229,21 +217,18 @@ public class FormsController : MonoBehaviour
         if (selectedForm == 0)
         {
             HumanForm.transform.position = positionCourant;
-            //HumanForm.transform.rotation = rotationCourant;
             HumanForm.SetActive(true);
             currentForm = 0;
         }
         if (selectedForm == 1)
         {
             BearForm.transform.position = positionCourant;
-            //BearForm.transform.rotation = rotationCourant;
             BearForm.SetActive(true);
             currentForm = 1;
         }
         if (selectedForm == 2)
         {
             PumaForm.transform.position = positionCourant;
-            //PumaForm.transform.rotation = rotationCourant;
             PumaForm.SetActive(true);
             currentForm = 2;
         }
@@ -255,44 +240,6 @@ public class FormsController : MonoBehaviour
         Transformation();
     }
 
-
-
-    //private void SetMaterialTransparent(GameObject Form)
-    //{
-    //    foreach (Material m in Form.GetComponentInChildren<Renderer>().materials)
-    //    {
-    //        m.SetFloat("_Mode", 2);
-    //        m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-    //        m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-    //        m.SetInt("_ZWrite", 0);
-    //        m.DisableKeyword("_ALPHATEST_ON");
-    //        m.EnableKeyword("_ALPHABLEND_ON");
-    //        m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-    //        m.renderQueue = 3000;
-
-    //    }
-    //}
-
-    //private void SetMaterialOpaque(GameObject Form)
-    //{
-    //    foreach (Material m in Form.GetComponent<Renderer>().materials)
-    //    {
-    //        m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-    //        m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-    //        m.SetInt("_ZWrite", 1);
-    //        m.DisableKeyword("_ALPHATEST_ON");
-    //        m.DisableKeyword("_ALPHABLEND_ON");
-    //        m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-    //        m.renderQueue = -1;
-    //    }
-    //}
-
-    //private void FormFadeOut(GameObject Form)
-    //{
-    //    SetMaterialTransparent(HumanForm);
-    //    iTween.FadeTo(HumanForm, 0, 1);
-
-    //}
 
 
 

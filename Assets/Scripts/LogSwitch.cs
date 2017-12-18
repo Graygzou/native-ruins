@@ -41,7 +41,7 @@ public class LogSwitch : MonoBehaviour {
         if (counterWeightOn)
         {
             //Si le rondin n'est pas complètement basculé
-                if (angleRondin > -23f)
+                if (angleRondin > -8f)
             {
                 //On augmente sa vitesse de rotation pour simuler l'accélération
                 rotationSpeed = rotationSpeed + accelerationAngulaireMontee;
