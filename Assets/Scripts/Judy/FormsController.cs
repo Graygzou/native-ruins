@@ -54,7 +54,7 @@ public class FormsController : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         //ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
 

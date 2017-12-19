@@ -30,7 +30,7 @@ public class Menus : MonoBehaviour {
     //Créer une nouvelle partie et écrase l'ancienne
     public void NouvellePartie()
     {
-        SceneManager.LoadScene("Map Island - final");
+        SceneManager.LoadScene("Map Island");
     }
 
     //Quitter le jeu

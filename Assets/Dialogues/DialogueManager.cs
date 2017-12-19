@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour {
     private string currentSentence;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         this.dialoguesQueue = new Queue<Dialogue>();
         this.actionsQueue = new Queue<Switch>();
         this.sentences = new Queue<string>();

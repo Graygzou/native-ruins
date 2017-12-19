@@ -128,7 +128,7 @@ public class Sauvegarde : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Awake() {
 
         Player = GameObject.Find("Player");
         LifeBar = GameObject.Find("Affichages/Gauges/Life");
@@ -142,6 +142,10 @@ public class Sauvegarde : MonoBehaviour {
         if (PlayerPrefs.GetInt("load_scene") == 1)
         {
             Debug.Log("Chargement scene");
+
+            float y = PlayerPrefs.GetFloat("xPlayer");
+            float u = PlayerPrefs.GetFloat("yPlayer");
+            float p = PlayerPrefs.GetFloat("zPlayer");
 
             //Positionnement du joueur
             Player.transform.position = new Vector3(PlayerPrefs.GetFloat("xPlayer"), PlayerPrefs.GetFloat("yPlayer"), PlayerPrefs.GetFloat("zPlayer"));
@@ -179,6 +183,8 @@ public class Sauvegarde : MonoBehaviour {
                 GameObject.FindWithTag("TotemOurs").SetActive(false);
             }
 
+            GameObject carreNoir = GameObject.Find("CameraCutscenes/Intro/PlaneFade");
+            carreNoir.SetActive(false);
         } else {
             // Setting up the scene
             GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
@@ -226,9 +232,10 @@ public class Sauvegarde : MonoBehaviour {
         PlayerPrefs.SetString("scene", SceneManager.GetActiveScene().name);
 
         //Position du joueur
-        PlayerPrefs.SetFloat("xPlayer", Player.transform.position.x);
-        PlayerPrefs.SetFloat("yPlayer", Player.transform.position.y);
-        PlayerPrefs.SetFloat("zPlayer", Player.transform.position.z);
+        GameObject Judy = GameObject.FindWithTag("Player");
+        PlayerPrefs.SetFloat("xPlayer", Judy.transform.position.x);
+        PlayerPrefs.SetFloat("yPlayer", Judy.transform.position.y);
+        PlayerPrefs.SetFloat("zPlayer", Judy.transform.position.z);
 
         //Jauges vie et faim
         PlayerPrefs.SetFloat("life", LifeBar.GetComponent<LifeBar>().getSizeLifeBar());
@@ -302,7 +309,7 @@ public class Sauvegarde : MonoBehaviour {
         }
         else //creer une nouvelle partie
         {
-            SceneManager.LoadScene("Map Island - final");
+            SceneManager.LoadScene("Map Island");
         }
     }
 }
