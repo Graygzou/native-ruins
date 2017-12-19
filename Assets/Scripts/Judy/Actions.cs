@@ -11,7 +11,6 @@ public class Actions : MonoBehaviour {
 
 	void Awake () {
 		animator = GetComponent<Animator> ();
-        PlayerPrefs.DeleteAll();
     }
 
 	public void Stay () {
