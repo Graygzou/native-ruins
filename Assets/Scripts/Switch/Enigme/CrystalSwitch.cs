@@ -8,10 +8,9 @@ public class CrystalSwitch : Switch
     public Texture texture;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         if (cameraCutScene != null)
-            cameraCutScene.enabled = false;
+            cameraCutScene.GetComponent<Camera>().enabled = false;
     }
 
     override public IEnumerator PlayCutSceneStart() {
@@ -27,8 +26,7 @@ public class CrystalSwitch : Switch
     }
 
     // The switch does what he's meant for here.
-    override protected void ActivateSwitch()
-    {
+    override protected void ActivateSwitch() {
         gameObject.GetComponent<Renderer>().material.mainTexture = texture;
     }
 }

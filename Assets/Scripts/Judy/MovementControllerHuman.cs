@@ -410,6 +410,10 @@ public class MovementControllerHuman : MovementController {
         isReloading = r;
     }
 
+    public bool getIsAiming() {
+        return isAiming;
+    }
+
     void OnDrawGizmosSelected()
     {
         //Camera camera = GameObject.Find("AimedCamera").GetComponent<Camera>();

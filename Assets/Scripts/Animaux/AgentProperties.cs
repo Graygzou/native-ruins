@@ -116,12 +116,6 @@ public class AgentProperties : MonoBehaviour
         // Reduce the current health by the amount of damage sustained.
         currentHealth -= amount;
 
-        // Set the position of the particle system to where the hit was sustained.
-        //hitParticles.transform.position = hitPoint;
-
-        // And play the particles.
-        //hitParticles.Play();
-
         // If the current health is less than or equal to zero...
         if (currentHealth <= 0) {
             Debug.Log("Dead");
@@ -135,7 +129,10 @@ public class AgentProperties : MonoBehaviour
     }
 
     void DropItems() {
-        transform.GetChild(transform.childCount-2).gameObject.SetActive(true);
+        // Active food
+        for (int i = 0; i < transform.Find("Items").childCount; i++) {
+            transform.Find("Items").GetChild(i).gameObject.SetActive(true);
+        }
     }
 
     private IEnumerator SmokeAnimation(GameObject o)

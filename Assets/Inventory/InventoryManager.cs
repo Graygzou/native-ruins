@@ -69,20 +69,19 @@ public class InventoryManager : MonoBehaviour {
 	}
 
 	public void PutWeaponInBag (){
-		if (Input.GetKeyDown (KeyCode.R) && !bag_open) {
-			RectTransform clone;
+        if (Input.GetKeyDown (KeyCode.R) && !bag_open) {
+            RectTransform clone;
+            GameObject player = GameObject.FindWithTag("Player");
 			if (isTorchEquiped) {
 				AddObjectOfType (ObjectsType.Torch);
-                GameObject player = GameObject.FindWithTag("Player");
                 player.GetComponent<ActionsNew>().DisarmWeapon();
                 StartCoroutine("DisarmTorch");
 				clone = Instantiate(o_Torch) as RectTransform;
 				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
 				isTorchEquiped = false;
 			}
-			if (isBowEquiped) {
+			if (isBowEquiped && !player.GetComponent<MovementControllerHuman>().getIsAiming()) {
 				AddObjectOfType (ObjectsType.Bow);
-                GameObject player = GameObject.FindWithTag("Player");
                 player.GetComponent<ActionsNew>().DisarmWeapon();
                 StartCoroutine("DisarmBow");
 				clone = Instantiate(o_Bow) as RectTransform;
