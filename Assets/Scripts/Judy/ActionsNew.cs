@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (Animator))]
 public class ActionsNew : MonoBehaviour {
 
 	private Animator animator;
@@ -230,10 +229,13 @@ public class ActionsNew : MonoBehaviour {
         animator.Play("Focus", MovementLayer);
     }
 
-    public void StartIntro()
-    {
+    public void StartIntro() {
+        if(animator == null) {
+            animator = GetComponent<Animator>();
+        }
         animator.SetBool("startCutScene", true);
         animator.Play("SleepingIdle", MovementLayer);
+        PlayerPrefs.DeleteAll();
     }
 
     public void FinIntro() {
