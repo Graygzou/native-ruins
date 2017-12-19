@@ -62,17 +62,27 @@ public class Collectable : MonoBehaviour {
 		}
 	}
 
-	IEnumerator WaitRespawn(){
-		if (isActive) {
-			GetInputs ();
-			yield return 0;
-		} else {
-			yield return new WaitForSeconds (900);
-			isActive = true;
-			this.gameObject.GetComponent<MeshRenderer>().enabled=true;
-			this.gameObject.GetComponent<SphereCollider>().enabled=true;
-		}
-	}
+    IEnumerator WaitRespawn() {
+        if (isActive)
+        {
+            GetInputs();
+            yield return 0;
+        }
+        else
+        {
+            yield return new WaitForSeconds(900);
+            if (!isActive)
+            {
+                isActive = true;
+                this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                this.gameObject.GetComponent<SphereCollider>().enabled = true;
+                InventoryManager.an_object_is_pickable = false;
+                o_isPickable = false;
+                renderer.material.shader = Shader.Find("Mobile/Diffuse");
+                GameObject.Find("InventoryManager/Canvas/ButtonRamasser").SetActive(false);
+            }
+        }
+    }
 }
 
 
