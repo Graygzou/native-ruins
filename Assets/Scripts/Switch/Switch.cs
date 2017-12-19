@@ -48,7 +48,11 @@ public abstract class Switch : MonoBehaviour {
         isActived = true;
         //GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = false;
         GameObject.FindWithTag("Player").GetComponent<MovementController>().enabled = false;
-        GameObject.FindWithTag("Player").GetComponent<ActionsNew>().Stay(100f);
+        ActionsNew actions = GameObject.FindWithTag("Player").GetComponent<ActionsNew>();
+        if (actions != null) {
+            actions.Stay(100f);
+        }
+        
         // Enable the right camera
         playerCamera.enabled = false;
         cameraCutScene.enabled = true;

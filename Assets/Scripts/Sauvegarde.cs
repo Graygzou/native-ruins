@@ -181,7 +181,7 @@ public class Sauvegarde : MonoBehaviour {
 
         } else {
             // Setting up the scene
-            GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
+           /* GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
             GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
             GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
             GameObject.FindWithTag("MainCamera").GetComponent<Camera>().enabled = false;
@@ -198,7 +198,7 @@ public class Sauvegarde : MonoBehaviour {
             dialogue.TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
             dialogue.TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
             dialogue.TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
-            dialogue.TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());
+            dialogue.TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());*/
         }
     }
 

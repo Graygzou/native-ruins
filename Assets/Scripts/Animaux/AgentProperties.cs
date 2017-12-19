@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR 
 using UnityEditor;
+#endif
 using UnityEngine.AI;
 
 [System.Serializable]
 public class AgentProperties : MonoBehaviour
 {
-
     // Attributes of the agent
     public float maxHealth;
     public float maxForce;
@@ -30,8 +31,8 @@ public class AgentProperties : MonoBehaviour
     private float currentSpeed;
     private Transform front;
 
-    private AudioSource sonCri;
-    private AudioSource sonCombat;
+    public AudioSource sonCri;
+    public AudioSource sonCombat;
 
     public static bool soundIsPlaying;
 
@@ -39,6 +40,8 @@ public class AgentProperties : MonoBehaviour
         isDead = false;
         maxForce = 200f;
         currentSpeed = 22f;
+        // Get the child collider
+        visionRange = gameObject.GetComponentInChildren<SphereCollider>();
     }
 
     void Start() {
@@ -57,18 +60,10 @@ public class AgentProperties : MonoBehaviour
         // If the entering collider is the player...
         if (other.gameObject.tag == "Player" && !isDead)
         {
-            if (!isAlert)
-            {
-                if(!AgentProperties.soundIsPlaying)
-                {
-                    sonCombat.Play();
-                    AgentProperties.soundIsPlaying = true;
-                }   
+            if (!isAlert) {
                 // The animal enter the "State" Alert
                 isAlert = true;
-            }
-            else if (isAlert && !playerTooClose)
-            {
+            } else if (isAlert && !playerTooClose) {
                 playerTooClose = true;
                 sonCri.Play();
             }
@@ -80,20 +75,11 @@ public class AgentProperties : MonoBehaviour
         // If the exiting collider is the player...
         if (other.gameObject.tag == "Player" && !isDead)
         {
-            if (isAlert && playerTooClose)
-            {
+            if (isAlert && playerTooClose) {
                 playerTooClose = false;
-            }
-            else if (isAlert && !playerTooClose)
-            {
+            } else if (isAlert && !playerTooClose) {
                 // The animal quit the "State" Alert
                 isAlert = false;
-                if (AgentProperties.soundIsPlaying)
-                {
-                    sonCombat.Stop();
-                    AgentProperties.soundIsPlaying = false;
-                }
-                
             }
         }
     }
@@ -118,8 +104,6 @@ public class AgentProperties : MonoBehaviour
     }
 
     public void takeDamages(float amount) {
-
-        Debug.Log("Outch !");
 
         // If the enemy is dead...
         if (isDead)
@@ -170,44 +154,5 @@ public class AgentProperties : MonoBehaviour
 
         //Gizmos.color = Color.red;
         //Gizmos.DrawLine(nose.position, nose.position + nose.forward * 0.5f);
-    }
-}
-
-[CustomEditor(typeof(AgentProperties))]
-[CanEditMultipleObjects]
-public class EditorAgentProperty : Editor
-{
-    SerializedProperty m_isMean, m_maxHealth, m_maxSpeed, m_mass;
-    SerializedProperty m_damages, m_hungryIndicator;
-    SerializedProperty m_visionRange, m_awarenessRange;
-    SerializedProperty m_tauntRange;
-
-    void OnEnable() {
-        // Fetch the objects from the GameObject script to display in the inspector
-        m_maxHealth = serializedObject.FindProperty("maxHealth");
-        m_maxSpeed = serializedObject.FindProperty("maxSpeed");
-        m_mass = serializedObject.FindProperty("mass");
-        m_isMean = serializedObject.FindProperty("isMean");
-        m_damages = serializedObject.FindProperty("damages");
-        m_hungryIndicator = serializedObject.FindProperty("hungryIndicator");
-        m_visionRange = serializedObject.FindProperty("isAlert");
-        m_awarenessRange = serializedObject.FindProperty("playerTooClose");
-        m_tauntRange = serializedObject.FindProperty("tauntRange");
-    }
-
-    override public void OnInspectorGUI() {
-        //The variables and GameObject from the MyGameObject script are displayed in the Inspector with appropriate labels
-        EditorGUILayout.PropertyField(m_maxHealth, new GUIContent("Max Health:"));
-        EditorGUILayout.PropertyField(m_maxSpeed, new GUIContent("Max Speed:"));
-        EditorGUILayout.PropertyField(m_mass, new GUIContent("Mass:"));
-        EditorGUILayout.PropertyField(m_isMean, new GUIContent("IsMean:"));
-        EditorGUILayout.PropertyField(m_damages, new GUIContent("Damages:"));
-        EditorGUILayout.PropertyField(m_hungryIndicator, new GUIContent("Hunger:"));
-        EditorGUILayout.PropertyField(m_visionRange, new GUIContent("VisionRange:"));
-        EditorGUILayout.PropertyField(m_awarenessRange, new GUIContent("AwarenessRange:"));
-        EditorGUILayout.PropertyField(m_tauntRange, new GUIContent("Taunt Range:"));
-
-        // Apply changes to the serializedProperty - always do this at the end of OnInspectorGUI.
-        serializedObject.ApplyModifiedProperties();
     }
 }

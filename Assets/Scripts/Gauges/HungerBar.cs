@@ -9,7 +9,7 @@ public class HungerBar : MonoBehaviour {
     public Color BarColor;
 
     private int currentTimeFaim = 0;
-    private int timeMaxFaim = 3600;
+    private int timeMaxFaim = 800;
 	private GameObject forms;
 
 	// Use this for initialization
@@ -26,11 +26,11 @@ public class HungerBar : MonoBehaviour {
         {
             if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma)
             {
-                Hunger.GetComponent<Scrollbar>().size -= 0.06f;
+                Hunger.GetComponent<Scrollbar>().size -= 0.08f;
             }
             else
             {
-                Hunger.GetComponent<Scrollbar>().size -= 0.02f;
+                Hunger.GetComponent<Scrollbar>().size -= 0.04f;
             }
             currentTimeFaim = 0;
         }

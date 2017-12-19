@@ -58,6 +58,9 @@ public class PickUpScript : MonoBehaviour {
                 son.Play();
                 dialogue.TriggerDialogueArc(null);     
                 GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
+                GameObject playerRoot = GameObject.Find("Player");
+                playerRoot.GetComponent<FormsController>().Transformation(0);
+                GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ActionsNew>().Stay(100f);
             }
             if (o_type.Equals(ObjectsType.Rope) && !brain.HasDiscoveredRope)
             {
@@ -66,6 +69,9 @@ public class PickUpScript : MonoBehaviour {
                 son.Play();
                 dialogue.TriggerDialogueCorde(null);
                 GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
+                GameObject playerRoot = GameObject.Find("Player");
+                playerRoot.GetComponent<FormsController>().Transformation(0);
+                GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ActionsNew>().Stay(100f);
             }
             if (o_type.Equals(ObjectsType.Sail) && !brain.HasDiscoveredSail)
             {
@@ -74,6 +80,9 @@ public class PickUpScript : MonoBehaviour {
                 son.Play();
                 dialogue.TriggerDialogueVoile(null);
                 GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
+                GameObject playerRoot = GameObject.Find("Player");
+                playerRoot.GetComponent<FormsController>().Transformation(0);
+                GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ActionsNew>().Stay(100f);
             }
             InventoryManager.AddObjectOfType(o_type);
 			InventoryManager.an_object_is_pickable = false;

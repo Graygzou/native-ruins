@@ -9,14 +9,7 @@ public class MovementBearStatue : MonoBehaviour {
 
     public void SetCanBeMoved(bool a)
     {
-        if (a)
-        {
-            GetComponent<Rigidbody>().isKinematic = false;
-        } else
-        {
-            GetComponent<Rigidbody>().isKinematic = true;
-        }
-        
+            GetComponent<Rigidbody>().isKinematic = a;
     }
 
     //public void Move(Collider other) 

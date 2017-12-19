@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR 
 using UnityEditor;
+#endif
 using UnityEngine.AI;
 using System;
 
@@ -117,16 +119,3 @@ public class StateMachine : MonoBehaviour {
     }
 
 }
-
-//[CustomEditor(typeof(StateMachine))]
-//public class EditorStateMachine : Editor
-//{
-//    override public void OnInspectorGUI()
-//    {
-//        var myScript = target as StateMachine;
-
-//        //myScript.currentState = EditorGUILayout.ObjectField("CurrentState", myScript.currentState, typeof(State<GameObject>), true) as State<GameObject>;
-//        //myScript.previousState = EditorGUILayout.ObjectField("PreviousState", myScript.previousState, typeof(State<GameObject>), true) as State<GameObject>;
-//        //myScript.globalState = EditorGUILayout.ObjectField("GlobalState", myScript.globalState, typeof(State<GameObject>), true) as State<GameObject>;
-//    }
-//}

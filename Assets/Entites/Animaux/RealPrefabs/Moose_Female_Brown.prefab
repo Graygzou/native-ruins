@@ -467,7 +467,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!54 &54536281714472008
 Rigidbody:
@@ -811,6 +811,8 @@ MonoBehaviour:
   awarenessRange: {fileID: 135936426356611758}
   isAlert: 0
   playerTooClose: 0
+  sonCri: {fileID: 0}
+  sonCombat: {fileID: 0}
 --- !u!114 &114786507226272848
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SimpleCutScene : Switch {
 
-    public AnimationClip cutSceneStart;
-    public AnimationClip cutSceneEnd;
+    public string nameCutScene;
     public AudioClip cutSceneMusic;
+    public float PauseTime;
     public bool loop;
     public bool triggerZone;
 
@@ -22,15 +22,15 @@ public class SimpleCutScene : Switch {
 
     override public IEnumerator PlayCutSceneStart() {
         ActivateSwitch();
-        if (cutSceneStart != null) {
-            cameraCutScene.GetComponent<Animation>().clip = cutSceneStart;
-            cameraCutScene.GetComponent<Animation>().Play();
+        if (nameCutScene != "") {
+            cameraCutScene.GetComponent<Animator>().SetBool("Animation", true);
+            cameraCutScene.GetComponent<Animator>().Play(nameCutScene);
             if (cutSceneMusic != null)
             {
                 cameraCutScene.GetComponent<AudioSource>().clip = cutSceneMusic;
                 cameraCutScene.GetComponent<AudioSource>().Play();
             }
-            yield return new WaitForSeconds(cameraCutScene.GetComponent<Animation>().clip.length);
+            yield return new WaitForSeconds(PauseTime);
             StopCutScene();
             if (gameObject.GetComponent<SwitchObject>() != null) {
                 // Activate all his children

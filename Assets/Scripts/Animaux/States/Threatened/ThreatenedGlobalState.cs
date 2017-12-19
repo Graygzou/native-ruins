@@ -20,8 +20,12 @@ public class ThreatenedGlobalState : State<GameObject>
     }
 
     override public void Enter(GameObject o) {
-        // change the music ?
-        // Jouer l'animation (fumé qui sort de la tete / narines, par ex)
+        AgentProperties properties = o.GetComponent<AgentProperties>();
+        // change the music
+        if (!AgentProperties.soundIsPlaying) {
+            properties.sonCombat.Play();
+            AgentProperties.soundIsPlaying = true;
+        }
     }
 
     override public void Execute(GameObject o) {
@@ -45,7 +49,10 @@ public class ThreatenedGlobalState : State<GameObject>
     }
 
     override public void Exit(GameObject o) {
-        // Change music ?
+        AgentProperties properties = o.GetComponent<AgentProperties>();
+        // Change music
+        properties.sonCombat.Stop();
+        AgentProperties.soundIsPlaying = true;
     }
 
 }

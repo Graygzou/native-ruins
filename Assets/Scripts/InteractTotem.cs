@@ -70,6 +70,7 @@ public class InteractTotem : MonoBehaviour {
             }
             o_isTotem = false;
             GameObject.Find("Affichages/Interaction/ButtonInteragir").SetActive(false);
+            Judy.GetComponentInChildren<ActionsNew>().Stay(100f);
         }
     }
 }

@@ -70,7 +70,12 @@ public class MovementControllerHuman : MovementController {
     // In this case, the vector3 NextDir is not used.
     override protected void JumpingAndLanding(Vector3 NextDir)
     {
-        bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
+        bool jumpCooldownOver;
+        if (m_rigidBody.velocity.magnitude <= 1.0) {
+            jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
+        } else {
+            jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= 1.0;
+        }
 
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space)) {
             m_jumpTimeStamp = Time.time;
