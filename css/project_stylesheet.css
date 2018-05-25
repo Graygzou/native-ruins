@@ -1,0 +1,377 @@
+@font-face {
+    font-family: 'metenoragefont';
+    src: url('../../fonts/komikazba.woff2') format('woff2'),
+         url('../../fonts/komikazba.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nativeruinsfont';
+    src: url('../../fonts/NativeAlien.woff2') format('woff2'),
+         url('../../fonts/NativeAlien.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'loderunnerfont';
+    src: url('../../fonts/PressStart2P.woff2') format('woff2'),
+         url('../../fonts/PressStart2P.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ravenfont';
+    src: url('../../fonts/returntocastle.woff2') format('woff2'),
+         url('../../fonts/returntocastle.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'braincontrolfont';
+    src: url('../../fonts/rubber-biscuit.woff2') format('woff2'),
+         url('../../fonts/rubber-biscuit.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'spidaphobiafont';
+    src: url('../../fonts/spiderfingers.woff2') format('woff2'),
+         url('../../fonts/spiderfingers.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'penguinfont';
+    src: url('../../fonts/snaps-taste-christmas.woff2') format('woff2'),
+         url('../../fonts/snaps-taste-christmas.woff') format('woff');
+/    font-weight: normal;
+    font-style: normal;
+}
+
+#header {
+	width: 60%;
+}
+
+#profile {
+	right: 20%;
+}
+
+hr {
+	display: block;
+    	margin-top: 2em;
+    	margin-bottom: 0.5em;
+    	border-width: 5px;
+}
+
+section {
+	padding-bottom: 2%;
+	text-align: left;
+}
+
+.section_title {
+	margin: 0;
+	font-size: 2.5em;
+        text-align: center;
+        font-style: italic;
+	font-family: 'customfont';
+}
+
+h1 {
+	position: relative;
+}
+
+.section_title > span {
+	position: absolute;
+	top: 50%;
+	padding-right: 40px;
+	transform: translate(-50%, -50%);
+}
+
+table {
+	margin: auto;
+	width: 100%;
+}
+
+/*--------------------------*/
+/*    Picture Section       */
+/*--------------------------*/
+#picture_section {
+	margin: 0 auto;
+	line-height: 200px;
+	height: 200px;
+	text-align: center;
+}
+
+#picture_section > img {
+	width: 100%;
+	height: inherit;
+	object-fit: cover;
+	border: 5px solid black;
+	
+}
+
+.project_title {
+  text-align: center;
+  margin : 15px;
+  font-weight: normal;
+}
+
+/*--------------------------*/
+/*  	Overview Section    */
+/*--------------------------*/
+#overview_section {
+	display: block;
+}
+
+.overview_table {
+	display: inline-block;
+	min-width: 20%;
+	margin-right: 2%;
+	vertical-align: top;
+	text-align: left;
+}
+
+
+.overview_table > div {
+	margin-bottom: 10px;
+}
+
+.table_title {
+	font-size: 120%;
+	font-family: 'customfont';
+}
+
+.description_side {
+	display: inline-block;
+	font-size: 110%;
+	max-width: 65%;
+	text-align: left;
+	vertical-align: top;
+}
+
+
+/*-----------------------------*/
+/*    Gameplay video Section   */
+/*-----------------------------*/
+
+#gameplay_section {
+	text-align: center;
+}
+
+iframe {
+	display: inline-block;
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+/*-----------------------*/
+/*    Carousel Section   */
+/*-----------------------*/
+
+#image_carousel {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#carousel {
+  position: relative;
+  height: 300px;
+  top: 50%;
+  overflow: hidden;
+}
+#carousel div {
+  position: absolute;
+  transition: transform 1s, left 1s, opacity 1s, z-index 0s;
+  opacity: 1;
+}
+#carousel div img {
+  width: 400px;
+  transition: width 1s;
+}
+#carousel div.hideLeft {
+  left: 0%;
+  opacity: 0;
+  transform: translateY(50%) translateX(-50%);
+}
+#carousel div img {
+  width: 200px;
+  height: 200px;
+}
+#carousel div.hideRight {
+  left: 100%;
+  opacity: 0;
+  transform: translateY(50%) translateX(-50%);
+}
+#carousel div.hideRight img {
+  width: 200px;
+}
+#carousel div.prev {
+  z-index: 5;
+  left: 30%;
+  transform: translateY(50px) translateX(-50%);
+}
+#carousel div.prev img {
+  width: 300px;
+}
+#carousel div.prevLeftSecond {
+  z-index: 4;
+  left: 15%;
+  transform: translateY(50%) translateX(-50%);
+  opacity: .7;
+}
+#carousel div.prevLeftSecond img {
+  width: 200px;
+}
+#carousel div.selected {
+  z-index: 10;
+  left: 50%;
+  transform: translateY(0px) translateX(-50%);
+}
+
+#carousel div.selected img {
+  width: 400px;
+}
+
+#carousel div.next {
+  z-index: 5;
+  left: 70%;
+  transform: translateY(50px) translateX(-50%);
+}
+#carousel div.next img {
+  width: 300px;
+}
+#carousel div.nextRightSecond {
+  z-index: 4;
+  left: 85%;
+  transform: translateY(50%) translateX(-50%);
+  opacity: .7;
+}
+#carousel div.nextRightSecond img {
+  width: 200px;
+}
+
+.buttons {
+  width: 100%;
+}
+
+#prev {
+  float:left
+}
+
+#next {
+  float:right;
+}
+
+.buttons span:hover {
+  opacity: 0.5;
+}
+
+/*-----------------------------*/
+/*        Detailed Info	       */
+/*-----------------------------*/
+.class-diagram {
+	float: right;
+	width: 60%;
+}
+
+.puzzle {
+	margin: 0 auto;
+	padding: 2%;
+	margin-bottom: 2%;
+	display: block;
+	text-align: center;
+	background-color: lightgray;
+}
+
+.puzzle > div {
+	display: inline-block;
+	text-align: left;
+	vertical-align: super;
+	width: 29%;	
+}
+
+.puzzle > img {
+	width: 70%;
+	display: inline-block;
+	border-radius: 10px;
+}
+
+tbody {
+	display: block;
+	text-align: left;
+}
+
+#detailed_section h3 {
+	text-decoration: underline;
+}
+
+#detailed_section h4 {
+	clear: both;
+}
+
+.bloc > img {
+	padding: 5px;
+	width: 40px;
+}
+
+.puzzle > div > h4 {
+	margin: 0;
+	font-weight: bold;
+}
+
+.puzzle > div > table {
+	text-align: center;
+}
+
+.puzzle-subtitles {
+	display: block;
+	font-style: italic;
+	border-bottom: 2px solid black;
+	margin-bottom: 2%;
+}
+
+ol {
+	padding-left: 20px;
+	margin: 0;
+	min-width: 50%;
+}
+
+.horizontal-list li {
+	display: inline;
+	list-style-type: circle;
+}
+
+.bloc-images {
+	display: block;
+	text-align: center;
+}
+
+.bloc-images img {
+	display: inline-block;
+	width: 40%;
+}
+
+@media only screen and (max-width: 1000px) {
+    .puzzle > div {
+	display: block;
+	text-align: left;
+        width:100%;
+    }
+
+    #detailed_section>div>img {
+	width: 100%;
+	display: block;
+	border-radius: 10px;
+    }
+
+    .gridright {
+        width:100%;
+    }
+}

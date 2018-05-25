@@ -1,0 +1,538 @@
+/*----------------*/
+/* Projects fonts */
+/*----------------*/
+@font-face {
+    font-family: 'nativeruins-font';
+    src: url('../fonts/NativeAlien.woff2') format('woff2'),
+         url('../fonts/NativeAlien.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'raven-font';
+    src: url('../fonts/returntocastle.woff2') format('woff2'),
+         url('../fonts/returntocastle.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'loderunner-font';
+    src: url('../fonts/PressStart2P.woff2') format('woff2'),
+         url('../fonts/PressStart2P.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'metenorage-font';
+    src: url('../fonts/komikazba.woff2') format('woff2'),
+         url('../fonts/komikazba.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'penguinpanic-font';
+    src: url('../fonts/snaps-taste-christmas.woff2') format('woff2'),
+         url('../fonts/snaps-taste-christmas.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'spidaphobia-font';
+    src: url('../fonts/spiderfingers.woff2') format('woff2'),
+         url('../fonts/spiderfingers.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'braincontrol-font';
+    src: url('../fonts/rubber-biscuit.woff2') format('woff2'),
+         url('../fonts/rubber-biscuit.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*-------------------------*/
+/*     Start WebSite Css   */
+/*-------------------------*/
+body {
+       	margin: 0;
+}
+
+h3 {
+  font-weight: normal;
+  margin: 0;
+}
+
+/*---------------------*/
+/* description section */
+/*---------------------*/
+
+#desc_section {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#desc_section > a {
+	display: inline-block;
+	padding: 15px;
+	color: white;
+	border-radius: 10px;
+	background-color: #333;
+	text-decoration: none;
+	border: 2px solid lightgray;
+}
+
+#desc_section> div {
+	margin-top: 1%;
+	padding: 1%;	
+}
+
+#desc_section > div > a {
+	color: #333;
+	margin-right: 2%;	
+	text-decoration: none;
+}
+
+#desc_section a:hover {
+	
+	opacity: 0.5;
+}
+
+.frame {
+  min-height: 625px;
+  overflow: hidden;
+}
+
+.section_title {
+	font-family: 'customfont';
+	text-align: center;
+	font-style: italic;
+	padding: 1%;
+      	margin: 0;
+      	font-size: 250%;
+}
+
+.subsection_title {
+	font-family: 'customfont';
+	font-size: 1.5em;
+	text-align: left;
+}
+
+.separator {
+	width: 80%;
+	margin-top: 2em;
+    	margin-bottom: 2em;
+	border-color: lightgray;
+	border-width: 2px;
+}
+
+.description {
+  width: 80%;
+  font-size: 1.6em;
+  margin: auto;
+  text-align: center;
+}
+
+/*--------------------*/
+/* Tags projects      */
+/*--------------------*/
+.tags_bloc {
+  display: inline-block;
+}
+
+.tag {
+  font-family: Tahoma, Helvetica, Georgia, Arial;
+  font-size: 1em;
+  font-weight: 600;
+  color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 5px;
+}
+
+.tag_engine {
+  background-color: rgb(1, 41, 53);
+  border: 2px solid rgb(1, 41, 53);
+}
+
+.tag_language {
+  background-color: rgb(67, 53, 131);
+  border: 2px solid rgb(67, 53, 131);
+}
+
+.tag_concept {
+  background-color: rgb(50, 145, 42);
+  border: 2px solid rgb(50, 145, 42);
+}
+
+.tag_moteur {
+  background-color: rgb(123, 0, 1);
+  border: 2px solid rgb(123, 0, 1);
+}
+
+.tag_autre1 {
+  background-color: rgb(132, 147, 91);
+  border: 2px solid rgb(132, 147, 91);
+}
+
+/*-----------------*/
+/* Project section */
+/*-----------------*/
+#projects-section {
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.projects-line {
+	width: 100%;
+	text-align: center;
+	background-color: blue;
+
+}
+
+.project {
+	display: inline-block;
+	min-width: 270px;
+	min-height: 270px;
+	width: 26vw;
+	height: 26vw;
+	vertical-align: top;
+}
+
+.project > h2 {
+	height : 50px;
+}
+
+.project_background img {
+  width: 40vw;
+  height: 100%;
+  max-width: 500px;
+  border: 1px solid black;
+  background-size: cover;
+}
+
+.quickDescProjectGames img:hover{
+  opacity: 0.4;
+}
+
+/*-----------------------*/
+/* font of each projects */
+/*-----------------------*/
+.penguin h3, .penguin .quickDescText > div > span {
+  font-family:'penguinpanic-font';
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.brain h3, .brain .quickDescText > div > span {
+  font-family:'braincontrol-font';
+  font-size: 1.1em;
+}
+
+.spida h3, .spida .quickDescText > div > span {
+  font-family:'spidaphobia-font';
+  font-size: 1.5em;
+}
+
+.metenorage h3, .metenorage .quickDescText > div > span {
+  font-family:'metenorage-font';
+  font-size: 1.8em;
+}
+
+.native h3, .native .quickDescText > div > span {
+  font-family:'nativeruins-font';
+  font-size: 1.2em;
+}
+
+.raven h3, .raven .quickDescText > div > span {
+  font-family:'raven-font';
+  font-size: 1.3em;
+}
+
+/*
+@media screen and (max-width: 320px) {
+	.project {
+		display: block;
+		width: 100%;
+		min-width: 210px;
+		min-height: 210px;
+	}
+
+	.project_background img {
+		min-width: 150px;
+		min-height: 150px;
+	}
+}*/
+
+/*--------------------*/
+/* new Projects       */
+/*--------------------*/
+
+.projects2 {
+  background: #eee;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  height: 400px;
+  font-family: "Tahoma";
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.projects2 #scene {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+}
+
+#left-zone {
+  margin: 1%;
+  height: 100%;
+}
+
+#left-zone .list {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 0;
+  padding : 0;
+}
+
+.project_item input[type="radio"] {
+  display: none;
+}
+
+.project_item {
+  text-align: left;
+  margin-right: 5px;
+}
+
+.project_label {
+  font-weight: 700;
+  margin: 0 auto;
+  margin-right: 5px;
+  color: black;
+  opacity: 0.5;
+  line-height: 1.4em;
+}
+
+input[type="radio"] ~ div .project_label:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.quickDescProjectGames {
+  display: none;
+  left: 165px;
+}
+
+.quickDescProjectMaths {
+  display: none;
+  left: 260px;
+  text-align: left;
+}
+
+.active {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  animation-duration: 0.75s;
+  animation-name: slideout;
+  animation-timing-function: ease-out;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.quickDescText {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.quickDescText > div {
+  text-align: left;
+  line-height: 2.25em;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: 14px;
+}
+
+.quickDescProjectMaths p {
+  text-align: left;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.quickDescProjectMaths p span {
+  font-weight: 700;
+}
+
+/* Color effects on the right */
+#scene #left-zone .list li.project_item input[type="radio"]:checked + div {
+  opacity: 1;
+  border-right: solid 5px #D64541;
+}
+
+#scene #middle-border {
+  background-color: #eee;
+  height: 100%;
+  flex-grow: 1;
+  max-width: 2px;
+  z-index: 0;
+}
+
+#scene #right-zone {
+  background: #fff;
+  height: 100%;
+  flex-grow: 3;
+}
+
+  /*------------------*/
+  /* new Skills       */
+  /*------------------*/
+
+  .new_skills_section {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+   }
+
+   #chart {
+       position: relative;
+   }
+
+   .overlap_images {
+       position: absolute;
+   }
+
+  /*------------------*/
+  /* timeline section */
+  /*------------------*/
+#section_timeline {
+  margin: 0;
+  font-family: 'Source Sans Pro', arial, sans-serif;
+  font-weight: 300;
+  color: #333;
+  box-sizing: border-box;
+}
+
+#section_timeline * {
+  box-sizing: border-box;
+}
+
+.timeline {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 800px;
+  background: #fff;
+  padding: 100px 50px;
+  position: relative;
+  box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.timeline a {
+  color: black;
+  text-decoration: none;
+}
+
+.timeline a:hover {
+  background: #eee;
+  color: black;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.timeline:before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: calc(33% + 15px);
+  bottom: 0px;
+  width: 4px;
+  background: #ddd;
+}
+.timeline:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.entry {
+  clear: both;
+  text-align: left;
+  position: relative;
+}
+.entry .titleTimeline {
+  margin-bottom: .5em;
+  float: left;
+  width: 33%;
+  padding-right: 30px;
+  text-align: right;
+  position: relative;
+}
+.entry .titleTimeline:before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 4px solid salmon;
+  background-color: #fff;
+  border-radius: 100%;
+  top: 15%;
+  right: -12px;
+  z-index: 99;
+}
+
+.entry .titleTimeline p {
+  margin: 0;
+}
+.entry .body {
+  margin: 0 0 3em;
+  float: right;
+  width: 66%;
+  padding-left: 30px;
+}
+.entry .body p {
+  line-height: 1.4em;
+}
+.entry .body p:first-child {
+  margin-top: 0;
+  font-weight: 400;
+}
+.body > ul {
+  color: #aaa;
+  padding-left: 0;
+  list-style-type: none;
+}
+.entry .body ul li:before {
+  margin-right: .5em;
+}
+
+.entry .body ul li span {
+  color: black;
+  text-align: center;
+  width: 15px;
+}

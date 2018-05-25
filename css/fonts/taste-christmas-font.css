@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'customfont';
+    src: url('../../fonts/snaps-taste-christmas.woff2') format('woff2'),
+         url('../../fonts/snaps-taste-christmas.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.left_chevron_legend, .right_chevron_legend, .table_title, .section_title {
+   font-weight: bold;
+}
