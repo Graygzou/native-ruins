@@ -1,56 +1,8 @@
 @font-face {
-    font-family: 'metenoragefont';
-    src: url('../../fonts/komikazba.woff2') format('woff2'),
-         url('../../fonts/komikazba.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'nativeruinsfont';
     src: url('../../fonts/NativeAlien.woff2') format('woff2'),
          url('../../fonts/NativeAlien.woff') format('woff');
     font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'loderunnerfont';
-    src: url('../../fonts/PressStart2P.woff2') format('woff2'),
-         url('../../fonts/PressStart2P.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'ravenfont';
-    src: url('../../fonts/returntocastle.woff2') format('woff2'),
-         url('../../fonts/returntocastle.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'braincontrolfont';
-    src: url('../../fonts/rubber-biscuit.woff2') format('woff2'),
-         url('../../fonts/rubber-biscuit.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'spidaphobiafont';
-    src: url('../../fonts/spiderfingers.woff2') format('woff2'),
-         url('../../fonts/spiderfingers.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'penguinfont';
-    src: url('../../fonts/snaps-taste-christmas.woff2') format('woff2'),
-         url('../../fonts/snaps-taste-christmas.woff') format('woff');
-/    font-weight: normal;
     font-style: normal;
 }
 
@@ -113,7 +65,7 @@ table {
 	height: inherit;
 	object-fit: cover;
 	border: 5px solid black;
-	
+
 }
 
 .project_title {
@@ -168,6 +120,71 @@ iframe {
 	display: inline-block;
 	max-width: 100%;
 	vertical-align: middle;
+}
+
+/*------------------------*/
+/*  Team section          */
+/*------------------------*/
+
+#team-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  text-align: center;
+  padding-top: 5%;
+}
+
+.team-members {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.team-members > img  {
+  width: 180px;
+  height: 190px;
+}
+
+.member-name {
+  padding: 3%;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.member-role > ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 40px;
+}
+
+.member-role > ul > li {
+  padding: 1%;
+}
+
+.member-links {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-around;
+  text-align: center;
+  font-size:1.5em;
+}
+
+.member-links > a {
+  text-decoration: none;
+  color: black;
+}
+
+.member-links > a:hover {
+  color: darkblue;
+  font-size: 1.6em;
 }
 
 /*-----------------------*/
@@ -294,7 +311,7 @@ iframe {
 	display: inline-block;
 	text-align: left;
 	vertical-align: super;
-	width: 29%;	
+	width: 29%;
 }
 
 .puzzle > img {
