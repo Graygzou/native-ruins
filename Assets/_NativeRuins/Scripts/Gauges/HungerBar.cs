@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HungerBar : MonoBehaviour {
+public class HungerBar : MonoBehaviour
+{
+    #region Consts
+    private const float MAX_HUNGER_PLAYER = 300f;
+    #endregion
 
-    public GameObject Hunger;
-    public Color BarColor;
+    #region Components
+    [SerializeField]
+    private RectTransform hungerSprite;
+    #endregion
+
+    #region Hunger settings
+    [SerializeField]
+    private float hungerDecreasingFactor = 0.04f;
+    [SerializeField]
+    private float hungerDecreasingFactorPuma = 0.08f;
+    #endregion
 
     private int currentTimeFaim = 0;
     private int timeMaxFaim = 800;
 	private GameObject forms;
-
-	// Use this for initialization
-	void Start () {
-        Hunger.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.green;
-    }
-
-
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,24 +32,30 @@ public class HungerBar : MonoBehaviour {
         {
             if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma)
             {
-                Hunger.GetComponent<Scrollbar>().size -= 0.08f;
+                ChangeHungerBar(-hungerDecreasingFactorPuma);
             }
             else
             {
-                Hunger.GetComponent<Scrollbar>().size -= 0.04f;
+                ChangeHungerBar(-hungerDecreasingFactor);
             }
             currentTimeFaim = 0;
         }
         currentTimeFaim++;
     }
 
-    public float getSizeHungerBar()
+    public float GetSizeHungerBar()
     {
-        return Hunger.GetComponent<Scrollbar>().size;
+        return hungerSprite.sizeDelta.x;
     }
 
-    public void setSizeHungerBar(float size)
+    public void SetSizeHungerBar(float size)
     {
-        Hunger.GetComponent<Scrollbar>().size = size;
+        float newHungerValue = Mathf.Clamp(size, 0, MAX_HUNGER_PLAYER);
+        hungerSprite.sizeDelta = new Vector2(newHungerValue, hungerSprite.sizeDelta.y);
+    }
+
+    private void ChangeHungerBar(float amount)
+    {
+        SetSizeHungerBar(hungerSprite.sizeDelta.x + amount);
     }
 }

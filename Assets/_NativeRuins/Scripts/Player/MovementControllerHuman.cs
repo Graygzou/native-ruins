@@ -292,7 +292,7 @@ public class MovementControllerHuman : MovementController {
                         }
                     } else {
                         aimCamera.transform.localPosition = GameObject.Find("OriginCamera").transform.localPosition;
-                        actions.Stay(LifeBar.GetComponent<LifeBar>().getSizeLifeBar());
+                        actions.Stay(LifeBar.GetComponent<LifeBar>().GetCurrentSizeLifeBar());
                         if(!isReloading) {
                             actions.Aiming();
                         }
@@ -310,12 +310,13 @@ public class MovementControllerHuman : MovementController {
                     if (Input.GetKey(KeyCode.LeftControl)) {
                         actions.Wary();
                     } else {
-                        actions.Stay(LifeBar.GetComponent<LifeBar>().getSizeLifeBar());
+                        actions.Stay(LifeBar.GetComponent<LifeBar>().GetCurrentSizeLifeBar());
                     }
                 } else {
                     // If the player is running
                     if (Input.GetKey(KeyCode.LeftShift) && !EnergyBar.GetComponent<EnergyBar>().energyIsAt0) {
-                        if (EnergyBar.GetComponent<Scrollbar>().size > 0f) {
+                        if (EnergyBar.GetComponent<EnergyBar>().GetCurrentEnergy() > 0f) {
+                            Debug.Log("EnergyBarValue = " + EnergyBar.GetComponent<EnergyBar>().GetCurrentEnergy() + " => Running");
                             m_footstep.UnPause ();
 					        m_footstep.pitch = 1.7f;
                             if (Input.GetKey (KeyCode.LeftControl)) {

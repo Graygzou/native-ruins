@@ -151,8 +151,8 @@ public class Sauvegarde : MonoBehaviour {
             Player.transform.position = new Vector3(PlayerPrefs.GetFloat("xPlayer"), PlayerPrefs.GetFloat("yPlayer"), PlayerPrefs.GetFloat("zPlayer"));
 
             //Jauges de vie et faim
-            LifeBar.GetComponent<LifeBar>().setSizeLifeBar(PlayerPrefs.GetFloat("life"));
-            HungerBar.GetComponent<HungerBar>().setSizeHungerBar(PlayerPrefs.GetFloat("hunger"));
+            LifeBar.GetComponent<LifeBar>().SetSizeLifeBar(PlayerPrefs.GetFloat("life"));
+            HungerBar.GetComponent<HungerBar>().SetSizeHungerBar(PlayerPrefs.GetFloat("hunger"));
 
             //Chargement de l'inventaire
             Inventory.GetComponent<InventoryManager>().GetInventory().Clear();
@@ -238,8 +238,8 @@ public class Sauvegarde : MonoBehaviour {
         PlayerPrefs.SetFloat("zPlayer", Judy.transform.position.z);
 
         //Jauges vie et faim
-        PlayerPrefs.SetFloat("life", LifeBar.GetComponent<LifeBar>().getSizeLifeBar());
-        PlayerPrefs.SetFloat("hunger", HungerBar.GetComponent<HungerBar>().getSizeHungerBar());
+        PlayerPrefs.SetFloat("life", LifeBar.GetComponent<LifeBar>().GetCurrentSizeLifeBar());
+        PlayerPrefs.SetFloat("hunger", HungerBar.GetComponent<HungerBar>().GetSizeHungerBar());
 
         //Inventaire
         int nbArrow = 0;

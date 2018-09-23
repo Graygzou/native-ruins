@@ -5,78 +5,127 @@ using UnityEngine.UI;
 
 public class LifeBar : MonoBehaviour {
 
-    public GameObject Life;
+    #region Consts
+    private const float MAX_LIFE_PLAYER = 300f;
+
+    private const int timeMaxFaim = 3600;
+    private int currentTimeFaim = 0;
+    private const int timeMaxHeart = 60;
+    private int currentTimeHeart = 0;
+    #endregion
+
+    #region Components
+    [SerializeField]
+    private RectTransform lifeSprite;
+    [SerializeField]
+    private HungerBar hungerBar;
+
+    private AudioSource audio;
+    #endregion
+
+    #region FX audioClips
+    [Header("Component settings")]
+    [SerializeField]
+    private AudioClip sonCri;
+    [SerializeField]
+    private AudioClip sonManger;
+    [SerializeField]
+    private AudioClip sonVieBasse;
+    #endregion
+
     public GameObject Hunger;
-    public Color BarColor;
     public Animator animator;
 
-    private AudioSource sonCri;
-    private AudioSource sonManger;
-    private AudioSource sonVieBasse;
-    private int timeMaxFaim = 3600;
-    private int currentTimeFaim = 0;
-    private int timeMaxHeart = 60;
-    private int currentTimeHeart = 0;
-    private GameObject Judy;
-	private ActionsNew actions;
+    #region Scale parameters
+    [Header("Health settings")]
+    [SerializeField]
+    private float hurtByFallScale = 0.005f;
+    [SerializeField]
+    private float hurtByHungerScale = 0.1f;
+    #endregion
+
+    private GameObject judy;
+    private ActionsNew actions;
     private bool isWeak;
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
     // Use this for initialization
     void Start () {
-        AudioSource[] sons = GetComponents<AudioSource>();
-        sonCri = sons[0];
-        sonManger = sons[1];
-        sonVieBasse = sons[2];
-		Judy = GameObject.FindWithTag ("Player");
-		actions = Judy.GetComponent ("ActionsNew") as ActionsNew;
-        Life.transform.Find("Mask").Find("Sprite").GetComponent<Image>().color = Color.red;
+		judy = GameObject.FindWithTag ("Player");
+		actions = judy.GetComponent ("ActionsNew") as ActionsNew;
         isWeak = false;
-    }
+     }
 
     // Update is called once per frame (60 frames)
     void FixedUpdate () {
         //*****************PERTE DE VIE******************//
         //Si Judy a sa barre de vie à 0 : Mort
-        if (Life.GetComponent<Scrollbar>().size <= 0f) {
-            Judy.GetComponent<MovementController>().setDeath(true);
+        if (this.GetCurrentSizeLifeBar() <= 0f)
+        {
+            judy.GetComponent<MovementController>().setDeath(true);
             GameObject playerRoot = GameObject.Find("Player");
             playerRoot.GetComponent<FormsController>().Transformation(0);
             actions.Death();
-            sonCri.Stop();
+            audio.Stop();
             GameObject.Find("Affichages/Menus/Menu_game_over").SetActive(!GameObject.Find("Affichages/Menus/Menu_game_over").activeSelf);
         }
 
-        //Si Judy chute 
-       if (Judy.GetComponent<Rigidbody>().velocity.y < 0 && Judy.GetComponent<Rigidbody>().velocity.magnitude > 100f)
+        // Si Judy chute 
+        if (judy.GetComponent<Rigidbody>().velocity.y < 0 && judy.GetComponent<Rigidbody>().velocity.magnitude > 100f)
         {
-            Life.GetComponent<Scrollbar>().size -= 0.005f; 
+            Debug.Log(lifeSprite.sizeDelta.y);
+            Debug.Log("Player Fall. Old life =" + lifeSprite.sizeDelta.x + ", New life = " + (lifeSprite.sizeDelta.x - hurtByFallScale));
+            ChangeLifeBar(-hurtByFallScale);
         }
 
         //Si la barre de faim est vide
-        if(Hunger.GetComponent<Scrollbar>().size == 0f)
+        if(hungerBar.GetSizeHungerBar() == 0f)
         {
             if(currentTimeFaim == timeMaxFaim)
             {
-                Life.GetComponent<Scrollbar>().size -= 0.1f; //valeur en pourcent (0.1f = 10%)
+                ChangeLifeBar(-hurtByHungerScale); //valeur en pourcent (0.1f = 10%)
                 currentTimeFaim = 0;
             }
             currentTimeFaim++;
         }
 
-        weak();
+        Weak();
 
     }
 
-    public void weak()
+    /*
+     * Should be 100 max ? Works ?
+     */
+    public float GetCurrentSizeLifeBar()
     {
-        if (Life.GetComponent<Scrollbar>().size <= 0.3f)
+        return lifeSprite.sizeDelta.x;
+    }
+
+    public void SetSizeLifeBar(float size)
+    {
+        float newLifeValue = Mathf.Clamp(size, 0f, MAX_LIFE_PLAYER);
+        lifeSprite.sizeDelta = new Vector2(newLifeValue, lifeSprite.sizeDelta.y);
+    }
+
+    private void ChangeLifeBar(float amount)
+    {
+        SetSizeLifeBar(lifeSprite.sizeDelta.x + amount);
+    }
+
+    public void Weak()
+    {
+        if (this.GetCurrentSizeLifeBar() <= 0.3f)
         {
             if (currentTimeHeart == timeMaxHeart)
             {
                 isWeak = !isWeak;
                 if(!isWeak)
                 {
-                    sonVieBasse.Play();
+                    audio.PlayOneShot(sonVieBasse);
                 }
                 animator.SetBool("isWeak", isWeak);
                 currentTimeHeart = 0;
@@ -86,45 +135,42 @@ public class LifeBar : MonoBehaviour {
         }
     }
 
-    public float getSizeLifeBar()
-    {
-        return Life.GetComponent<Scrollbar>().size;
-    }
-
-    public void setSizeLifeBar(float size)
-    {
-        Life.GetComponent<Scrollbar>().size = size;
-    }
-
-    //*****************RECUPERATION DE VIE******************//
+    /*
+     * Recuperation de vie
+     */
     public void Eat(float lifeBack)
     {
-		sonManger.Play ();
+        audio.PlayOneShot(sonManger);
         if (Hunger.GetComponent<Scrollbar>().size >= 1f)
         {
-            Life.GetComponent<Scrollbar>().size += lifeBack;
-        } else
+            ChangeLifeBar(lifeBack);
+        }
+        else
         {
-            Hunger.GetComponent<Scrollbar>().size += lifeBack;
+            hungerBar.SetSizeHungerBar(lifeBack);
         }
     }
 
-    //*****************SE FAIT ATTAQUER******************//
+    /* 
+     * Se Fait attaquer
+     */
     public void TakeDamages(float lifeLoosed)
     {
         GameObject playerRoot = GameObject.Find("Player");
-        sonCri.Play();
+        audio.PlayOneShot(sonCri);
         //si forme puma, 50% de degats en plus
-        if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma) {
-            Life.GetComponent<Scrollbar>().size -= lifeLoosed + lifeLoosed *0.5f;
+        if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma)
+        {
+            ChangeLifeBar(-(lifeLoosed + lifeLoosed * 0.5f));
         }
-        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_human) {
+        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_human)
+        {
             actions.Damage();
-            Life.GetComponent<Scrollbar>().size -= lifeLoosed;
+            ChangeLifeBar(-lifeLoosed);
         } //si forme ours, 25% de degats en moins
-        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_bear) {
-            Life.GetComponent<Scrollbar>().size -= lifeLoosed - lifeLoosed*0.25f;
+        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_bear)
+        {
+            ChangeLifeBar(-(lifeLoosed - lifeLoosed * 0.25f));
         }
     }
-
 }
