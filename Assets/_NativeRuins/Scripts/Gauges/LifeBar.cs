@@ -58,6 +58,8 @@ public class LifeBar : MonoBehaviour {
 		judy = GameObject.FindWithTag ("Player");
 		actions = judy.GetComponent ("ActionsNew") as ActionsNew;
         isWeak = false;
+
+        // 
      }
 
     // Update is called once per frame (60 frames)

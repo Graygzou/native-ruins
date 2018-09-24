@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour {
 
-    public Dialogue dialogue;
+    public static Dialogue dialogue;
 
-    public void TriggerSauvegarde(Switch action)
+    public static void TriggerSauvegarde(Switch action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Menu";
@@ -15,16 +15,16 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueDebut(Switch action) {
+    public static void TriggerDialogueDebut(Switch action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
-        dialogue.sentences[0] = "           .........           ";
+        dialogue.sentences[0] = ".........           ";
         dialogue.sentences[1] = "  ... aaah..  aaah.... ma tête...";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueDebut2(Switch action) {
+    public static void TriggerDialogueDebut2(Switch action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[3];
@@ -34,7 +34,7 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueDebut3(Switch action) {
+    public static void TriggerDialogueDebut3(Switch action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
@@ -43,7 +43,7 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueDebut4(Switch action) {
+    public static void TriggerDialogueDebut4(Switch action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
@@ -52,7 +52,7 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueDebut5(Switch action) {
+    public static void TriggerDialogueDebut5(Switch action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
@@ -60,7 +60,7 @@ public class DialogueTrigger : MonoBehaviour {
         dialogue.sentences[1] = "Comment je vais partir d'ici ? ... Mmmmmhhhh ...";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
-    public void TriggerDialogueDebut6(Switch action) {
+    public static void TriggerDialogueDebut6(Switch action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
@@ -69,7 +69,7 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueInstructions(Switch action)
+    public static void TriggerDialogueInstructions(Switch action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -84,7 +84,7 @@ public class DialogueTrigger : MonoBehaviour {
     }
 
 
-    public void TriggerDialogueFin(Switch action)
+    public static void TriggerDialogueFin(Switch action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
@@ -94,7 +94,7 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueTotemOurs(Switch action)
+    public static void TriggerDialogueTotemOurs(Switch action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -105,7 +105,7 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueTotemPuma(Switch action)
+    public static void TriggerDialogueTotemPuma(Switch action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -115,7 +115,7 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueVoile(Switch action)
+    public static void TriggerDialogueVoile(Switch action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -124,7 +124,7 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueCorde(Switch action)
+    public static void TriggerDialogueCorde(Switch action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -133,7 +133,7 @@ public class DialogueTrigger : MonoBehaviour {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public void TriggerDialogueArc(Switch action)
+    public static void TriggerDialogueArc(Switch action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";

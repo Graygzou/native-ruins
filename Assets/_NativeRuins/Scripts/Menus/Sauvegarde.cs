@@ -6,16 +6,21 @@ using UnityEngine.SceneManagement;
 public class Sauvegarde : MonoBehaviour {
 
     // Used to save and load the game
-    private DialogueTrigger dialogue;
     private static GameObject Player;
-    private static GameObject LifeBar;
-    private static GameObject HungerBar;
-    private static GameObject Inventory;
 
-    // Used to start the game after the first cutscene
-    private static GameObject EnergyBar;
-    private static GameObject ArrowUI;
+    #region ComponentSettings
+    [Header("Component settings")]
+    [SerializeField]
+    private GameObject gameHUD;
+    [SerializeField]
+    private LifeBar lifeBar;
+    [SerializeField]
+    private HungerBar hungerBar;
+    [SerializeField]
+    private GameObject inventory;
+    #endregion
 
+    [Header("Items settings")]
     [SerializeField] private RectTransform arrow2D;
     [SerializeField] private RectTransform bow2D;
     [SerializeField] private RectTransform fire2D;
@@ -60,9 +65,7 @@ public class Sauvegarde : MonoBehaviour {
             default:
                 return null;
         }
-
     }
-
 
     private void addInInventory(ObjectsType obj)
     {
@@ -92,9 +95,9 @@ public class Sauvegarde : MonoBehaviour {
         Debug.Log("obj = " + obj + " " + obj2D);
         while (indice < PlayerPrefs.GetInt("" + obj))
         {
-            InventoryManager.AddObjectOfType(obj);
+            GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>().AddObjectOfType(obj);
             RectTransform clone = Instantiate(obj2D) as RectTransform;
-            clone.SetParent(GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+            clone.SetParent(inventory.GetComponent<InventoryManager>().GetBagRectTransform(), false);
             indice++;
         }
     }
@@ -131,13 +134,7 @@ public class Sauvegarde : MonoBehaviour {
     void Awake() {
 
         Player = GameObject.Find("Player");
-        LifeBar = GameObject.Find("Affichages/Gauges/Life");
-        HungerBar = GameObject.Find("Affichages/Gauges/Hunger");
-        Inventory = GameObject.Find("Affichages/InventoryManager");
-        dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
 
-        EnergyBar = GameObject.Find("Affichages/Gauges/Energy");
-        ArrowUI = GameObject.Find("Affichages/Arrow");
         //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
         if (PlayerPrefs.GetInt("load_scene") == 1)
         {
@@ -151,11 +148,12 @@ public class Sauvegarde : MonoBehaviour {
             Player.transform.position = new Vector3(PlayerPrefs.GetFloat("xPlayer"), PlayerPrefs.GetFloat("yPlayer"), PlayerPrefs.GetFloat("zPlayer"));
 
             //Jauges de vie et faim
-            LifeBar.GetComponent<LifeBar>().SetSizeLifeBar(PlayerPrefs.GetFloat("life"));
-            HungerBar.GetComponent<HungerBar>().SetSizeHungerBar(PlayerPrefs.GetFloat("hunger"));
+            Debug.Log("Life :" + PlayerPrefs.GetFloat("life") + ", Hunger :" + PlayerPrefs.GetFloat("hunger"));
+            lifeBar.GetComponent<LifeBar>().SetSizeLifeBar(PlayerPrefs.GetFloat("life"));
+            hungerBar.GetComponent<HungerBar>().SetSizeHungerBar(PlayerPrefs.GetFloat("hunger"));
 
             //Chargement de l'inventaire
-            Inventory.GetComponent<InventoryManager>().GetInventory().Clear();
+            inventory.GetComponent<InventoryManager>().GetInventory().Clear();
             addInInventory(ObjectsType.Arrow);
             addInInventory(ObjectsType.Bow);
             addInInventory(ObjectsType.Fire);
@@ -186,6 +184,7 @@ public class Sauvegarde : MonoBehaviour {
             GameObject carreNoir = GameObject.Find("CameraCutscenes/Intro/PlaneFade");
             carreNoir.SetActive(false);
         } else {
+            /*
             // Setting up the scene
             GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
             GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
@@ -196,32 +195,20 @@ public class Sauvegarde : MonoBehaviour {
             GameObject.FindWithTag("Player").GetComponent<ActionsNew>().StartIntro();
 
             // Disabled UI
-            Sauvegarde.DisableUI();
+            gameHUD.GetComponent<CanvasGroup>().alpha = 0.0f;
 
             // Call dialogues
-            dialogue.TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
-            dialogue.TriggerDialogueDebut2(GameObject.Find("SecondCutSceneCamera").GetComponent<StandUpCutScene>());
-            dialogue.TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
-            dialogue.TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
-            dialogue.TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
-            dialogue.TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());
+            DialogueTrigger.TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
+            DialogueTrigger.TriggerDialogueDebut2(GameObject.Find("SecondCutSceneCamera").GetComponent<StandUpCutScene>());
+            DialogueTrigger.TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
+            DialogueTrigger.TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
+            DialogueTrigger.TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
+            DialogueTrigger.TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());*/
         }
     }
 
-    public static void DisableUI() {
-        LifeBar.SetActive(false);
-        HungerBar.SetActive(false);
-        Inventory.SetActive(false);
-        EnergyBar.SetActive(false);
-        ArrowUI.SetActive(false);
-    }
-
-    public static void EnableUI() {
-        LifeBar.SetActive(true);
-        HungerBar.SetActive(true);
-        Inventory.SetActive(true);
-        EnergyBar.SetActive(true);
-        ArrowUI.SetActive(true);
+    public void EnableUI() {
+        gameHUD.GetComponent<CanvasGroup>().alpha = 1.0f;
     }
 
 
@@ -238,8 +225,8 @@ public class Sauvegarde : MonoBehaviour {
         PlayerPrefs.SetFloat("zPlayer", Judy.transform.position.z);
 
         //Jauges vie et faim
-        PlayerPrefs.SetFloat("life", LifeBar.GetComponent<LifeBar>().GetCurrentSizeLifeBar());
-        PlayerPrefs.SetFloat("hunger", HungerBar.GetComponent<HungerBar>().GetSizeHungerBar());
+        PlayerPrefs.SetFloat("life", lifeBar.GetComponent<LifeBar>().GetCurrentSizeLifeBar());
+        PlayerPrefs.SetFloat("hunger", hungerBar.GetComponent<HungerBar>().GetSizeHungerBar());
 
         //Inventaire
         int nbArrow = 0;
@@ -254,7 +241,7 @@ public class Sauvegarde : MonoBehaviour {
         int nbSail = 0;
         int nbRope = 0;
         int nbRaft = 0;
-        foreach (ObjectsType obj in Inventory.GetComponent<InventoryManager>().GetInventory())
+        foreach (ObjectsType obj in inventory.GetComponent<InventoryManager>().GetInventory())
         {
             if (obj == ObjectsType.Arrow) nbArrow++;
             if (obj == ObjectsType.Bow) nbBow++;
@@ -287,7 +274,7 @@ public class Sauvegarde : MonoBehaviour {
         PlayerPrefs.SetInt("bearUnlocked", Player.GetComponent<FormsController>().isBearUnlocked());
 
         //Afficher message de sauvegarde
-        dialogue.TriggerSauvegarde(null);
+        DialogueTrigger.TriggerSauvegarde(null);
     }
 
     //Permet de revenir au menu demarrer pour quitter le jeu

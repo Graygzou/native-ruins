@@ -16,17 +16,19 @@ public class EnergyBar : MonoBehaviour
 
     #region Energy settings
     [SerializeField]
-    private float energyDecreasingFactor = 0.001f;
+    private float energyDecreasingFactor = 1f;
     [SerializeField]
-    private float energizingBackFactor = 0.002f;
+    private float energizingBackFactor = 2f;
+    [SerializeField]
+    private float energizingBackAfterEmptyFactor = 2f;
     #endregion
 
     private bool canRun = true;
     // Should be readonly parameters..
     [System.NonSerialized]
     public bool energyIsAt0 = false;
-	
-	void Update () {
+
+    void Update () {
         if(canRun)
         {
             energyIsAt0 = !(GetCurrentEnergy() >= 1f);
@@ -35,10 +37,14 @@ public class EnergyBar : MonoBehaviour
             {
                 ChangeEnergyBar(-energyDecreasingFactor);
             }
+            else
+            {
+                ChangeEnergyBar(energizingBackFactor);
+            }
         }
         else
         {
-            ChangeEnergyBar(energizingBackFactor);
+            ChangeEnergyBar(energizingBackAfterEmptyFactor);
             canRun = (GetCurrentEnergy() == MAX_ENERGY_PLAYER);
         }
 	}

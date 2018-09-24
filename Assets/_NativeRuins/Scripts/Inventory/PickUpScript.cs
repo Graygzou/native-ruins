@@ -6,15 +6,25 @@ public class PickUpScript : MonoBehaviour {
 	
 	public Renderer renderer;
 	public ObjectsType o_type;
-    [SerializeField]private RectTransform o_object;
+    [SerializeField]
+    private RectTransform o_object;
 
-	private bool o_isPickable;
+    private bool o_isPickable;
 
-    private DialogueTrigger dialogue;
+    private GameObject buttonRamasser;
+    private GameObject bag;
+    private InventoryManager inventoryManager;
+
+    private void Awake()
+    {
+        inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
+        bag = GameObject.FindWithTag("BagUI");
+        buttonRamasser = GameObject.Find("Affichages/HUD/InventoryHUD/ButtonRamasser");
+
+    }
 
     // Use this for initialization
     void Start () {
-        dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
         o_isPickable = false;
     }
 	
@@ -29,7 +39,7 @@ public class PickUpScript : MonoBehaviour {
 				InventoryManager.an_object_is_pickable = false;
 				o_isPickable = false;
 				renderer.material.shader = Shader.Find ("Mobile/Diffuse");
-				GameObject.Find ("InventoryManager/Canvas/ButtonRamasser").SetActive(false);
+                buttonRamasser.SetActive(false);
 			}
 		}
 	}
@@ -40,7 +50,7 @@ public class PickUpScript : MonoBehaviour {
 				InventoryManager.an_object_is_pickable = true;
 				o_isPickable = true;
 				renderer.material.shader = Shader.Find ("Outlined/Silhouetted Diffuse");
-				GameObject.Find ("InventoryManager/Canvas/ButtonRamasser").SetActive(true);
+                buttonRamasser.SetActive(true);
 			}
 		}
 	}
@@ -56,7 +66,7 @@ public class PickUpScript : MonoBehaviour {
                 brain.HasDiscoveredBow = true;
                 son = this.GetComponentInParent<AudioSource>();
                 son.Play();
-                dialogue.TriggerDialogueArc(null);     
+                DialogueTrigger.TriggerDialogueArc(null);     
                 GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
                 GameObject playerRoot = GameObject.Find("Player");
                 playerRoot.GetComponent<FormsController>().Transformation(0);
@@ -67,7 +77,7 @@ public class PickUpScript : MonoBehaviour {
                 brain.HasDiscoveredRope = true;
                 son = this.GetComponentInParent<AudioSource>();
                 son.Play();
-                dialogue.TriggerDialogueCorde(null);
+                DialogueTrigger.TriggerDialogueCorde(null);
                 GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
                 GameObject playerRoot = GameObject.Find("Player");
                 playerRoot.GetComponent<FormsController>().Transformation(0);
@@ -78,17 +88,17 @@ public class PickUpScript : MonoBehaviour {
                 brain.HasDiscoveredSail = true;
                 son = this.GetComponentInParent<AudioSource>();
                 son.Play();
-                dialogue.TriggerDialogueVoile(null);
+                DialogueTrigger.TriggerDialogueVoile(null);
                 GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
                 GameObject playerRoot = GameObject.Find("Player");
                 playerRoot.GetComponent<FormsController>().Transformation(0);
                 GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ActionsNew>().Stay(100f);
             }
-            InventoryManager.AddObjectOfType(o_type);
+            inventoryManager.AddObjectOfType(o_type);
 			InventoryManager.an_object_is_pickable = false;
 			RectTransform clone = Instantiate(o_object) as RectTransform;
-			clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
-			GameObject.Find ("InventoryManager/Canvas/ButtonRamasser").SetActive(false);
+			clone.SetParent (bag.transform, false);
+            buttonRamasser.SetActive(false);
 			Destroy(this.gameObject);
 		}
 	}

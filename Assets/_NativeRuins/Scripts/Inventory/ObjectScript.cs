@@ -2,42 +2,52 @@
  using UnityEngine.UI;
  using UnityEngine.EventSystems;
  using System.Collections;
- 
- public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
- 
-     private bool mouseDown = false;
-     private Vector3 startMousePos;
-     private Vector3 startPos;
-     private bool restrictX;
-     private bool restrictY;
-     private float fakeX;
-     private float fakeY;
-     private float myWidth;
-     private float myHeight;
- 
-     private RectTransform ParentRT;
-     public RectTransform MyRect;
-	private Vector3 player_pos;
 
-	private GameObject LifeBar;
-	private GameObject HungerBar;
+public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
 
-	public ObjectsType o_type;
+    private bool mouseDown = false;
+    private Vector3 startMousePos;
+    private Vector3 startPos;
+    private bool restrictX;
+    private bool restrictY;
+    private float fakeX;
+    private float fakeY;
+    private float myWidth;
+    private float myHeight;
+
+    private RectTransform ParentRT;
+    public RectTransform MyRect;
+    private Vector3 player_pos;
+
+    private GameObject lifeBar;
+    private GameObject buttonUtiliser;
+    private GameObject infoObjets;
+
+    public ObjectsType o_type;
 	[SerializeField]private Rigidbody o_mushroom;
 	public bool is_usable=false;
 	[SerializeField]private AudioSource m_pickSound;
 
 	private bool isUsed = false;
 
-     void Start()
+    private InventoryManager inventoryManager;
+
+    private void Awake()
+    {
+        inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
+    }
+
+    void Start()
      {
-		m_pickSound.Play();
-		 HungerBar = GameObject.Find ("Gauges/Hunger");
-		 LifeBar = GameObject.Find ("Gauges/Life");
-		 ParentRT =  (RectTransform)GameObject.Find ("Canvas").transform;
-         myWidth = (MyRect.rect.width + 5) / 2;
-         myHeight = (MyRect.rect.height + 5) / 2;
-     }
+        m_pickSound.Play();
+        ParentRT =  (RectTransform)GameObject.Find ("InventoryHUD").transform;
+        myWidth = (MyRect.rect.width + 5) / 2;
+        myHeight = (MyRect.rect.height + 5) / 2;
+
+        lifeBar = GameObject.FindWithTag("LifeBar");
+        buttonUtiliser = GameObject.Find("Affichages/HUD/InventoryHUD/ButtonUtiliser");
+        infoObjets = GameObject.FindWithTag("InfoObjets");
+    }
  
 	void Update () 
 	{
@@ -50,12 +60,11 @@
 	public void OnCollisionEnter2D(Collision2D collision){
 		if (collision.gameObject.name=="FallDetector") {
 			player_pos = GameObject.FindWithTag ("Player").transform.position;
-			InventoryManager.RemoveObjectOfType (o_type);
+            GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>().RemoveObjectOfType (o_type);
 			Rigidbody clone;
 			clone = Instantiate(o_mushroom,new Vector3(player_pos.x+20f*(Random.value-0.5f), player_pos.y+10f, player_pos.z+20f*(Random.value-0.5f)) ,Random.rotation) as Rigidbody;
 			Destroy (this.gameObject);
 		}
-		
 	}
 
      public void OnPointerDown(PointerEventData ped) 
@@ -67,9 +76,9 @@
      
      public void OnPointerUp(PointerEventData ped) 
      {
-         mouseDown = false;
-		 GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
-		 HideInfo ();
+        mouseDown = false;
+        buttonUtiliser.SetActive(false);
+        HideInfo ();
      }
      
 	 private void DragNDrop(){
@@ -112,7 +121,7 @@
 			}
 			GetInputs ();
 			if (is_usable && !isUsed) {
-				GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(true);
+                buttonUtiliser.SetActive(true);
 				ShowInfo (o_type);
 			}
 			if(!is_usable)
@@ -132,9 +141,9 @@
 		case ObjectsType.Bow:
 			if (!InventoryManager.isTorchEquiped) {
 				InventoryManager.isBowEquiped = true;
-				GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
+                buttonUtiliser.SetActive(false);
 				HideInfo ();
-				InventoryManager.RemoveObjectOfType (o_type);
+                inventoryManager.RemoveObjectOfType (o_type);
 				isUsed = true;
                 GameObject player = GameObject.FindWithTag("Player");
                 player.GetComponent<ActionsNew>().EquipWeapon();
@@ -145,27 +154,27 @@
 		case ObjectsType.Fire:
 			break;
 		case ObjectsType.Meat:
-			LifeBar.GetComponent<LifeBar> ().Eat (30);
-			GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive (false);
+            lifeBar.GetComponent<LifeBar> ().Eat (30);
+            buttonUtiliser.SetActive (false);
 			HideInfo ();
-			InventoryManager.RemoveObjectOfType (o_type);
+                inventoryManager.RemoveObjectOfType (o_type);
 			isUsed = true;
 			Destroy(this.gameObject);
 			break;
 		case ObjectsType.Mushroom:
-			LifeBar.GetComponent<LifeBar>().Eat(10);
-			GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
+            lifeBar.GetComponent<LifeBar>().Eat(10);
+            buttonUtiliser.SetActive(false);
 			HideInfo ();
-			InventoryManager.RemoveObjectOfType (o_type);
+                inventoryManager.RemoveObjectOfType (o_type);
 			isUsed = true;
 			Destroy(this.gameObject);
 			break;
 		case ObjectsType.Torch:
 			if (!InventoryManager.isBowEquiped) {
 				InventoryManager.isTorchEquiped = true;
-				GameObject.Find ("InventoryManager/Canvas/ButtonUtiliser").SetActive(false);
+                buttonUtiliser.SetActive(false);
 				HideInfo ();
-				InventoryManager.RemoveObjectOfType (o_type);
+                inventoryManager.RemoveObjectOfType (o_type);
 				isUsed = true;
                 GameObject player = GameObject.FindWithTag("Player");
                 player.GetComponent<ActionsNew>().EquipWeapon();
@@ -179,57 +188,49 @@
 	private void ShowInfo(ObjectsType o_type){
 		switch (o_type) {
 		case ObjectsType.Arrow:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Arrow").SetActive(true);
-			break;
+            infoObjets.transform.Find("Arrow").gameObject.SetActive(true);
+            break;
 		case ObjectsType.Mushroom:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Mushroom").SetActive(true);
-			break;
+            infoObjets.transform.Find("Mushroom").gameObject.SetActive(true);
+            break;
 		case ObjectsType.Bow:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bow").SetActive(true);
-			break;
+            infoObjets.transform.Find("Bow").gameObject.SetActive(true);
+            break;
 		case ObjectsType.Meat:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Meat").SetActive(true);
-			break;
+            infoObjets.transform.Find("Meat").gameObject.SetActive(true);
+            break;
 		case ObjectsType.Plank:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Plank").SetActive(true);
-			break;
+            infoObjets.transform.Find("Plank").gameObject.SetActive(true);
+            break;
 		case ObjectsType.Sail:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Sail").SetActive(true);
-			break;
+            infoObjets.transform.Find("Sail").gameObject.SetActive(true);
+            break;
 		case ObjectsType.Fire:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bonfire").SetActive(true);
-			break;
-		case ObjectsType.Raft:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Raft").SetActive(true);
-			break;
+            infoObjets.transform.Find("Bonfire").gameObject.SetActive(true);
+            break;
+	    case ObjectsType.Raft:
+            infoObjets.transform.Find("Raft").gameObject.SetActive(true);
+            break;
 		case ObjectsType.Wood:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Wood").SetActive(true);
-			break;
+            infoObjets.transform.Find("Wood").gameObject.SetActive(true);
+            break;
 		case ObjectsType.Rope:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Rope").SetActive(true);
-			break;
+            infoObjets.transform.Find("Rope").gameObject.SetActive(true);
+            break;
 		case ObjectsType.Flint:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Flint").SetActive(true);
+            infoObjets.transform.Find("Flint").gameObject.SetActive(true);
 			break;
 		case ObjectsType.Torch:
-			GameObject.Find ("InventoryManager/Canvas/InfoObjets/Torch").SetActive(true);
+            infoObjets.transform.Find("Torch").gameObject.SetActive(true);
 			break;
 		}
 	}
 
 	private void HideInfo(){
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Mushroom").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Arrow").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Meat").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bow").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Plank").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Sail").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Raft").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Torch").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Bonfire").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Wood").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Rope").SetActive(false);
-		GameObject.Find ("InventoryManager/Canvas/InfoObjets/Flint").SetActive(false);
+        for (int i = 0; i < infoObjets.transform.childCount; i++)
+        {
+            infoObjets.transform.GetChild(i).gameObject.SetActive(false);
+        }
 	}
      
  }

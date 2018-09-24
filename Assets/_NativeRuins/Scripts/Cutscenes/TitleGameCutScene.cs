@@ -7,6 +7,8 @@ public class TitleGameCutScene : Switch {
     public AnimationClip cutScene;
     public AudioClip cutSceneMusic;
     private GameObject songs;
+    [SerializeField]
+    private Sauvegarde sauvegarde;
 
     protected override void ActivateSwitch() {
         // Setting up
@@ -90,9 +92,12 @@ public class TitleGameCutScene : Switch {
         // Set back songs of the game
         songs.SetActive(true);
 
-        Sauvegarde.EnableUI();
+        // Disable audio listener
+        GetComponent<AudioListener>().enabled = false;
+
+        sauvegarde.EnableUI();
 
         yield return new WaitForEndOfFrame();
-        GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>().TriggerDialogueInstructions(null);
+        DialogueTrigger.TriggerDialogueInstructions(null);
     }
 }

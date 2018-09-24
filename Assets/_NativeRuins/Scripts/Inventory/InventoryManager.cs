@@ -5,21 +5,32 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
 
-	[SerializeField] private RectTransform m_canvas;
-	[SerializeField] private RectTransform m_bag;
-	[SerializeField]private RectTransform b_anchor;
-	[SerializeField]private AudioSource m_bagSound;
-	[SerializeField]private AudioSource m_craftSound;
+    [Header("Component settings")]
+    [SerializeField]
+    private GameObject redCross;
+    [SerializeField]
+    private GameObject button;
+    [SerializeField]
+    private GameObject craft;
+    [SerializeField]
+    private Text arrowNumber;
 
-	[SerializeField]private RectTransform o_Bow;
-	[SerializeField]private RectTransform o_Torch;
-	[SerializeField]private RectTransform o_Bonfire;
-	[SerializeField]private RectTransform o_Raft;
-	[SerializeField]private RectTransform o_Plank;
-	[SerializeField]private RectTransform o_Arrow;
+    [Header("RectTransform settings")]
+    [SerializeField] private RectTransform m_canvas;
+    [SerializeField] private RectTransform m_bag;
+    [SerializeField] private RectTransform b_anchor;
+    [SerializeField] private AudioSource m_bagSound;
+    [SerializeField] private AudioSource m_craftSound;
+
+    [Header("RectTransform of items")]
+    [SerializeField] private RectTransform o_Bow;
+    [SerializeField] private RectTransform o_Torch;
+    [SerializeField] private RectTransform o_Bonfire;
+    [SerializeField] private RectTransform o_Raft;
+    [SerializeField] private RectTransform o_Plank;
+    [SerializeField] private RectTransform o_Arrow;
 
     private static int nbArrow;
-    private DialogueTrigger dialogue;
 
     public static bool isBowEquiped = false;
 	public static bool isTorchEquiped = false;
@@ -34,7 +45,6 @@ public class InventoryManager : MonoBehaviour {
 		deltaScreen = m_canvas.sizeDelta;
         nbArrow = 0;
 		ActiveRedCross();
-        dialogue = GameObject.Find("Affichages/Dialogues/DialogueTrigger").GetComponent<DialogueTrigger>();
     }
 	
 	// Update is called once per frame
@@ -46,6 +56,11 @@ public class InventoryManager : MonoBehaviour {
 		StartCoroutine(ActiveRedCross());
     }
 
+    public RectTransform GetBagRectTransform()
+    {
+        return m_bag;
+    }
+
 	public ArrayList GetInventory(){
 		return inventaire;
 	}
@@ -53,18 +68,16 @@ public class InventoryManager : MonoBehaviour {
 	private void OpenOrCloseInventory(){
 		if (Input.GetKeyDown (KeyCode.Tab)) {
 			m_bagSound.Play ();
-			if (!bag_open) {
-				bag_open = !bag_open;
-				m_bag.localScale = new Vector3(7f,3.5f,3.5f);
-				m_bag.transform.localPosition =  new Vector3(0f, 0f, 0f);
-				GameObject.Find ("InventoryManager/Canvas/Craft").SetActive (true);
+            
+            if (!bag_open) {
+                m_bag.localPosition = Vector3.zero; 
+				m_bag.localScale = new Vector3(2.5f, 2.5f, 1f);
 			} else {
-				bag_open = !bag_open;
-				m_bag.localScale = new Vector3(2f,1f,1f);
-				m_bag.localPosition = b_anchor.localPosition;
-				GameObject.Find ("InventoryManager/Canvas/Craft").SetActive (false);
-				//m_bag.transform.position += Vector3(-100f,0f,0f);
+                m_bag.anchoredPosition = new Vector3(-200f, 100f, 0f);
+                m_bag.localScale = new Vector3(1f, 1f, 1f);
 			}
+            craft.SetActive(!bag_open);
+            bag_open = !bag_open;
         }
 	}
 
@@ -77,7 +90,7 @@ public class InventoryManager : MonoBehaviour {
                 player.GetComponent<ActionsNew>().DisarmWeapon();
                 StartCoroutine("DisarmTorch");
 				clone = Instantiate(o_Torch) as RectTransform;
-				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+				clone.SetParent (m_bag.transform, false);
 				isTorchEquiped = false;
 			}
 			if (isBowEquiped && !player.GetComponent<MovementControllerHuman>().getIsAiming()) {
@@ -85,7 +98,7 @@ public class InventoryManager : MonoBehaviour {
                 player.GetComponent<ActionsNew>().DisarmWeapon();
                 StartCoroutine("DisarmBow");
 				clone = Instantiate(o_Bow) as RectTransform;
-				clone.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+				clone.SetParent (m_bag.transform, false);
 				isBowEquiped = false;
 			}
 
@@ -103,7 +116,7 @@ public class InventoryManager : MonoBehaviour {
     }
 
 
-    public static void RemoveObjectOfType(ObjectsType o){
+    public void RemoveObjectOfType(ObjectsType o){
 		foreach (ObjectsType obj in inventaire) {
 			if (obj == o) {
 				inventaire.Remove (o);
@@ -116,7 +129,7 @@ public class InventoryManager : MonoBehaviour {
 		}
 	}
 
-    public static void DrawArrow() {
+    public void DrawArrow() {
         DestroyArrow();
         foreach (ObjectsType obj in inventaire) {
             if (obj.Equals(ObjectsType.Arrow)) {
@@ -128,8 +141,8 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-    private static void DestroyArrow() {
-        Transform bag = GameObject.Find("Affichages/InventoryManager/Canvas/Bag").transform;
+    private void DestroyArrow() {
+        Transform bag = m_bag.transform;
         int i = 0;
         bool trouve = false;
         while (i < bag.childCount && !trouve) {
@@ -149,20 +162,21 @@ public class InventoryManager : MonoBehaviour {
         return false;
     }
 
-    private static void displayNumberArrow() {
+    private void displayNumberArrow() {
         if (nbArrow < 10) {
-            GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x " + nbArrow;
+            arrowNumber.text = "x " + nbArrow;
         } else {
-            GameObject.Find("Affichages/Arrow/Nb_arrow").GetComponent<Text>().text = "x" + nbArrow;
+            arrowNumber.text = "x" + nbArrow;
         }
     }
 
-    public static void AddObjectOfType(ObjectsType o){
+    public void AddObjectOfType(ObjectsType o){
 		inventaire.Add (o);
         // Update the arrow indicator
         if (o.Equals(ObjectsType.Arrow)) {
             nbArrow++;
-            displayNumberArrow();
+            arrowNumber.text = "x " + nbArrow;
+            //displayNumberArrow();
         }
     }
 
@@ -193,36 +207,36 @@ public class InventoryManager : MonoBehaviour {
 			}
 		}
 		if (wood >= 2) {
-			GameObject.Find ("InventoryManager/Canvas/Craft/Plank/RedCross").SetActive (false);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Plank/Button").SetActive (true);
+            redCross.SetActive (false);
+			button.SetActive (true);
 		} else {
-			GameObject.Find ("InventoryManager/Canvas/Craft/Plank/RedCross").SetActive (true);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Plank/Button").SetActive (false);
+            redCross.SetActive (true);
+            button.SetActive (false);
 		}
 		if (wood >= 1 && flint >=1) {
-			GameObject.Find ("InventoryManager/Canvas/Craft/Arrow/RedCross").SetActive (false);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Arrow/Button").SetActive (true);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Torch/RedCross").SetActive (false);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Torch/Button").SetActive (true);
+            redCross.SetActive (false);
+            button.SetActive (true);
+            redCross.SetActive (false);
+            button.SetActive (true);
 		} else {
-			GameObject.Find ("InventoryManager/Canvas/Craft/Arrow/RedCross").SetActive (true);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Arrow/Button").SetActive (false);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Torch/RedCross").SetActive (true);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Torch/Button").SetActive (false);
+            redCross.SetActive (true);
+            button.SetActive (false);
+            redCross.SetActive (true);
+            button.SetActive (false);
 		}
 		if (wood >= 3 && flint >=1) {
-			GameObject.Find ("InventoryManager/Canvas/Craft/Bonfire/RedCross").SetActive (false);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Bonfire/Button").SetActive (true);
+            redCross.SetActive (false);
+            button.SetActive (true);
 		} else {
-			GameObject.Find ("InventoryManager/Canvas/Craft/Bonfire/RedCross").SetActive (true);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Bonfire/Button").SetActive (false);
+            redCross.SetActive (true);
+            button.SetActive (false);
 		}
 		if (plank >= 5 && sail >=1 && rope >=1) {
-			GameObject.Find ("InventoryManager/Canvas/Craft/Raft/RedCross").SetActive (false);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Raft/Button").SetActive (true);
+            redCross.SetActive (false);
+            button.SetActive (true);
 		} else {
-			GameObject.Find ("InventoryManager/Canvas/Craft/Raft/RedCross").SetActive (true);
-			GameObject.Find ("InventoryManager/Canvas/Craft/Raft/Button").SetActive (false);
+            redCross.SetActive (true);
+            button.SetActive (false);
 		}
 		yield return new WaitForSeconds (0.2f);
 	}
@@ -233,9 +247,9 @@ public class InventoryManager : MonoBehaviour {
 		int flint = 1;
 			int i = 0;
 		bool trouve = false;
-		Transform bag = GameObject.Find("Affichages/InventoryManager/Canvas/Bag").transform;
+		Transform bag = m_bag.transform;
 		while (i < bag.childCount && !trouve) {
-			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Wood) && wood>0) {
+			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Wood) && wood > 0) {
 				wood--;
 				Destroy(bag.GetChild(i).gameObject);
 				RemoveObjectOfType (ObjectsType.Wood);
@@ -248,15 +262,15 @@ public class InventoryManager : MonoBehaviour {
 			i++;
 		}
 
-		InventoryManager.AddObjectOfType(ObjectsType.Arrow);
-		InventoryManager.AddObjectOfType(ObjectsType.Arrow);
-		InventoryManager.AddObjectOfType(ObjectsType.Arrow);
+		AddObjectOfType(ObjectsType.Arrow);
+		AddObjectOfType(ObjectsType.Arrow);
+		AddObjectOfType(ObjectsType.Arrow);
 		RectTransform clone1 = Instantiate(o_Arrow) as RectTransform;
-		clone1.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+		clone1.SetParent (bag.transform, false);
 		RectTransform clone2 = Instantiate(o_Arrow) as RectTransform;
-		clone2.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+		clone2.SetParent (bag.transform, false);
 		RectTransform clone3 = Instantiate(o_Arrow) as RectTransform;
-		clone3.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+		clone3.SetParent (bag.transform, false);
 	}
 
 	public void CraftPlank(){
@@ -264,7 +278,7 @@ public class InventoryManager : MonoBehaviour {
 		int wood = 2;
 		int i = 0;
 		bool trouve = false;
-		Transform bag = GameObject.Find("Affichages/InventoryManager/Canvas/Bag").transform;
+		Transform bag = m_bag.transform;
 		while (i < bag.childCount && !trouve) {
 			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Wood) && wood>0) {
 				wood--;
@@ -276,9 +290,9 @@ public class InventoryManager : MonoBehaviour {
 		}
 
 
-		InventoryManager.AddObjectOfType(ObjectsType.Plank);
+		AddObjectOfType(ObjectsType.Plank);
 		RectTransform clone1 = Instantiate(o_Plank) as RectTransform;
-		clone1.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+		clone1.SetParent (m_bag.transform, false);
 	}
 
 	public void CraftTorch(){
@@ -287,7 +301,7 @@ public class InventoryManager : MonoBehaviour {
 		int flint = 1;
 		int i = 0;
 		bool trouve = false;
-		Transform bag = GameObject.Find("Affichages/InventoryManager/Canvas/Bag").transform;
+		Transform bag = m_bag.transform;
 		while (i < bag.childCount && !trouve) {
 			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Wood) && wood>0) {
 				wood--;
@@ -302,9 +316,9 @@ public class InventoryManager : MonoBehaviour {
 			i++;
 		}
 
-		InventoryManager.AddObjectOfType(ObjectsType.Torch);
+		AddObjectOfType(ObjectsType.Torch);
 		RectTransform clone1 = Instantiate(o_Torch) as RectTransform;
-		clone1.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+		clone1.SetParent (bag.transform, false);
 	}
 
 	public void CraftBonfire(){
@@ -313,7 +327,7 @@ public class InventoryManager : MonoBehaviour {
 		int flint = 1;
 		int i = 0;
 		bool trouve = false;
-		Transform bag = GameObject.Find("Affichages/InventoryManager/Canvas/Bag").transform;
+		Transform bag = m_bag.transform;
 		while (i < bag.childCount && !trouve) {
 			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Wood) && wood>0) {
 				wood--;
@@ -328,9 +342,9 @@ public class InventoryManager : MonoBehaviour {
 			i++;
 		}
 
-		InventoryManager.AddObjectOfType(ObjectsType.Fire);
+		AddObjectOfType(ObjectsType.Fire);
 		RectTransform clone1 = Instantiate(o_Bonfire) as RectTransform;
-		clone1.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+		clone1.SetParent (m_bag.transform, false);
 	}
 
 	public void CraftRaft(){
@@ -340,7 +354,7 @@ public class InventoryManager : MonoBehaviour {
 		int plank = 5;
 		int i = 0;
 		bool trouve = false;
-		Transform bag = GameObject.Find("Affichages/InventoryManager/Canvas/Bag").transform;
+		Transform bag = m_bag.transform;
 		while (i < bag.childCount && !trouve) {
 			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Plank) && plank>0) {
 				plank--;
@@ -359,11 +373,11 @@ public class InventoryManager : MonoBehaviour {
 			i++;
 		}
 
-		InventoryManager.AddObjectOfType(ObjectsType.Raft);
+		AddObjectOfType(ObjectsType.Raft);
 		RectTransform clone1 = Instantiate(o_Raft) as RectTransform;
-		clone1.SetParent (GameObject.Find("InventoryManager/Canvas/Bag").transform, false);
+		clone1.SetParent (bag.transform, false);
 
-        dialogue.TriggerDialogueFin(null);
+        DialogueTrigger.TriggerDialogueFin(null);
 	}
 
     //private void NumberOfArrow() {

@@ -97,8 +97,8 @@ public class DialogueManager : MonoBehaviour {
     //Fin du dialogue
     public void EndDialogue() {
         // Play the corresponding switch
-        Switch action;
-        if((action = this.actionsQueue.Dequeue()) != null) {
+        Switch action = actionsQueue.Dequeue();
+        if(action != null) {
             SwitchManager.StartAction(action);
         }
 

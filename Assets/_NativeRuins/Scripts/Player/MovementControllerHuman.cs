@@ -80,8 +80,7 @@ public class MovementControllerHuman : MovementController {
         if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space)) {
             m_jumpTimeStamp = Time.time;
             actions.Jump();
-            print(m_rigidBody.velocity.magnitude);  
-
+            //print(m_rigidBody.velocity.magnitude);  
             m_rigidBody.AddForce(Vector3.up * 45, ForceMode.Impulse);
         }
     }
@@ -316,7 +315,6 @@ public class MovementControllerHuman : MovementController {
                     // If the player is running
                     if (Input.GetKey(KeyCode.LeftShift) && !EnergyBar.GetComponent<EnergyBar>().energyIsAt0) {
                         if (EnergyBar.GetComponent<EnergyBar>().GetCurrentEnergy() > 0f) {
-                            Debug.Log("EnergyBarValue = " + EnergyBar.GetComponent<EnergyBar>().GetCurrentEnergy() + " => Running");
                             m_footstep.UnPause ();
 					        m_footstep.pitch = 1.7f;
                             if (Input.GetKey (KeyCode.LeftControl)) {

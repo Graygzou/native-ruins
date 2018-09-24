@@ -24,9 +24,14 @@ public class HungerBar : MonoBehaviour
     private int currentTimeFaim = 0;
     private int timeMaxFaim = 800;
 	private GameObject forms;
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update () {
         GameObject playerRoot = GameObject.Find("Player");
         if (currentTimeFaim == timeMaxFaim)
         {

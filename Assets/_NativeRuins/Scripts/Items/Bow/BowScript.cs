@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BowScript : MonoBehaviour {
 
+    InventoryManager inventoryManager;
+
     public Rigidbody m_Arrow;       // Prefab of the arrow.  
     public AudioSource m_ShootingAudio;     // Reference to the audio source used to play the shooting audio. NB: different to the movement audio source.
     public AudioClip m_BendingClip;         // Audio that plays when each shot is charging up.
@@ -15,14 +17,13 @@ public class BowScript : MonoBehaviour {
 
     private GameObject judy;
 
-    // Use this for initialization
-    void Start() {
-        judy = GameObject.FindWithTag("Player");
+    private void Awake()
+    {
+        inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
     }
 
-    // Update is called once per frame
-    void Update() {
-        // ?
+    void Start() {
+        judy = GameObject.FindWithTag("Player");
     }
 
     public void PlayZoomSound() {
@@ -51,7 +52,7 @@ public class BowScript : MonoBehaviour {
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D/BowRig_tex/Root/String").GetComponent<BowString>().Release();
 
         // ?
-        InventoryManager.DrawArrow();
+        inventoryManager.DrawArrow();
 
     }
 
