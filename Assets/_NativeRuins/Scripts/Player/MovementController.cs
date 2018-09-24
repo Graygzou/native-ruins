@@ -201,6 +201,11 @@ public class MovementController : MonoBehaviour {
         m_isDead = isDead;
     }
 
+    public bool isDeath()
+    {
+        return m_isDead;
+    }
+
     public void setDialogue(bool isDialogueOn) {
         m_dialogueOn = isDialogueOn;
     }

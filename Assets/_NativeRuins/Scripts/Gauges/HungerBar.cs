@@ -53,14 +53,19 @@ public class HungerBar : MonoBehaviour
         return hungerSprite.sizeDelta.x;
     }
 
-    public void SetSizeHungerBar(float size)
+    private void SetSizeHungerBar(float size)
     {
         float newHungerValue = Mathf.Clamp(size, 0, MAX_HUNGER_PLAYER);
         hungerSprite.sizeDelta = new Vector2(newHungerValue, hungerSprite.sizeDelta.y);
     }
 
-    private void ChangeHungerBar(float amount)
+    public void ChangeHungerBar(float amount)
     {
         SetSizeHungerBar(hungerSprite.sizeDelta.x + amount);
+    }
+
+    public void RestoreHungerFromData(float amount)
+    {
+        SetSizeHungerBar(amount * MAX_HUNGER_PLAYER);
     }
 }

@@ -10,6 +10,9 @@ public class FormsController : MonoBehaviour
     public GameObject BearForm;
     public GameObject PumaForm;
 
+    [SerializeField]
+    private LifeBar lifeBar;
+
     private bool PumaUnlocked;
     private bool BearUnlocked;
     private int currentForm;
@@ -81,8 +84,7 @@ public class FormsController : MonoBehaviour
 
     public void Update()
     {
-        //Debug.Log(currentForm);
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && !(HumanForm.GetComponent<MovementController>().isDeath()))
         {
             OpenTransformationWheel();
         } else

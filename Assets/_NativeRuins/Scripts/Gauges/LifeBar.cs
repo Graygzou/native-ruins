@@ -58,25 +58,11 @@ public class LifeBar : MonoBehaviour {
 		judy = GameObject.FindWithTag ("Player");
 		actions = judy.GetComponent ("ActionsNew") as ActionsNew;
         isWeak = false;
-
-        // 
      }
 
-    // Update is called once per frame (60 frames)
     void FixedUpdate () {
-        //*****************PERTE DE VIE******************//
-        //Si Judy a sa barre de vie à 0 : Mort
-        if (this.GetCurrentSizeLifeBar() <= 0f)
-        {
-            judy.GetComponent<MovementController>().setDeath(true);
-            GameObject playerRoot = GameObject.Find("Player");
-            playerRoot.GetComponent<FormsController>().Transformation(0);
-            actions.Death();
-            audio.Stop();
-            GameObject.Find("Affichages/Menus/Menu_game_over").SetActive(!GameObject.Find("Affichages/Menus/Menu_game_over").activeSelf);
-        }
-
         // Si Judy chute 
+        // Should not be in the FixedUpdate
         if (judy.GetComponent<Rigidbody>().velocity.y < 0 && judy.GetComponent<Rigidbody>().velocity.magnitude > 100f)
         {
             Debug.Log(lifeSprite.sizeDelta.y);
@@ -99,23 +85,31 @@ public class LifeBar : MonoBehaviour {
 
     }
 
-    /*
-     * Should be 100 max ? Works ?
-     */
     public float GetCurrentSizeLifeBar()
     {
         return lifeSprite.sizeDelta.x;
     }
 
-    public void SetSizeLifeBar(float size)
+    private void SetSizeLifeBar(float size)
     {
         float newLifeValue = Mathf.Clamp(size, 0f, MAX_LIFE_PLAYER);
         lifeSprite.sizeDelta = new Vector2(newLifeValue, lifeSprite.sizeDelta.y);
+
+        //Si Judy a sa barre de vie à 0 : MORT
+        if (GetCurrentSizeLifeBar() <= 0f)
+        {
+            Death();
+        }
     }
 
     private void ChangeLifeBar(float amount)
     {
         SetSizeLifeBar(lifeSprite.sizeDelta.x + amount);
+    }
+
+    public void RestoreLifeFromData(float amount)
+    {
+        SetSizeLifeBar(amount * MAX_LIFE_PLAYER);
     }
 
     public void Weak()
@@ -133,8 +127,17 @@ public class LifeBar : MonoBehaviour {
                 currentTimeHeart = 0;
             }
             currentTimeHeart++;
-               
         }
+    }
+
+    private void Death()
+    {
+        judy.GetComponent<MovementController>().setDeath(true);
+        GameObject playerRoot = GameObject.Find("Player");
+        playerRoot.GetComponent<FormsController>().Transformation(0);
+        actions.Death();
+        audio.Stop();
+        GameObject.Find("Affichages/Menus/Menu_game_over").SetActive(true);
     }
 
     /*
@@ -149,7 +152,7 @@ public class LifeBar : MonoBehaviour {
         }
         else
         {
-            hungerBar.SetSizeHungerBar(lifeBack);
+            hungerBar.ChangeHungerBar(lifeBack);
         }
     }
 

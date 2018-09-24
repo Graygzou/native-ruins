@@ -149,8 +149,8 @@ public class Sauvegarde : MonoBehaviour {
 
             //Jauges de vie et faim
             Debug.Log("Life :" + PlayerPrefs.GetFloat("life") + ", Hunger :" + PlayerPrefs.GetFloat("hunger"));
-            lifeBar.GetComponent<LifeBar>().SetSizeLifeBar(PlayerPrefs.GetFloat("life"));
-            hungerBar.GetComponent<HungerBar>().SetSizeHungerBar(PlayerPrefs.GetFloat("hunger"));
+            lifeBar.GetComponent<LifeBar>().RestoreLifeFromData(PlayerPrefs.GetFloat("life"));
+            hungerBar.GetComponent<HungerBar>().RestoreHungerFromData(PlayerPrefs.GetFloat("hunger"));
 
             //Chargement de l'inventaire
             inventory.GetComponent<InventoryManager>().GetInventory().Clear();

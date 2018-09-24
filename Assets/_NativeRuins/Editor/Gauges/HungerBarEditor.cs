@@ -13,7 +13,7 @@ public class HungerBarEditor : Editor
         HungerBar hungerBarScript = (HungerBar)target;
         if(GUILayout.Button("Empty Hunger Bar"))
         {
-            hungerBarScript.SetSizeHungerBar(0.0f);
+            hungerBarScript.RestoreHungerFromData(0.0f);
         }
     }
 }

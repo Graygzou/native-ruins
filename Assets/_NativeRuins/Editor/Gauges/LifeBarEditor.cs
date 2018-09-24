@@ -13,7 +13,7 @@ public class LifeBarEditor : Editor
         LifeBar lifeBarScript = (LifeBar)target;
         if(GUILayout.Button("Kill Player"))
         {
-            lifeBarScript.SetSizeLifeBar(0.0f);
+            lifeBarScript.RestoreLifeFromData(0.0f);
         }
     }
 }
