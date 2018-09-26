@@ -20,7 +20,6 @@ public class PickUpScript : MonoBehaviour {
         inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
         bag = GameObject.FindWithTag("BagUI");
         buttonRamasser = GameObject.Find("Affichages/HUD/InventoryHUD/ButtonRamasser");
-
     }
 
     // Use this for initialization
@@ -57,7 +56,6 @@ public class PickUpScript : MonoBehaviour {
 
 	private void GetInputs(){
         AudioSource son;
-
 
         PlayerAknowledge brain = GameObject.Find("Player").GetComponent<PlayerAknowledge>();
         if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {

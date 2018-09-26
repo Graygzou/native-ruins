@@ -17,7 +17,7 @@ public class Sauvegarde : MonoBehaviour {
     [SerializeField]
     private HungerBar hungerBar;
     [SerializeField]
-    private GameObject inventory;
+    private InventoryManager inventory;
     #endregion
 
     [Header("Items settings")]
@@ -69,7 +69,7 @@ public class Sauvegarde : MonoBehaviour {
 
     private void addInInventory(ObjectsType obj)
     {
-        if(PlayerPrefs.GetInt("" + obj) > 0)
+        if (PlayerPrefs.GetInt("" + obj) > 0)
         {
             if(obj.Equals(ObjectsType.Bow))
             {
@@ -88,17 +88,16 @@ public class Sauvegarde : MonoBehaviour {
                 GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
                 GameObject.Find("EnigmeVoile/Voile/Fabric3D").SetActive(false);
             }
-        }
-        
-        int indice = 0;
-        RectTransform obj2D = GetObject2D(obj);
-        Debug.Log("obj = " + obj + " " + obj2D);
-        while (indice < PlayerPrefs.GetInt("" + obj))
-        {
-            GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>().AddObjectOfType(obj);
-            RectTransform clone = Instantiate(obj2D) as RectTransform;
-            clone.SetParent(inventory.GetComponent<InventoryManager>().GetBagRectTransform(), false);
-            indice++;
+
+            int indice = 0;
+            RectTransform obj2D = GetObject2D(obj);
+            Debug.Log("obj = " + obj + " " + obj2D + ", amount = " + PlayerPrefs.GetInt("" + obj));
+            for (indice = 0;  indice < PlayerPrefs.GetInt("" + obj); indice++)
+            {
+                inventory.AddObjectOfType(obj);
+                RectTransform clone = Instantiate(obj2D) as RectTransform;
+                clone.SetParent(inventory.GetBagRectTransform(), false);
+            }
         }
     }
 
@@ -153,7 +152,8 @@ public class Sauvegarde : MonoBehaviour {
             hungerBar.GetComponent<HungerBar>().RestoreHungerFromData(PlayerPrefs.GetFloat("hunger"));
 
             //Chargement de l'inventaire
-            inventory.GetComponent<InventoryManager>().GetInventory().Clear();
+            inventory.EmptyBag();
+
             addInInventory(ObjectsType.Arrow);
             addInInventory(ObjectsType.Bow);
             addInInventory(ObjectsType.Fire);
@@ -241,7 +241,7 @@ public class Sauvegarde : MonoBehaviour {
         int nbSail = 0;
         int nbRope = 0;
         int nbRaft = 0;
-        foreach (ObjectsType obj in inventory.GetComponent<InventoryManager>().GetInventory())
+        foreach (ObjectsType obj in inventory.GetInventory())
         {
             if (obj == ObjectsType.Arrow) nbArrow++;
             if (obj == ObjectsType.Bow) nbBow++;
@@ -256,6 +256,7 @@ public class Sauvegarde : MonoBehaviour {
             if (obj == ObjectsType.Torch) nbTorch++;
             if (obj == ObjectsType.Wood) nbWood++;
         }
+
         PlayerPrefs.SetInt("" + ObjectsType.Arrow, nbArrow);
         PlayerPrefs.SetInt("" + ObjectsType.Mushroom, nbMushroom);
         PlayerPrefs.SetInt("" + ObjectsType.Meat, nbMeat);
@@ -280,6 +281,7 @@ public class Sauvegarde : MonoBehaviour {
     //Permet de revenir au menu demarrer pour quitter le jeu
     public void QuitterMapIsland()
     {
+        inventory.EmptyBag();
         SceneManager.LoadScene("Menu_demarrer");
     }
 

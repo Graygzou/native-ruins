@@ -30,7 +30,7 @@ public class InventoryManager : MonoBehaviour {
     [SerializeField] private RectTransform o_Plank;
     [SerializeField] private RectTransform o_Arrow;
 
-    private static int nbArrow;
+    private static int nbArrow = 0;
 
     public static bool isBowEquiped = false;
 	public static bool isTorchEquiped = false;
@@ -40,14 +40,12 @@ public class InventoryManager : MonoBehaviour {
 
 	private static ArrayList inventaire = new ArrayList ();
 	public static bool an_object_is_pickable = false;
-	// Use this for initialization
-	void Start () {
+
+    void Start () {
 		deltaScreen = m_canvas.sizeDelta;
-        nbArrow = 0;
 		ActiveRedCross();
     }
 	
-	// Update is called once per frame
 	void Update () {
 		//print (inventaire.Count);
 		OpenOrCloseInventory ();
@@ -178,6 +176,13 @@ public class InventoryManager : MonoBehaviour {
             arrowNumber.text = "x " + nbArrow;
             //displayNumberArrow();
         }
+    }
+
+    public void EmptyBag()
+    {
+        inventaire.Clear();
+        nbArrow = 0;
+        displayNumberArrow();
     }
 
 	private IEnumerator ActiveRedCross(){
@@ -379,14 +384,4 @@ public class InventoryManager : MonoBehaviour {
 
         DialogueTrigger.TriggerDialogueFin(null);
 	}
-
-    //private void NumberOfArrow() {
-    //    int nbArrow = 0;
-    //    foreach (Object_Type obj in inventaire) {
-    //        if(obj.Equals(Object_Type.Arrow)) {
-    //            nbArrow++;
-    //        }
-    //    }
-    //    nbArrowText.text = "x " + nbArrow;
-    //}
 }
