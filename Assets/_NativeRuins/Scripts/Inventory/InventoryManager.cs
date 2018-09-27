@@ -1,15 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
 
+    #region Structs
+    [System.Serializable]
+    public struct CraftRecipeUI
+    {
+        [SerializeField]
+        public GameObject redCross;
+
+        [SerializeField]
+        public GameObject button;
+    }
+    #endregion
+
+    #region Consts
+    private const int NB_CRAFT_RECETTE = 5;
+    #endregion
+
+    #region Fields
     [Header("Component settings")]
     [SerializeField]
-    private GameObject redCross;
-    [SerializeField]
-    private GameObject button;
+    private CraftRecipeUI[] craftRecipesUI = new CraftRecipeUI[NB_CRAFT_RECETTE];
     [SerializeField]
     private GameObject craft;
     [SerializeField]
@@ -30,28 +46,23 @@ public class InventoryManager : MonoBehaviour {
     [SerializeField] private RectTransform o_Plank;
     [SerializeField] private RectTransform o_Arrow;
 
-    private static int nbArrow = 0;
-
     public static bool isBowEquiped = false;
 	public static bool isTorchEquiped = false;
 
 	public static bool bag_open = false;
 	private Vector2 deltaScreen;
 
-	private static ArrayList inventaire = new ArrayList ();
+	private static SortedDictionary<ObjectsType, int> inventaire = new SortedDictionary<ObjectsType, int>();
 	public static bool an_object_is_pickable = false;
+    #endregion
 
     void Start () {
 		deltaScreen = m_canvas.sizeDelta;
-		ActiveRedCross();
     }
 	
 	void Update () {
-		//print (inventaire.Count);
 		OpenOrCloseInventory ();
 		PutWeaponInBag ();
-        //NumberOfArrow();
-		StartCoroutine(ActiveRedCross());
     }
 
     public RectTransform GetBagRectTransform()
@@ -59,7 +70,7 @@ public class InventoryManager : MonoBehaviour {
         return m_bag;
     }
 
-	public ArrayList GetInventory(){
+	public SortedDictionary<ObjectsType, int> GetInventory(){
 		return inventaire;
 	}
 
@@ -114,137 +125,118 @@ public class InventoryManager : MonoBehaviour {
     }
 
 
-    public void RemoveObjectOfType(ObjectsType o){
-		foreach (ObjectsType obj in inventaire) {
-			if (obj == o) {
-				inventaire.Remove (o);
-                if (o.Equals(ObjectsType.Arrow)) {
-                    nbArrow--;
-                    displayNumberArrow();
-                }
-                return;
-			}
-		}
-	}
-
-    public void DrawArrow() {
-        DestroyArrow();
-        foreach (ObjectsType obj in inventaire) {
-            if (obj.Equals(ObjectsType.Arrow)) {
-                inventaire.Remove(obj);
-                nbArrow--;
-                displayNumberArrow();
-                return;
-            }
+    public void RemoveObjectOfType(ObjectsType obj)
+    {
+        if(!inventaire.ContainsKey(obj))
+        {
+            Debug.LogWarning("Removing non existing object !");
         }
+        else
+        {
+            if (inventaire[obj] <= 1)
+            {
+                inventaire.Remove(obj);
+            } 
+            else
+            {
+                inventaire[obj] -= 1;
+            }
+            DisplayNumberArrow();
+        }
+        ActiveRedCross();
     }
 
-    private void DestroyArrow() {
+    public void DrawArrow()
+    {
+        DestroyArrow();
+        RemoveObjectOfType(ObjectsType.Arrow);
+    }
+
+    private void DestroyArrow()
+    {
         Transform bag = m_bag.transform;
         int i = 0;
         bool trouve = false;
-        while (i < bag.childCount && !trouve) {
-            if(trouve = (bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Arrow)) {
+        while (i < bag.childCount && !trouve)
+        {
+            if(trouve = (bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Arrow))
+            {
                 Destroy(bag.GetChild(i).gameObject);
             }
             i++;
         }
     }
 
-    public static bool hasArrowLeft() {
-        foreach (ObjectsType obj in inventaire) {
-            if(obj.Equals(ObjectsType.Arrow)) {
-                return true;
-            }
-        }
-        return false;
+    public static bool HasArrowLeft()
+    {
+        return inventaire[ObjectsType.Arrow] > 0;
     }
 
-    private void displayNumberArrow() {
-        if (nbArrow < 10) {
-            arrowNumber.text = "x " + nbArrow;
-        } else {
-            arrowNumber.text = "x" + nbArrow;
+    private void DisplayNumberArrow()
+    {
+        if (inventaire.ContainsKey(ObjectsType.Arrow))
+        {
+            arrowNumber.text = "x" + inventaire[ObjectsType.Arrow];
         }
     }
 
-    public void AddObjectOfType(ObjectsType o){
-		inventaire.Add (o);
-        // Update the arrow indicator
-        if (o.Equals(ObjectsType.Arrow)) {
-            nbArrow++;
-            arrowNumber.text = "x " + nbArrow;
-            //displayNumberArrow();
+    public void AddObjectOfType(ObjectsType obj)
+    {
+        AddObjectOfType(obj, 1);
+    }
+
+    public void AddObjectOfType(ObjectsType obj, int amount){
+        if (inventaire.ContainsKey(obj))
+        {
+            inventaire[obj] += amount;
         }
+        else
+        {
+            inventaire.Add(obj, amount);
+        }
+        DisplayNumberArrow();
+        ActiveRedCross();
     }
 
     public void EmptyBag()
     {
         inventaire.Clear();
-        nbArrow = 0;
-        displayNumberArrow();
+        DisplayNumberArrow();
     }
 
-	private IEnumerator ActiveRedCross(){
-		int wood = 0;
-		int flint = 0;
-		int plank = 0;
-		int sail = 0;
-		int rope = 0;
+    private void ActiveRedCross()
+    {
+        bool ownOnePieceFlint = inventaire.ContainsKey(ObjectsType.Flint) && inventaire[ObjectsType.Flint] >= 1;
 
-		foreach (ObjectsType obj in inventaire) {
-			switch (obj) {
-			case ObjectsType.Wood:
-				wood++;
-				break;
-			case ObjectsType.Rope:
-				rope++;
-				break;
-			case ObjectsType.Flint:
-				flint++;
-				break;
-			case ObjectsType.Plank:
-				plank++;
-				break;
-			case ObjectsType.Sail:
-				sail++;
-				break;
-			}
-		}
-		if (wood >= 2) {
-            redCross.SetActive (false);
-			button.SetActive (true);
-		} else {
-            redCross.SetActive (true);
-            button.SetActive (false);
-		}
-		if (wood >= 1 && flint >=1) {
-            redCross.SetActive (false);
-            button.SetActive (true);
-            redCross.SetActive (false);
-            button.SetActive (true);
-		} else {
-            redCross.SetActive (true);
-            button.SetActive (false);
-            redCross.SetActive (true);
-            button.SetActive (false);
-		}
-		if (wood >= 3 && flint >=1) {
-            redCross.SetActive (false);
-            button.SetActive (true);
-		} else {
-            redCross.SetActive (true);
-            button.SetActive (false);
-		}
-		if (plank >= 5 && sail >=1 && rope >=1) {
-            redCross.SetActive (false);
-            button.SetActive (true);
-		} else {
-            redCross.SetActive (true);
-            button.SetActive (false);
-		}
-		yield return new WaitForSeconds (0.2f);
-	}
+        bool ownOnePieceWood = inventaire.ContainsKey(ObjectsType.Wood) && inventaire[ObjectsType.Wood] >= 1;
+        bool ownTwoPiecesWood = inventaire.ContainsKey(ObjectsType.Wood) && inventaire[ObjectsType.Wood] >= 2;
+        bool ownThreePiecesWood = inventaire.ContainsKey(ObjectsType.Wood) && inventaire[ObjectsType.Wood] >= 3;
+
+        bool ownOnePieceRope = inventaire.ContainsKey(ObjectsType.Rope) && inventaire[ObjectsType.Rope] >= 1;
+        
+        bool ownOnePieceSail = inventaire.ContainsKey(ObjectsType.Sail) && inventaire[ObjectsType.Sail] >= 1;
+
+        bool ownFivePiecesPlank = inventaire.ContainsKey(ObjectsType.Plank) && inventaire[ObjectsType.Plank] >= 5;
+
+        bool activeCraftArrowOrTorch = ownOnePieceWood && ownOnePieceFlint;
+        craftRecipesUI[0].redCross.SetActive(!activeCraftArrowOrTorch);
+        craftRecipesUI[0].button.SetActive(activeCraftArrowOrTorch);
+
+        bool activeCraftPlank = ownTwoPiecesWood;
+        craftRecipesUI[1].redCross.SetActive(!activeCraftPlank);
+        craftRecipesUI[1].button.SetActive(activeCraftPlank);
+
+        bool activeCraftBonFire = ownThreePiecesWood && ownOnePieceFlint;
+        craftRecipesUI[2].redCross.SetActive(!activeCraftBonFire);
+        craftRecipesUI[2].button.SetActive(activeCraftBonFire);
+
+        craftRecipesUI[3].redCross.SetActive(!activeCraftArrowOrTorch);
+        craftRecipesUI[3].button.SetActive(activeCraftArrowOrTorch);
+
+        bool activeCraftRaft = ownFivePiecesPlank && ownOnePieceSail && ownOnePieceRope;
+        craftRecipesUI[4].redCross.SetActive(!activeCraftRaft);
+        craftRecipesUI[4].button.SetActive(activeCraftRaft);
+    }
 
 	public void CraftArrow(){
 		m_craftSound.Play ();
@@ -300,7 +292,12 @@ public class InventoryManager : MonoBehaviour {
 		clone1.SetParent (m_bag.transform, false);
 	}
 
-	public void CraftTorch(){
+    internal int GetNumberItems(ObjectsType objectType)
+    {
+        return inventaire.ContainsKey(objectType) ? inventaire[objectType] : 0;
+    }
+
+    public void CraftTorch(){
 		m_craftSound.Play ();
 		int wood = 1;
 		int flint = 1;

@@ -57,7 +57,7 @@ public class BowScript : MonoBehaviour {
     }
 
     public IEnumerator DrawArrow() {
-        bool hasArrowLeft = InventoryManager.hasArrowLeft();
+        bool hasArrowLeft = InventoryManager.HasArrowLeft();
         if (hasArrowLeft)
         {
             // SetActive the arrow

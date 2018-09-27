@@ -376,7 +376,7 @@ public class MovementControllerHuman : MovementController {
         // Launch the animation to reload
         isReloading = true;
         actions.Reloading();
-        hasArrowLeft = InventoryManager.hasArrowLeft();
+        hasArrowLeft = InventoryManager.HasArrowLeft();
         if (hasArrowLeft) {
             // SetActive the arrow
             GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(true);

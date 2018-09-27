@@ -89,12 +89,14 @@ public class Sauvegarde : MonoBehaviour {
                 GameObject.Find("EnigmeVoile/Voile/Fabric3D").SetActive(false);
             }
 
-            int indice = 0;
             RectTransform obj2D = GetObject2D(obj);
+            // Create item in memory
             Debug.Log("obj = " + obj + " " + obj2D + ", amount = " + PlayerPrefs.GetInt("" + obj));
-            for (indice = 0;  indice < PlayerPrefs.GetInt("" + obj); indice++)
+            inventory.AddObjectOfType(obj, PlayerPrefs.GetInt("" + obj));
+
+            // Create item physically
+            for (int indice = 0;  indice < PlayerPrefs.GetInt("" + obj); indice++)
             {
-                inventory.AddObjectOfType(obj);
                 RectTransform clone = Instantiate(obj2D) as RectTransform;
                 clone.SetParent(inventory.GetBagRectTransform(), false);
             }
@@ -228,47 +230,18 @@ public class Sauvegarde : MonoBehaviour {
         PlayerPrefs.SetFloat("life", lifeBar.GetComponent<LifeBar>().GetCurrentSizeLifeBar());
         PlayerPrefs.SetFloat("hunger", hungerBar.GetComponent<HungerBar>().GetSizeHungerBar());
 
-        //Inventaire
-        int nbArrow = 0;
-        int nbMushroom = 0;
-        int nbMeat = 0;
-        int nbFlint = 0;
-        int nbWood = 0;
-        int nbBow = 0;
-        int nbTorch = 0;
-        int nbFire = 0;
-        int nbPlank = 0;
-        int nbSail = 0;
-        int nbRope = 0;
-        int nbRaft = 0;
-        foreach (ObjectsType obj in inventory.GetInventory())
-        {
-            if (obj == ObjectsType.Arrow) nbArrow++;
-            if (obj == ObjectsType.Bow) nbBow++;
-            if (obj == ObjectsType.Fire) nbFire++;
-            if (obj == ObjectsType.Flint) nbFlint++;
-            if (obj == ObjectsType.Meat) nbMeat++;
-            if (obj == ObjectsType.Mushroom) nbMushroom++;
-            if (obj == ObjectsType.Plank) nbPlank++;
-            if (obj == ObjectsType.Raft) nbRaft++;
-            if (obj == ObjectsType.Rope) nbRope++;
-            if (obj == ObjectsType.Sail) nbSail++;
-            if (obj == ObjectsType.Torch) nbTorch++;
-            if (obj == ObjectsType.Wood) nbWood++;
-        }
-
-        PlayerPrefs.SetInt("" + ObjectsType.Arrow, nbArrow);
-        PlayerPrefs.SetInt("" + ObjectsType.Mushroom, nbMushroom);
-        PlayerPrefs.SetInt("" + ObjectsType.Meat, nbMeat);
-        PlayerPrefs.SetInt("" + ObjectsType.Flint, nbFlint);
-        PlayerPrefs.SetInt("" + ObjectsType.Wood, nbWood);
-        PlayerPrefs.SetInt("" + ObjectsType.Bow, nbBow);
-        PlayerPrefs.SetInt("" + ObjectsType.Torch, nbTorch);
-        PlayerPrefs.SetInt("" + ObjectsType.Fire, nbFire);
-        PlayerPrefs.SetInt("" + ObjectsType.Plank, nbPlank);
-        PlayerPrefs.SetInt("" + ObjectsType.Sail, nbSail);
-        PlayerPrefs.SetInt("" + ObjectsType.Rope, nbRope);
-        PlayerPrefs.SetInt("" + ObjectsType.Raft, nbRaft);
+        PlayerPrefs.SetInt("" + ObjectsType.Arrow, inventory.GetNumberItems(ObjectsType.Arrow));
+        PlayerPrefs.SetInt("" + ObjectsType.Mushroom, inventory.GetNumberItems(ObjectsType.Mushroom));
+        PlayerPrefs.SetInt("" + ObjectsType.Meat, inventory.GetNumberItems(ObjectsType.Meat));
+        PlayerPrefs.SetInt("" + ObjectsType.Flint, inventory.GetNumberItems(ObjectsType.Flint));
+        PlayerPrefs.SetInt("" + ObjectsType.Wood, inventory.GetNumberItems(ObjectsType.Wood));
+        PlayerPrefs.SetInt("" + ObjectsType.Bow, inventory.GetNumberItems(ObjectsType.Bow));
+        PlayerPrefs.SetInt("" + ObjectsType.Torch, inventory.GetNumberItems(ObjectsType.Torch));
+        PlayerPrefs.SetInt("" + ObjectsType.Fire, inventory.GetNumberItems(ObjectsType.Fire));
+        PlayerPrefs.SetInt("" + ObjectsType.Plank, inventory.GetNumberItems(ObjectsType.Plank));
+        PlayerPrefs.SetInt("" + ObjectsType.Sail, inventory.GetNumberItems(ObjectsType.Sail));
+        PlayerPrefs.SetInt("" + ObjectsType.Rope, inventory.GetNumberItems(ObjectsType.Rope));
+        PlayerPrefs.SetInt("" + ObjectsType.Raft, inventory.GetNumberItems(ObjectsType.Raft));
 
         //Connaitre transformation debloquee
         PlayerPrefs.SetInt("pumaUnlocked", Player.GetComponent<FormsController>().isPumaUnlocked());
