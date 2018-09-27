@@ -110,7 +110,6 @@ public class InventoryManager : MonoBehaviour {
 				clone.SetParent (m_bag.transform, false);
 				isBowEquiped = false;
 			}
-
 		}
 	}
 
@@ -123,7 +122,6 @@ public class InventoryManager : MonoBehaviour {
         yield return new WaitForSeconds(0.6f);
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive(false);
     }
-
 
     public void RemoveObjectOfType(ObjectsType obj)
     {

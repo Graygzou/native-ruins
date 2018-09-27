@@ -7,21 +7,18 @@ public class LifeBar : MonoBehaviour {
 
     #region Consts
     private const float MAX_LIFE_PLAYER = 300f;
-
-    private const int timeMaxFaim = 3600;
-    private int currentTimeFaim = 0;
-    private const int timeMaxHeart = 60;
-    private int currentTimeHeart = 0;
     #endregion
 
-    #region Components
+    #region Components setting
     [SerializeField]
     private RectTransform lifeSprite;
+
     [SerializeField]
     private HungerBar hungerBar;
-
-    private AudioSource audio;
     #endregion
+
+    private float currentTimeFaim = 0.0f;
+    private float currentTimeHeart = 0.0f;
 
     #region FX audioClips
     [Header("Component settings")]
@@ -33,15 +30,23 @@ public class LifeBar : MonoBehaviour {
     private AudioClip sonVieBasse;
     #endregion
 
+    private AudioSource audio;
     public GameObject Hunger;
     public Animator animator;
 
     #region Scale parameters
     [Header("Health settings")]
     [SerializeField]
-    private float hurtByFallScale = 0.005f;
+    private int timeMaxBeforeHungerHurt = 15;
+
     [SerializeField]
-    private float hurtByHungerScale = 0.1f;
+    private int timeMaxBeforeHeartBeat = 1;
+
+    [SerializeField]
+    private float hurtByFallScale = 0.5f;
+
+    [SerializeField]
+    private float hurtByHungerScale = 3f;
     #endregion
 
     private GameObject judy;
@@ -60,6 +65,27 @@ public class LifeBar : MonoBehaviour {
         isWeak = false;
      }
 
+    private void Update()
+    {
+        Debug.Log(hungerBar.GetSizeHungerBar());
+        //Si la barre de faim est vide
+        if (hungerBar.GetSizeHungerBar() <= 0.0f)
+        {
+            currentTimeFaim += Time.deltaTime;
+            if (currentTimeFaim >= timeMaxBeforeHungerHurt)
+            {
+                ChangeLifeBar(-hurtByHungerScale); //valeur en pourcent (0.1f = 10%)
+                currentTimeFaim = 0.0f;
+            }
+            
+        }
+        else
+        {
+            currentTimeFaim = 0.0f;
+        }
+        Weak();
+    }
+
     void FixedUpdate () {
         // Si Judy chute 
         // Should not be in the FixedUpdate
@@ -69,20 +95,6 @@ public class LifeBar : MonoBehaviour {
             Debug.Log("Player Fall. Old life =" + lifeSprite.sizeDelta.x + ", New life = " + (lifeSprite.sizeDelta.x - hurtByFallScale));
             ChangeLifeBar(-hurtByFallScale);
         }
-
-        //Si la barre de faim est vide
-        if(hungerBar.GetSizeHungerBar() == 0f)
-        {
-            if(currentTimeFaim == timeMaxFaim)
-            {
-                ChangeLifeBar(-hurtByHungerScale); //valeur en pourcent (0.1f = 10%)
-                currentTimeFaim = 0;
-            }
-            currentTimeFaim++;
-        }
-
-        Weak();
-
     }
 
     public float GetCurrentSizeLifeBar()
@@ -112,11 +124,17 @@ public class LifeBar : MonoBehaviour {
         SetSizeLifeBar(amount * MAX_LIFE_PLAYER);
     }
 
+    public bool IsFull()
+    {
+        return GetCurrentSizeLifeBar() == MAX_LIFE_PLAYER;
+    }
+
     public void Weak()
     {
         if (this.GetCurrentSizeLifeBar() <= 0.3f)
         {
-            if (currentTimeHeart == timeMaxHeart)
+            currentTimeHeart += Time.deltaTime;
+            if (currentTimeHeart >= timeMaxBeforeHeartBeat)
             {
                 isWeak = !isWeak;
                 if(!isWeak)
@@ -124,9 +142,12 @@ public class LifeBar : MonoBehaviour {
                     audio.PlayOneShot(sonVieBasse);
                 }
                 animator.SetBool("isWeak", isWeak);
-                currentTimeHeart = 0;
+                currentTimeHeart = 0.0f;
             }
-            currentTimeHeart++;
+        }
+        else
+        {
+            currentTimeHeart = 0.0f;
         }
     }
 
@@ -146,13 +167,13 @@ public class LifeBar : MonoBehaviour {
     public void Eat(float lifeBack)
     {
         audio.PlayOneShot(sonManger);
-        if (Hunger.GetComponent<Scrollbar>().size >= 1f)
+        if (!IsFull())
         {
-            ChangeLifeBar(lifeBack);
+            ChangeLifeBar(lifeBack * MAX_LIFE_PLAYER / 100f);
         }
         else
         {
-            hungerBar.ChangeHungerBar(lifeBack);
+            hungerBar.ChangeHungerBar(lifeBack * MAX_LIFE_PLAYER / 100f);
         }
     }
 

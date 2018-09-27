@@ -16,25 +16,25 @@ public class HungerBar : MonoBehaviour
 
     #region Hunger settings
     [SerializeField]
+    private int timeMaxBeforeHungerDecrease = 5;
+
+    [SerializeField]
     private float hungerDecreasingFactor = 0.04f;
+
     [SerializeField]
     private float hungerDecreasingFactorPuma = 0.08f;
     #endregion
 
-    private int currentTimeFaim = 0;
-    private int timeMaxFaim = 800;
+    private float currentTimeFaim = 0.0f;
+    
 	private GameObject forms;
-
-    private void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update () {
-        GameObject playerRoot = GameObject.Find("Player");
-        if (currentTimeFaim == timeMaxFaim)
+        currentTimeFaim += Time.deltaTime;
+        if (currentTimeFaim >= timeMaxBeforeHungerDecrease)
         {
+            GameObject playerRoot = GameObject.Find("Player");
             if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma)
             {
                 ChangeHungerBar(-hungerDecreasingFactorPuma);
@@ -43,9 +43,8 @@ public class HungerBar : MonoBehaviour
             {
                 ChangeHungerBar(-hungerDecreasingFactor);
             }
-            currentTimeFaim = 0;
+            currentTimeFaim = 0.0f;
         }
-        currentTimeFaim++;
     }
 
     public float GetSizeHungerBar()
@@ -67,5 +66,10 @@ public class HungerBar : MonoBehaviour
     public void RestoreHungerFromData(float amount)
     {
         SetSizeHungerBar(amount * MAX_HUNGER_PLAYER);
+    }
+
+    public bool IsFull()
+    {
+        return hungerSprite.sizeDelta.x == MAX_HUNGER_PLAYER;
     }
 }
