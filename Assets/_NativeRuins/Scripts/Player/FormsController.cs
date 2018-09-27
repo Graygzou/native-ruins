@@ -103,19 +103,19 @@ public class FormsController : MonoBehaviour
         // Verification des formes disponibles
         if (!PumaUnlocked)
         {
-            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPuma").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPumaLocked").SetActive(true);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPuma").SetActive(false);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(true);
         }
         else
         {
-            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPuma").SetActive(true);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPumaLocked").SetActive(false);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPuma").SetActive(true);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(false);
         }
 
         if (!BearUnlocked)
         {
-            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconBear").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconBearLocked").SetActive(true);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/IconBear").SetActive(false);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearLocked").SetActive(true);
         }
 
 
@@ -148,37 +148,37 @@ public class FormsController : MonoBehaviour
             if ((positionMouse.y > positionMouse.x*a1 + b1) && (positionMouse.y > positionMouse.x*a2 + b2))
             {
                 selectedForm = 0;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconHumanSelected").SetActive(true);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(true);
             } else
             {
-                GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconHumanSelected").SetActive(false);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(false);
             }
 
             // SELECTION PUMA
             if ((positionMouse.y < positionMouse.x*a1 + b1) && (positionMouse.x < centreScreen.x) && PumaUnlocked)
             {
                 selectedForm = 2;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPumaSelected").SetActive(true);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(true);
             } else
             {
-                GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPumaSelected").SetActive(false);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
             }
 
             // SELECTION OURS
             if ((positionMouse.y < positionMouse.x * a2 + b2) && (positionMouse.x > centreScreen.x) && BearUnlocked)
             {
                 selectedForm = 1;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconBearSelected").SetActive(true);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(true);
             } else
             {
-                GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconBearSelected").SetActive(false);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(false);
             }
         } else
         {
             selectedForm = currentForm;
-            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconHumanSelected").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconPumaSelected").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/Fond/IconBearSelected").SetActive(false);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(false);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
+            GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(false);
         }
     }
 
