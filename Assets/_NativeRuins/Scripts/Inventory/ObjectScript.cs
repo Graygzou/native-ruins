@@ -24,9 +24,14 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private GameObject infoObjets;
 
     public ObjectsType o_type;
-	[SerializeField]private Rigidbody o_mushroom;
-	public bool is_usable=false;
-	[SerializeField]private AudioSource m_pickSound;
+
+	[SerializeField]
+    private Rigidbody o_mushroom;
+
+	public bool is_usable = false;
+
+	[SerializeField]
+    private AudioSource m_pickSound;
 
 	private bool isUsed = false;
 
@@ -58,7 +63,7 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
 
 	public void OnCollisionEnter2D(Collision2D collision){
-		if (collision.gameObject.name=="FallDetector") {
+		if (collision.gameObject.name == "FallDetector") {
 			player_pos = GameObject.FindWithTag ("Player").transform.position;
             GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>().RemoveObjectOfType (o_type);
 			Rigidbody clone;

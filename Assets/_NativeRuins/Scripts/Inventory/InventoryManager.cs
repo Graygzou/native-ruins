@@ -30,6 +30,8 @@ public class InventoryManager : MonoBehaviour {
     private GameObject craft;
     [SerializeField]
     private Text arrowNumber;
+    [SerializeField]
+    private BoxCollider2D fallDetector;
 
     [Header("RectTransform settings")]
     [SerializeField] private RectTransform m_canvas;
@@ -81,10 +83,14 @@ public class InventoryManager : MonoBehaviour {
             if (!bag_open) {
                 m_bag.localPosition = Vector3.zero; 
 				m_bag.localScale = new Vector3(2.5f, 2.5f, 1f);
-			} else {
+                fallDetector.offset = new Vector2(0f, 40f);
+
+            } else {
                 m_bag.anchoredPosition = new Vector3(-200f, 100f, 0f);
                 m_bag.localScale = new Vector3(1f, 1f, 1f);
-			}
+                fallDetector.offset = new Vector2(0f, -250f);
+
+            }
             craft.SetActive(!bag_open);
             bag_open = !bag_open;
         }

@@ -126,7 +126,7 @@ public class LifeBar : MonoBehaviour {
 
     public bool IsFull()
     {
-        return GetCurrentSizeLifeBar() == MAX_LIFE_PLAYER;
+        return GetCurrentSizeLifeBar() >= MAX_LIFE_PLAYER;
     }
 
     public void Weak()
