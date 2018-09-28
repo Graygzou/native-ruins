@@ -5,17 +5,21 @@ using UnityEngine;
 public class InteractTotem : MonoBehaviour {
 
     private bool o_isTotem = false;
-    private GameObject Judy;
+    private GameObject judy;
     private AudioSource son;
 
     [SerializeField]
     private DialogueTrigger dialogue;
+    [SerializeField]
+    private GameObject buttonInteragir;
+    [SerializeField]
+    private GameObject particuleEffect;
 
     // Use this for initialization
     void Start()
     {
         son = this.GetComponentInParent<AudioSource>();
-        Judy = GameObject.Find("Player");
+        judy = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -29,7 +33,7 @@ public class InteractTotem : MonoBehaviour {
         if (other.gameObject.tag.Equals("Player"))
         {
             o_isTotem = false;
-            GameObject.Find("Affichages/Interaction/ButtonInteragir").SetActive(false);
+            buttonInteragir.SetActive(false);
         }
     }
 
@@ -38,7 +42,7 @@ public class InteractTotem : MonoBehaviour {
         if (other.gameObject.tag.Equals("Player") && !InventoryManager.bag_open)
         {
             o_isTotem = true;
-            GameObject.Find("Affichages/Interaction/ButtonInteragir").SetActive(true);
+            buttonInteragir.SetActive(true);
         }
     }
 
@@ -46,32 +50,33 @@ public class InteractTotem : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.E) && o_isTotem)
         {
-            
-            
-            if (Judy.GetComponent<FormsController>().isBearUnlocked() == 0) //Si il y a encore le totem ours
+            if (judy.GetComponent<FormsController>().isBearUnlocked() == 0) //Si il y a encore le totem ours
             {
                 //Range arme avant d'ouvrir le menu de sauvegarde
                 GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();
                 GameObject playerRoot = GameObject.Find("Player");
                 playerRoot.GetComponent<FormsController>().Transformation(0);
                 son.Play();
-                GameObject.Find("EnigmeTotemOurs/pfb_EarthTotem").SetActive(false);
-                Judy.GetComponent<FormsController>().setBearUnlocked(true);
+                particuleEffect.SetActive(false);
+                judy.GetComponent<FormsController>().setBearUnlocked(true);
                 DialogueTrigger.TriggerDialogueTotemOurs(null);
-            } else //le totem ours a deja ete recupere donc il ne reste que celui du puma
+            }
+            else //le totem ours a deja ete recupere donc il ne reste que celui du puma
             {
                 //Range arme avant d'ouvrir le menu de sauvegarde
                 GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();
                 GameObject playerRoot = GameObject.Find("Player");
                 playerRoot.GetComponent<FormsController>().Transformation(0);
                 son.Play();
-                GameObject.Find("EnigmeTotemPuma/pfb_AirTotem").SetActive(false);
-                Judy.GetComponent<FormsController>().setPumaUnlocked(true);
+                particuleEffect.SetActive(false);
+                judy.GetComponent<FormsController>().setPumaUnlocked(true);
                 DialogueTrigger.TriggerDialogueTotemPuma(null);
             }
+            // Disable the totem
+            gameObject.SetActive(false);
             o_isTotem = false;
-            GameObject.Find("Affichages/Interaction/ButtonInteragir").SetActive(false);
-            Judy.GetComponentInChildren<ActionsNew>().Stay(100f);
+            buttonInteragir.SetActive(false);
+            judy.GetComponentInChildren<ActionsNew>().Stay(100f);
         }
     }
 }

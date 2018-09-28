@@ -67,7 +67,6 @@ public class LifeBar : MonoBehaviour {
 
     private void Update()
     {
-        Debug.Log(hungerBar.GetSizeHungerBar());
         //Si la barre de faim est vide
         if (hungerBar.GetSizeHungerBar() <= 0.0f)
         {
