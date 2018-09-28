@@ -37,6 +37,10 @@ public class EvadeState : State<GameObject> {
     override public void Execute(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
         AgentProperties properties = o.GetComponent<AgentProperties>();
+
+        // Update the player position
+        FSM.behavior.target_p = GameObject.FindWithTag("Player").transform.position;
+
         if (!properties.isAlert) {
             FSM.ChangeState(WalkingState.Instance);
         }

@@ -87,8 +87,12 @@ public class SteeringBehavior : MonoBehaviour {
         //update the heading if the vehicle has a non zero velocity
         if (m_vSteeringForce.sqrMagnitude > 0.000001)
         {
+            //Debug.Log("Rotate");
+            //Quaternion targetRotation = Quaternion.FromToRotation(transform.forward, m_vSteeringForce);
+            //Debug.Log(Quaternion.LookRotation(m_vSteeringForce));
             GetComponent<Rigidbody>().rotation = Quaternion.Lerp(transform.rotation,
-                Quaternion.LookRotation(m_vSteeringForce), Time.deltaTime);
+                Quaternion.LookRotation(m_vSteeringForce), Time.deltaTime * 10f);
+            //GetComponent<Rigidbody>().rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 10f * Time.deltaTime);
         }
 
         //transform.Translate(GetComponent<Rigidbody>().velocity * Time.deltaTime);
@@ -99,10 +103,10 @@ public class SteeringBehavior : MonoBehaviour {
         // -- A TESTER --
 
         // Normalise the movement vector and make it proportional to the speed per second.
-        Vector3 movement = m_vSteeringForce * GetComponent<AgentProperties>().getCurrentSpeed() * Time.deltaTime;
+        //Vector3 movement = m_vSteeringForce * GetComponent<AgentProperties>().getCurrentSpeed() * Time.deltaTime;
 
         //// Move the player to it's current position plus the movement.
-        GetComponent<Rigidbody>().MovePosition(transform.position + movement * Time.deltaTime);
+        //GetComponent<Rigidbody>().MovePosition(transform.position + movement * Time.deltaTime);
 
         // -- Fin a tester ---
 
@@ -259,6 +263,8 @@ public class SteeringBehavior : MonoBehaviour {
 
     public Vector3 Flee() {
         Vector3 m_DesiredVelocity = Vector3.zero;
+        Debug.Log("Target_P :" + target_p);
+        Debug.Log("Position raton :" + transform.position);
         //Vector3 m_DesiredVelocity = (transform.position - target_p.position).normalized * maxSpeed;
         m_DesiredVelocity = transform.position - target_p; //) * properties.getCurrentSpeed();
         return m_DesiredVelocity; // - GetComponent<Rigidbody>().velocity;
