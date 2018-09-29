@@ -14,13 +14,15 @@ public class MovementController : MonoBehaviour {
     [SerializeField] protected AudioSource m_footstep;
 
     // Cameras gestion
-    protected Transform m_cameraPivot = null;
+    [SerializeField]
+    protected Transform m_cameraPivot;
+    [SerializeField]
+    protected EnergyBar energyBar;
+    [SerializeField]
+    protected LifeBar lifeBar;
+
     protected int currentCamera = 0;
-
     protected Vector3 initial_orientation;
-    protected GameObject EnergyBar;
-    protected GameObject LifeBar;
-
     protected Vector3 lastMousePosition = Vector3.zero;
 
     protected bool m_wasGrounded;
@@ -45,8 +47,6 @@ public class MovementController : MonoBehaviour {
         m_dialogueOn = false;
         m_isSaving = false;
         m_cameraPivot = GameObject.Find("CameraPivot").transform;
-        EnergyBar = GameObject.Find("Gauges/Energy");
-        LifeBar = GameObject.Find("Gauges/Life");
         initial_orientation = Vector3.forward;
         m_footstep.Play();
         m_footstep.loop = true;

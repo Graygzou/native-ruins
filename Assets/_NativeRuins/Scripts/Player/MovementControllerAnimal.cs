@@ -45,25 +45,31 @@ public class MovementControllerAnimal : MovementController {
                 m_moveSpeed = 0f;
                 m_animator.SetFloat("Speed_f", 0f);
                 Attack();
-            } else { // Movements Directionnal
-                if (!NextDir.Equals (Vector3.zero)) {
-                    if (Input.GetKey (KeyCode.LeftShift) && !EnergyBar.GetComponent<EnergyBar>().energyIsAt0) {
-                        if (EnergyBar.GetComponent<Scrollbar>().size > 0f)
+            }
+            else
+            { // Movements Directionnal
+                if (!NextDir.Equals (Vector3.zero))
+                {
+                    if (Input.GetKey (KeyCode.LeftShift) && energyBar.canRun)
+                    {
+                        if (energyBar.GetCurrentEnergy() > 0f)
                         {
                             m_moveSpeed = m_maxSpeed;
                             m_animator.SetFloat("Speed_f", m_maxSpeed);
                             m_footstep.UnPause();
                             m_footstep.pitch = 1.7f;
-                        } else {
-                            EnergyBar.GetComponent<EnergyBar>().energyIsAt0 = true;
                         }
-				    } else {
+				    }
+                    else
+                    {
 					    m_moveSpeed = m_minSpeed;
 					    m_animator.SetFloat ("Speed_f", m_minSpeed);
 					    m_footstep.UnPause ();
 					    m_footstep.pitch = 1f;
 				    }
-			    } else {
+			    }
+                else
+                {
 				    m_moveSpeed = 0f;
 				    m_animator.SetFloat ("Speed_f", 0f);
 				    m_footstep.Pause ();

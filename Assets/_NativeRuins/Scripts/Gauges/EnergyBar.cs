@@ -23,10 +23,10 @@ public class EnergyBar : MonoBehaviour
     private float energizingBackAfterEmptyFactor = 2f;
     #endregion
 
-    private bool canRun = true;
+    public bool canRun { private set; get; }
     // Should be readonly parameters..
     [System.NonSerialized]
-    public bool energyIsAt0 = false;
+    private bool energyIsAt0 = false;
 
     void Update () {
         if(canRun)
