@@ -39,7 +39,7 @@ public class InteractTotem : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag.Equals("Player") && !InventoryManager.bag_open)
+        if (other.gameObject.tag.Equals("Player") && !InventoryManager.instance.bag_open)
         {
             o_isTotem = true;
             buttonInteragir.SetActive(true);

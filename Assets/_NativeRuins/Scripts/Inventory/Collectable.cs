@@ -5,12 +5,6 @@ using System;
 
 public class Collectable : MonoBehaviour {
 
-    [Header("Component settings")]
-    [SerializeField]
-    private GameObject buttonRamasser;
-    [SerializeField]
-    private GameObject bag;
-
     public Renderer renderer;
 	public ObjectsType o_type;
 	[SerializeField]private RectTransform o_object;
@@ -30,30 +24,28 @@ public class Collectable : MonoBehaviour {
 				InventoryManager.an_object_is_pickable = false;
 				o_isPickable = false;
 				renderer.material.shader = Shader.Find ("Mobile/Diffuse");
-                buttonRamasser.SetActive(false);
-			}
+                InventoryManager.instance.SetStatePickupButton(false);
+            }
 		}
 	}
 
 	void OnTriggerStay(Collider other){
-		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.bag_open) {
+		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.instance.bag_open) {
 			if (!InventoryManager.an_object_is_pickable) {
 				InventoryManager.an_object_is_pickable = true;
 				o_isPickable = true;
 				renderer.material.shader = Shader.Find ("Outlined/Silhouetted Diffuse");
-                buttonRamasser.SetActive(true);
-			}
+                InventoryManager.instance.SetStatePickupButton(true);
+            }
 		}
 	}
 
 	private void GetInputs(){
 		if (Input.GetKeyDown (KeyCode.E) && o_isPickable && isActive) {
-			GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>().AddObjectOfType(o_type);
+			GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>().AddObjectOfType(o_type, o_object);
 			InventoryManager.an_object_is_pickable = false;
-			RectTransform clone = Instantiate(o_object) as RectTransform;
-			clone.SetParent (bag.transform, false);
-            buttonRamasser.SetActive(false);
-			this.gameObject.GetComponent<MeshRenderer>().enabled=false;
+            InventoryManager.instance.SetStatePickupButton(false);
+            this.gameObject.GetComponent<MeshRenderer>().enabled=false;
 			this.gameObject.GetComponent<SphereCollider>().enabled=false;
 			isActive = false;
 		}
@@ -76,7 +68,7 @@ public class Collectable : MonoBehaviour {
                 InventoryManager.an_object_is_pickable = false;
                 o_isPickable = false;
                 renderer.material.shader = Shader.Find("Mobile/Diffuse");
-                buttonRamasser.SetActive(false);
+                InventoryManager.instance.SetStatePickupButton(false);
             }
         }
     }

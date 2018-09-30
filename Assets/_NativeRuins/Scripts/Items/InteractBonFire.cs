@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ public class InteractBonFire : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider other){
-		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.bag_open) {
+		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.instance.bag_open) {
 			o_isBonFire = true;
 			GameObject.Find ("Affichages/Interaction/ButtonInteragir").SetActive(true);
 		}
@@ -50,8 +51,13 @@ public class InteractBonFire : MonoBehaviour {
             playerRoot.GetComponent<FormsController>().Transformation(0);
 
             // Play the sitting animation
-            GetComponent<Switch>().Activate();
-            StartCoroutine("SitDownNearFire");
+            try
+            {
+                // If the bonfire is a real one (not craft)
+                GetComponent<Switch>().Activate();
+                StartCoroutine("SitDownNearFire");
+            }
+            catch(Exception e) {}
         } else if(Input.GetKeyDown(KeyCode.E) && o_isBonFire && sitted) {
             sitted = false;
             StartCoroutine("StandUpNearFire");
@@ -76,6 +82,11 @@ public class InteractBonFire : MonoBehaviour {
         yield return new WaitForSeconds(4.4f);
         // Can control judy
         judy.GetComponent<MovementController>().setIsSaving(false);
-        GetComponent<Switch>().StopCutScene();
+        try
+        {
+            // If the bonfire is a real one (not craft)
+            GetComponent<Switch>().StopCutScene();
+        }
+        catch (Exception e) { }
     }
 }

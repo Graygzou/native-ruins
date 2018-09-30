@@ -92,14 +92,9 @@ public class Sauvegarde : MonoBehaviour {
             RectTransform obj2D = GetObject2D(obj);
             // Create item in memory
             Debug.Log("obj = " + obj + " " + obj2D + ", amount = " + PlayerPrefs.GetInt("" + obj));
-            inventory.AddObjectOfType(obj, PlayerPrefs.GetInt("" + obj));
 
             // Create item physically
-            for (int indice = 0;  indice < PlayerPrefs.GetInt("" + obj); indice++)
-            {
-                RectTransform clone = Instantiate(obj2D) as RectTransform;
-                clone.SetParent(inventory.GetBagRectTransform(), false);
-            }
+            inventory.AddObjectOfType(obj, obj2D, PlayerPrefs.GetInt("" + obj));
         }
     }
 
@@ -135,7 +130,7 @@ public class Sauvegarde : MonoBehaviour {
     void Awake() {
 
         Player = GameObject.Find("Player");
-
+            
         //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
         if (PlayerPrefs.GetInt("load_scene") == 1)
         {
@@ -183,8 +178,8 @@ public class Sauvegarde : MonoBehaviour {
                 GameObject.FindWithTag("TotemOurs").SetActive(false);
             }
 
-            GameObject carreNoir = GameObject.Find("CameraCutscenes/Intro/PlaneFade");
-            carreNoir.SetActive(false);
+            //GameObject carreNoir = GameObject.Find("CameraCutscenes/Intro/PlaneFade");
+            //carreNoir.SetActive(false);
         } else {
             /*
             // Setting up the scene

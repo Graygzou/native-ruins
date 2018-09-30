@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
+
+    public static InventoryManager instance = null;
 
     #region Structs
     [System.Serializable]
@@ -22,7 +23,7 @@ public class InventoryManager : MonoBehaviour {
     private const int NB_CRAFT_RECETTE = 5;
     #endregion
 
-    #region Fields
+    #region Serialize Field
     [Header("Component settings")]
     [SerializeField]
     private CraftRecipeUI[] craftRecipesUI = new CraftRecipeUI[NB_CRAFT_RECETTE];
@@ -32,13 +33,16 @@ public class InventoryManager : MonoBehaviour {
     private Text arrowNumber;
     [SerializeField]
     private BoxCollider2D fallDetector;
+    [SerializeField]
+    private GameObject pickupButton;
 
     [Header("RectTransform settings")]
     [SerializeField] private RectTransform m_canvas;
     [SerializeField] private RectTransform m_bag;
-    [SerializeField] private RectTransform b_anchor;
-    [SerializeField] private AudioSource m_bagSound;
-    [SerializeField] private AudioSource m_craftSound;
+    [SerializeField] private RectTransform m_items;
+    [SerializeField] private RectTransform spawningAnchor;
+    [SerializeField] private AudioClip m_bagSound;
+    [SerializeField] private AudioClip m_craftSound;
 
     [Header("RectTransform of items")]
     [SerializeField] private RectTransform o_Bow;
@@ -48,15 +52,33 @@ public class InventoryManager : MonoBehaviour {
     [SerializeField] private RectTransform o_Plank;
     [SerializeField] private RectTransform o_Arrow;
 
-    public static bool isBowEquiped = false;
-	public static bool isTorchEquiped = false;
-
-	public static bool bag_open = false;
-	private Vector2 deltaScreen;
-
-	private static SortedDictionary<ObjectsType, int> inventaire = new SortedDictionary<ObjectsType, int>();
-	public static bool an_object_is_pickable = false;
     #endregion
+
+    public bool isBowEquiped = false;
+    public bool isTorchEquiped = false;
+
+    public bool bag_open = false;
+    private Vector2 deltaScreen;
+
+    private AudioSource audioSource;
+    private EdgeCollider2D collider;
+
+    private static SortedDictionary<ObjectsType, int> inventaire = new SortedDictionary<ObjectsType, int>();
+    public static bool an_object_is_pickable = false;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        audioSource = GetComponent<AudioSource>();
+        collider = m_bag.GetComponent<EdgeCollider2D>();
+    }
 
     void Start () {
 		deltaScreen = m_canvas.sizeDelta;
@@ -67,114 +89,290 @@ public class InventoryManager : MonoBehaviour {
 		PutWeaponInBag ();
     }
 
-    public RectTransform GetBagRectTransform()
+    #region Add / Remove methods
+
+    public void EmptyBag()
     {
-        return m_bag;
+        inventaire.Clear();
+        DisplayNumberArrow();
     }
 
-	public SortedDictionary<ObjectsType, int> GetInventory(){
+    public void RemoveObjectOfType(ObjectsType type, GameObject obj)
+    {
+        if (!inventaire.ContainsKey(type))
+        {
+            Debug.LogWarning("Removing non existing object !");
+        }
+        else
+        {
+            if (inventaire[type] <= 1)
+            {
+                inventaire.Remove(type);
+            }
+            else
+            {
+                inventaire[type] -= 1;
+            }
+            DisplayNumberArrow();
+        }
+        // Destroy the object
+        Destroy(obj);
+
+        ActiveRedCross();
+    }
+
+    public void RemoveObjectOfType(ObjectsType type)
+    {
+        Debug.Log("HERE");
+        Transform bag = m_items.transform;
+        bool trouve = false;
+        int i = 0;
+        while (i < bag.childCount && !trouve)
+        {
+            if (trouve = (bag.GetChild(i).GetComponent<ObjectScript>().o_type == type))
+            {
+                RemoveObjectOfType(type, bag.GetChild(i).gameObject);
+            }
+            i++;
+        }
+    }
+
+    public void AddObjectOfType(ObjectsType obj, RectTransform obj2D)
+    {
+        AddObjectOfType(obj, obj2D, 1);
+    }
+
+    public void AddObjectOfType(ObjectsType obj, RectTransform obj2D, int amount)
+    {
+        // Add the object in the structure
+        if (inventaire.ContainsKey(obj))
+        {
+            inventaire[obj] += amount;
+        }
+        else
+        {
+            inventaire.Add(obj, amount);
+        }
+        // Add physically the object
+        for (int indice = 0; indice < amount; indice++)
+        {
+            Debug.Log(GetSpawningPosition());
+            RectTransform clone = Instantiate(obj2D) as RectTransform;
+            clone.SetParent(m_items);
+            clone.anchoredPosition = GetSpawningPosition();
+            clone.localRotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
+            // Scale the object back (useful during craft)
+            clone.transform.localScale = obj2D.localScale;
+        }
+        // Adding Post-Process
+        DisplayNumberArrow();
+        ActiveRedCross();
+    }
+    #endregion
+
+    #region Crafts methods
+    /**
+     * Craft three arrows from 1 wood and 1 flint.
+     * @Pre: Their are, at least, 1 wood and 1 flint in the inventory.
+     */
+    public void CraftArrow()
+    {
+        Debug.Log("CraftArrows");
+        CraftObject(1, 1);
+        AddObjectOfType(ObjectsType.Arrow, o_Arrow);
+        AddObjectOfType(ObjectsType.Arrow, o_Arrow);
+        AddObjectOfType(ObjectsType.Arrow, o_Arrow);
+    }
+
+    /**
+     * Craft 1 plank from 2 wood.
+     * @Pre: Their are, at least, 2 wood in the inventory.
+     */
+    public void CraftPlank()
+    {
+        CraftObject(2);
+        AddObjectOfType(ObjectsType.Plank, o_Plank);
+    }
+
+    /**
+     * Craft 1 torch from 1 wood, 1 flint.
+     * @Pre: Their are, at least, 1 wood and 1 flint in the inventory.
+     */
+    public void CraftTorch()
+    {
+        CraftObject(1, 1);
+        AddObjectOfType(ObjectsType.Torch, o_Torch);
+    }
+
+    /**
+     * Craft 1 bonfire from 3 wood, 1 flint.
+     * @Pre: Their are, at least, 3 wood and 1 flint in the inventory.
+     */
+    public void CraftBonfire()
+    {
+        CraftObject(3, 1);
+        AddObjectOfType(ObjectsType.Torch, o_Torch);
+        AddObjectOfType(ObjectsType.Fire, o_Bonfire);
+    }
+
+    public void CraftRaft()
+    {
+        CraftObject(0, 0, 1, 5, 1);
+        AddObjectOfType(ObjectsType.Raft, o_Raft);
+
+        // Should not be there.
+        //DialogueTrigger.TriggerDialogueFin(null);
+    }
+
+    private void CraftObject(int wood = 0, int flint = 0, int sail = 0, int plank = 0, int rope = 0)
+    {
+        audioSource.PlayOneShot(m_craftSound);
+        Debug.Log("Craf !!t");
+        bool trouve = false;
+        Transform bag = m_items.transform;
+
+        int i = 0;
+        while (i < bag.childCount && !trouve)
+        {
+            ObjectsType type = bag.GetChild(i).GetComponent<ObjectScript>().o_type;
+            switch (type)
+            {
+                case ObjectsType.Wood:
+                    if(wood > 0)
+                    {
+                        wood--;
+                        RemoveObjectOfType(type, bag.GetChild(i).gameObject);
+                    }
+                    break;
+                case ObjectsType.Flint:
+                    if (flint > 0)
+                    {
+                        flint--;
+                        RemoveObjectOfType(type, bag.GetChild(i).gameObject);
+                    }
+                    break;
+                case ObjectsType.Plank:
+                    if (plank > 0)
+                    {
+                        plank--;
+                        RemoveObjectOfType(type, bag.GetChild(i).gameObject);
+                    }
+                    break;
+                case ObjectsType.Sail:
+                    if (sail > 0)
+                    {
+                        sail--;
+                        RemoveObjectOfType(type, bag.GetChild(i).gameObject);
+                    }
+                    break;
+                case ObjectsType.Rope:
+                    if (rope > 0)
+                    {
+                        rope--;
+                        RemoveObjectOfType(type, bag.GetChild(i).gameObject);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            trouve = (wood == 0) && (flint == 0) && (plank == 0) && (sail == 0) && (rope == 0);
+            i++;
+        }
+    }
+    #endregion
+
+    public void SetStatePickupButton(bool state)
+    {
+        pickupButton.SetActive(state);
+    }
+
+    public SortedDictionary<ObjectsType, int> GetInventory(){
 		return inventaire;
 	}
 
-	private void OpenOrCloseInventory(){
-		if (Input.GetKeyDown (KeyCode.Tab)) {
-			m_bagSound.Play ();
-            
-            if (!bag_open) {
-                m_bag.localPosition = Vector3.zero; 
-				m_bag.localScale = new Vector3(2.5f, 2.5f, 1f);
+	private void OpenOrCloseInventory()
+    {
+		if (Input.GetKeyDown (KeyCode.Tab))
+        {
+            audioSource.PlayOneShot(m_bagSound);
+            if (!bag_open)
+            {
+                m_bag.localPosition = Vector3.zero;
+                m_bag.anchoredPosition = new Vector3(-960f, 540f, 0f);
+                m_bag.localScale = new Vector3(2.5f, 2.5f, 1f);
                 fallDetector.offset = new Vector2(0f, 40f);
-
-            } else {
-                m_bag.anchoredPosition = new Vector3(-200f, 100f, 0f);
+                collider.edgeRadius = 25f;
+            }
+            else
+            {
                 m_bag.localScale = new Vector3(1f, 1f, 1f);
+                m_bag.anchoredPosition = new Vector3(-200f, 100f, 0f);
                 fallDetector.offset = new Vector2(0f, -250f);
-
+                collider.edgeRadius = 10f;
             }
             craft.SetActive(!bag_open);
             bag_open = !bag_open;
         }
 	}
 
-	public void PutWeaponInBag (){
+    public Vector2 GetSpawningPosition()
+    {
+        float halfWidth = spawningAnchor.sizeDelta.x / 2;
+        float halfheight = spawningAnchor.sizeDelta.y / 2;
+        float xValue = Random.Range(spawningAnchor.anchoredPosition.x - halfWidth, spawningAnchor.anchoredPosition.x + halfWidth);
+        float yValue = Random.Range(spawningAnchor.anchoredPosition.y - halfheight, spawningAnchor.anchoredPosition.y + halfheight);
+        return new Vector2(xValue, yValue);
+    }
+
+    public void PutWeaponInBag ()
+    {
         if (Input.GetKeyDown (KeyCode.R) && !bag_open) {
-            RectTransform clone;
             GameObject player = GameObject.FindWithTag("Player");
-			if (isTorchEquiped) {
-				AddObjectOfType (ObjectsType.Torch);
+			if (isTorchEquiped)
+            {
+				AddObjectOfType (ObjectsType.Torch, o_Torch);
                 player.GetComponent<ActionsNew>().DisarmWeapon();
                 StartCoroutine("DisarmTorch");
-				clone = Instantiate(o_Torch) as RectTransform;
-				clone.SetParent (m_bag.transform, false);
 				isTorchEquiped = false;
 			}
-			if (isBowEquiped && !player.GetComponent<MovementControllerHuman>().getIsAiming()) {
-				AddObjectOfType (ObjectsType.Bow);
+			if (isBowEquiped && !player.GetComponent<MovementControllerHuman>().getIsAiming())
+            {
+				AddObjectOfType (ObjectsType.Bow, o_Bow);
                 player.GetComponent<ActionsNew>().DisarmWeapon();
                 StartCoroutine("DisarmBow");
-				clone = Instantiate(o_Bow) as RectTransform;
-				clone.SetParent (m_bag.transform, false);
 				isBowEquiped = false;
 			}
 		}
 	}
 
-    private IEnumerator DisarmTorch() {
+    private IEnumerator DisarmTorch()
+    {
         yield return new WaitForSeconds(0.6f);
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive(false);
     }
 
-    private IEnumerator DisarmBow() {
+    private IEnumerator DisarmBow()
+    {
         yield return new WaitForSeconds(0.6f);
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive(false);
     }
 
-    public void RemoveObjectOfType(ObjectsType obj)
-    {
-        if(!inventaire.ContainsKey(obj))
-        {
-            Debug.LogWarning("Removing non existing object !");
-        }
-        else
-        {
-            if (inventaire[obj] <= 1)
-            {
-                inventaire.Remove(obj);
-            } 
-            else
-            {
-                inventaire[obj] -= 1;
-            }
-            DisplayNumberArrow();
-        }
-        ActiveRedCross();
-    }
-
     public void DrawArrow()
     {
-        DestroyArrow();
         RemoveObjectOfType(ObjectsType.Arrow);
-    }
-
-    private void DestroyArrow()
-    {
-        Transform bag = m_bag.transform;
-        int i = 0;
-        bool trouve = false;
-        while (i < bag.childCount && !trouve)
-        {
-            if(trouve = (bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Arrow))
-            {
-                Destroy(bag.GetChild(i).gameObject);
-            }
-            i++;
-        }
     }
 
     public static bool HasArrowLeft()
     {
         return inventaire[ObjectsType.Arrow] > 0;
     }
+
+    internal int GetNumberItems(ObjectsType objectType)
+    {
+        return inventaire.ContainsKey(objectType) ? inventaire[objectType] : 0;
+    }
+
+    #region UI managements
 
     private void DisplayNumberArrow()
     {
@@ -184,42 +382,14 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-    public void AddObjectOfType(ObjectsType obj)
-    {
-        AddObjectOfType(obj, 1);
-    }
-
-    public void AddObjectOfType(ObjectsType obj, int amount){
-        if (inventaire.ContainsKey(obj))
-        {
-            inventaire[obj] += amount;
-        }
-        else
-        {
-            inventaire.Add(obj, amount);
-        }
-        DisplayNumberArrow();
-        ActiveRedCross();
-    }
-
-    public void EmptyBag()
-    {
-        inventaire.Clear();
-        DisplayNumberArrow();
-    }
-
     private void ActiveRedCross()
     {
         bool ownOnePieceFlint = inventaire.ContainsKey(ObjectsType.Flint) && inventaire[ObjectsType.Flint] >= 1;
-
         bool ownOnePieceWood = inventaire.ContainsKey(ObjectsType.Wood) && inventaire[ObjectsType.Wood] >= 1;
         bool ownTwoPiecesWood = inventaire.ContainsKey(ObjectsType.Wood) && inventaire[ObjectsType.Wood] >= 2;
         bool ownThreePiecesWood = inventaire.ContainsKey(ObjectsType.Wood) && inventaire[ObjectsType.Wood] >= 3;
-
         bool ownOnePieceRope = inventaire.ContainsKey(ObjectsType.Rope) && inventaire[ObjectsType.Rope] >= 1;
-        
         bool ownOnePieceSail = inventaire.ContainsKey(ObjectsType.Sail) && inventaire[ObjectsType.Sail] >= 1;
-
         bool ownFivePiecesPlank = inventaire.ContainsKey(ObjectsType.Plank) && inventaire[ObjectsType.Plank] >= 5;
 
         bool activeCraftArrowOrTorch = ownOnePieceWood && ownOnePieceFlint;
@@ -241,148 +411,5 @@ public class InventoryManager : MonoBehaviour {
         craftRecipesUI[4].redCross.SetActive(!activeCraftRaft);
         craftRecipesUI[4].button.SetActive(activeCraftRaft);
     }
-
-	public void CraftArrow(){
-		m_craftSound.Play ();
-		int wood = 1;
-		int flint = 1;
-			int i = 0;
-		bool trouve = false;
-		Transform bag = m_bag.transform;
-		while (i < bag.childCount && !trouve) {
-			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Wood) && wood > 0) {
-				wood--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Wood);
-			}else if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Flint) && flint>0) {
-				flint--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Flint);
-			}
-			trouve = (flint == 0) && (wood == 0);
-			i++;
-		}
-
-		AddObjectOfType(ObjectsType.Arrow);
-		AddObjectOfType(ObjectsType.Arrow);
-		AddObjectOfType(ObjectsType.Arrow);
-		RectTransform clone1 = Instantiate(o_Arrow) as RectTransform;
-		clone1.SetParent (bag.transform, false);
-		RectTransform clone2 = Instantiate(o_Arrow) as RectTransform;
-		clone2.SetParent (bag.transform, false);
-		RectTransform clone3 = Instantiate(o_Arrow) as RectTransform;
-		clone3.SetParent (bag.transform, false);
-	}
-
-	public void CraftPlank(){
-		m_craftSound.Play ();
-		int wood = 2;
-		int i = 0;
-		bool trouve = false;
-		Transform bag = m_bag.transform;
-		while (i < bag.childCount && !trouve) {
-			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Wood) && wood>0) {
-				wood--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Wood);
-			}
-			trouve = (wood == 0);
-			i++;
-		}
-
-
-		AddObjectOfType(ObjectsType.Plank);
-		RectTransform clone1 = Instantiate(o_Plank) as RectTransform;
-		clone1.SetParent (m_bag.transform, false);
-	}
-
-    internal int GetNumberItems(ObjectsType objectType)
-    {
-        return inventaire.ContainsKey(objectType) ? inventaire[objectType] : 0;
-    }
-
-    public void CraftTorch(){
-		m_craftSound.Play ();
-		int wood = 1;
-		int flint = 1;
-		int i = 0;
-		bool trouve = false;
-		Transform bag = m_bag.transform;
-		while (i < bag.childCount && !trouve) {
-			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Wood) && wood>0) {
-				wood--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Wood);
-			}else if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Flint) && flint>0) {
-				flint--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Flint);
-			}
-			trouve = (flint == 0) && (wood == 0);
-			i++;
-		}
-
-		AddObjectOfType(ObjectsType.Torch);
-		RectTransform clone1 = Instantiate(o_Torch) as RectTransform;
-		clone1.SetParent (bag.transform, false);
-	}
-
-	public void CraftBonfire(){
-		m_craftSound.Play ();
-		int wood = 3;
-		int flint = 1;
-		int i = 0;
-		bool trouve = false;
-		Transform bag = m_bag.transform;
-		while (i < bag.childCount && !trouve) {
-			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Wood) && wood>0) {
-				wood--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Wood);
-			}else if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Flint) && flint>0) {
-				flint--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Flint);
-			}
-			trouve = (flint == 0) && (wood == 0);
-			i++;
-		}
-
-		AddObjectOfType(ObjectsType.Fire);
-		RectTransform clone1 = Instantiate(o_Bonfire) as RectTransform;
-		clone1.SetParent (m_bag.transform, false);
-	}
-
-	public void CraftRaft(){
-		m_craftSound.Play ();
-		int rope = 1;
-		int sail = 1;
-		int plank = 5;
-		int i = 0;
-		bool trouve = false;
-		Transform bag = m_bag.transform;
-		while (i < bag.childCount && !trouve) {
-			if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Plank) && plank>0) {
-				plank--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Plank);
-			}else if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Sail) && sail>0) {
-				sail--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Sail);
-			}else if((bag.GetChild(i).GetComponent<ObjectScript>().o_type == ObjectsType.Rope) && rope>0) {
-				rope--;
-				Destroy(bag.GetChild(i).gameObject);
-				RemoveObjectOfType (ObjectsType.Rope);
-			}
-			trouve = (sail == 0) && (plank == 0) && (rope == 0);
-			i++;
-		}
-
-		AddObjectOfType(ObjectsType.Raft);
-		RectTransform clone1 = Instantiate(o_Raft) as RectTransform;
-		clone1.SetParent (bag.transform, false);
-
-        DialogueTrigger.TriggerDialogueFin(null);
-	}
+    #endregion
 }

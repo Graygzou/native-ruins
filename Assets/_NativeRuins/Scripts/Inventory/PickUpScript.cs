@@ -11,7 +11,6 @@ public class PickUpScript : MonoBehaviour {
 
     private bool o_isPickable;
 
-    private GameObject buttonRamasser;
     private GameObject bag;
     private InventoryManager inventoryManager;
 
@@ -19,7 +18,6 @@ public class PickUpScript : MonoBehaviour {
     {
         inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
         bag = GameObject.FindWithTag("BagUI");
-        buttonRamasser = GameObject.Find("Affichages/HUD/InventoryHUD/ButtonRamasser");
     }
 
     // Use this for initialization
@@ -38,18 +36,18 @@ public class PickUpScript : MonoBehaviour {
 				InventoryManager.an_object_is_pickable = false;
 				o_isPickable = false;
 				renderer.material.shader = Shader.Find ("Mobile/Diffuse");
-                buttonRamasser.SetActive(false);
+                InventoryManager.instance.SetStatePickupButton(false);
 			}
 		}
 	}
 
 	void OnTriggerStay(Collider other){
-		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.bag_open) {
+		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.instance.bag_open) {
 			if (!InventoryManager.an_object_is_pickable) {
 				InventoryManager.an_object_is_pickable = true;
 				o_isPickable = true;
 				renderer.material.shader = Shader.Find ("Outlined/Silhouetted Diffuse");
-                buttonRamasser.SetActive(true);
+                InventoryManager.instance.SetStatePickupButton(true);
 			}
 		}
 	}
@@ -92,12 +90,10 @@ public class PickUpScript : MonoBehaviour {
                 playerRoot.GetComponent<FormsController>().Transformation(0);
                 GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ActionsNew>().Stay(100f);
             }
-            inventoryManager.AddObjectOfType(o_type);
+            inventoryManager.AddObjectOfType(o_type, o_object);
 			InventoryManager.an_object_is_pickable = false;
-			RectTransform clone = Instantiate(o_object) as RectTransform;
-			clone.SetParent (bag.transform, false);
-            buttonRamasser.SetActive(false);
-			Destroy(this.gameObject);
+            InventoryManager.instance.SetStatePickupButton(false);
+            Destroy(this.gameObject);
 		}
 	}
 
