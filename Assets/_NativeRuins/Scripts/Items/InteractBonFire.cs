@@ -31,7 +31,7 @@ public class InteractBonFire : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider other){
-		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.instance.bag_open) {
+		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.Instance.bag_open) {
 			o_isBonFire = true;
 			GameObject.Find ("Affichages/Interaction/ButtonInteragir").SetActive(true);
 		}

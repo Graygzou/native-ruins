@@ -56,7 +56,7 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
  
 	void Update () 
 	{
-		if (InventoryManager.instance.bag_open) {
+		if (InventoryManager.Instance.bag_open) {
 			DragNDrop ();
 		}
 	}
@@ -144,8 +144,8 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 	private void UseObject(ObjectsType o_type){
 		switch(o_type) {
 		case ObjectsType.Bow:
-			if (!InventoryManager.instance.isTorchEquiped) {
-				InventoryManager.instance.isBowEquiped = true;
+			if (!InventoryManager.Instance.isTorchEquiped) {
+				InventoryManager.Instance.isBowEquiped = true;
                 buttonUtiliser.SetActive(false);
 				HideInfo ();
                 inventoryManager.RemoveObjectOfType (o_type);
@@ -175,8 +175,8 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 			Destroy(this.gameObject);
 			break;
 		case ObjectsType.Torch:
-			if (!InventoryManager.instance.isBowEquiped) {
-				InventoryManager.instance.isTorchEquiped = true;
+			if (!InventoryManager.Instance.isBowEquiped) {
+				InventoryManager.Instance.isTorchEquiped = true;
                 buttonUtiliser.SetActive(false);
 				HideInfo ();
                 inventoryManager.RemoveObjectOfType (o_type);

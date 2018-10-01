@@ -24,18 +24,18 @@ public class Collectable : MonoBehaviour {
 				InventoryManager.an_object_is_pickable = false;
 				o_isPickable = false;
 				renderer.material.shader = Shader.Find ("Mobile/Diffuse");
-                InventoryManager.instance.SetStatePickupButton(false);
+                InventoryManager.Instance.SetStatePickupButton(false);
             }
 		}
 	}
 
 	void OnTriggerStay(Collider other){
-		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.instance.bag_open) {
+		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.Instance.bag_open) {
 			if (!InventoryManager.an_object_is_pickable) {
 				InventoryManager.an_object_is_pickable = true;
 				o_isPickable = true;
 				renderer.material.shader = Shader.Find ("Outlined/Silhouetted Diffuse");
-                InventoryManager.instance.SetStatePickupButton(true);
+                InventoryManager.Instance.SetStatePickupButton(true);
             }
 		}
 	}
@@ -44,7 +44,7 @@ public class Collectable : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.E) && o_isPickable && isActive) {
 			GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>().AddObjectOfType(o_type, o_object);
 			InventoryManager.an_object_is_pickable = false;
-            InventoryManager.instance.SetStatePickupButton(false);
+            InventoryManager.Instance.SetStatePickupButton(false);
             this.gameObject.GetComponent<MeshRenderer>().enabled=false;
 			this.gameObject.GetComponent<SphereCollider>().enabled=false;
 			isActive = false;
@@ -68,7 +68,7 @@ public class Collectable : MonoBehaviour {
                 InventoryManager.an_object_is_pickable = false;
                 o_isPickable = false;
                 renderer.material.shader = Shader.Find("Mobile/Diffuse");
-                InventoryManager.instance.SetStatePickupButton(false);
+                InventoryManager.Instance.SetStatePickupButton(false);
             }
         }
     }

@@ -196,7 +196,7 @@ public class MovementControllerHuman : MovementController {
 
     override protected void GetInputs(Vector3 NextDir, float h, float v) {
         if (m_isGrounded) {
-            if (Input.GetMouseButtonDown(1) && InventoryManager.instance.isBowEquiped) {
+            if (Input.GetMouseButtonDown(1) && InventoryManager.Instance.isBowEquiped) {
                 if (!isAiming)
                 {
                     // Equip the bow
@@ -246,9 +246,9 @@ public class MovementControllerHuman : MovementController {
 
             // 2) Check if the player want to hit something
             if(Input.GetMouseButtonDown(0)) {
-                if (InventoryManager.instance.isBowEquiped && isAiming && !isReloading && hasArrowLeft) {
+                if (InventoryManager.Instance.isBowEquiped && isAiming && !isReloading && hasArrowLeft) {
                     FireArrow();
-                } else if (InventoryManager.instance.isTorchEquiped) {
+                } else if (InventoryManager.Instance.isTorchEquiped) {
                     HitWithStick();
                 }
             }

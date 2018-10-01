@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1742996104473450}
   m_LocalRotation: {x: 0.04175994, y: 0.7165906, z: 0.043062825, w: 0.6949099}
-  m_LocalPosition: {x: -106.12663, y: 439.9831, z: 815.35486}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,8 +50,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9010189992806794da10fd2b13c41cb3, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 0.51
   m_Pitch: 1
   Loop: 0
@@ -160,3 +160,6 @@ MonoBehaviour:
   o_Raft: {fileID: 224071314372471912, guid: a4ebd2584d632e3428ef25af6dea8df9, type: 2}
   o_Plank: {fileID: 224399268398623374, guid: d2082ec775e9aae41a0d055fe1b1c9b4, type: 2}
   o_Arrow: {fileID: 224507697386379926, guid: 97c2424a8ad745a4bab097bf19f3a44a, type: 2}
+  isBowEquiped: 0
+  isTorchEquiped: 0
+  bag_open: 0

@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
 
-    public static InventoryManager instance = null;
+    #region Singleton
+    private static InventoryManager _instance;
+
+    public static InventoryManager Instance { get { return _instance; } }
+    #endregion
 
     #region Structs
     [System.Serializable]
@@ -65,18 +69,18 @@ public class InventoryManager : MonoBehaviour {
     private static SortedDictionary<ObjectsType, int> inventaire = new SortedDictionary<ObjectsType, int>();
     public static bool an_object_is_pickable = false;
 
-    private void Awake()
+    protected void Awake()
     {
-        if (instance == null)
+        if (_instance != null && _instance != this)
         {
-            instance = GameObject.Instantiate(this);
+            Destroy(this.gameObject);
         }
-        else if (instance != this)
+        else
         {
-            Destroy(gameObject);
+            _instance = this;
         }
-        instance.audioSource = GetComponent<AudioSource>();
-        instance.collider = m_bag.GetComponent<EdgeCollider2D>();
+        audioSource = GetComponent<AudioSource>();
+        collider = m_bag.GetComponent<EdgeCollider2D>();
     }
 
     void Start () {
@@ -155,9 +159,8 @@ public class InventoryManager : MonoBehaviour {
         // Add physically the object
         for (int indice = 0; indice < amount; indice++)
         {
-            Debug.Log(GetSpawningPosition());
             RectTransform clone = Instantiate(obj2D) as RectTransform;
-            clone.SetParent(m_items);
+            clone.SetParent(_instance.m_items);
             clone.anchoredPosition = GetSpawningPosition();
             clone.localRotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
             // Scale the object back (useful during craft)
@@ -225,10 +228,13 @@ public class InventoryManager : MonoBehaviour {
 
     private void CraftObject(int wood = 0, int flint = 0, int sail = 0, int plank = 0, int rope = 0)
     {
-        GetComponent<AudioSource>().PlayOneShot(m_craftSound);
-        Debug.Log("Craf !!t");
+        Debug.Log(Instance.m_items);
+        Debug.Log("This :" + this);
+        Debug.Log("This :" + m_items);
+
+        _instance.audioSource.PlayOneShot(m_craftSound);
         bool trouve = false;
-        Transform bag = m_items.transform;
+        Transform bag = _instance.m_items.transform;
 
         int i = 0;
         while (i < bag.childCount && !trouve)
@@ -293,7 +299,7 @@ public class InventoryManager : MonoBehaviour {
     {
 		if (Input.GetKeyDown (KeyCode.Tab))
         {
-            audioSource.PlayOneShot(m_bagSound);
+            _instance.audioSource.PlayOneShot(m_bagSound);
             if (!bag_open)
             {
                 m_bag.localPosition = Vector3.zero;
@@ -316,10 +322,10 @@ public class InventoryManager : MonoBehaviour {
 
     public Vector2 GetSpawningPosition()
     {
-        float halfWidth = spawningAnchor.sizeDelta.x / 2;
-        float halfheight = spawningAnchor.sizeDelta.y / 2;
-        float xValue = Random.Range(spawningAnchor.anchoredPosition.x - halfWidth, spawningAnchor.anchoredPosition.x + halfWidth);
-        float yValue = Random.Range(spawningAnchor.anchoredPosition.y - halfheight, spawningAnchor.anchoredPosition.y + halfheight);
+        float halfWidth = _instance.spawningAnchor.sizeDelta.x / 2;
+        float halfheight = _instance.spawningAnchor.sizeDelta.y / 2;
+        float xValue = Random.Range(_instance.spawningAnchor.anchoredPosition.x - halfWidth, _instance.spawningAnchor.anchoredPosition.x + halfWidth);
+        float yValue = Random.Range(_instance.spawningAnchor.anchoredPosition.y - halfheight, _instance.spawningAnchor.anchoredPosition.y + halfheight);
         return new Vector2(xValue, yValue);
     }
 
@@ -377,7 +383,7 @@ public class InventoryManager : MonoBehaviour {
     {
         if (inventaire.ContainsKey(ObjectsType.Arrow))
         {
-            arrowNumber.text = "x" + inventaire[ObjectsType.Arrow];
+            _instance.arrowNumber.text = "x" + inventaire[ObjectsType.Arrow];
         }
     }
 
@@ -392,23 +398,23 @@ public class InventoryManager : MonoBehaviour {
         bool ownFivePiecesPlank = inventaire.ContainsKey(ObjectsType.Plank) && inventaire[ObjectsType.Plank] >= 5;
 
         bool activeCraftArrowOrTorch = ownOnePieceWood && ownOnePieceFlint;
-        craftRecipesUI[0].redCross.SetActive(!activeCraftArrowOrTorch);
-        craftRecipesUI[0].button.SetActive(activeCraftArrowOrTorch);
+        _instance.craftRecipesUI[0].redCross.SetActive(!activeCraftArrowOrTorch);
+        _instance.craftRecipesUI[0].button.SetActive(activeCraftArrowOrTorch);
 
         bool activeCraftPlank = ownTwoPiecesWood;
-        craftRecipesUI[1].redCross.SetActive(!activeCraftPlank);
-        craftRecipesUI[1].button.SetActive(activeCraftPlank);
+        _instance.craftRecipesUI[1].redCross.SetActive(!activeCraftPlank);
+        _instance.craftRecipesUI[1].button.SetActive(activeCraftPlank);
 
         bool activeCraftBonFire = ownThreePiecesWood && ownOnePieceFlint;
-        craftRecipesUI[2].redCross.SetActive(!activeCraftBonFire);
-        craftRecipesUI[2].button.SetActive(activeCraftBonFire);
+        _instance.craftRecipesUI[2].redCross.SetActive(!activeCraftBonFire);
+        _instance.craftRecipesUI[2].button.SetActive(activeCraftBonFire);
 
-        craftRecipesUI[3].redCross.SetActive(!activeCraftArrowOrTorch);
-        craftRecipesUI[3].button.SetActive(activeCraftArrowOrTorch);
+        _instance.craftRecipesUI[3].redCross.SetActive(!activeCraftArrowOrTorch);
+        _instance.craftRecipesUI[3].button.SetActive(activeCraftArrowOrTorch);
 
         bool activeCraftRaft = ownFivePiecesPlank && ownOnePieceSail && ownOnePieceRope;
-        craftRecipesUI[4].redCross.SetActive(!activeCraftRaft);
-        craftRecipesUI[4].button.SetActive(activeCraftRaft);
+        _instance.craftRecipesUI[4].redCross.SetActive(!activeCraftRaft);
+        _instance.craftRecipesUI[4].button.SetActive(activeCraftRaft);
     }
     #endregion
 }
