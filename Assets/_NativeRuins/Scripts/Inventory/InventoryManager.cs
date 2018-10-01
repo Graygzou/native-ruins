@@ -59,7 +59,6 @@ public class InventoryManager : MonoBehaviour {
 
     public bool bag_open = false;
     private Vector2 deltaScreen;
-
     private AudioSource audioSource;
     private EdgeCollider2D collider;
 
@@ -70,18 +69,18 @@ public class InventoryManager : MonoBehaviour {
     {
         if (instance == null)
         {
-            instance = this;
+            instance = GameObject.Instantiate(this);
         }
         else if (instance != this)
         {
             Destroy(gameObject);
         }
-        audioSource = GetComponent<AudioSource>();
-        collider = m_bag.GetComponent<EdgeCollider2D>();
+        instance.audioSource = GetComponent<AudioSource>();
+        instance.collider = m_bag.GetComponent<EdgeCollider2D>();
     }
 
     void Start () {
-		deltaScreen = m_canvas.sizeDelta;
+        deltaScreen = m_canvas.sizeDelta;
     }
 	
 	void Update () {
@@ -226,7 +225,7 @@ public class InventoryManager : MonoBehaviour {
 
     private void CraftObject(int wood = 0, int flint = 0, int sail = 0, int plank = 0, int rope = 0)
     {
-        audioSource.PlayOneShot(m_craftSound);
+        GetComponent<AudioSource>().PlayOneShot(m_craftSound);
         Debug.Log("Craf !!t");
         bool trouve = false;
         Transform bag = m_items.transform;

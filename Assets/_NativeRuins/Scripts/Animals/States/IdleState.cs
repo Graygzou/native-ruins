@@ -22,6 +22,9 @@ public class IdleState : State<GameObject>
     {
         // Get the current agent variables
         StateMachine FSM = o.GetComponent<StateMachine>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
+
+        properties.setSpeed(0.0f);
 
         // Set the animation variables
         FSM.animator.SetFloat("Speed_f", 0.0f);

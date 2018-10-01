@@ -19,7 +19,9 @@ public class DeathState : State<GameObject>
 
     override public void Enter(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
 
+        properties.setSpeed(0.0f);
         // Tell the animator that the enemy is dead.
         //FSM.animator.SetBool("Dead", true);
         //FSM.animator.SetFloat("Speed_f", 0.0f);
@@ -47,7 +49,7 @@ public class DeathState : State<GameObject>
 
     override public void Exit(GameObject o)
     {
-        //AgentProperties properties = o.GetComponent<AgentProperties>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
         StateMachine FSM = o.GetComponent<StateMachine>();
 
         // Turn the collider into a trigger so shots can pass through it.
@@ -58,12 +60,12 @@ public class DeathState : State<GameObject>
         }
 
         // disable his steering behavior
-        //FSM.behavior = null;
+        FSM.behavior = null;
 
         // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
         o.GetComponent<Rigidbody>().isKinematic = true;
 
-        //properties.MakeAgentDisappear(o);
+        properties.MakeAgentDisappear(o);
 
         // DROP Items
         // Increase the score by the enemy's score value.

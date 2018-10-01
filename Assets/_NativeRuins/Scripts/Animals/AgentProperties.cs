@@ -1,20 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR 
-using UnityEditor;
-#endif
 using UnityEngine.AI;
 
-[System.Serializable]
 public class AgentProperties : MonoBehaviour
 {
     // Attributes of the agent
     public float maxHealth;
-    public float maxForce;
-    public int maxSpeed;
+    public float maxForce = 200f;
+    public float maxSpeed;
 
-    public int mass;
     public float damages;
     public float hungryIndicator = 0.0f;
     public bool isMean;
@@ -28,27 +23,29 @@ public class AgentProperties : MonoBehaviour
     public bool playerTooClose;
 
     private float currentHealth;
-    private float currentSpeed;
+    [SerializeField]
+    private float currentSpeed = 22f;
     private Transform front;
 
-    public AudioSource sonCri;
-    public AudioSource sonCombat;
+    public AudioClip sonCri;
+    public AudioClip sonCombat;
+
+    private AudioSource audioSource;
 
     public static bool soundIsPlaying;
 
     void Awake() {
         isDead = false;
-        maxForce = 200f;
-        currentSpeed = 22f;
         // Get the child collider
         visionRange = gameObject.GetComponentInChildren<SphereCollider>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start() {
         AgentProperties.soundIsPlaying = false;
         AudioSource[] sons = GetComponents<AudioSource>();
-        sonCri = sons[0];
-        sonCombat = sons[1];
+        //sonCri = sons[0];
+        //sonCombat = sons[1];
         currentHealth = maxHealth;
 
         front = transform.GetChild(transform.childCount-1).transform;
@@ -65,7 +62,7 @@ public class AgentProperties : MonoBehaviour
                 isAlert = true;
             } else if (isAlert && !playerTooClose) {
                 playerTooClose = true;
-                sonCri.Play();
+                audioSource.PlayOneShot(sonCri);
             }
         }
     }
@@ -111,7 +108,7 @@ public class AgentProperties : MonoBehaviour
             return;
 
         // Play the hurt sound effect.
-        sonCri.Play();
+        audioSource.PlayOneShot(sonCri);
 
         // Reduce the current health by the amount of damage sustained.
         currentHealth -= amount;
@@ -122,6 +119,17 @@ public class AgentProperties : MonoBehaviour
             // the enemy is dead.
             isDead = true;
         }
+    }
+
+    public void PlayFightSong()
+    {
+        audioSource.clip = sonCombat;
+        audioSource.Play();
+    }
+
+    public void StopFightSong()
+    {
+        audioSource.Stop();
     }
 
     public void MakeAgentDisappear(GameObject o) {

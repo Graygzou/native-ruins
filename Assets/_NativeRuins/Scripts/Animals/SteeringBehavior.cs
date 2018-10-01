@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System;
 
 public class SteeringBehavior : MonoBehaviour {
+
+    [SerializeField]
+    private Transform noseTransform;
 
     // Variables for the wander
     public float WanderDistance { get; set; }
@@ -25,6 +27,7 @@ public class SteeringBehavior : MonoBehaviour {
     public bool seekOn;
 
     float theta;
+    public float enthropy = 0.2f;
 
     // Variables for the obstacles avoidance
     public float boundingSphereRadius;
@@ -32,19 +35,19 @@ public class SteeringBehavior : MonoBehaviour {
     public Dictionary<Ray, float> senseurs;
 
     private AgentProperties properties;
+    private Rigidbody rigidbody;
 
-    // Maybe useless
-    //NavMeshAgent animal;
-
-    void Start() {
-
+    private void Awake()
+    {
         // Get the animal properties
         properties = GetComponent<AgentProperties>();
-        //animal = GetComponent<NavMeshAgent>();
 
-        //maxSpeed = GetComponent<NavMeshAgent>().speed;
+        rigidbody = GetComponent<Rigidbody>();
+    }
 
-        // set Items
+    void Start()
+    {
+        // Set Items
         dWanderRadius = 3.0f;
         WanderDistance = 7.0f;
 
@@ -53,77 +56,63 @@ public class SteeringBehavior : MonoBehaviour {
 
         senseurs = new Dictionary<Ray, float>();
 
-        // Set velocity
-        Vector3 velocity = transform.forward;
-        velocity.y = GetComponent<Rigidbody>().velocity.y;
-        GetComponent<Rigidbody>().velocity = velocity;
-
         // Create first random point
-        theta = UnityEngine.Random.value * 2 * Mathf.PI;
+        /*
+        theta = Random.value * 2 * Mathf.PI;
         vWanderTarget = new Vector3(dWanderRadius * Mathf.Cos(theta), 0f,
                                     dWanderRadius * Mathf.Sin(theta));
-        vWanderTarget += transform.position + transform.forward * WanderDistance;
-
-        //Debug.Log("first: " + agent.transform.position + " et " + m_vWanderTarget2);
+        vWanderTarget += noseTransform.position + noseTransform.forward * WanderDistance;
+        vWanderTarget.y = noseTransform.position.y;*/
     }
 
-    // Update is called once per frame
-    //void Update() {
-    //    UpdateBehavior();
-    //}
+    public void FixedUpdate()
+    {
+        UpdateBehavior();
+    }
 
     /* -----------------------------------------
      * Update the steering behavior of the agent
      * ----------------------------------------- */
     public void UpdateBehavior() {
+        ComputeYValue();
         //StartCoroutine(UpdateSteer());
         Vector3 m_vSteeringForce = CalculatePrioritized();
 
-        //make sure vehicle does not exceed maximum velocity
-        m_vSteeringForce = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
+        // The force has to be on a plane (Right now)
+        m_vSteeringForce.y = 0;
 
-        //GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
+        Debug.Log(m_vSteeringForce);
+
+        //make sure vehicle does not exceed maximum velocity
+        //m_vSteeringForce = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
 
         //update the heading if the vehicle has a non zero velocity
         if (m_vSteeringForce.sqrMagnitude > 0.000001)
         {
-            //Debug.Log("Rotate");
-            //Quaternion targetRotation = Quaternion.FromToRotation(transform.forward, m_vSteeringForce);
-            //Debug.Log(Quaternion.LookRotation(m_vSteeringForce));
-            GetComponent<Rigidbody>().rotation = Quaternion.Lerp(transform.rotation,
+            transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.LookRotation(m_vSteeringForce), Time.deltaTime * 10f);
-            //GetComponent<Rigidbody>().rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 10f * Time.deltaTime);
         }
 
-        //transform.Translate(GetComponent<Rigidbody>().velocity * Time.deltaTime);
-        //transform.position = Vector3.Lerp(transform.position, transform.position + GetComponent<Rigidbody>().velocity, Time.deltaTime);
-
-        //transform.position = Vector3.Lerp(transform.position, transform.position + GetComponent<Rigidbody>().velocity, Time.deltaTime);
-
-        // -- A TESTER --
-
         // Normalise the movement vector and make it proportional to the speed per second.
-        //Vector3 movement = m_vSteeringForce * GetComponent<AgentProperties>().getCurrentSpeed() * Time.deltaTime;
+        Vector3 movement = m_vSteeringForce;
+        rigidbody.AddForce(transform.forward * properties.getCurrentSpeed());
+    }
 
-        //// Move the player to it's current position plus the movement.
-        //GetComponent<Rigidbody>().MovePosition(transform.position + movement * Time.deltaTime);
-
-        // -- Fin a tester ---
-
-
-        //animal.Move(GetComponent<Rigidbody>().velocity * Time.deltaTime);
-        //GetComponent<Rigidbody>().AddForce(GetComponent<Rigidbody>().velocity * GetComponent<NavMeshAgent>().speed);
+    private void ComputeYValue()
+    {
 
     }
 
     public Vector3 CalculatePrioritized() {
         Vector3 force;
         Vector3 steeringForceAverage = Vector3.zero;
+        /*
         if (wanderOn) {
             steeringForceAverage = new Vector3(0.0f, 0.0f, 1.0f); ;
-        }
+        }*/
 
         if (wallAvoidanceOn) {
+            Debug.Log("Avoid");
             force = WallAvoidance() * 5.0f;
             if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
@@ -136,6 +125,7 @@ public class SteeringBehavior : MonoBehaviour {
         }
 
         if (obstacleAvoidanceOn) {
+            /*
             force = ObstaclesAvoidance() * 5.0f;
             if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
@@ -144,11 +134,12 @@ public class SteeringBehavior : MonoBehaviour {
                 //add it to the steering force
                 steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
-            }
+            }*/
         }
 
         if (wanderOn) {
-            force = Wander() * 1.0f;
+            Debug.Log("Wander");
+            force = Wander() * 2.0f;
             if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
@@ -160,7 +151,8 @@ public class SteeringBehavior : MonoBehaviour {
         }
 
         if (fleeOn) {
-            force = Flee() * 1.0f;
+            Debug.Log("Flee");
+            force = Flee() * 2.0f;
             if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
@@ -172,7 +164,8 @@ public class SteeringBehavior : MonoBehaviour {
         }
 
         if (seekOn) {
-            force = Seek() * 1.0f;
+            Debug.Log("Seek");
+            force = Seek() * 2.0f;
             if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
@@ -185,22 +178,58 @@ public class SteeringBehavior : MonoBehaviour {
         return steeringForceAverage;
     }
 
+    #region Seek
+    public Vector3 Seek()
+    {
+        Vector3 m_DesiredVelocity = Vector3.zero;
+        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        //if (agent != null) {
+        //    agent.SetDestination(target_p.position);
+        //} else {
+        // Redefinir A* ici ?
+        //vWanderTarget = (target_p - transform.position).normalized * WanderDistance;
+
+        m_DesiredVelocity = target_p - noseTransform.position;// * properties.maxSpeed;
+
+        //}
+        return m_DesiredVelocity;
+    }
+    #endregion
+
+    #region Flee
+    public Vector3 Flee()
+    {
+        Vector3 m_DesiredVelocity = Vector3.zero;
+        //Vector3 m_DesiredVelocity = (transform.position - target_p.position).normalized * maxSpeed;
+        m_DesiredVelocity = noseTransform.position - target_p;
+        return m_DesiredVelocity;
+    }
+    #endregion
+
+    #region Wander
     public Vector3 Wander() {
         Vector3 m_DesiredVelocity;
 
         timer += Time.deltaTime;
-        if (timer > 0.7) {
-            // get a new direction
-            theta = theta + UnityEngine.Random.Range(-0.2f, 0.2f) * 2 * Mathf.PI;
-            vWanderTarget = transform.position + new Vector3(dWanderRadius * Mathf.Cos(theta), 0f,
-                                dWanderRadius * Mathf.Sin(theta));
-            vWanderTarget += transform.forward * WanderDistance;
+        if (timer > 1.7) {
+            CalculateNewWanderTarget();
             timer = 0;
         }
-        m_DesiredVelocity = vWanderTarget - transform.position;
+        m_DesiredVelocity = vWanderTarget - noseTransform.position;
         return m_DesiredVelocity;
     }
 
+    private void CalculateNewWanderTarget()
+    {
+        // get a new direction
+        theta += UnityEngine.Random.Range(-enthropy, enthropy) * 2 * Mathf.PI;
+        vWanderTarget = noseTransform.position + new Vector3(dWanderRadius * Mathf.Cos(theta), 0f, dWanderRadius * Mathf.Sin(theta));
+        vWanderTarget += noseTransform.forward * WanderDistance;
+        vWanderTarget.y = noseTransform.position.y;
+    }
+    #endregion
+
+    #region Avoidance
     public Vector3 WallAvoidance(){ 
         // Get most threatening obstacle
         RaycastHit hitInfo;
@@ -245,51 +274,26 @@ public class SteeringBehavior : MonoBehaviour {
         }
         return m_DesiredVelocity * properties.getCurrentSpeed();
     }
+    #endregion
 
-    public Vector3 Seek() {
-        Vector3 m_DesiredVelocity = Vector3.zero;
-        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        //if (agent != null) {
-        //    agent.SetDestination(target_p.position);
-        //} else {
-        // Redefinir A* ici ?
-        //vWanderTarget = (target_p - transform.position).normalized * WanderDistance;
-
-        m_DesiredVelocity = target_p - transform.position;// * properties.maxSpeed;
-
-        //}
-        return m_DesiredVelocity;
-    }
-
-    public Vector3 Flee() {
-        Vector3 m_DesiredVelocity = Vector3.zero;
-        Debug.Log("Target_P :" + target_p);
-        Debug.Log("Position raton :" + transform.position);
-        //Vector3 m_DesiredVelocity = (transform.position - target_p.position).normalized * maxSpeed;
-        m_DesiredVelocity = transform.position - target_p; //) * properties.getCurrentSpeed();
-        return m_DesiredVelocity; // - GetComponent<Rigidbody>().velocity;
-    }
-
-    /*
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
-
+        Gizmos.DrawLine(noseTransform.position, noseTransform.position + noseTransform.forward);
 
         Gizmos.color = Color.black;
         //Gizmos.DrawLine(transform.position, transform.forward + GetComponent<Rigidbody>().velocity.normalized * WanderDistance);
-        Gizmos.DrawWireSphere(transform.position + transform.forward * WanderDistance, dWanderRadius);
+        Gizmos.DrawWireSphere(noseTransform.position + noseTransform.forward * WanderDistance, dWanderRadius);
+        Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(vWanderTarget, 0.33f);
 
         Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 5);
-        Gizmos.DrawLine(transform.position + transform.forward * 1.5f, transform.position + Quaternion.Euler(0, 16, 0) * transform.forward * 5);
-        Gizmos.DrawLine(transform.position + transform.forward * 1.5f, transform.position + Quaternion.Euler(0, -16, 0) * transform.forward * 5);
-
+        Gizmos.DrawLine(noseTransform.position, noseTransform.position + noseTransform.forward * 5);
+        Gizmos.DrawLine(noseTransform.position + noseTransform.forward * 1.5f, noseTransform.position + Quaternion.Euler(0, 16, 0) * noseTransform.forward * 5);
+        Gizmos.DrawLine(noseTransform.position + noseTransform.forward * 1.5f, noseTransform.position + Quaternion.Euler(0, -16, 0) * noseTransform.forward * 5);
 
         Gizmos.color = Color.gray;
-        Gizmos.DrawLine(transform.position, transform.position + desiredVelocity);
-    }*/
+        Gizmos.DrawLine(noseTransform.position, noseTransform.position + desiredVelocity);
+    }
 
 }

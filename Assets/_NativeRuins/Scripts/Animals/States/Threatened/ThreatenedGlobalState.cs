@@ -23,7 +23,7 @@ public class ThreatenedGlobalState : State<GameObject>
         AgentProperties properties = o.GetComponent<AgentProperties>();
         // change the music
         if (!AgentProperties.soundIsPlaying) {
-            properties.sonCombat.Play();
+            properties.PlayFightSong();
             AgentProperties.soundIsPlaying = true;
         }
     }
@@ -51,7 +51,7 @@ public class ThreatenedGlobalState : State<GameObject>
     override public void Exit(GameObject o) {
         AgentProperties properties = o.GetComponent<AgentProperties>();
         // Change music
-        properties.sonCombat.Stop();
+        properties.StopFightSong();
         AgentProperties.soundIsPlaying = true;
     }
 

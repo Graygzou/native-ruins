@@ -25,6 +25,9 @@ public class EatingState : State<GameObject>
     {
         // Get the current agent variables
         StateMachine FSM = o.GetComponent<StateMachine>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
+
+        properties.setSpeed(0.0f);
 
         // Stop the previous animation
         FSM.animator.Play("Eat");
@@ -40,9 +43,10 @@ public class EatingState : State<GameObject>
         StateMachine FSM = o.GetComponent<StateMachine>();
         AgentProperties properties = o.GetComponent<AgentProperties>();
 
+
         // Update of the variable if needed
         if (properties.hungryIndicator > 0.0f) {
-            properties.hungryIndicator -= 1f;
+            properties.hungryIndicator -= 2f;
         }
 
         float currTime = o.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;

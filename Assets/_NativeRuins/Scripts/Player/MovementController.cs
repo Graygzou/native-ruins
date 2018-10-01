@@ -66,7 +66,6 @@ public class MovementController : MonoBehaviour {
         float z;
         z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, -32, -12);
         cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
-        
     }
 
     protected virtual void UpdateCamera(float deltaX, float deltaY) {

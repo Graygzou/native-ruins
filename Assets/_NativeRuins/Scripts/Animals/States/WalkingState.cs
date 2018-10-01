@@ -20,6 +20,9 @@ public class WalkingState : State<GameObject> {
 
     override public void Enter(GameObject o) {
         StateMachine FSM = o.GetComponent<StateMachine>();
+        AgentProperties properties = o.GetComponent<AgentProperties>();
+
+        properties.setSpeed(40.0f);
 
         // Set the animation variables
         FSM.animator.SetFloat("Speed_f", 0.5f);
