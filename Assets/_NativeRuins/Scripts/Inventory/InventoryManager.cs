@@ -27,7 +27,7 @@ public class InventoryManager : MonoBehaviour {
     private const int NB_CRAFT_RECETTE = 5;
     #endregion
 
-    #region Serialize Field
+    #region Serialize field
     [Header("Component settings")]
     [SerializeField]
     private CraftRecipeUI[] craftRecipesUI = new CraftRecipeUI[NB_CRAFT_RECETTE];
