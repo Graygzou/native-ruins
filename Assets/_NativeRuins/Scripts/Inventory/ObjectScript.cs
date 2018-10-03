@@ -39,7 +39,7 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     private void Awake()
     {
-        inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
+        inventoryManager = InventoryManager.Instance.GetComponent<InventoryManager>();
     }
 
     void Start()
@@ -65,7 +65,7 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 	public void OnCollisionEnter2D(Collision2D collision){
 		if (collision.gameObject.name == "FallDetector") {
 			player_pos = GameObject.FindWithTag ("Player").transform.position;
-            GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>().RemoveObjectOfType (o_type);
+            InventoryManager.Instance.GetComponent<InventoryManager>().RemoveObjectOfType (o_type);
 			Rigidbody clone;
 			clone = Instantiate(o_mushroom,new Vector3(player_pos.x+20f*(Random.value-0.5f), player_pos.y+10f, player_pos.z+20f*(Random.value-0.5f)) ,Random.rotation) as Rigidbody;
 			Destroy (this.gameObject);

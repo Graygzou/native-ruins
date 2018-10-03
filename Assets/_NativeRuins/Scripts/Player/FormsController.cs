@@ -6,88 +6,68 @@ using UnityEngine.EventSystems;
 
 public class FormsController : MonoBehaviour
 {
-    public GameObject HumanForm;
-    public GameObject BearForm;
-    public GameObject PumaForm;
+    #region Singleton
+    private static FormsController _instance;
+
+    public static FormsController Instance { get { return _instance; } }
+    #endregion
+
+    public enum TransformationType : int
+    {
+        Human = 0,
+        Bear = 1,
+        Puma = 2
+    }
 
     [SerializeField]
+    private GameObject[] availableForms;
+    [SerializeField]
+    private GameObject plasmaExplosionEffect;
+    [SerializeField]
     private LifeBar lifeBar;
+    [SerializeField]
+    private GameObject playerRoot;
+    [SerializeField]
+    private GameObject transformationWheel;
+    [SerializeField]
+    private bool transformationWheelOpen;
 
-    private bool PumaUnlocked;
-    private bool BearUnlocked;
-    private int currentForm;
-    private int selectedForm;
-    public GameObject transformationWheel;
+    private bool pumaUnlocked;
+    private bool bearUnlocked;
+    private TransformationType currentForm = TransformationType.Human;
+    private TransformationType selectedForm;
 
-    public bool transformationWheelOpen;
+    private Color colorStartHuman;
 
-    private Color ColorStartHuman;
-
-    public int isPumaUnlocked()
+    // Use this for initialization
+    protected void Awake()
     {
-        if (PumaUnlocked == true)
+        if (_instance != null && _instance != this)
         {
-            return 1;
+            Destroy(this.gameObject);
         }
         else
         {
-            return 0;
+            _instance = this;
         }
-    }
-
-    public int isBearUnlocked()
-    {
-        if(BearUnlocked ==  true)
-        {
-            return 1;
-        } else
-        {
-            return 0;
-        }
-    }
-
-    public void setPumaUnlocked(bool Puma)
-    {
-        PumaUnlocked = Puma;
-    }
-
-    public void setBearUnlocked(bool Ours)
-    {
-        BearUnlocked = Ours;
-    }
-
-    // Use this for initialization
-    void Awake()
-    {
         //ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
-
-        PumaUnlocked = false;
-        BearUnlocked = true;   
-        transformationWheel.SetActive(false);
-        GameObject playerRoot = GameObject.Find("Player");
-        int i = 0;
-        while (i < playerRoot.transform.childCount)
+        _instance.pumaUnlocked = false;
+        _instance.bearUnlocked = true;
+        _instance.transformationWheel.SetActive(false);
+        for (int i = 0;  i < _instance.playerRoot.transform.childCount; i++)
         {
-            if (playerRoot.transform.GetChild(i).gameObject.activeSelf)
-            {
-                currentForm = i;
-            }
-            i++;
+            _instance.currentForm = _instance.playerRoot.transform.GetChild(i).gameObject.activeSelf ? (TransformationType)i : _instance.currentForm;
         }
-
-    }
-
-    public int getCurrentForm()
-    {
-        return currentForm;
+        Debug.Log(_instance.currentForm);
     }
 
     public void Update()
     {
-        if (Input.GetKey(KeyCode.A) && !(HumanForm.GetComponent<MovementController>().isDeath()))
+        if (Input.GetKey(KeyCode.A) && !(_instance.availableForms[(int)TransformationType.Human].GetComponent<MovementController>().isDeath()))
         {
             OpenTransformationWheel();
-        } else
+        }
+        else
         {
             CloseTransformationWheel();
             if (selectedForm != currentForm)
@@ -97,11 +77,41 @@ public class FormsController : MonoBehaviour
         }
     }
 
+    public int IsPumaUnlocked()
+    {
+        return System.Convert.ToInt32(_instance.pumaUnlocked == true);
+    }
+
+    public int IsBearUnlocked()
+    {
+        return System.Convert.ToInt32(_instance.bearUnlocked == true);
+    }
+
+    public bool IsTransformationWheelOpened()
+    {
+        return transformationWheelOpen;
+    }
+
+    public void SetPumaUnlocked(bool puma)
+    {
+        pumaUnlocked = puma;
+    }
+
+    public void SetBearUnlocked(bool ours)
+    {
+        bearUnlocked = ours;
+    }
+
+    public int GetCurrentForm()
+    {
+        return System.Convert.ToInt32(currentForm);
+    }
+
     private void OpenTransformationWheel()
     {
-        transformationWheelOpen = true;
+        _instance.transformationWheelOpen = true;
         // Verification des formes disponibles
-        if (!PumaUnlocked)
+        if (!_instance.pumaUnlocked)
         {
             GameObject.Find("Affichages/TransformationSystem/Wheel/IconPuma").SetActive(false);
             GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(true);
@@ -112,19 +122,17 @@ public class FormsController : MonoBehaviour
             GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(false);
         }
 
-        if (!BearUnlocked)
+        if (!bearUnlocked)
         {
             GameObject.Find("Affichages/TransformationSystem/Wheel/IconBear").SetActive(false);
             GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearLocked").SetActive(true);
         }
 
-
         // Temps arrêté
         Time.timeScale = 0f;
 
         // Affichage de la roue
-        transformationWheel.SetActive(true);
-        
+        _instance.transformationWheel.SetActive(true);
         
         // Données utiles à la sélection
         Vector3 centreScreen = new Vector3(Screen.width / 2, Screen.height/2, 0);
@@ -147,35 +155,39 @@ public class FormsController : MonoBehaviour
             // SELECTION HUMAIN
             if ((positionMouse.y > positionMouse.x*a1 + b1) && (positionMouse.y > positionMouse.x*a2 + b2))
             {
-                selectedForm = 0;
+                _instance.selectedForm = TransformationType.Human;
                 GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(true);
-            } else
+            }
+            else
             {
                 GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(false);
             }
 
-            // SELECTION PUMA
-            if ((positionMouse.y < positionMouse.x*a1 + b1) && (positionMouse.x < centreScreen.x) && PumaUnlocked)
-            {
-                selectedForm = 2;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(true);
-            } else
-            {
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
-            }
-
             // SELECTION OURS
-            if ((positionMouse.y < positionMouse.x * a2 + b2) && (positionMouse.x > centreScreen.x) && BearUnlocked)
+            if ((positionMouse.y < positionMouse.x * a2 + b2) && (positionMouse.x > centreScreen.x) && bearUnlocked)
             {
-                selectedForm = 1;
+                _instance.selectedForm = TransformationType.Bear;
                 GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(true);
-            } else
+            }
+            else
             {
                 GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(false);
             }
-        } else
+
+            // SELECTION PUMA
+            if ((positionMouse.y < positionMouse.x * a1 + b1) && (positionMouse.x < centreScreen.x) && pumaUnlocked)
+            {
+                _instance.selectedForm = TransformationType.Puma;
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(true);
+            }
+            else
+            {
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
+            }
+        }
+        else
         {
-            selectedForm = currentForm;
+            _instance.selectedForm = _instance.currentForm;
             GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(false);
             GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
             GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(false);
@@ -184,74 +196,47 @@ public class FormsController : MonoBehaviour
 
     private void CloseTransformationWheel()
     {
-        transformationWheelOpen = false;
+        _instance.transformationWheelOpen = false;
         Time.timeScale = 1;
-        transformationWheel.SetActive(false);
+        _instance.transformationWheel.SetActive(false);
     }
 
     private void Transformation()
     {
         // Memorisation position et orientation actuelle
         Vector3 positionCourant = new Vector3();
-        // Desactiver forme actuelle
-        if (currentForm == 0)
+        // Desactiver toutes les formes
+        foreach (GameObject transformation in _instance.availableForms)
         {
-            positionCourant = HumanForm.transform.position;
-            HumanForm.SetActive(false);
+            positionCourant = transformation.activeSelf ? transformation.transform.position : positionCourant;
+            transformation.SetActive(false);
+            //positionCourant = availableForms[(int)TransformationType.Human].transform.position;
         }
-        if (currentForm == 1)
-        {
-            positionCourant = BearForm.transform.position;
-            BearForm.SetActive(false);
-        }
-        if (currentForm == 2)
-        {
-            positionCourant = PumaForm.transform.position;
-            PumaForm.SetActive(false);
-        }
-
-        if (currentForm != selectedForm)
+        if (_instance.currentForm != _instance.selectedForm)
         {
             StartCoroutine(ExplosionAnimation(positionCourant));
         }
-        
         // Activation nouvelle forme
-        if (selectedForm == 0)
-        {
-            HumanForm.transform.position = positionCourant;
-            HumanForm.SetActive(true);
-            currentForm = 0;
-        }
-        if (selectedForm == 1)
-        {
-            BearForm.transform.position = positionCourant;
-            BearForm.SetActive(true);
-            currentForm = 1;
-        }
-        if (selectedForm == 2)
-        {
-            PumaForm.transform.position = positionCourant;
-            PumaForm.SetActive(true);
-            currentForm = 2;
-        }
+        _instance.availableForms[(int)selectedForm].transform.position = positionCourant;
+        _instance.availableForms[(int)selectedForm].SetActive(true);
+        _instance.currentForm = _instance.selectedForm;
     }
 
-    public void Transformation(int i)
+    public void Transformation(TransformationType type)
     {
-        selectedForm = i;
-        Transformation();
+        if(_instance.currentForm != type)
+        {
+            _instance.selectedForm = type;
+            Transformation();
+        }
     }
-
-
-
 
     private IEnumerator ExplosionAnimation(Vector3 position)
     {
-        GameObject explosion = GameObject.Find("Affichages/TransformationSystem/PlasmaExplosionEffect");
-        explosion.transform.position = position;
-        explosion.SetActive(true);
+        _instance.plasmaExplosionEffect.transform.position = position;
+        _instance.plasmaExplosionEffect.SetActive(true);
         yield return new WaitForSeconds(seconds: 1f);
-        explosion.SetActive(false);
+        _instance.plasmaExplosionEffect.SetActive(false);
     }
 
 }

@@ -105,22 +105,22 @@ public class Sauvegarde : MonoBehaviour {
         {
             if (totemBool == 0) //Pas de totem
             {
-                script.setPumaUnlocked(false);
+                script.SetPumaUnlocked(false);
             }
             else //Totem
             {
-                script.setPumaUnlocked(true);
+                script.SetPumaUnlocked(true);
             }
         }
         else //Ours
         {
             if (totemBool == 0) //Pas de totem
             {
-                script.setBearUnlocked(false);
+                script.SetBearUnlocked(false);
             }
             else //Totem
             {
-                script.setBearUnlocked(true);
+                script.SetBearUnlocked(true);
             }
         }
 
@@ -239,8 +239,8 @@ public class Sauvegarde : MonoBehaviour {
         PlayerPrefs.SetInt("" + ObjectsType.Raft, inventory.GetNumberItems(ObjectsType.Raft));
 
         //Connaitre transformation debloquee
-        PlayerPrefs.SetInt("pumaUnlocked", Player.GetComponent<FormsController>().isPumaUnlocked());
-        PlayerPrefs.SetInt("bearUnlocked", Player.GetComponent<FormsController>().isBearUnlocked());
+        PlayerPrefs.SetInt("pumaUnlocked", Player.GetComponent<FormsController>().IsPumaUnlocked());
+        PlayerPrefs.SetInt("bearUnlocked", Player.GetComponent<FormsController>().IsBearUnlocked());
 
         //Afficher message de sauvegarde
         DialogueTrigger.TriggerSauvegarde(null);

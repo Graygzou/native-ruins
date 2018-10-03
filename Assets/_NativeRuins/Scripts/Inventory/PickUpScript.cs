@@ -12,11 +12,9 @@ public class PickUpScript : MonoBehaviour {
     private bool o_isPickable;
 
     private GameObject bag;
-    private InventoryManager inventoryManager;
 
     private void Awake()
     {
-        inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
         bag = GameObject.FindWithTag("BagUI");
     }
 
@@ -65,7 +63,7 @@ public class PickUpScript : MonoBehaviour {
                 DialogueTrigger.TriggerDialogueArc(null);     
                 GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
                 GameObject playerRoot = GameObject.Find("Player");
-                playerRoot.GetComponent<FormsController>().Transformation(0);
+                FormsController.Instance.Transformation(FormsController.TransformationType.Human);
                 GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ActionsNew>().Stay(100f);
             }
             if (o_type.Equals(ObjectsType.Rope) && !brain.HasDiscoveredRope)
@@ -76,7 +74,7 @@ public class PickUpScript : MonoBehaviour {
                 DialogueTrigger.TriggerDialogueCorde(null);
                 GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
                 GameObject playerRoot = GameObject.Find("Player");
-                playerRoot.GetComponent<FormsController>().Transformation(0);
+                FormsController.Instance.Transformation(FormsController.TransformationType.Human);
                 GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ActionsNew>().Stay(100f);
             }
             if (o_type.Equals(ObjectsType.Sail) && !brain.HasDiscoveredSail)
@@ -87,10 +85,10 @@ public class PickUpScript : MonoBehaviour {
                 DialogueTrigger.TriggerDialogueVoile(null);
                 GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
                 GameObject playerRoot = GameObject.Find("Player");
-                playerRoot.GetComponent<FormsController>().Transformation(0);
+                FormsController.Instance.Transformation(FormsController.TransformationType.Human);
                 GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ActionsNew>().Stay(100f);
             }
-            inventoryManager.AddObjectOfType(o_type, o_object);
+            InventoryManager.Instance.AddObjectOfType(o_type, o_object);
 			InventoryManager.an_object_is_pickable = false;
             InventoryManager.Instance.SetStatePickupButton(false);
             Destroy(this.gameObject);

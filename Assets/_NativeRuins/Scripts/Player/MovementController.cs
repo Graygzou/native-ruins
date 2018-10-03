@@ -58,7 +58,7 @@ public class MovementController : MonoBehaviour {
         float mouseY = Input.GetAxis("Mouse Y");
         Vector3 dir = new Vector3(mouseX, mouseY, 0f);
         lastMousePosition = Input.mousePosition;
-        if (!GameObject.Find("Player").GetComponent<FormsController>().transformationWheelOpen && !InventoryManager.Instance.bag_open && !m_dialogueOn)
+        if (!FormsController.Instance.GetComponent<FormsController>().IsTransformationWheelOpened() && !InventoryManager.Instance.bag_open && !m_dialogueOn)
         {
             UpdateCamera(dir.x, -dir.y);
         }

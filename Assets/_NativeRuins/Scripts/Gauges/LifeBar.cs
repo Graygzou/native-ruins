@@ -184,16 +184,16 @@ public class LifeBar : MonoBehaviour {
         GameObject playerRoot = GameObject.Find("Player");
         audio.PlayOneShot(sonCri);
         //si forme puma, 50% de degats en plus
-        if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma)
+        if (playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)Forms.id_puma)
         {
             ChangeLifeBar(-(lifeLoosed + lifeLoosed * 0.5f));
         }
-        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_human)
+        else if (playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)Forms.id_human)
         {
             actions.Damage();
             ChangeLifeBar(-lifeLoosed);
         } //si forme ours, 25% de degats en moins
-        else if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_bear)
+        else if (playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)Forms.id_bear)
         {
             ChangeLifeBar(-(lifeLoosed - lifeLoosed * 0.25f));
         }

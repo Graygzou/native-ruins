@@ -42,7 +42,7 @@ public class Collectable : MonoBehaviour {
 
 	private void GetInputs(){
 		if (Input.GetKeyDown (KeyCode.E) && o_isPickable && isActive) {
-			GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>().AddObjectOfType(o_type, o_object);
+			InventoryManager.Instance.AddObjectOfType(o_type, o_object);
 			InventoryManager.an_object_is_pickable = false;
             InventoryManager.Instance.SetStatePickupButton(false);
             this.gameObject.GetComponent<MeshRenderer>().enabled=false;

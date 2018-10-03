@@ -35,7 +35,7 @@ public class HungerBar : MonoBehaviour
         if (currentTimeFaim >= timeMaxBeforeHungerDecrease)
         {
             GameObject playerRoot = GameObject.Find("Player");
-            if (playerRoot.GetComponent<FormsController>().getCurrentForm() == (int)Forms.id_puma)
+            if (FormsController.Instance.GetCurrentForm() == (int)Forms.id_puma)
             {
                 ChangeHungerBar(-hungerDecreasingFactorPuma);
             }

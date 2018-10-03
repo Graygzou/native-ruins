@@ -300,8 +300,12 @@ public class InventoryManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Tab))
         {
             _instance.audioSource.PlayOneShot(m_bagSound);
+
             if (!bag_open)
             {
+                // Force to transform back into human form when opening the bag
+                FormsController.Instance.Transformation(FormsController.TransformationType.Human);
+
                 m_bag.localPosition = Vector3.zero;
                 m_bag.anchoredPosition = new Vector3(-960f, 540f, 0f);
                 m_bag.localScale = new Vector3(2.5f, 2.5f, 1f);

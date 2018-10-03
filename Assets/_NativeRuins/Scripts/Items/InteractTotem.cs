@@ -50,7 +50,7 @@ public class InteractTotem : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.E) && o_isTotem)
         {
-            if (judy.GetComponent<FormsController>().isBearUnlocked() == 0) //Si il y a encore le totem ours
+            if (judy.GetComponent<FormsController>().IsBearUnlocked() == 0) //Si il y a encore le totem ours
             {
                 //Range arme avant d'ouvrir le menu de sauvegarde
                 GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();
@@ -58,7 +58,7 @@ public class InteractTotem : MonoBehaviour {
                 playerRoot.GetComponent<FormsController>().Transformation(0);
                 son.Play();
                 particuleEffect.SetActive(false);
-                judy.GetComponent<FormsController>().setBearUnlocked(true);
+                judy.GetComponent<FormsController>().SetBearUnlocked(true);
                 DialogueTrigger.TriggerDialogueTotemOurs(null);
             }
             else //le totem ours a deja ete recupere donc il ne reste que celui du puma
@@ -69,7 +69,7 @@ public class InteractTotem : MonoBehaviour {
                 playerRoot.GetComponent<FormsController>().Transformation(0);
                 son.Play();
                 particuleEffect.SetActive(false);
-                judy.GetComponent<FormsController>().setPumaUnlocked(true);
+                judy.GetComponent<FormsController>().SetPumaUnlocked(true);
                 DialogueTrigger.TriggerDialogueTotemPuma(null);
             }
             // Disable the totem
