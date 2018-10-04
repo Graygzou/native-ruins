@@ -76,7 +76,7 @@ public class SteeringBehavior : MonoBehaviour {
     public void UpdateBehavior() {
         ComputeYValue();
         //StartCoroutine(UpdateSteer());
-        Vector3 m_vSteeringForce = CalculatePrioritized();
+        Vector3 m_vSteeringForce = CalculatePrioritized() * properties.maxSpeed;
 
         // The force has to be on a plane (Right now)
         m_vSteeringForce.y = 0;
@@ -84,7 +84,7 @@ public class SteeringBehavior : MonoBehaviour {
         Debug.Log(m_vSteeringForce);
 
         //make sure vehicle does not exceed maximum velocity
-        //m_vSteeringForce = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxSpeed);
+        m_vSteeringForce = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxForce);
 
         //update the heading if the vehicle has a non zero velocity
         if (m_vSteeringForce.sqrMagnitude > 0.000001)
@@ -95,7 +95,7 @@ public class SteeringBehavior : MonoBehaviour {
 
         // Normalise the movement vector and make it proportional to the speed per second.
         Vector3 movement = m_vSteeringForce;
-        rigidbody.AddForce(transform.forward * properties.getCurrentSpeed());
+        rigidbody.AddForce(m_vSteeringForce);
     }
 
     private void ComputeYValue()
@@ -113,7 +113,7 @@ public class SteeringBehavior : MonoBehaviour {
 
         if (wallAvoidanceOn) {
             Debug.Log("Avoid");
-            force = WallAvoidance() * 5.0f;
+            force = WallAvoidance() * 10.0f;
             if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
@@ -125,8 +125,7 @@ public class SteeringBehavior : MonoBehaviour {
         }
 
         if (obstacleAvoidanceOn) {
-            /*
-            force = ObstaclesAvoidance() * 5.0f;
+            force = ObstaclesAvoidance() * 10.0f;
             if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
@@ -134,7 +133,7 @@ public class SteeringBehavior : MonoBehaviour {
                 //add it to the steering force
                 steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
-            }*/
+            }
         }
 
         if (wanderOn) {
