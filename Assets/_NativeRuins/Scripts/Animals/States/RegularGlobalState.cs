@@ -38,7 +38,7 @@ public class RegularGlobalState : State<GameObject>
                 // check if the player is too close or that he has a weird behavior
                 if (properties.playerTooClose || (properties.isAlert &&
                 player.GetComponent<MovementController>().getCurrentSpeed() > 30.0f)) {
-                    if (properties.isMean) {
+                    if (properties.IsMean) {
                         FSM.ChangeGlobalState(ThreatenedGlobalState.Instance);
                         FSM.ChangeState(PursuitState.Instance);
                     }

@@ -24,7 +24,7 @@ public class ChargeState : State<GameObject>
         StateMachine FSM = o.GetComponent<StateMachine>();
         // Set the animation variables
 
-        properties.setSpeed(properties.maxSpeed);
+        properties.setSpeed(properties.MaxSpeed);
         FSM.animator.SetFloat("Speed_f", 2f);
 
         FSM.animator.Play("Locomotion");

@@ -41,7 +41,6 @@ public class SteeringBehavior : MonoBehaviour {
     {
         // Get the animal properties
         properties = GetComponent<AgentProperties>();
-
         rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -57,12 +56,11 @@ public class SteeringBehavior : MonoBehaviour {
         senseurs = new Dictionary<Ray, float>();
 
         // Create first random point
-        /*
         theta = Random.value * 2 * Mathf.PI;
         vWanderTarget = new Vector3(dWanderRadius * Mathf.Cos(theta), 0f,
                                     dWanderRadius * Mathf.Sin(theta));
         vWanderTarget += noseTransform.position + noseTransform.forward * WanderDistance;
-        vWanderTarget.y = noseTransform.position.y;*/
+        vWanderTarget.y = noseTransform.position.y;
     }
 
     public void FixedUpdate()
@@ -76,7 +74,7 @@ public class SteeringBehavior : MonoBehaviour {
     public void UpdateBehavior() {
         ComputeYValue();
         //StartCoroutine(UpdateSteer());
-        Vector3 m_vSteeringForce = CalculatePrioritized() * properties.maxSpeed;
+        Vector3 m_vSteeringForce = CalculatePrioritized() * properties.MaxSpeed;
 
         // The force has to be on a plane (Right now)
         m_vSteeringForce.y = 0;
@@ -84,7 +82,7 @@ public class SteeringBehavior : MonoBehaviour {
         Debug.Log(m_vSteeringForce);
 
         //make sure vehicle does not exceed maximum velocity
-        m_vSteeringForce = Vector3.ClampMagnitude(m_vSteeringForce, properties.maxForce);
+        m_vSteeringForce = Vector3.ClampMagnitude(m_vSteeringForce, properties.MaxForce);
 
         //update the heading if the vehicle has a non zero velocity
         if (m_vSteeringForce.sqrMagnitude > 0.000001)
@@ -106,71 +104,67 @@ public class SteeringBehavior : MonoBehaviour {
     public Vector3 CalculatePrioritized() {
         Vector3 force;
         Vector3 steeringForceAverage = Vector3.zero;
-        /*
-        if (wanderOn) {
-            steeringForceAverage = new Vector3(0.0f, 0.0f, 1.0f); ;
-        }*/
 
         if (wallAvoidanceOn) {
             Debug.Log("Avoid");
-            force = WallAvoidance() * 10.0f;
-            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
+            force = WallAvoidance() * 50.0f;
+            if (force.magnitude < properties.MaxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.MaxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
 
         if (obstacleAvoidanceOn) {
-            force = ObstaclesAvoidance() * 10.0f;
-            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
+            force = ObstaclesAvoidance() * 50.0f;
+            if (force.magnitude < properties.MaxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.MaxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
 
         if (wanderOn) {
             Debug.Log("Wander");
-            force = Wander() * 2.0f;
-            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
+            force = Wander() * 1.0f;
+            if (force.magnitude < properties.MaxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.MaxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
 
         if (fleeOn) {
             Debug.Log("Flee");
-            force = Flee() * 2.0f;
-            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
+            force = Flee() * 1.0f;
+            if (force.magnitude < properties.MaxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.MaxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
 
         if (seekOn) {
             Debug.Log("Seek");
-            force = Seek() * 2.0f;
-            if (force.magnitude < properties.maxForce - steeringForceAverage.magnitude) {
+            force = Seek() * 1.0f;
+            if (force.magnitude < properties.MaxForce - steeringForceAverage.magnitude) {
                 // We add the value to the vector
                 steeringForceAverage += force;
             } else {
                 //add it to the steering force
-                steeringForceAverage += (force.normalized * (properties.maxForce - steeringForceAverage.magnitude));
+                steeringForceAverage += (force.normalized * (properties.MaxForce - steeringForceAverage.magnitude));
                 return steeringForceAverage;
             }
         }
@@ -233,9 +227,9 @@ public class SteeringBehavior : MonoBehaviour {
         // Get most threatening obstacle
         RaycastHit hitInfo;
 
-        senseurs.Add(new Ray(transform.position, transform.forward), 5);
-        senseurs.Add(new Ray(transform.position + transform.forward * 1.5f, Quaternion.Euler(0, 16, 0) * transform.forward), 5);
-        senseurs.Add(new Ray(transform.position + transform.forward * 1.5f, Quaternion.Euler(0, -16, 0) * transform.forward), 5);
+        senseurs.Add(new Ray(noseTransform.position, transform.forward), 4);
+        senseurs.Add(new Ray(noseTransform.position, Quaternion.Euler(0, 35, 0) * noseTransform.forward), 3);
+        senseurs.Add(new Ray(noseTransform.position, Quaternion.Euler(0, -35, 0) * noseTransform.forward), 3);
 
         //Ray obstacleRay = new Ray(agent.transform.position, agent.transform.forward);
         Vector3 avoidanceForce = Vector3.zero;
@@ -245,7 +239,7 @@ public class SteeringBehavior : MonoBehaviour {
             // Calculate avoidance force
             if (Physics.Raycast(r, out hitInfo, senseurs[r]))
             {
-                avoidanceForce += Vector3.Reflect(transform.forward * properties.getCurrentSpeed(), hitInfo.normal) * (senseurs[r] - hitInfo.distance);
+                avoidanceForce += Vector3.Reflect(transform.forward * properties.MaxSpeed, hitInfo.normal) * ((r.origin + r.direction * senseurs[r]) - (r.origin + r.direction * hitInfo.distance)).magnitude;
                 //avoidanceForce += hitInfo.normal * (m_Senseurs[r] - hitInfo.distance);
             }
         }
@@ -287,9 +281,9 @@ public class SteeringBehavior : MonoBehaviour {
         Gizmos.DrawWireSphere(vWanderTarget, 0.33f);
 
         Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(noseTransform.position, noseTransform.position + noseTransform.forward * 5);
-        Gizmos.DrawLine(noseTransform.position + noseTransform.forward * 1.5f, noseTransform.position + Quaternion.Euler(0, 16, 0) * noseTransform.forward * 5);
-        Gizmos.DrawLine(noseTransform.position + noseTransform.forward * 1.5f, noseTransform.position + Quaternion.Euler(0, -16, 0) * noseTransform.forward * 5);
+        Gizmos.DrawLine(noseTransform.position, noseTransform.position + noseTransform.forward * 4);
+        Gizmos.DrawLine(noseTransform.position, noseTransform.position + Quaternion.Euler(0, 35, 0) * noseTransform.forward * 3);
+        Gizmos.DrawLine(noseTransform.position, noseTransform.position + Quaternion.Euler(0, -35, 0) * noseTransform.forward * 3);
 
         Gizmos.color = Color.gray;
         Gizmos.DrawLine(noseTransform.position, noseTransform.position + desiredVelocity);

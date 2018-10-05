@@ -21,7 +21,7 @@ public class EvadeState : State<GameObject> {
         AgentProperties properties = o.GetComponent<AgentProperties>();
 
         // Set the animation variables
-        properties.setSpeed(properties.maxSpeed);
+        properties.setSpeed(properties.MaxSpeed);
         FSM.animator.SetFloat("Speed_f", 2.0f);
         FSM.animator.Play("Locomotion");
 

@@ -22,7 +22,7 @@ public class PursuitState : State<GameObject> {
         GameObject player = GameObject.FindWithTag("Player");
         AgentProperties properties = o.GetComponent<AgentProperties>();
 
-        properties.setSpeed(properties.maxSpeed);
+        properties.setSpeed(properties.MaxSpeed);
         FSM.animator.SetFloat("Speed_f", 2f);
         FSM.animator.Play("Locomotion");
 
@@ -40,7 +40,7 @@ public class PursuitState : State<GameObject> {
         GameObject player = GameObject.FindWithTag("Player");
 
         // If the player is not far away
-        if ((player.transform.position - o.transform.position).magnitude < properties.tauntRange) {
+        if ((player.transform.position - o.transform.position).magnitude < properties.TauntRange) {
             FSM.ChangeState(TauntState.Instance);
             //FSM.animator.SetBool("ReadyToCharge", true);
         }

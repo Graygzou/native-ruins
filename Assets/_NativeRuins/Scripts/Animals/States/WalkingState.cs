@@ -27,7 +27,8 @@ public class WalkingState : State<GameObject> {
         // Set the animation variables
         FSM.animator.SetFloat("Speed_f", 0.5f);
         FSM.behavior.wanderOn = true;
-        FSM.behavior.obstacleAvoidanceOn = true;
+        //FSM.behavior.obstacleAvoidanceOn = true;
+        FSM.behavior.wallAvoidanceOn = true;
         FSM.animator.Play("Locomotion");
 
         // make sure we're in the good state animation

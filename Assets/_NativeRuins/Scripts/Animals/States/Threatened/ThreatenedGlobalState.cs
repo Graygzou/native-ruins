@@ -40,7 +40,7 @@ public class ThreatenedGlobalState : State<GameObject>
             }
         } else if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size == 0) {
             FSM.ChangeState(WalkingState.Instance);
-        } else if ((properties.getCurrentHealth() * 100) / properties.maxHealth < 50) {
+        } else if ((properties.getCurrentHealth() * 100) / properties.MaxHealth < 50) {
             FSM.ChangeState(EvadeState.Instance);
         } else if (!properties.isAlert) {
             FSM.ChangeGlobalState(RegularGlobalState.Instance);

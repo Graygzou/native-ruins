@@ -5,48 +5,72 @@ using UnityEngine.AI;
 
 public class AgentProperties : MonoBehaviour
 {
+    #region Serialize Fields
     // Attributes of the agent
-    public float maxHealth;
-    public float maxForce = 200f;
-    public float maxSpeed;
-
-    public float damages;
-    public float hungryIndicator = 0.0f;
-    public bool isMean;
-    public bool isDead;
-
-    public float tauntRange;
-
-    public SphereCollider visionRange;
-    public SphereCollider awarenessRange;
-    public bool isAlert;
-    public bool playerTooClose;
-
-    private float currentHealth;
+    [Header("Basic properties")]
     [SerializeField]
-    private float currentSpeed = 22f;
+    private float _maxHealth;
+    [SerializeField]
+    private float _damages;
+    [SerializeField]
+    private bool _isMean;
+    [SerializeField]
+    private float _tauntRange;
+    [SerializeField]
+    private SphereCollider _visionRange;
+    [SerializeField]
+    private SphereCollider _awarenessRange;
+    [SerializeField]
+    private AudioClip _sonCri;
+    [SerializeField]
+    private AudioClip _sonCombat;
+
+    [Header("Steering behavior")]
+    [SerializeField]
+    private float _maxForce = 300f;
+    [SerializeField]
+    private float _maxSpeed = 300f;
+    [SerializeField]
     private Transform front;
 
-    public AudioClip sonCri;
-    public AudioClip sonCombat;
+    [Header("Indicators")]
+    public float hungryIndicator = 0.0f;
+    public bool isDead;
+    public bool isAlert;
+    public bool playerTooClose;
+    [SerializeField]
+    private float currentSpeed = 22f;
+    [SerializeField]
+    private float currentHealth;
+
+    #endregion
+
+    #region
+    [SerializeField]
+    public float MaxHealth { get { return _maxHealth; } set {} }
+    public float MaxForce { get { return _maxForce; } set {} }
+    public float MaxSpeed { get { return _maxSpeed; } set {} }
+    public float Damages { get { return _damages; } set { _damages = value;  } }
+    public bool IsMean { get { return _isMean; } set {} }
+    public float TauntRange { get { return _tauntRange; } set {} }
+
+    #endregion
 
     private AudioSource audioSource;
-
     public static bool soundIsPlaying;
 
     void Awake() {
         isDead = false;
         // Get the child collider
-        visionRange = gameObject.GetComponentInChildren<SphereCollider>();
+        _visionRange = gameObject.GetComponentInChildren<SphereCollider>();
         audioSource = GetComponent<AudioSource>();
     }
 
     void Start() {
-        AgentProperties.soundIsPlaying = false;
         AudioSource[] sons = GetComponents<AudioSource>();
         //sonCri = sons[0];
         //sonCombat = sons[1];
-        currentHealth = maxHealth;
+        currentHealth = MaxHealth;
 
         front = transform.GetChild(transform.childCount-1).transform;
         transform.GetComponentInChildren<ParticleSystem>().Stop();
@@ -62,7 +86,7 @@ public class AgentProperties : MonoBehaviour
                 isAlert = true;
             } else if (isAlert && !playerTooClose) {
                 playerTooClose = true;
-                audioSource.PlayOneShot(sonCri);
+                audioSource.PlayOneShot(_sonCri);
             }
         }
     }
@@ -108,7 +132,7 @@ public class AgentProperties : MonoBehaviour
             return;
 
         // Play the hurt sound effect.
-        audioSource.PlayOneShot(sonCri);
+        audioSource.PlayOneShot(_sonCri);
 
         // Reduce the current health by the amount of damage sustained.
         currentHealth -= amount;
@@ -123,7 +147,7 @@ public class AgentProperties : MonoBehaviour
 
     public void PlayFightSong()
     {
-        audioSource.clip = sonCombat;
+        audioSource.clip = _sonCombat;
         audioSource.Play();
     }
 

@@ -44,8 +44,8 @@ public class AttackState : State<GameObject>
                 if (hitInfo.transform.tag == "Player") {
                     if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size != 0) {
                         // Decrease the current life of the player
-                        lifeBar.GetComponent<LifeBar>().TakeDamages(properties.damages / 100);
-                        Debug.Log("Take that ! dmg:" + properties.damages);
+                        lifeBar.GetComponent<LifeBar>().TakeDamages(properties.Damages / 100);
+                        Debug.Log("Take that ! dmg:" + properties.Damages);
                     }
                 }
             }
