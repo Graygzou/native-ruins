@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class InteractTotem : MonoBehaviour {
 
-    private bool o_isTotem = false;
-    private GameObject judy;
-    private AudioSource son;
-
     [SerializeField]
     private DialogueTrigger dialogue;
     [SerializeField]
     private GameObject buttonInteragir;
-    [SerializeField]
-    private GameObject particuleEffect;
 
-    // Use this for initialization
-    void Start()
+    private bool o_isTotem = false;
+    private GameObject judy;
+    private AudioSource son;
+    private ParticleSystem particuleEffect;
+
+    private void Awake()
     {
         son = this.GetComponentInParent<AudioSource>();
+        particuleEffect = GetComponent<ParticleSystem>();
+    }
+
+    void Start()
+    {
         judy = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
         GetInputs();
@@ -53,22 +55,22 @@ public class InteractTotem : MonoBehaviour {
             if (judy.GetComponent<FormsController>().IsBearUnlocked() == 0) //Si il y a encore le totem ours
             {
                 //Range arme avant d'ouvrir le menu de sauvegarde
-                GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();
+                InventoryManager.Instance.GetComponent<InventoryManager>().PutWeaponInBag();
                 GameObject playerRoot = GameObject.Find("Player");
                 playerRoot.GetComponent<FormsController>().Transformation(0);
                 son.Play();
-                particuleEffect.SetActive(false);
+                particuleEffect.Stop();
                 judy.GetComponent<FormsController>().SetBearUnlocked(true);
                 DialogueTrigger.TriggerDialogueTotemOurs(null);
             }
             else //le totem ours a deja ete recupere donc il ne reste que celui du puma
             {
                 //Range arme avant d'ouvrir le menu de sauvegarde
-                GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();
+                InventoryManager.Instance.GetComponent<InventoryManager>().PutWeaponInBag();
                 GameObject playerRoot = GameObject.Find("Player");
                 playerRoot.GetComponent<FormsController>().Transformation(0);
                 son.Play();
-                particuleEffect.SetActive(false);
+                particuleEffect.Stop();
                 judy.GetComponent<FormsController>().SetPumaUnlocked(true);
                 DialogueTrigger.TriggerDialogueTotemPuma(null);
             }
