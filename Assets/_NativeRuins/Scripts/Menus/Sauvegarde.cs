@@ -18,6 +18,14 @@ public class Sauvegarde : MonoBehaviour {
     private HungerBar hungerBar;
     [SerializeField]
     private InventoryManager inventory;
+
+    [Header("Puzzles rewards")]
+    [SerializeField]
+    private GameObject firstRope;
+    [SerializeField]
+    private GameObject firstSail;
+    [SerializeField]
+    private GameObject firstBow;
     #endregion
 
     [Header("Items settings")]
@@ -73,20 +81,20 @@ public class Sauvegarde : MonoBehaviour {
         {
             if(obj.Equals(ObjectsType.Bow))
             {
-                GameObject.Find("Terrain/Bow/Chest_bow/Particles_Fireflies").SetActive(false);
-                GameObject.Find("Terrain/Bow/Bow3D").SetActive(false);
+                firstBow.GetComponent<ParticleSystem>().Stop();
+                firstBow.SetActive(false);
             }
 
             if (obj.Equals(ObjectsType.Rope))
             {
-                GameObject.Find("EnigmeCorde/Corde/Particles_Fireflies").SetActive(false);
-                GameObject.Find("EnigmeCorde/Corde/Rope3D").SetActive(false);
+                firstRope.GetComponent<ParticleSystem>().Stop();
+                firstRope.SetActive(false);
             }
 
             if (obj.Equals(ObjectsType.Sail))
             {
-                GameObject.Find("EnigmeVoile/Voile/Particles_Fireflies").SetActive(false);
-                GameObject.Find("EnigmeVoile/Voile/Fabric3D").SetActive(false);
+                firstSail.GetComponent<ParticleSystem>().Stop();
+                firstSail.SetActive(false);
             }
 
             RectTransform obj2D = GetObject2D(obj);

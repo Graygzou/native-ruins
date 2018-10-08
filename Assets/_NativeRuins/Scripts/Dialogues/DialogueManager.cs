@@ -4,18 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour {
-    public Text nameText;
-    public Text dialogueText;
 
-    public Animator animator;
+    #region SerializeField
+    [SerializeField]
+    public Text nameText;
+    [SerializeField]
+    public Text dialogueText;
+    [SerializeField]
+    private Animator animator;
+
+    [SerializeField]
+    private AudioClip sonDialog;
+    [SerializeField]
+    private AudioClip sonLettre;
+    #endregion
 
     private Queue<Dialogue> dialoguesQueue;
     private Queue<Switch> actionsQueue;
     private Queue<string> sentences;
 
-    private AudioSource sonDialog;
-    private AudioSource sonLettre;
-    private GameObject Judy;
+    private AudioSource audioSource;
+    private GameObject judy;
 
     private bool isTyping;
     private bool isProcessing;
@@ -23,16 +32,14 @@ public class DialogueManager : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        this.dialoguesQueue = new Queue<Dialogue>();
-        this.actionsQueue = new Queue<Switch>();
-        this.sentences = new Queue<string>();
+        dialoguesQueue = new Queue<Dialogue>();
+        actionsQueue = new Queue<Switch>();
+        sentences = new Queue<string>();
 
         isTyping = false;
         isProcessing = false;
-        Judy = GameObject.FindWithTag("Player");
-        AudioSource[] son = this.GetComponents<AudioSource>();
-        sonDialog = son[0];
-        sonLettre = son[1];
+        judy = GameObject.FindWithTag("Player");
+        audioSource = GetComponent<AudioSource>();
     }
 	
     //Lancer le dialogue
@@ -44,8 +51,9 @@ public class DialogueManager : MonoBehaviour {
         // if the dialogueManager is empty at the moment
         if (this.dialoguesQueue.Count == 1 && !isProcessing) {
             // Process the current dialogue
-            Judy.GetComponent<MovementController>().setDialogue(true);
-            sonDialog.Play();
+            judy.GetComponent<MovementController>().setDialogue(true);
+            audioSource.clip = sonDialog;
+            audioSource.Play();
             animator.SetBool("isOpen", true);
             FillSentences(this.dialoguesQueue.Dequeue());
         }
@@ -76,7 +84,7 @@ public class DialogueManager : MonoBehaviour {
             this.currentSentence = sentences.Dequeue();
             StopAllCoroutines();
             StartCoroutine(TypeSentence(this.currentSentence));
-            sonLettre.Stop();
+            audioSource.Stop();
         }
     }
 
@@ -87,7 +95,8 @@ public class DialogueManager : MonoBehaviour {
         dialogueText.text = "";
         foreach(char letter in sentence.ToCharArray())
         {
-            sonLettre.Play();
+            audioSource.clip = sonLettre;
+            audioSource.Play();
             dialogueText.text += letter;
             yield return null;
         }
@@ -108,10 +117,11 @@ public class DialogueManager : MonoBehaviour {
         } else {
             // Stop the dialogue
             isProcessing = false;
-            Judy.GetComponent<MovementController>().setDialogue(false);
+            judy.GetComponent<MovementController>().setDialogue(false);
             StopAllCoroutines();
-            sonLettre.Stop();
-            sonDialog.Play();
+            audioSource.Stop();
+            audioSource.clip = sonDialog;
+            audioSource.Play();
             animator.SetBool("isOpen", false);
         }
     }
