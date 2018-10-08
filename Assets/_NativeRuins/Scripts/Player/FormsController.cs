@@ -22,16 +22,11 @@ public class FormsController : MonoBehaviour
     [SerializeField]
     private GameObject[] availableForms;
     [SerializeField]
-    private GameObject plasmaExplosionEffect;
-    [SerializeField]
-    private LifeBar lifeBar;
-    [SerializeField]
-    private GameObject playerRoot;
-    [SerializeField]
     private GameObject transformationWheel;
     [SerializeField]
     private bool transformationWheelOpen;
 
+    private ParticleSystem plasmaExplosionEffect;
     private bool pumaUnlocked;
     private bool bearUnlocked;
     private TransformationType currentForm = TransformationType.Human;
@@ -51,12 +46,13 @@ public class FormsController : MonoBehaviour
             _instance = this;
         }
         //ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
+        plasmaExplosionEffect = GetComponent<ParticleSystem>();
         _instance.pumaUnlocked = false;
         _instance.bearUnlocked = true;
         _instance.transformationWheel.SetActive(false);
-        for (int i = 0;  i < _instance.playerRoot.transform.childCount; i++)
+        for (int i = 0;  i < _instance.transform.childCount; i++)
         {
-            _instance.currentForm = _instance.playerRoot.transform.GetChild(i).gameObject.activeSelf ? (TransformationType)i : _instance.currentForm;
+            _instance.currentForm = _instance.transform.GetChild(i).gameObject.activeSelf ? (TransformationType)i : _instance.currentForm;
         }
         Debug.Log(_instance.currentForm);
     }
@@ -234,9 +230,9 @@ public class FormsController : MonoBehaviour
     private IEnumerator ExplosionAnimation(Vector3 position)
     {
         _instance.plasmaExplosionEffect.transform.position = position;
-        _instance.plasmaExplosionEffect.SetActive(true);
+        _instance.plasmaExplosionEffect.Play();
         yield return new WaitForSeconds(seconds: 1f);
-        _instance.plasmaExplosionEffect.SetActive(false);
+        _instance.plasmaExplosionEffect.Stop();
     }
 
 }

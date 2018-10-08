@@ -43,7 +43,7 @@ public class InventoryManager : MonoBehaviour {
     [Header("RectTransform settings")]
     [SerializeField] private RectTransform m_canvas;
     [SerializeField] private RectTransform m_bag;
-    [SerializeField] private RectTransform m_items;
+    [SerializeField] private RectTransform m_itemsContainer;
     [SerializeField] private RectTransform spawningAnchor;
     [SerializeField] private AudioClip m_bagSound;
     [SerializeField] private AudioClip m_craftSound;
@@ -127,7 +127,7 @@ public class InventoryManager : MonoBehaviour {
     public void RemoveObjectOfType(ObjectsType type)
     {
         Debug.Log("HERE");
-        Transform bag = m_items.transform;
+        Transform bag = m_itemsContainer.transform;
         bool trouve = false;
         int i = 0;
         while (i < bag.childCount && !trouve)
@@ -160,7 +160,7 @@ public class InventoryManager : MonoBehaviour {
         for (int indice = 0; indice < amount; indice++)
         {
             RectTransform clone = Instantiate(obj2D) as RectTransform;
-            clone.SetParent(_instance.m_items);
+            clone.SetParent(_instance.m_itemsContainer);
             clone.anchoredPosition = GetSpawningPosition();
             clone.localRotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
             // Scale the object back (useful during craft)
@@ -228,13 +228,13 @@ public class InventoryManager : MonoBehaviour {
 
     private void CraftObject(int wood = 0, int flint = 0, int sail = 0, int plank = 0, int rope = 0)
     {
-        Debug.Log(Instance.m_items);
+        Debug.Log(Instance.m_itemsContainer);
         Debug.Log("This :" + this);
-        Debug.Log("This :" + m_items);
+        Debug.Log("This :" + m_itemsContainer);
 
         _instance.audioSource.PlayOneShot(m_craftSound);
         bool trouve = false;
-        Transform bag = _instance.m_items.transform;
+        Transform bag = _instance.m_itemsContainer.transform;
 
         int i = 0;
         while (i < bag.childCount && !trouve)
