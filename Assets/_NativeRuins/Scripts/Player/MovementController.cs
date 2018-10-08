@@ -12,6 +12,8 @@ public class MovementController : MonoBehaviour {
     [SerializeField] protected Animator m_animator = null;
     [SerializeField] protected Rigidbody m_rigidBody;
     [SerializeField] protected AudioSource m_footstep;
+    [SerializeField] protected int m_camera_zoom_max = -1;
+    [SerializeField] protected int m_camera_zoom_min = -3;
 
     // Cameras gestion
     [SerializeField]
@@ -64,7 +66,7 @@ public class MovementController : MonoBehaviour {
         }
         Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
         float z;
-        z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, -32, -12);
+        z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, m_camera_zoom_min, m_camera_zoom_max);
         cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
     }
 
