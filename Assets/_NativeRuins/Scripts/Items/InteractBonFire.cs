@@ -46,7 +46,7 @@ public class InteractBonFire : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.E) && o_isBonFire && !sitted) {
             sitted = true;
             //Range arme avant d'ouvrir le menu de sauvegarde
-            GameObject.Find("InventoryManager").GetComponent<InventoryManager>().PutWeaponInBag();
+            InventoryManager.Instance.GetComponent<InventoryManager>().PutWeaponInBag();
             GameObject playerRoot = GameObject.Find("Player");
             FormsController.Instance.Transformation(FormsController.TransformationType.Human);
 
