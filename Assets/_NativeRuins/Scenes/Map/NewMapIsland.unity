@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 82e52ed08f5c46749b66812d2b99e4ec, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45141107, g: 0.5005561, b: 0.57046163, a: 1}
+  m_IndirectSpecularColor: {r: 0.44125012, g: 0.4986936, b: 0.61027426, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5975,13 +5975,13 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 677745037}
-  m_LocalRotation: {x: -0.035167456, y: -0.6231388, z: -0.028061872, w: 0.7808162}
-  m_LocalPosition: {x: 12.02, y: 3.71, z: 0.95}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1233350846}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -5.157, y: -77.184006, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &677745039
 Animator:
   serializedVersion: 3
@@ -6026,7 +6026,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 50
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -8872,8 +8872,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1125157469}
-  m_LocalRotation: {x: -0.1748353, y: 0.48464885, z: -0.09954279, w: -0.8512575}
-  m_LocalPosition: {x: 12.52, y: 4.52, z: -0.02}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1233350846}
@@ -8920,7 +8920,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 50
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -9663,31 +9663,31 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 404.4
+      value: 406
       objectReference: {fileID: 0}
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 10.29
       objectReference: {fileID: 0}
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 174.8
+      value: 174.52
       objectReference: {fileID: 0}
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.12730463
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.9918637
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_RootOrder
@@ -9711,7 +9711,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -14.628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4704382496823994, guid: 1dbaa381ca62baa48a6e145b4494b369, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y

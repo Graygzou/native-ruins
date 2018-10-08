@@ -11,13 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fc1a6584efa41f38b85fc9dd9d264e, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  m_bool_keys: []
-  m_int_keys: []
+  m_bool_keys:
+  - z_pref_lockBrushToFirst
+  m_int_keys:
+  - prefab_previewThumbSize
+  - z_GIWorkflowMode
   m_float_keys: []
   m_string_keys: []
   m_Color_keys: []
-  m_bool_values: 
-  m_int_values: 
+  m_bool_values: 01
+  m_int_values: 1e00000000000000
   m_float_values: []
   m_string_values: []
   m_Color_values: []
