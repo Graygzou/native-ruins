@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class MovementBearStatue : MonoBehaviour {
 
+    [SerializeField]
+    private GameObject interactionButton;
+    [SerializeField]
+    private Material bearMaterial;
+
     private bool canBeMoved;
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Player"))
+        {
+            bearMaterial.shader = Shader.Find("Mobile/Diffuse");
+        }
+    }
 
     public void SetCanBeMoved(bool a) {
-        //GetComponent<Rigidbody>().isKinematic = !a;
+        GetComponent<Rigidbody>().isKinematic = !a;
     }
 
     //public void Move(Collider other) 

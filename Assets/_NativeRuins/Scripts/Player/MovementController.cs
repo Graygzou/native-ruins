@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour {
 
-    [SerializeField] protected float m_moveSpeed;
+    [SerializeField] protected float m_walkSpeed = 5;
+    [SerializeField] protected float m_runMultFactor = 2;
     [SerializeField] protected float m_turnSpeed;
     [SerializeField] protected float m_jumpForce;
 
@@ -34,6 +35,7 @@ public class MovementController : MonoBehaviour {
     protected float m_minJumpInterval = 1.50f;
 
     protected bool m_isGrounded;
+    protected bool m_isRunning;
     protected List<Collider> m_collisions = new List<Collider>();
 
     // Death of the player
@@ -173,7 +175,7 @@ public class MovementController : MonoBehaviour {
     protected virtual void Move(Vector3 NextDir, float h, float v) {
         if (!NextDir.Equals(Vector3.zero))
             transform.rotation = Quaternion.LookRotation(NextDir);
-        transform.position += NextDir * m_moveSpeed * Time.deltaTime;
+        transform.position += NextDir * getCurrentSpeed() * Time.deltaTime;
     }
 
     protected virtual void JumpingAndLanding(Vector3 NextDir) { }
@@ -195,7 +197,7 @@ public class MovementController : MonoBehaviour {
     }
 
     public float getCurrentSpeed() {
-        return m_moveSpeed;
+        return m_isRunning ? m_walkSpeed * m_runMultFactor: m_walkSpeed;
     }
     
     public void setDeath(bool isDead) {

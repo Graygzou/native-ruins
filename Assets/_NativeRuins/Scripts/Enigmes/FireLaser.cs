@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class FireLaser : MonoBehaviour {
 
-    public float updateFrequency = 1f;
+    [SerializeField]
+    private float updateFrequency = 0.5f;
+
     public int laserDistance;
     public string bounceTag;
     public string splitTag;
@@ -16,14 +18,12 @@ public class FireLaser : MonoBehaviour {
     private LineRenderer line;
     private bool redraw = true;
 
-    // Use this for initialization
     void Start () {
         timer = 0;
         line = gameObject.GetComponent<LineRenderer>();
         StartCoroutine(RedrawLaser());
     }
 
-    // Update is called once per frame
     void Update()
     {
         //timer = 0;

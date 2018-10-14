@@ -32,9 +32,9 @@ public class MovementControllerHuman : MovementController {
     protected override void Awake() {
         base.Awake();
         // Set the attribute to the desire amount
-        m_moveSpeed = 10;
-        m_turnSpeed = 5;
-        m_jumpForce = 5;
+        //m_moveSpeed = 10;
+        //m_turnSpeed = 5;
+        //m_jumpForce = 5;
         isAiming = false;
         isReloading = false;
         hasArrowLeft = false;
@@ -189,8 +189,8 @@ public class MovementControllerHuman : MovementController {
             base.Move(NextDir, h, v);
         } else {
             // Aiming State
-            transform.position += (GameObject.FindWithTag("Player").transform.forward * m_moveSpeed) * v * Time.deltaTime;
-            transform.position += (GameObject.FindWithTag("Player").transform.right * m_moveSpeed) * h * Time.deltaTime;
+            transform.position += (GameObject.FindWithTag("Player").transform.forward * getCurrentSpeed()) * v * Time.deltaTime;
+            transform.position += (GameObject.FindWithTag("Player").transform.right * getCurrentSpeed()) * h * Time.deltaTime;
         }
     }
 
@@ -305,6 +305,7 @@ public class MovementControllerHuman : MovementController {
                 // Regular mode
                 // If the player is not moving at all
                 if (NextDir.Equals(Vector3.zero)) {
+                    m_isRunning = false;
                     m_footstep.Pause();
                     if (Input.GetKey(KeyCode.LeftControl)) {
                         actions.Wary();
@@ -315,6 +316,7 @@ public class MovementControllerHuman : MovementController {
                     // If the player is running
                     if (Input.GetKey(KeyCode.LeftShift) && energyBar.canRun) {
                         if (energyBar.GetCurrentEnergy() > 0f) {
+                            m_isRunning = true;
                             m_footstep.UnPause ();
 					        m_footstep.pitch = 1.7f;
                             if (Input.GetKey (KeyCode.LeftControl)) {
@@ -325,7 +327,8 @@ public class MovementControllerHuman : MovementController {
                         }
                     // If the player is walking
 				    } else {
-					    m_footstep.UnPause ();
+                        m_isRunning = false;
+                        m_footstep.UnPause ();
 					    m_footstep.pitch = 1f;
 					    if (Input.GetKey (KeyCode.LeftControl)) {
 						    actions.Sitting ();
@@ -336,7 +339,7 @@ public class MovementControllerHuman : MovementController {
                 }
 
             }
-			m_moveSpeed = m_animator.GetFloat ("Speed");
+			//m_moveSpeed = m_animator.GetFloat ("Speed");
         }
 	}
 

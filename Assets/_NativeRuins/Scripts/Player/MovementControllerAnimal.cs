@@ -15,7 +15,7 @@ public class MovementControllerAnimal : MovementController {
         sons = GetComponents<AudioSource>();
         sonAttaque = sons[1];
         // Set the attribute to the desire amount
-        m_moveSpeed = 1;
+        //m_moveSpeed = 1;
         //m_minSpeed = 1;
         //m_maxSpeed = 3;
         //m_turnSpeed = 1;
@@ -42,7 +42,8 @@ public class MovementControllerAnimal : MovementController {
 		if (m_isGrounded) {
             if (Input.GetMouseButton(0)) //attaque
             {
-                m_moveSpeed = 0f;
+                //m_moveSpeed = 0f;
+                m_isRunning = false;
                 m_animator.SetFloat("Speed_f", 0f);
                 Attack();
             }
@@ -52,9 +53,9 @@ public class MovementControllerAnimal : MovementController {
                 {
                     if (Input.GetKey (KeyCode.LeftShift) && energyBar.canRun)
                     {
-                        if (energyBar.GetCurrentEnergy() > 0f)
+                        if (m_isRunning = (energyBar.GetCurrentEnergy() > 0f))
                         {
-                            m_moveSpeed = m_maxSpeed;
+                            //m_moveSpeed = m_maxSpeed;
                             m_animator.SetFloat("Speed_f", m_maxSpeed);
                             m_footstep.UnPause();
                             m_footstep.pitch = 1.7f;
@@ -62,7 +63,7 @@ public class MovementControllerAnimal : MovementController {
 				    }
                     else
                     {
-					    m_moveSpeed = m_minSpeed;
+					    //m_moveSpeed = m_minSpeed;
 					    m_animator.SetFloat ("Speed_f", m_minSpeed);
 					    m_footstep.UnPause ();
 					    m_footstep.pitch = 1f;
@@ -70,8 +71,9 @@ public class MovementControllerAnimal : MovementController {
 			    }
                 else
                 {
-				    m_moveSpeed = 0f;
-				    m_animator.SetFloat ("Speed_f", 0f);
+                    m_isRunning = false;
+                    //m_moveSpeed = 0f;
+                    m_animator.SetFloat ("Speed_f", 0f);
 				    m_footstep.Pause ();
 			    }
             }
