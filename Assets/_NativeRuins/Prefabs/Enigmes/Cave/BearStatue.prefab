@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 54593653738677196}
   - component: {fileID: 114140891258718290}
   m_Layer: 0
-  m_Name: BearStatue 1
+  m_Name: BearStatue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -526,6 +526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353fd989b5aa23e41817bb7238ec8c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionButton: {fileID: 0}
+  bearMaterial: {fileID: 0}
 --- !u!114 &114830435290520148
 MonoBehaviour:
   m_ObjectHideFlags: 1
