@@ -3,24 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour {
+public class InputManager {
 
     #region Enums
+    public enum ActionsLabels : int
+    {
+        Movement = 0,
+        Sprint = 1,
+        Crouch = 2,
+        Jump = 3,
+        Aim = 4,
+        Attack = 5,
+        MoveCamera = 6,
+    }
+
     public enum EventTypeButton : int
     {
         Up = 0,
         Down = 1,
         Hold = 2,
     }
+
+    public enum EventTypeChanged : int
+    {
+        Changed = 0,
+        UnChanged = 1,
+    }
     #endregion
 
-    private IDictionary<string, System.Action[]> keysCallbacks = new Dictionary<string, System.Action[]>();
-    public IDictionary<int, System.Action[]> mouseButtonsCallbacks = new Dictionary<int, System.Action[]>();
-    public System.Action[] mouseMoveCallbacks = new System.Action[] { };
+    // Use keycode
+    //private IDictionary<KeyCode, System.Action[]> keyCodeCallbacks = new Dictionary<KeyCode, System.Action[]>();
+    // Use Unity inputs
+    private IDictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>> buttonInputsCallbacks;
+    private IDictionary<string, System.Action> axisMovementsCallbacks;
+    private IDictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>> axisMovementsChangedCallbacks;
+    
+
+    // Others
+    /*
     public System.Action[] mouseScrollCallbacks = new System.Action[] { };
     public System.Action[] mouseDragCallbacks = new System.Action[] { };
     public System.Action[] mouseExitWindowsCallbacks = new System.Action[] { };
-    public System.Action[] mouseEnterWindowsCallbacks = new System.Action[] { };
+    public System.Action[] mouseEnterWindowsCallbacks = new System.Action[] { };*/
 
     /*
         MouseMove = 3,
@@ -60,159 +84,318 @@ public class InputManager : MonoBehaviour {
     #endregion
     */
 
-    #region KeyboardEvents
-    public void SubscribeKeyEvent(string keyCode, EventTypeButton type, System.Action callback)
+    public InputManager()
     {
-        if (keysCallbacks.ContainsKey(keyCode))
-        {
-            keysCallbacks[keyCode][(int)type] = callback;
-        }
-        else
-        {
-            SubscribeKeyEvents(keyCode, new System.Action[] { callback });
-        }
-
+        buttonInputsCallbacks = new Dictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>>();
+        axisMovementsCallbacks = new Dictionary<string, System.Action>();
+        axisMovementsChangedCallbacks = new Dictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>>();
     }
 
-    public void SubscribeKeyEvents(string key, params System.Action[] callbacks)
+    #region TESTS
+    private void Start()
     {
-        keysCallbacks.Add(key, callbacks);
+        SubscribeButtonEvent("Horizontal", EventTypeButton.Down, Horizontal);
+        SubscribeButtonEvent("Vertical", EventTypeButton.Down, Vertical);
+        //SubscribeKeyEvent("Zoom1", EventTypeButton.Down, Zoom1);
+        SubscribeButtonEvent("Fire1", EventTypeButton.Down, Fire1);
+        SubscribeButtonEvent("Aiming", EventTypeButton.Down, Aiming);
+        //SubscribeButtonEvent("Fire2", EventTypeButton.Down, Fire2);
+        SubscribeMouseMovementsEvent("Fire1", Fire1);
+        SubscribeButtonEvent("Jump", EventTypeButton.Down, Jump);
+        SubscribeMouseMovementsEvent("ZoomCamera", MouseScrollWheel);
+        SubscribeButtonEvent("Submit", EventTypeButton.Down, Submit);
+        SubscribeButtonEvent("Cancel", EventTypeButton.Down, Cancel);
+        SubscribeButtonEvent("Boost", EventTypeButton.Down, Boost);
+        SubscribeButtonEvent("OpenInventory", EventTypeButton.Down, OpenInventory);
+        SubscribeButtonEvent("Crouch", EventTypeButton.Down, Crouch);
+        SubscribeMouseMovementsEvent("Boost", Boost);
+        //SubscribeMouseMovementsEvent("HorizontalCamera", HorizontalCamera);
+        //SubscribeMouseMovementsEvent("VerticalCamera", VerticalCamera);
     }
+
+    private void Horizontal() 
+    {
+        Debug.Log("Horizontal pressed !");
+    }
+
+    private void Vertical()
+    {
+        Debug.Log("Vertical pressed !");
+    }
+
+    private void Zoom1()
+    {
+        Debug.Log("Zoom1 pressed !");
+    }
+
+    private void Fire1()
+    {
+        Debug.Log("Fire1 pressed !");
+    }
+
+    private void Aiming()
+    {
+        Debug.Log("Aiming pressed !");
+    }
+
+    private void Fire3()
+    {
+        Debug.Log("Fire3 pressed !");
+    }
+
+    private void Jump()
+    {
+        Debug.Log("Jump (space bar) pressed !");
+    }
+
+    private void MouseX()
+    {
+        Debug.Log("MouseX pressed !");
+    }
+
+    private void MouseY()
+    {
+        Debug.Log("MouseY pressed !");
+    }
+
+    private void MouseScrollWheel()
+    {
+        Debug.Log("MouseScrollWheel pressed !");
+    }
+
+    private void Submit()
+    {
+        Debug.Log("Submit pressed !");
+    }
+
+    private void Cancel()
+    {
+        Debug.Log("Cancel pressed !");
+    }
+
+    private void Boost()
+    {
+        Debug.Log("Boost pressed !");
+    }
+
+    private void OpenInventory()
+    {
+        Debug.Log("Inventory pressed !");
+    }
+
+    private void Crouch()
+    {
+        Debug.Log("Crouch pressed !");
+    }
+
+    private void HorizontalCamera()
+    {
+        Debug.Log("Horizontal camera !");
+    }
+
+    private void VerticalCamera()
+    {
+        Debug.Log("Vertical camera !");
+    }
+
     #endregion
 
-    #region MouseButtonsEvents
-    public void SubscribeMouseEvent(int buttonID, EventTypeButton type, System.Action callback)
+    public void CheckAllInputs()
     {
-        if(mouseButtonsCallbacks.ContainsKey(buttonID))
+        GetVirtualButtonInputs();
+        GetMouseMoveInput();
+        GetMouseMovementsChangedInput();
+    }
+
+    #region UnityVirtualEvents
+    public void GetVirtualButtonInputs()
+    {
+        foreach (ActionsLabels action in buttonInputsCallbacks.Keys)
         {
-            mouseButtonsCallbacks[buttonID][(int)type] = callback;
+            KeyValuePair<string[], System.Action[]> currentPair = buttonInputsCallbacks[action];
+            bool triggered = false;
+            int i = 0;
+            while(!triggered && i < currentPair.Key.Length)
+            {
+                string input = currentPair.Key[i];
+                if (triggered = (Input.GetButtonUp(input) && buttonInputsCallbacks[action].Value[(int)EventTypeButton.Up] != null))
+                {
+                    buttonInputsCallbacks[action].Value[(int)EventTypeButton.Up]();
+                }
+                if (triggered = (Input.GetButton(input) && buttonInputsCallbacks[action].Value[(int)EventTypeButton.Hold] != null))
+                {
+                    buttonInputsCallbacks[action].Value[(int)EventTypeButton.Hold]();
+                }
+                if (triggered = (Input.GetButtonDown(input) && buttonInputsCallbacks[action].Value[(int)EventTypeButton.Down] != null))
+                {
+                    buttonInputsCallbacks[action].Value[(int)EventTypeButton.Down]();
+                }
+                i++;
+            }
+            /*
+            foreach (string[], System.Action[]> input in buttonInputsCallbacks[action])
+            {
+                if (Input.GetButtonUp(input) && buttonInputsCallbacks[input][(int)EventTypeButton.Up] != null)
+                {
+                    buttonInputsCallbacks[input][(int)EventTypeButton.Up]();
+                }
+                if (Input.GetButton(input) && buttonInputsCallbacks[input][(int)EventTypeButton.Hold] != null)
+                {
+                    buttonInputsCallbacks[input][(int)EventTypeButton.Hold]();
+                }
+                if (Input.GetButtonDown(input) && buttonInputsCallbacks[input][(int)EventTypeButton.Down] != null)
+                {
+                    buttonInputsCallbacks[input][(int)EventTypeButton.Down]();
+                }
+            }*/
         }
-        else
+    }
+
+    public void GetMouseMoveInput()
+    {
+        foreach (string input in axisMovementsCallbacks.Keys)
         {
-            SubscribeMouseEvents(buttonID, new System.Action[] { callback });
+            axisMovementsCallbacks[input]();
         }
     }
 
-    public void SubscribeMouseEvents(int buttonID, params System.Action[] callbacks)
+    public void GetMouseMovementsChangedInput()
     {
-        mouseButtonsCallbacks.Add(buttonID, callbacks);
-    }
-    #endregion
-
-    #region OthersMouseEvents
-    public void SubscribeMouseMoveEvent(params System.Action[] callbacks)
-    {
-        mouseMoveCallbacks = callbacks;
-    }
-
-    public void SubscribeMouseDragEvent(params System.Action[] callbacks)
-    {
-        mouseDragCallbacks = callbacks;
-    }
-
-    public void SubscribeMouseExitWindowsEvent(params System.Action[] callbacks)
-    {
-        mouseExitWindowsCallbacks = callbacks;
-    }
-
-    public void SubscribeMouseEnterWindowsEvent(params System.Action[] callbacks)
-    {
-        mouseEnterWindowsCallbacks = callbacks;
+        foreach (ActionsLabels action in axisMovementsChangedCallbacks.Keys)
+        {
+            KeyValuePair<string[], System.Action[]> currentPair = axisMovementsChangedCallbacks[action];
+            bool triggered = false;
+            int i = 0;
+            while (!triggered && i < currentPair.Key.Length)
+            {
+                string input = currentPair.Key[i];
+                if (triggered = (Input.GetAxis(input) != 0 && axisMovementsChangedCallbacks[action].Value[(int)EventTypeChanged.Changed] != null))
+                {
+                    axisMovementsChangedCallbacks[action].Value[(int)EventTypeChanged.Changed]();
+                }
+                else if (axisMovementsChangedCallbacks[action].Value[(int)EventTypeChanged.UnChanged] != null)
+                {
+                    axisMovementsChangedCallbacks[action].Value[(int)EventTypeChanged.UnChanged]();
+                }
+                i++;
+            }
+            /*
+            foreach (string input in axisMovementsChangedCallbacks.Keys)
+            {
+                if (Input.GetAxis(input) != 0 && axisMovementsChangedCallbacks[input][(int)EventTypeChanged.Changed] != null)
+                {
+                    axisMovementsChangedCallbacks[input][(int)EventTypeChanged.Changed]();
+                }
+                else if (axisMovementsChangedCallbacks[input][(int)EventTypeChanged.UnChanged] != null)
+                {
+                    axisMovementsChangedCallbacks[input][(int)EventTypeChanged.UnChanged]();
+                }
+            }*/
+        }
     }
     #endregion
 
     public void UnsubscribeAll(string key)
     {
-        keysCallbacks.Clear();
-        mouseButtonsCallbacks.Clear();
+        buttonInputsCallbacks.Clear();
+        axisMovementsCallbacks.Clear();
+        axisMovementsChangedCallbacks.Clear();
 
-        keysCallbacks = null;
-        mouseButtonsCallbacks = null;
-        mouseMoveCallbacks = null;
+        buttonInputsCallbacks = null;
+        axisMovementsCallbacks = null;
+        axisMovementsChangedCallbacks = null;
     }
 
-
-    void Update() {
-
-        GetKeyboardInputs();
-        GetMouseButtonsInputs();
-
-        GetMouseMoveInput();
-        GetMouseScrollInput();
-        /* TODO later ??
-        GetMouseDragInput();
-
-        GetMouseExitWindowsInput();
-        GetMouseEnterWindowsInput();*/
-    }
-
-    #region KeyboardEvents
-    private void GetKeyboardInputs()
+    #region SubscribeEvents
+    public void SubscribeButtonEvent(string input, EventTypeButton type, System.Action callback)
     {
-        foreach(string key in keysCallbacks.Keys)
+        /*
+        if (buttonInputsCallbacks.ContainsKey(input))
         {
-            if (Input.GetKeyUp(key) && keysCallbacks[key][(int)EventTypeButton.Up] != null)
+            buttonInputsCallbacks[input][(int)type] = callback;
+        }
+        else
+        {
+            switch(type)
             {
-                keysCallbacks[key][(int)EventTypeButton.Up]();
+                case EventTypeButton.Up:
+                    SubscribeButtonEvents(input, new System.Action[] { callback, null, null });
+                    break;
+                case EventTypeButton.Down:
+                    SubscribeButtonEvents(input, new System.Action[] { null, callback, null });
+                    break;
+                case EventTypeButton.Hold:
+                    SubscribeButtonEvents(input, new System.Action[] { null, null, callback });
+                    break;
             }
-            if (Input.GetKey(key) && keysCallbacks[key][(int)EventTypeButton.Hold] != null)
+        }*/
+    }
+
+    public void SubscribeButtonEvents(ActionsLabels action, string input, params System.Action[] callbacks)
+    {
+        SubscribeButtonEvents(action, new string[] { input }, callbacks);
+    }
+
+    public void SubscribeButtonEvents(ActionsLabels action, string[] input, params System.Action[] callbacks)
+    {
+        
+        int enumsLength = Enum.GetNames(typeof(EventTypeButton)).Length;
+        if (callbacks.Length == enumsLength)
+        {
+            buttonInputsCallbacks.Add(action, new KeyValuePair<string[], System.Action[]>(input, callbacks));
+        }
+        else
+        {
+            Debug.LogWarning("The size of the callbacks array (" + callbacks.Length + ")" +
+                " is not equals to the lenght of the Enums (" + enumsLength + "). Callbacks ignored.");
+        }
+    }
+
+    public void SubscribeMouseMovementsEvent(string input, System.Action callbacks)
+    {
+        axisMovementsCallbacks.Add(input, callbacks);
+    }
+
+    public void SubscribeMouseMovementsChangedEvent(string input, EventTypeChanged type, System.Action callback)
+    {
+        /*
+        if (axisMovementsChangedCallbacks.ContainsKey(input))
+        {
+            axisMovementsChangedCallbacks[input][(int)type] = callback;
+        }
+        else
+        {
+            switch (type)
             {
-                keysCallbacks[key][(int)EventTypeButton.Hold]();
+                case EventTypeChanged.Changed:
+                    SubscribeMouseMovementsChangedEvents(input, new System.Action[] { callback, null });
+                    break;
+                case EventTypeChanged.UnChanged:
+                    SubscribeMouseMovementsChangedEvents(input, new System.Action[] { null, callback });
+                    break;
             }
-            if (Input.GetKeyDown(key) && keysCallbacks[key][(int)EventTypeButton.Down] != null)
-            {
-                keysCallbacks[key][(int)EventTypeButton.Down]();
-            }
+        }*/
+    }
+
+    public void SubscribeMouseMovementsChangedEvents(ActionsLabels action, string input, params System.Action[] callbacks)
+    {
+        SubscribeMouseMovementsChangedEvents(action, new string[] { input }, callbacks);
+    }
+
+    public void SubscribeMouseMovementsChangedEvents(ActionsLabels action, string[] input, params System.Action[] callbacks)
+    {
+        int enumsLength = Enum.GetNames(typeof(EventTypeChanged)).Length;
+        if (callbacks.Length == enumsLength)
+        {
+            axisMovementsChangedCallbacks.Add(action, new KeyValuePair<string[], System.Action[]>(input, callbacks));
+        }
+        else
+        {
+            Debug.LogWarning("The size of the callbacks array (" + callbacks.Length + ")" +
+                " is not equals to the lenght of the Enums (" + enumsLength + "). Callbacks ignored.");
         }
     }
     #endregion
 
-    # region MouseEvents
-    private void GetMouseButtonsInputs()
-    {
-        foreach (int buttonID in mouseButtonsCallbacks.Keys)
-        {
-            if (Input.GetMouseButtonUp(buttonID) && mouseButtonsCallbacks[buttonID][(int)EventTypeButton.Up] != null)
-            {
-                mouseButtonsCallbacks[buttonID][(int)EventTypeButton.Up]();
-            }
-            if (Input.GetMouseButton(buttonID) && mouseButtonsCallbacks[buttonID][(int)EventTypeButton.Hold] != null)
-            {
-                mouseButtonsCallbacks[buttonID][(int)EventTypeButton.Hold]();
-            }
-            if (Input.GetMouseButtonDown(buttonID) && mouseButtonsCallbacks[buttonID][(int)EventTypeButton.Down] != null)
-            {
-                mouseButtonsCallbacks[buttonID][(int)EventTypeButton.Down]();
-            }
-        }
-    }
-
-    private void GetMouseMoveInput()
-    {
-        foreach (Action callback in mouseMoveCallbacks)
-        {
-            // Should pass the vector2 ?!
-            callback();
-        }
-    }
-
-    private void GetMouseScrollInput()
-    {
-        foreach (Action callback in mouseScrollCallbacks)
-        {
-            callback();
-        }
-    }
-    #endregion
-
-    /*
-    void OnGUI()
-    {
-        Event e = Event.current;
-        if (e.type != EventType.Repaint && e.type != EventType.Layout) 
-        {
-            Debug.Log(e.type);
-        }
-    }*/
 }
 

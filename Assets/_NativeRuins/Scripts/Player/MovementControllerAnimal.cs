@@ -23,7 +23,7 @@ public class MovementControllerAnimal : MovementController {
     }
 
 
-    override protected void JumpingAndLanding(Vector3 NextDir)
+    override protected void JumpingAndLanding()
     {
         bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
 
@@ -31,19 +31,19 @@ public class MovementControllerAnimal : MovementController {
         {
             m_jumpTimeStamp = Time.time;
 			//actions.Jump ();
+            /*
 			if(!NextDir.Equals(Vector3.zero))
 				m_rigidBody.AddForce((Vector3.up+transform.forward) * m_jumpForce, ForceMode.Impulse);
 			else
-				m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+				m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);*/
         }
     }
 
-	override protected void GetInputs(Vector3 NextDir, float h, float v){
+    override protected void GetInputs(Vector3 NextDir, float h, float v){
 		if (m_isGrounded) {
             if (Input.GetMouseButton(0)) //attaque
             {
                 //m_moveSpeed = 0f;
-                m_isRunning = false;
                 m_animator.SetFloat("Speed_f", 0f);
                 Attack();
             }
@@ -53,13 +53,14 @@ public class MovementControllerAnimal : MovementController {
                 {
                     if (Input.GetKey (KeyCode.LeftShift) && energyBar.canRun)
                     {
+                        /*
                         if (m_isRunning = (energyBar.GetCurrentEnergy() > 0f))
                         {
                             //m_moveSpeed = m_maxSpeed;
                             m_animator.SetFloat("Speed_f", m_maxSpeed);
                             m_footstep.UnPause();
                             m_footstep.pitch = 1.7f;
-                        }
+                        }*/
 				    }
                     else
                     {
@@ -71,7 +72,7 @@ public class MovementControllerAnimal : MovementController {
 			    }
                 else
                 {
-                    m_isRunning = false;
+                    //m_isRunning = false;
                     //m_moveSpeed = 0f;
                     m_animator.SetFloat ("Speed_f", 0f);
 				    m_footstep.Pause ();

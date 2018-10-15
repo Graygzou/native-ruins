@@ -10,11 +10,24 @@ public class MovementController : MonoBehaviour {
     [SerializeField] protected float m_jumpForce;
 
     [SerializeField] protected float m_cameraSpeed = 2f;
-    [SerializeField] protected Animator m_animator = null;
+    protected Animator m_animator;
     [SerializeField] protected Rigidbody m_rigidBody;
     [SerializeField] protected AudioSource m_footstep;
     [SerializeField] protected int m_camera_zoom_max = -1;
     [SerializeField] protected int m_camera_zoom_min = -3;
+
+    // Actual State of the player
+    [Header("Player States (read only)")]
+    [SerializeField] private bool m_isDead;
+    [SerializeField] private bool m_isSaving;
+    [SerializeField] private bool m_dialogueOn;
+    [SerializeField] protected bool m_isPlayerCrouch = false;
+    [SerializeField] protected bool m_isMoving = false;
+    [SerializeField] protected float m_currentSpeed;
+
+    // Inputs gestion
+    [SerializeField] protected bool m_isShiftHold = false;
+    
 
     // Cameras gestion
     [SerializeField]
@@ -35,15 +48,9 @@ public class MovementController : MonoBehaviour {
     protected float m_minJumpInterval = 1.50f;
 
     protected bool m_isGrounded;
-    protected bool m_isRunning;
     protected List<Collider> m_collisions = new List<Collider>();
 
-    // Death of the player
-    private bool m_isDead;
-    // The player is saving his game
-    private bool m_isSaving;
-    //Dialogue on
-    private bool m_dialogueOn;
+    protected InputManager inputsManager;
 
     // Use this for initialization
     protected virtual void Awake() {
@@ -55,16 +62,59 @@ public class MovementController : MonoBehaviour {
         m_footstep.Play();
         m_footstep.loop = true;
         m_footstep.Pause();
+
+        m_currentSpeed = 0.0f;
+
+        // Animator settings
+        m_animator = GetComponent<Animator>();
+
+        // Inputs
+        inputsManager = new InputManager();
+    }
+
+    protected virtual void Start()
+    {
+        // Register Camera movements.
+        inputsManager.SubscribeMouseMovementsEvent("HorizontalCamera", MoveFollowingCamera);
+        inputsManager.SubscribeMouseMovementsEvent("VerticalCamera", MoveFollowingCamera);
+
+        // Register Player Movements
+        inputsManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { MoveCharacter, StopMovements });
+        inputsManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Sprint, "Boost", new System.Action[] { MakePlayerSprint, StopSprint });
+    }
+
+    protected virtual void Update()
+    {
+        /// Check if some inputs has been received.
+        inputsManager.GetVirtualButtonInputs();
+        //inputsManager.GetMouseMoveInput();
+        inputsManager.GetMouseMovementsChangedInput();
+
+        m_wasGrounded = m_isGrounded;
+
+        // Update the animator with player data
+        m_animator.SetFloat("Speed", GetCurrentSpeed());
+        m_animator.SetFloat("Health", lifeBar.GetCurrentSizeLifeBar());
     }
 
     protected void LateUpdate() {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        // Check if some mouse movements inputs has been received.
+        inputsManager.GetMouseMoveInput();
+    }
+
+    #region FollowingCamera
+    /**
+     * Callback to move the following Camera
+     */
+    private void MoveFollowingCamera()
+    {
+        float mouseX = Input.GetAxis("HorizontalCamera");
+        float mouseY = Input.GetAxis("VerticalCamera");
         Vector3 dir = new Vector3(mouseX, mouseY, 0f);
         lastMousePosition = Input.mousePosition;
         if (!FormsController.Instance.GetComponent<FormsController>().IsTransformationWheelOpened() && !InventoryManager.Instance.bag_open && !m_dialogueOn)
         {
-            UpdateCamera(dir.x, -dir.y);
+            UpdateFollowingCamera(dir.x, -dir.y);
         }
         Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
         float z;
@@ -72,7 +122,7 @@ public class MovementController : MonoBehaviour {
         cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
     }
 
-    protected virtual void UpdateCamera(float deltaX, float deltaY) {
+    protected virtual void UpdateFollowingCamera(float deltaX, float deltaY) {
         m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position;
 
         if (deltaX == 0 && deltaY == 0) return;
@@ -83,8 +133,30 @@ public class MovementController : MonoBehaviour {
             m_cameraPivot.localEulerAngles = rotate;
         }
     }
+    #endregion
 
-    protected void OnCollisionEnter(Collision collision) {
+    #region Others callbacks
+    public void MakePlayerSprint()
+    {
+        if(m_isMoving)
+        {
+            m_currentSpeed = m_walkSpeed * (Input.GetAxis("Boost") * m_runMultFactor);
+        }
+    }
+
+    public void StopSprint()
+    {
+        m_currentSpeed = m_isMoving ? m_walkSpeed : 0.0f;
+    }
+
+    public void SwicthIsPlayerCrouch()
+    {
+        m_isPlayerCrouch = !m_isPlayerCrouch;
+    }
+    #endregion
+
+    protected void OnCollisionEnter(Collision collision)
+    {
         ContactPoint[] contactPoints = collision.contacts;
         for (int i = 0; i < contactPoints.Length; i++)
         {
@@ -99,58 +171,67 @@ public class MovementController : MonoBehaviour {
         }
     }
 
-    protected void OnCollisionStay(Collision collision) {
-		//if (collision.gameObject.tag.Equals ("Terrain")) {
-		//	m_rigidBody.velocity.Set(0f, 0f, 0f);
-		//	m_rigidBody.useGravity = false;
-		//}	
-
+    protected void OnCollisionStay(Collision collision)
+    {
         ContactPoint[] contactPoints = collision.contacts;
         bool validSurfaceNormal = false;
-        for (int i = 0; i < contactPoints.Length; i++) {
-            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f) {
+        for (int i = 0; i < contactPoints.Length; i++)
+        {
+            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+            {
                 validSurfaceNormal = true; break;
             }
         }
 
-        if (validSurfaceNormal) {
+        if (validSurfaceNormal)
+        {
             m_isGrounded = true;
-            if (!m_collisions.Contains(collision.collider)) {
+            if (!m_collisions.Contains(collision.collider))
+            {
                 m_collisions.Add(collision.collider);
             }
         } else {
-            if (m_collisions.Contains(collision.collider)) {
+            if (m_collisions.Contains(collision.collider))
+            {
                 m_collisions.Remove(collision.collider);
             }
-            if (m_collisions.Count == 0) { m_isGrounded = false; }
+            if (m_collisions.Count == 0)
+            {
+                m_isGrounded = false;
+            }
         }
     }
 
-    protected void OnCollisionExit(Collision collision) {
-		//if (collision.gameObject.tag.Equals ("Terrain")) {
-		//	m_rigidBody.useGravity = true;
-		//}
-        if (m_collisions.Contains(collision.collider)) {
+    protected void OnCollisionExit(Collision collision)
+    {
+        if (m_collisions.Contains(collision.collider))
+        {
             m_collisions.Remove(collision.collider);
         }
-        if (m_collisions.Count == 0) { m_isGrounded = false; }
+        if (m_collisions.Count == 0)
+        {
+            m_isGrounded = false;
+        }
     }
 
-    protected void Update() {
-        DirectUpdate();
-		//m_rigidBody.rotation.Set (m_rigidBody.rotation.x, 0f, m_rigidBody.rotation.z, m_rigidBody.rotation.w);
-        m_wasGrounded = m_isGrounded;
+    protected virtual void StopMovements()
+    {
+        if (Input.GetAxis("Vertical").Equals(0.0f) && Input.GetAxis("Horizontal").Equals(0.0f))
+        {
+            m_currentSpeed = 0.0f;
+            m_isMoving = false;
+            m_footstep.Pause();
+        }
     }
 
-    //Vector3 newOrientation = Vector3.Normalize(transform.right*h)*Time.deltaTime*m_turnSpeed+transform.forward;
-    //transform.rotation = Quaternion.LookRotation (Vector3.Project(transform.forward+transform.right, newOrientation));
-    //transform.rotation = Quaternion.LookRotation (NextDir);
-    //transform.position += transform.forward * m_moveSpeed * Time.deltaTime;
-
-    //transform.forward.Set(projected_forward_camera.x, projected_forward_camera.y, projected_forward_camera.z);
-    //transform.Rotate(0f,cameraTrans.eulerAngles.y-transform.eulerAngles.y,0f);
-    protected void DirectUpdate() {
+    protected void MoveCharacter() {
        if (!m_isDead && !m_dialogueOn && !m_isSaving) {
+            m_isMoving = true;
+            if (m_currentSpeed.Equals(0.0f))
+            {
+                m_currentSpeed = m_walkSpeed;
+            }
+
             float v = Input.GetAxis("Vertical");
             float h = Input.GetAxis("Horizontal");
 
@@ -164,21 +245,21 @@ public class MovementController : MonoBehaviour {
             NextDir = Quaternion.Euler(0f, angle, 0f) * NextDir;
 
             // Control Judy's movement
-            Move(NextDir, h, v);
-            // Control Transition to animation states
-            GetInputs(NextDir, h, v);
-            // Control Judy's jump
-            JumpingAndLanding(NextDir);
+            Move(NextDir.normalized, h, v);
         }
     }
 
-    protected virtual void Move(Vector3 NextDir, float h, float v) {
-        if (!NextDir.Equals(Vector3.zero))
-            transform.rotation = Quaternion.LookRotation(NextDir);
-        transform.position += NextDir * getCurrentSpeed() * Time.deltaTime;
+    protected virtual void Move(Vector3 nextDir, float h, float v) {
+        if (!nextDir.Equals(Vector3.zero))
+        {
+            transform.rotation = Quaternion.LookRotation(nextDir);
+        }
+
+        Debug.Log(nextDir);
+        transform.position += nextDir * GetCurrentSpeed() * Time.deltaTime;
     }
 
-    protected virtual void JumpingAndLanding(Vector3 NextDir) { }
+    protected virtual void JumpingAndLanding() { }
 
     protected virtual void GetInputs(Vector3 NextDir, float h, float v) { }
 
@@ -196,8 +277,9 @@ public class MovementController : MonoBehaviour {
         return signed_angle;
     }
 
-    public float getCurrentSpeed() {
-        return m_isRunning ? m_walkSpeed * m_runMultFactor: m_walkSpeed;
+    public float GetCurrentSpeed() {
+        return m_currentSpeed;
+        //return (m_isRunning ? m_walkSpeed * m_runMultFactor : (m_isMoving ? m_walkSpeed : 0.0f));
     }
     
     public void setDeath(bool isDead) {
