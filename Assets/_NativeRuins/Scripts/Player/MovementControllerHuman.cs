@@ -74,8 +74,8 @@ public class MovementControllerHuman : MovementController {
         inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Crouch, "Crouch", new System.Action[] { SwicthIsPlayerCrouch, SwicthIsPlayerCrouch, null });
         inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { JumpingAndLanding, null, null });
         // Register the fighting related actions
-        inputsManager.SubscribeButtonEvent("Fire1", InputManager.EventTypeButton.Down, Fire);
-        inputsManager.SubscribeButtonEvent("Aiming", InputManager.EventTypeButton.Down, ChangedPlayerAimedState);
+        inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeButton.Down, Fire);
+        inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Aiming, "Aiming", InputManager.EventTypeButton.Down, ChangedPlayerAimedState);
 
         // Register others possible interactions
 
@@ -140,9 +140,8 @@ public class MovementControllerHuman : MovementController {
         }
     }
 
-    override protected void Move(Vector3 nextDir, float h, float v) {
-        WalkOrRun();
-
+    override protected void Move(Vector3 nextDir, float h, float v)
+    {
         if (!isAiming) {
             // Regular state
             base.Move(nextDir, h, v);
@@ -156,24 +155,6 @@ public class MovementControllerHuman : MovementController {
             //actions.MoveWithBow(h, v);
             m_animator.SetFloat("VelX", h);
             m_animator.SetFloat("VelY", v);*/
-        }
-    }
-
-    public void WalkOrRun()
-    {
-        m_footstep.UnPause();
-        if (m_isShiftHold)
-        {
-            // Run
-            if (energyBar.canRun && energyBar.GetCurrentEnergy() > 0f)
-            {
-                m_footstep.pitch = 1.7f;
-            }
-        }
-        else
-        {
-            // Walk
-            m_footstep.pitch = 1f;
         }
     }
 

@@ -10,10 +10,15 @@ public class MovementControllerAnimal : MovementController {
     private AudioSource[] sons;
     private AudioSource sonAttaque;
 
+    protected float m_minattackInterval = 1.0f;
+    protected float m_attackTimeStamp = 0.0f;
+
     new void Awake() {
         base.Awake();
         sons = GetComponents<AudioSource>();
         sonAttaque = sons[1];
+
+        m_animator = this.gameObject.GetComponent<Animator>();
         // Set the attribute to the desire amount
         //m_moveSpeed = 1;
         //m_minSpeed = 1;
@@ -22,6 +27,16 @@ public class MovementControllerAnimal : MovementController {
         //m_jumpForce = 3;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+
+        // Special movements
+        inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { JumpingAndLanding, null, null });
+        // Register the fighting related actions
+        //inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeButton.Down, Attack);
+        inputsManager.SubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeChanged.Changed, Attack);
+    }
 
     override protected void JumpingAndLanding()
     {
@@ -40,108 +55,51 @@ public class MovementControllerAnimal : MovementController {
     }
 
     override protected void GetInputs(Vector3 NextDir, float h, float v){
-		if (m_isGrounded) {
-            if (Input.GetMouseButton(0)) //attaque
-            {
-                //m_moveSpeed = 0f;
-                m_animator.SetFloat("Speed_f", 0f);
-                Attack();
-            }
-            else
-            { // Movements Directionnal
-                if (!NextDir.Equals (Vector3.zero))
-                {
-                    if (Input.GetKey (KeyCode.LeftShift) && energyBar.canRun)
-                    {
-                        /*
-                        if (m_isRunning = (energyBar.GetCurrentEnergy() > 0f))
-                        {
-                            //m_moveSpeed = m_maxSpeed;
-                            m_animator.SetFloat("Speed_f", m_maxSpeed);
-                            m_footstep.UnPause();
-                            m_footstep.pitch = 1.7f;
-                        }*/
-				    }
-                    else
-                    {
-					    //m_moveSpeed = m_minSpeed;
-					    m_animator.SetFloat ("Speed_f", m_minSpeed);
-					    m_footstep.UnPause ();
-					    m_footstep.pitch = 1f;
-				    }
-			    }
-                else
-                {
-                    //m_isRunning = false;
-                    //m_moveSpeed = 0f;
-                    m_animator.SetFloat ("Speed_f", 0f);
-				    m_footstep.Pause ();
-			    }
-            }
-        } else {
+		if (!m_isGrounded) {
+            /*
             Animator judyAnim = this.gameObject.GetComponent<Animator>();
             float currTime = judyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
             if (currTime >= 1 - 0.06)       //si l'animation attack n'a pas fini on ne passe pas en locomotion
             {
                 m_animator.SetBool("Attack_state", false);
                 m_animator.Play("Locomotion");
-            }
+            }*/
         }
 	}
 
     private void Attack()
     {
-        GameObject playerRoot = GameObject.Find("Player");
-        Animator judyAnim = this.gameObject.GetComponent<Animator>();
-        judyAnim.SetBool("Attack_state", true);
-        judyAnim.Play("Attack"); //joue animation attaque
-        sonAttaque.Play();
+        Debug.Log(Input.GetAxis("Fire1"));
+        bool attackCooldownOver = (Time.time - m_attackTimeStamp) >= m_minattackInterval;
 
-        RaycastHit hit;
-        float distance = 2f; //distance de l'animal pour pouvoir lui infliger des degats
-        // For the bear
-        //Ray Judy = new Ray(transform.position + transform.forward * 6f + transform.up * 4, transform.forward);
-        //Debug.DrawRay(transform.position + transform.forward * 6f + transform.up * 4, transform.forward * distance);
-        // For the wolf
-        Ray Judy = new Ray(transform.position + transform.forward * 7.5f + transform.up * 3, transform.forward);
-        Debug.DrawRay(transform.position + transform.forward * 7.5f + transform.up * 3, transform.forward * distance);
-        if (Physics.Raycast(Judy, out hit, distance)) {
-            if (hit.collider.tag == "Animal") {
-                hit.transform.gameObject.GetComponent<AgentProperties>().takeDamages(50f);
-                //Inflige degat a l'animal
+        if (attackCooldownOver)
+        {
+            m_attackTimeStamp = Time.time;
+
+            Debug.Log(m_animator.GetCurrentAnimatorClipInfo(m_animator.GetLayerIndex("Base Layer"))[0].clip.name);
+            GameObject playerRoot = GameObject.Find("Player");
+            m_animator.SetTrigger("Attack");
+            sonAttaque.Play();
+
+            RaycastHit hit;
+            float distance = 2f; //distance de l'animal pour pouvoir lui infliger des degats
+                                 // For the bear
+                                 //Ray Judy = new Ray(transform.position + transform.forward * 6f + transform.up * 4, transform.forward);
+                                 //Debug.DrawRay(transform.position + transform.forward * 6f + transform.up * 4, transform.forward * distance);
+                                 // For the wolf
+            Ray Judy = new Ray(transform.position + transform.forward * 7.5f + transform.up * 3, transform.forward);
+            Debug.DrawRay(transform.position + transform.forward * 7.5f + transform.up * 3, transform.forward * distance);
+            if (Physics.Raycast(Judy, out hit, distance))
+            {
+                if (hit.collider.tag == "Animal")
+                {
+                    hit.transform.gameObject.GetComponent<AgentProperties>().takeDamages(50f);
+                    //Inflige degat a l'animal
+                }
             }
         }
+        
     }
-
-    /*private void Animate(Vector3 NextDir){
-		if (m_isGrounded) {
-			if (NextDir.Equals (Vector3.zero)) {
-				if (Input.GetKey (KeyCode.LeftControl)) {
-					actions.Wary ();
-				} else {
-					actions.Stay ();
-				}
-
-			} else {
-				if (Input.GetKey(KeyCode.LeftShift)) {
-					if (Input.GetKey (KeyCode.LeftControl)) {
-						actions.CrouchingRun ();
-					} else {
-						actions.Run ();
-					}
-				} else {
-					if (Input.GetKey (KeyCode.LeftControl)) {
-						actions.Sitting ();
-					} else {
-						actions.Walk ();
-					}
-				}
-
-			}
-
-			m_moveSpeed = m_animator.GetFloat ("Speed");
-		}
-	}*/
 
     void OnDrawGizmosSelected()
     {

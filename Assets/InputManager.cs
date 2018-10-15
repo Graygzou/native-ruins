@@ -12,7 +12,7 @@ public class InputManager {
         Sprint = 1,
         Crouch = 2,
         Jump = 3,
-        Aim = 4,
+        Aiming = 4,
         Attack = 5,
         MoveCamera = 6,
     }
@@ -94,7 +94,7 @@ public class InputManager {
     #region TESTS
     private void Start()
     {
-        SubscribeButtonEvent("Horizontal", EventTypeButton.Down, Horizontal);
+        /*SubscribeButtonEvent("Horizontal", EventTypeButton.Down, Horizontal);
         SubscribeButtonEvent("Vertical", EventTypeButton.Down, Vertical);
         //SubscribeKeyEvent("Zoom1", EventTypeButton.Down, Zoom1);
         SubscribeButtonEvent("Fire1", EventTypeButton.Down, Fire1);
@@ -107,7 +107,7 @@ public class InputManager {
         SubscribeButtonEvent("Cancel", EventTypeButton.Down, Cancel);
         SubscribeButtonEvent("Boost", EventTypeButton.Down, Boost);
         SubscribeButtonEvent("OpenInventory", EventTypeButton.Down, OpenInventory);
-        SubscribeButtonEvent("Crouch", EventTypeButton.Down, Crouch);
+        SubscribeButtonEvent("Crouch", EventTypeButton.Down, Crouch);*/
         SubscribeMouseMovementsEvent("Boost", Boost);
         //SubscribeMouseMovementsEvent("HorizontalCamera", HorizontalCamera);
         //SubscribeMouseMovementsEvent("VerticalCamera", VerticalCamera);
@@ -307,28 +307,27 @@ public class InputManager {
     }
 
     #region SubscribeEvents
-    public void SubscribeButtonEvent(string input, EventTypeButton type, System.Action callback)
+    public void SubscribeButtonEvent(ActionsLabels action, string input, EventTypeButton type, System.Action callback)
     {
-        /*
-        if (buttonInputsCallbacks.ContainsKey(input))
+        if (buttonInputsCallbacks.ContainsKey(action))
         {
-            buttonInputsCallbacks[input][(int)type] = callback;
+            buttonInputsCallbacks[action].Value[(int)type] = callback;
         }
         else
         {
             switch(type)
             {
                 case EventTypeButton.Up:
-                    SubscribeButtonEvents(input, new System.Action[] { callback, null, null });
+                    SubscribeButtonEvents(action, input, new System.Action[] { callback, null, null });
                     break;
                 case EventTypeButton.Down:
-                    SubscribeButtonEvents(input, new System.Action[] { null, callback, null });
+                    SubscribeButtonEvents(action, input, new System.Action[] { null, callback, null });
                     break;
                 case EventTypeButton.Hold:
-                    SubscribeButtonEvents(input, new System.Action[] { null, null, callback });
+                    SubscribeButtonEvents(action, input, new System.Action[] { null, null, callback });
                     break;
             }
-        }*/
+        }
     }
 
     public void SubscribeButtonEvents(ActionsLabels action, string input, params System.Action[] callbacks)
@@ -356,25 +355,24 @@ public class InputManager {
         axisMovementsCallbacks.Add(input, callbacks);
     }
 
-    public void SubscribeMouseMovementsChangedEvent(string input, EventTypeChanged type, System.Action callback)
+    public void SubscribeMouseMovementsChangedEvent(ActionsLabels action, string input, EventTypeChanged type, System.Action callback)
     {
-        /*
-        if (axisMovementsChangedCallbacks.ContainsKey(input))
+        if (axisMovementsChangedCallbacks.ContainsKey(action))
         {
-            axisMovementsChangedCallbacks[input][(int)type] = callback;
+            axisMovementsChangedCallbacks[action].Value[(int)type] = callback;
         }
         else
         {
             switch (type)
             {
                 case EventTypeChanged.Changed:
-                    SubscribeMouseMovementsChangedEvents(input, new System.Action[] { callback, null });
+                    SubscribeMouseMovementsChangedEvents(action, input, new System.Action[] { callback, null });
                     break;
                 case EventTypeChanged.UnChanged:
-                    SubscribeMouseMovementsChangedEvents(input, new System.Action[] { null, callback });
+                    SubscribeMouseMovementsChangedEvents(action, input, new System.Action[] { null, callback });
                     break;
             }
-        }*/
+        }
     }
 
     public void SubscribeMouseMovementsChangedEvents(ActionsLabels action, string input, params System.Action[] callbacks)

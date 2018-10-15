@@ -250,16 +250,35 @@ public class MovementController : MonoBehaviour {
     }
 
     protected virtual void Move(Vector3 nextDir, float h, float v) {
+        WalkOrRun();
+
         if (!nextDir.Equals(Vector3.zero))
         {
             transform.rotation = Quaternion.LookRotation(nextDir);
         }
 
-        Debug.Log(nextDir);
         transform.position += nextDir * GetCurrentSpeed() * Time.deltaTime;
     }
 
     protected virtual void JumpingAndLanding() { }
+
+    public void WalkOrRun()
+    {
+        m_footstep.UnPause();
+        if (m_isShiftHold)
+        {
+            // Run
+            if (energyBar.canRun && energyBar.GetCurrentEnergy() > 0f)
+            {
+                m_footstep.pitch = 1.7f;
+            }
+        }
+        else
+        {
+            // Walk
+            m_footstep.pitch = 1f;
+        }
+    }
 
     protected virtual void GetInputs(Vector3 NextDir, float h, float v) { }
 
