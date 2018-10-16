@@ -86,10 +86,31 @@ public class InventoryManager : MonoBehaviour {
     void Start () {
         deltaScreen = m_canvas.sizeDelta;
     }
-	
-	void Update () {
-		OpenOrCloseInventory ();
-		PutWeaponInBag ();
+
+    public void OpenOrCloseInventory()
+    {
+        _instance.audioSource.PlayOneShot(m_bagSound);
+
+        if (!bag_open)
+        {
+            // Force to transform back into human form when opening the bag
+            FormsController.Instance.Transformation(FormsController.TransformationType.Human);
+
+            m_bag.localPosition = Vector3.zero;
+            m_bag.anchoredPosition = new Vector3(-960f, 540f, 0f);
+            m_bag.localScale = new Vector3(2.5f, 2.5f, 1f);
+            fallDetector.offset = new Vector2(0f, 40f);
+            collider.edgeRadius = 25f;
+        }
+        else
+        {
+            m_bag.localScale = new Vector3(1f, 1f, 1f);
+            m_bag.anchoredPosition = new Vector3(-200f, 100f, 0f);
+            fallDetector.offset = new Vector2(0f, -250f);
+            collider.edgeRadius = 10f;
+        }
+        craft.SetActive(!bag_open);
+        bag_open = !bag_open;
     }
 
     #region Add / Remove methods
@@ -295,35 +316,6 @@ public class InventoryManager : MonoBehaviour {
 		return inventaire;
 	}
 
-	private void OpenOrCloseInventory()
-    {
-		if (Input.GetKeyDown (KeyCode.Tab))
-        {
-            _instance.audioSource.PlayOneShot(m_bagSound);
-
-            if (!bag_open)
-            {
-                // Force to transform back into human form when opening the bag
-                FormsController.Instance.Transformation(FormsController.TransformationType.Human);
-
-                m_bag.localPosition = Vector3.zero;
-                m_bag.anchoredPosition = new Vector3(-960f, 540f, 0f);
-                m_bag.localScale = new Vector3(2.5f, 2.5f, 1f);
-                fallDetector.offset = new Vector2(0f, 40f);
-                collider.edgeRadius = 25f;
-            }
-            else
-            {
-                m_bag.localScale = new Vector3(1f, 1f, 1f);
-                m_bag.anchoredPosition = new Vector3(-200f, 100f, 0f);
-                fallDetector.offset = new Vector2(0f, -250f);
-                collider.edgeRadius = 10f;
-            }
-            craft.SetActive(!bag_open);
-            bag_open = !bag_open;
-        }
-	}
-
     public Vector2 GetSpawningPosition()
     {
         float halfWidth = _instance.spawningAnchor.sizeDelta.x / 2;
@@ -335,7 +327,7 @@ public class InventoryManager : MonoBehaviour {
 
     public void PutWeaponInBag ()
     {
-        if (Input.GetKeyDown (KeyCode.R) && !bag_open) {
+        if (!bag_open) {
             GameObject player = GameObject.FindWithTag("Player");
 			if (isTorchEquiped)
             {
@@ -373,7 +365,8 @@ public class InventoryManager : MonoBehaviour {
 
     public static bool HasArrowLeft()
     {
-        return inventaire[ObjectsType.Arrow] > 0;
+        int nbArrow = 0;
+        return (inventaire.TryGetValue(ObjectsType.Arrow, out nbArrow) ? nbArrow : 0.0) > 0;
     }
 
     internal int GetNumberItems(ObjectsType objectType)

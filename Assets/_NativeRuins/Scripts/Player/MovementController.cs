@@ -28,7 +28,6 @@ public class MovementController : MonoBehaviour {
     // Inputs gestion
     [SerializeField] protected bool m_isShiftHold = false;
     
-
     // Cameras gestion
     [SerializeField]
     protected Transform m_cameraPivot;
@@ -50,7 +49,8 @@ public class MovementController : MonoBehaviour {
     protected bool m_isGrounded;
     protected List<Collider> m_collisions = new List<Collider>();
 
-    protected InputManager inputsManager;
+    protected InputManager m_inputsManager;
+    protected PlayerInteraction m_playerInteraction;
 
     // Use this for initialization
     protected virtual void Awake() {
@@ -65,30 +65,34 @@ public class MovementController : MonoBehaviour {
 
         m_currentSpeed = 0.0f;
 
-        // Animator settings
+        // Components
         m_animator = GetComponent<Animator>();
-
-        // Inputs
-        inputsManager = new InputManager();
+        m_inputsManager = new InputManager();
+        m_playerInteraction = GetComponent<PlayerInteraction>();
     }
 
     protected virtual void Start()
     {
         // Register Camera movements.
-        inputsManager.SubscribeMouseMovementsEvent("HorizontalCamera", MoveFollowingCamera);
-        inputsManager.SubscribeMouseMovementsEvent("VerticalCamera", MoveFollowingCamera);
+        m_inputsManager.SubscribeMouseMovementsEvent("HorizontalCamera", MoveFollowingCamera);
+        m_inputsManager.SubscribeMouseMovementsEvent("VerticalCamera", MoveFollowingCamera);
 
         // Register Player Movements
-        inputsManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { MoveCharacter, StopMovements });
-        inputsManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Sprint, "Boost", new System.Action[] { MakePlayerSprint, StopSprint });
-    }
+        m_inputsManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { MoveCharacter, StopMovements });
+        m_inputsManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Sprint, "Boost", new System.Action[] { MakePlayerSprint, StopSprint });
+
+        // Register inventory inputs
+        m_inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.OpenInventory, "OpenInventory", InputManager.EventTypeButton.Down, InventoryManager.Instance.OpenOrCloseInventory);
+        m_inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Interact, "Interact", InputManager.EventTypeButton.Down, Interact);
+
+    }        
 
     protected virtual void Update()
     {
         /// Check if some inputs has been received.
-        inputsManager.GetVirtualButtonInputs();
+        m_inputsManager.GetVirtualButtonInputs();
         //inputsManager.GetMouseMoveInput();
-        inputsManager.GetMouseMovementsChangedInput();
+        m_inputsManager.GetMouseMovementsChangedInput();
 
         m_wasGrounded = m_isGrounded;
 
@@ -99,7 +103,7 @@ public class MovementController : MonoBehaviour {
 
     protected void LateUpdate() {
         // Check if some mouse movements inputs has been received.
-        inputsManager.GetMouseMoveInput();
+        m_inputsManager.GetMouseMoveInput();
     }
 
     #region FollowingCamera
@@ -152,6 +156,14 @@ public class MovementController : MonoBehaviour {
     public void SwicthIsPlayerCrouch()
     {
         m_isPlayerCrouch = !m_isPlayerCrouch;
+    }
+
+    public void Interact()
+    {
+        if(m_playerInteraction != null)
+        {
+            m_playerInteraction.GetClosestItem().Interact();
+        }
     }
     #endregion
 

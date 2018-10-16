@@ -70,12 +70,15 @@ public class MovementControllerHuman : MovementController {
     {
         base.Start();
 
-        // Special movements
-        inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Crouch, "Crouch", new System.Action[] { SwicthIsPlayerCrouch, SwicthIsPlayerCrouch, null });
-        inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { JumpingAndLanding, null, null });
-        // Register the fighting related actions
-        inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeButton.Down, Fire);
-        inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Aiming, "Aiming", InputManager.EventTypeButton.Down, ChangedPlayerAimedState);
+        // Special movements inputs
+        m_inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Crouch, "Crouch", new System.Action[] { SwicthIsPlayerCrouch, SwicthIsPlayerCrouch, null });
+        m_inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { JumpingAndLanding, null, null });
+        
+        // Register the fighting inputs
+        m_inputsManager.SubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeChanged.Changed, Fire);
+        m_inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Aiming, "Aiming", InputManager.EventTypeButton.Down, ChangedPlayerAimedState);
+        m_inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.PutAwayWeapon, "PutAwayWeapon", InputManager.EventTypeButton.Down, InventoryManager.Instance.PutWeaponInBag);
+
 
         // Register others possible interactions
 
@@ -162,14 +165,16 @@ public class MovementControllerHuman : MovementController {
 
     public void Fire()
     {
-        if(m_isGrounded)
+        if (m_isGrounded)
         {
             if (InventoryManager.Instance.isBowEquiped && isAiming && !isReloading && hasArrowLeft)
             {
+                Debug.Log("Fire");
                 FireArrow();
             }
             else if (InventoryManager.Instance.isTorchEquiped)
             {
+                Debug.Log("HitStick");
                 HitWithStick();
             }
         }

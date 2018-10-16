@@ -11,30 +11,25 @@ public class PickUpScript : MonoBehaviour {
     [SerializeField]
     private RectTransform o_object;
 
-    private bool o_isPickable;
+    [SerializeField]
+    private bool o_isPickable = true;
+    public bool IsPickable { get { return o_isPickable; } }
     private GameObject bag;
+    private PlayerAknowledge brain;
 
     private void Awake()
     {
         bag = GameObject.FindWithTag("BagUI");
+        brain = GameObject.Find("Player").GetComponent<PlayerAknowledge>();
     }
 
-    void Start ()
-    {
-        o_isPickable = false;
-    }
-	
-	void Update ()
-    {
-		GetInputs ();
-	}
-
+    /*
 	void OnTriggerExit(Collider other)
     {
 		if (other.gameObject.tag.Equals ("Player")) {
-			if (InventoryManager.an_object_is_pickable && o_isPickable) {
+			if (InventoryManager.an_object_is_pickable && IsPickable) {
 				InventoryManager.an_object_is_pickable = false;
-				o_isPickable = false;
+				IsPickable = false;
 				renderer.material.shader = Shader.Find ("Mobile/Diffuse");
                 InventoryManager.Instance.SetStatePickupButton(false);
 			}
@@ -46,17 +41,16 @@ public class PickUpScript : MonoBehaviour {
 		if (other.gameObject.tag.Equals ("Player") && !InventoryManager.Instance.bag_open) {
 			if (!InventoryManager.an_object_is_pickable) {
 				InventoryManager.an_object_is_pickable = true;
-				o_isPickable = true;
+				IsPickable = true;
 				renderer.material.shader = Shader.Find ("Outlined/Silhouetted Diffuse");
                 InventoryManager.Instance.SetStatePickupButton(true);
 			}
 		}
-	}
+	}*/
 
-	private void GetInputs()
+	public void Interact()
     {
-        PlayerAknowledge brain = GameObject.Find("Player").GetComponent<PlayerAknowledge>();
-        if (Input.GetKeyDown (KeyCode.E) && o_isPickable) {
+        if (IsPickable) {
             if (o_type.Equals(ObjectsType.Bow) && !brain.HasDiscoveredBow)
             {
                 brain.HasDiscoveredBow = true;
@@ -76,7 +70,8 @@ public class PickUpScript : MonoBehaviour {
                 FindObjectPostProcess();
             }
             InventoryManager.Instance.AddObjectOfType(o_type, o_object);
-			InventoryManager.an_object_is_pickable = false;
+            o_isPickable = false;
+            InventoryManager.an_object_is_pickable = false;
             InventoryManager.Instance.SetStatePickupButton(false);
             Destroy(gameObject);
 		}
@@ -86,13 +81,14 @@ public class PickUpScript : MonoBehaviour {
     {
         GameObject playerRoot = GameObject.Find("Player");
         FormsController.Instance.Transformation(FormsController.TransformationType.Human);
+        /*
         AudioSource son = GetComponentInParent<AudioSource>();
         son.Play();
         ParticleSystem particles;
         if ((particles = GetComponent<ParticleSystem>()) != null)
         {
             particles.Stop();
-        }
+        }*/
         GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ActionsNew>().Stay(100f);
     }
 

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BowScript : MonoBehaviour {
 
-    InventoryManager inventoryManager;
-
     public Rigidbody m_Arrow;       // Prefab of the arrow.  
     public AudioSource m_ShootingAudio;     // Reference to the audio source used to play the shooting audio. NB: different to the movement audio source.
     public AudioClip m_BendingClip;         // Audio that plays when each shot is charging up.
@@ -16,11 +14,6 @@ public class BowScript : MonoBehaviour {
     public float m_MaxBendTime = 0.75f;         // How long the shell can charge for before it is fired at max force.
 
     private GameObject judy;
-
-    private void Awake()
-    {
-        inventoryManager = GameObject.FindWithTag("InventoryManager").GetComponent<InventoryManager>();
-    }
 
     void Start() {
         judy = GameObject.FindWithTag("Player");
@@ -52,7 +45,7 @@ public class BowScript : MonoBehaviour {
         GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D/BowRig_tex/Root/String").GetComponent<BowString>().Release();
 
         // ?
-        inventoryManager.DrawArrow();
+        InventoryManager.Instance.DrawArrow();
 
     }
 

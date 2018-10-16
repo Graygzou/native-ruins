@@ -14,7 +14,11 @@ public class InputManager {
         Jump = 3,
         Aiming = 4,
         Attack = 5,
-        MoveCamera = 6,
+        OpenInventory = 6,
+        PutAwayWeapon = 7,
+        Interact = 8,
+        MoveCamera = 100,
+        
     }
 
     public enum EventTypeButton : int
