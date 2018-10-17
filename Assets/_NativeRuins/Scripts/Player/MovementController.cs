@@ -49,7 +49,6 @@ public class MovementController : MonoBehaviour {
     protected bool m_isGrounded;
     protected List<Collider> m_collisions = new List<Collider>();
 
-    protected InputManager m_inputsManager;
     protected PlayerInteraction m_playerInteraction;
 
     // Use this for initialization
@@ -57,7 +56,6 @@ public class MovementController : MonoBehaviour {
         m_isDead = false;
         m_dialogueOn = false;
         m_isSaving = false;
-        m_cameraPivot = GameObject.Find("CameraPivot").transform;
         initial_orientation = Vector3.forward;
         m_footstep.Play();
         m_footstep.loop = true;
@@ -67,32 +65,42 @@ public class MovementController : MonoBehaviour {
 
         // Components
         m_animator = GetComponent<Animator>();
-        m_inputsManager = new InputManager();
         m_playerInteraction = GetComponent<PlayerInteraction>();
     }
 
     protected virtual void Start()
     {
+        RegisterInputs();
+    }
+
+    public virtual void RegisterInputs()
+    {
         // Register Camera movements.
-        m_inputsManager.SubscribeMouseMovementsEvent("HorizontalCamera", MoveFollowingCamera);
-        m_inputsManager.SubscribeMouseMovementsEvent("VerticalCamera", MoveFollowingCamera);
+        InputManager.SubscribeMouseMovementsEvent("HorizontalCamera", MoveFollowingCamera);
+        InputManager.SubscribeMouseMovementsEvent("VerticalCamera", MoveFollowingCamera);
 
         // Register Player Movements
-        m_inputsManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { MoveCharacter, StopMovements });
-        m_inputsManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Sprint, "Boost", new System.Action[] { MakePlayerSprint, StopSprint });
+        InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { MoveCharacter, StopMovements });
+        InputManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { JumpingAndLanding, null, null });
+        InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Sprint, "Boost", new System.Action[] { MakePlayerSprint, StopSprint });
+
+        // Register transformation inputs
+        InputManager.SubscribeButtonEvents(InputManager.ActionsLabels.Transformation, "Transformation", new System.Action[] { FormsController.Instance.CloseTransformationWheel, null, FormsController.Instance.OpenTransformationWheel });
+
+        // Register Fighting inputs
+        InputManager.SubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeChanged.Changed, Attack);
 
         // Register inventory inputs
-        m_inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.OpenInventory, "OpenInventory", InputManager.EventTypeButton.Down, InventoryManager.Instance.OpenOrCloseInventory);
-        m_inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Interact, "Interact", InputManager.EventTypeButton.Down, Interact);
-
-    }        
+        InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.OpenInventory, "OpenInventory", InputManager.EventTypeButton.Down, InventoryManager.Instance.OpenOrCloseInventory);
+        InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Interact, "Interact", InputManager.EventTypeButton.Down, Interact);
+    }   
 
     protected virtual void Update()
     {
         /// Check if some inputs has been received.
-        m_inputsManager.GetVirtualButtonInputs();
+        InputManager.GetVirtualButtonInputs();
         //inputsManager.GetMouseMoveInput();
-        m_inputsManager.GetMouseMovementsChangedInput();
+        InputManager.GetMouseMovementsChangedInput();
 
         m_wasGrounded = m_isGrounded;
 
@@ -103,7 +111,7 @@ public class MovementController : MonoBehaviour {
 
     protected void LateUpdate() {
         // Check if some mouse movements inputs has been received.
-        m_inputsManager.GetMouseMoveInput();
+        InputManager.GetMouseMoveInput();
     }
 
     #region FollowingCamera
@@ -165,6 +173,8 @@ public class MovementController : MonoBehaviour {
             m_playerInteraction.GetClosestItem().Interact();
         }
     }
+
+    protected virtual void Attack() { }
     #endregion
 
     protected void OnCollisionEnter(Collision collision)

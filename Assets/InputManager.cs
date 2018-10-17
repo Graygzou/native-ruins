@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager {
+public static class InputManager {
 
     #region Enums
     public enum ActionsLabels : int
@@ -17,6 +17,7 @@ public class InputManager {
         OpenInventory = 6,
         PutAwayWeapon = 7,
         Interact = 8,
+        Transformation = 9,
         MoveCamera = 100,
         
     }
@@ -38,10 +39,10 @@ public class InputManager {
     // Use keycode
     //private IDictionary<KeyCode, System.Action[]> keyCodeCallbacks = new Dictionary<KeyCode, System.Action[]>();
     // Use Unity inputs
-    private IDictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>> buttonInputsCallbacks;
-    private IDictionary<string, System.Action> axisMovementsCallbacks;
-    private IDictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>> axisMovementsChangedCallbacks;
-    
+    private static IDictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>> buttonInputsCallbacks = new Dictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>>();
+    private static IDictionary<string, System.Action> axisMovementsCallbacks = new Dictionary<string, System.Action>();
+    private static IDictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>> axisMovementsChangedCallbacks = new Dictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>>();
+
 
     // Others
     /*
@@ -88,15 +89,8 @@ public class InputManager {
     #endregion
     */
 
-    public InputManager()
-    {
-        buttonInputsCallbacks = new Dictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>>();
-        axisMovementsCallbacks = new Dictionary<string, System.Action>();
-        axisMovementsChangedCallbacks = new Dictionary<ActionsLabels, KeyValuePair<string[], System.Action[]>>();
-    }
-
     #region TESTS
-    private void Start()
+    private static void Start()
     {
         /*SubscribeButtonEvent("Horizontal", EventTypeButton.Down, Horizontal);
         SubscribeButtonEvent("Vertical", EventTypeButton.Down, Vertical);
@@ -117,94 +111,94 @@ public class InputManager {
         //SubscribeMouseMovementsEvent("VerticalCamera", VerticalCamera);
     }
 
-    private void Horizontal() 
+    private static void Horizontal() 
     {
         Debug.Log("Horizontal pressed !");
     }
 
-    private void Vertical()
+    private static void Vertical()
     {
         Debug.Log("Vertical pressed !");
     }
 
-    private void Zoom1()
+    private static void Zoom1()
     {
         Debug.Log("Zoom1 pressed !");
     }
 
-    private void Fire1()
+    private static void Fire1()
     {
         Debug.Log("Fire1 pressed !");
     }
 
-    private void Aiming()
+    private static void Aiming()
     {
         Debug.Log("Aiming pressed !");
     }
 
-    private void Fire3()
+    private static void Fire3()
     {
         Debug.Log("Fire3 pressed !");
     }
 
-    private void Jump()
+    private static void Jump()
     {
         Debug.Log("Jump (space bar) pressed !");
     }
 
-    private void MouseX()
+    private static void MouseX()
     {
         Debug.Log("MouseX pressed !");
     }
 
-    private void MouseY()
+    private static void MouseY()
     {
         Debug.Log("MouseY pressed !");
     }
 
-    private void MouseScrollWheel()
+    private static void MouseScrollWheel()
     {
         Debug.Log("MouseScrollWheel pressed !");
     }
 
-    private void Submit()
+    private static void Submit()
     {
         Debug.Log("Submit pressed !");
     }
 
-    private void Cancel()
+    private static void Cancel()
     {
         Debug.Log("Cancel pressed !");
     }
 
-    private void Boost()
+    private static void Boost()
     {
         Debug.Log("Boost pressed !");
     }
 
-    private void OpenInventory()
+    private static void OpenInventory()
     {
         Debug.Log("Inventory pressed !");
     }
 
-    private void Crouch()
+    private static void Crouch()
     {
         Debug.Log("Crouch pressed !");
     }
 
-    private void HorizontalCamera()
+    private static void HorizontalCamera()
     {
         Debug.Log("Horizontal camera !");
     }
 
-    private void VerticalCamera()
+    private static void VerticalCamera()
     {
         Debug.Log("Vertical camera !");
     }
 
     #endregion
 
-    public void CheckAllInputs()
+    public static void CheckAllInputs()
     {
         GetVirtualButtonInputs();
         GetMouseMoveInput();
@@ -212,7 +206,7 @@ public class InputManager {
     }
 
     #region UnityVirtualEvents
-    public void GetVirtualButtonInputs()
+    public static void GetVirtualButtonInputs()
     {
         foreach (ActionsLabels action in buttonInputsCallbacks.Keys)
         {
@@ -236,26 +230,10 @@ public class InputManager {
                 }
                 i++;
             }
-            /*
-            foreach (string[], System.Action[]> input in buttonInputsCallbacks[action])
-            {
-                if (Input.GetButtonUp(input) && buttonInputsCallbacks[input][(int)EventTypeButton.Up] != null)
-                {
-                    buttonInputsCallbacks[input][(int)EventTypeButton.Up]();
-                }
-                if (Input.GetButton(input) && buttonInputsCallbacks[input][(int)EventTypeButton.Hold] != null)
-                {
-                    buttonInputsCallbacks[input][(int)EventTypeButton.Hold]();
-                }
-                if (Input.GetButtonDown(input) && buttonInputsCallbacks[input][(int)EventTypeButton.Down] != null)
-                {
-                    buttonInputsCallbacks[input][(int)EventTypeButton.Down]();
-                }
-            }*/
         }
     }
 
-    public void GetMouseMoveInput()
+    public static void GetMouseMoveInput()
     {
         foreach (string input in axisMovementsCallbacks.Keys)
         {
@@ -263,7 +241,7 @@ public class InputManager {
         }
     }
 
-    public void GetMouseMovementsChangedInput()
+    public static void GetMouseMovementsChangedInput()
     {
         foreach (ActionsLabels action in axisMovementsChangedCallbacks.Keys)
         {
@@ -283,23 +261,11 @@ public class InputManager {
                 }
                 i++;
             }
-            /*
-            foreach (string input in axisMovementsChangedCallbacks.Keys)
-            {
-                if (Input.GetAxis(input) != 0 && axisMovementsChangedCallbacks[input][(int)EventTypeChanged.Changed] != null)
-                {
-                    axisMovementsChangedCallbacks[input][(int)EventTypeChanged.Changed]();
-                }
-                else if (axisMovementsChangedCallbacks[input][(int)EventTypeChanged.UnChanged] != null)
-                {
-                    axisMovementsChangedCallbacks[input][(int)EventTypeChanged.UnChanged]();
-                }
-            }*/
         }
     }
     #endregion
 
-    public void UnsubscribeAll(string key)
+    public static void UnsubscribeAll(string key)
     {
         buttonInputsCallbacks.Clear();
         axisMovementsCallbacks.Clear();
@@ -311,7 +277,7 @@ public class InputManager {
     }
 
     #region SubscribeEvents
-    public void SubscribeButtonEvent(ActionsLabels action, string input, EventTypeButton type, System.Action callback)
+    public static void SubscribeButtonEvent(ActionsLabels action, string input, EventTypeButton type, System.Action callback)
     {
         if (buttonInputsCallbacks.ContainsKey(action))
         {
@@ -334,39 +300,58 @@ public class InputManager {
         }
     }
 
-    public void SubscribeButtonEvents(ActionsLabels action, string input, params System.Action[] callbacks)
+    public static void SubscribeButtonEvents(ActionsLabels action, string input, params System.Action[] callbacks)
     {
         SubscribeButtonEvents(action, new string[] { input }, callbacks);
     }
 
-    public void SubscribeButtonEvents(ActionsLabels action, string[] input, params System.Action[] callbacks)
+    public static void SubscribeButtonEvents(ActionsLabels action, string[] input, params System.Action[] callbacks)
     {
-        
-        int enumsLength = Enum.GetNames(typeof(EventTypeButton)).Length;
-        if (callbacks.Length == enumsLength)
+        KeyValuePair<string[], System.Action[]> currentValue = new KeyValuePair<string[], System.Action[]>(input, callbacks);
+        if (buttonInputsCallbacks.ContainsKey(action))
         {
-            buttonInputsCallbacks.Add(action, new KeyValuePair<string[], System.Action[]>(input, callbacks));
+            // Override input
+            buttonInputsCallbacks[action] = currentValue;
         }
         else
         {
-            Debug.LogWarning("The size of the callbacks array (" + callbacks.Length + ")" +
-                " is not equals to the lenght of the Enums (" + enumsLength + "). Callbacks ignored.");
+            int enumsLength = Enum.GetNames(typeof(EventTypeButton)).Length;
+            if (callbacks.Length == enumsLength)
+            {
+                buttonInputsCallbacks.Add(action, currentValue);
+            }
+            else
+            {
+                Debug.LogWarning("The size of the callbacks array (" + callbacks.Length + ")" +
+                    " is not equals to the lenght of the Enums (" + enumsLength + "). Callbacks ignored.");
+            }
         }
     }
 
-    public void SubscribeMouseMovementsEvent(string input, System.Action callbacks)
+    public static void SubscribeMouseMovementsEvent(string input, System.Action callbacks)
     {
-        axisMovementsCallbacks.Add(input, callbacks);
+        if (axisMovementsCallbacks.ContainsKey(input))
+        {
+            // Override input
+            axisMovementsCallbacks[input] = callbacks;
+        }
+        else
+        {
+            // Add the input
+            axisMovementsCallbacks.Add(input, callbacks);
+        }
     }
 
-    public void SubscribeMouseMovementsChangedEvent(ActionsLabels action, string input, EventTypeChanged type, System.Action callback)
+    public static void SubscribeMouseMovementsChangedEvent(ActionsLabels action, string input, EventTypeChanged type, System.Action callback)
     {
         if (axisMovementsChangedCallbacks.ContainsKey(action))
         {
+            // Override input
             axisMovementsChangedCallbacks[action].Value[(int)type] = callback;
         }
         else
         {
+            // Add the input
             switch (type)
             {
                 case EventTypeChanged.Changed:
@@ -379,22 +364,32 @@ public class InputManager {
         }
     }
 
-    public void SubscribeMouseMovementsChangedEvents(ActionsLabels action, string input, params System.Action[] callbacks)
+    public static void SubscribeMouseMovementsChangedEvents(ActionsLabels action, string input, params System.Action[] callbacks)
     {
         SubscribeMouseMovementsChangedEvents(action, new string[] { input }, callbacks);
     }
 
-    public void SubscribeMouseMovementsChangedEvents(ActionsLabels action, string[] input, params System.Action[] callbacks)
+    public static void SubscribeMouseMovementsChangedEvents(ActionsLabels action, string[] input, params System.Action[] callbacks)
     {
-        int enumsLength = Enum.GetNames(typeof(EventTypeChanged)).Length;
-        if (callbacks.Length == enumsLength)
+        KeyValuePair<string[], System.Action[]> currentValue = new KeyValuePair<string[], System.Action[]>(input, callbacks);
+        if (axisMovementsChangedCallbacks.ContainsKey(action))
         {
-            axisMovementsChangedCallbacks.Add(action, new KeyValuePair<string[], System.Action[]>(input, callbacks));
+            // Override input
+            axisMovementsChangedCallbacks[action] = currentValue;
         }
         else
         {
-            Debug.LogWarning("The size of the callbacks array (" + callbacks.Length + ")" +
-                " is not equals to the lenght of the Enums (" + enumsLength + "). Callbacks ignored.");
+            // Add the input
+            int enumsLength = Enum.GetNames(typeof(EventTypeChanged)).Length;
+            if (callbacks.Length == enumsLength)
+            {
+                axisMovementsChangedCallbacks.Add(action, currentValue);
+            }
+            else
+            {
+                Debug.LogWarning("The size of the callbacks array (" + callbacks.Length + ")" +
+                    " is not equals to the lenght of the Enums (" + enumsLength + "). Callbacks ignored.");
+            }
         }
     }
     #endregion

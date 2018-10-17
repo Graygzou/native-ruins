@@ -15,6 +15,7 @@ public class MovementControllerAnimal : MovementController {
 
     new void Awake() {
         base.Awake();
+
         sons = GetComponents<AudioSource>();
         sonAttaque = sons[1];
 
@@ -27,15 +28,9 @@ public class MovementControllerAnimal : MovementController {
         //m_jumpForce = 3;
     }
 
-    protected override void Start()
+    override protected void Move(Vector3 nextDir, float h, float v)
     {
-        base.Start();
-
-        // Special movements
-        m_inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { JumpingAndLanding, null, null });
-        // Register the fighting related actions
-        //inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeButton.Down, Attack);
-        m_inputsManager.SubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeChanged.Changed, Attack);
+        base.Move(nextDir, h, v);
     }
 
     override protected void JumpingAndLanding()
@@ -67,7 +62,7 @@ public class MovementControllerAnimal : MovementController {
         }
 	}
 
-    private void Attack()
+    override protected void Attack()
     {
         Debug.Log(Input.GetAxis("Fire1"));
         bool attackCooldownOver = (Time.time - m_attackTimeStamp) >= m_minattackInterval;

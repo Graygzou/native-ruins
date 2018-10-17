@@ -57,22 +57,6 @@ public class FormsController : MonoBehaviour
         Debug.Log(_instance.currentForm);
     }
 
-    public void Update()
-    {
-        if (Input.GetKey(KeyCode.A) && !(_instance.availableForms[(int)TransformationType.Human].GetComponent<MovementController>().isDeath()))
-        {
-            OpenTransformationWheel();
-        }
-        else
-        {
-            CloseTransformationWheel();
-            if (selectedForm != currentForm)
-            {
-                Transformation();
-            }
-        }
-    }
-
     public int IsPumaUnlocked()
     {
         return System.Convert.ToInt32(_instance.pumaUnlocked == true);
@@ -103,98 +87,109 @@ public class FormsController : MonoBehaviour
         return System.Convert.ToInt32(currentForm);
     }
 
-    private void OpenTransformationWheel()
+    public void OpenTransformationWheel()
     {
-        _instance.transformationWheelOpen = true;
-        // Verification des formes disponibles
-        if (!_instance.pumaUnlocked)
+        if (!(_instance.availableForms[(int)TransformationType.Human].GetComponent<MovementController>().isDeath()))
         {
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPuma").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(true);
-        }
-        else
-        {
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPuma").SetActive(true);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(false);
-        }
-
-        if (!bearUnlocked)
-        {
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconBear").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearLocked").SetActive(true);
-        }
-
-        // Temps arrêté
-        Time.timeScale = 0f;
-
-        // Affichage de la roue
-        _instance.transformationWheel.SetActive(true);
-        
-        // Données utiles à la sélection
-        Vector3 centreScreen = new Vector3(Screen.width / 2, Screen.height/2, 0);
-        Vector3 positionMouse = Input.mousePosition;
-        Vector3 difference = positionMouse - centreScreen;
-        
-        // Si en dehors du centre de la roue :
-        if (difference.magnitude > 125)
-        {
-            // Si sur le tiers du dessus :
-            // coefficient directeur de la droite "gauche"
-            float a1 = -182f / 312f;
-            // "ordonnée à l'origine"
-            float b1 = centreScreen.y - a1 * centreScreen.x;
-            // coefficient directeur de la droite "droite"
-            float a2 = -a1;
-            // "ordonnée à l'origine"
-            float b2 = centreScreen.y - a2 * centreScreen.x;
-
-            // SELECTION HUMAIN
-            if ((positionMouse.y > positionMouse.x*a1 + b1) && (positionMouse.y > positionMouse.x*a2 + b2))
+            // Unsubscribe the player movement and plug it to the transformation wheel
+            
+            
+            _instance.transformationWheelOpen = true;
+            // Verification des formes disponibles
+            if (!_instance.pumaUnlocked)
             {
-                _instance.selectedForm = TransformationType.Human;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(true);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPuma").SetActive(false);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(true);
             }
             else
             {
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPuma").SetActive(true);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(false);
+            }
+
+            if (!bearUnlocked)
+            {
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconBear").SetActive(false);
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearLocked").SetActive(true);
+            }
+
+            // Temps arrêté
+            Time.timeScale = 0f;
+
+            // Affichage de la roue
+            _instance.transformationWheel.SetActive(true);
+
+            // Données utiles à la sélection
+            Vector3 centreScreen = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+            Vector3 positionMouse = Input.mousePosition;
+            Vector3 difference = positionMouse - centreScreen;
+
+            // Si en dehors du centre de la roue :
+            if (difference.magnitude > 125)
+            {
+                // Si sur le tiers du dessus :
+                // coefficient directeur de la droite "gauche"
+                float a1 = -182f / 312f;
+                // "ordonnée à l'origine"
+                float b1 = centreScreen.y - a1 * centreScreen.x;
+                // coefficient directeur de la droite "droite"
+                float a2 = -a1;
+                // "ordonnée à l'origine"
+                float b2 = centreScreen.y - a2 * centreScreen.x;
+
+                // SELECTION HUMAIN
+                if ((positionMouse.y > positionMouse.x * a1 + b1) && (positionMouse.y > positionMouse.x * a2 + b2))
+                {
+                    _instance.selectedForm = TransformationType.Human;
+                    GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(true);
+                }
+                else
+                {
+                    GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(false);
+                }
+
+                // SELECTION OURS
+                if ((positionMouse.y < positionMouse.x * a2 + b2) && (positionMouse.x > centreScreen.x) && bearUnlocked)
+                {
+                    _instance.selectedForm = TransformationType.Bear;
+                    GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(true);
+                }
+                else
+                {
+                    GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(false);
+                }
+
+                // SELECTION PUMA
+                if ((positionMouse.y < positionMouse.x * a1 + b1) && (positionMouse.x < centreScreen.x) && pumaUnlocked)
+                {
+                    _instance.selectedForm = TransformationType.Puma;
+                    GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(true);
+                }
+                else
+                {
+                    GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
+                }
+            }
+            else
+            {
+                _instance.selectedForm = _instance.currentForm;
                 GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(false);
-            }
-
-            // SELECTION OURS
-            if ((positionMouse.y < positionMouse.x * a2 + b2) && (positionMouse.x > centreScreen.x) && bearUnlocked)
-            {
-                _instance.selectedForm = TransformationType.Bear;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(true);
-            }
-            else
-            {
+                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
                 GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(false);
             }
-
-            // SELECTION PUMA
-            if ((positionMouse.y < positionMouse.x * a1 + b1) && (positionMouse.x < centreScreen.x) && pumaUnlocked)
-            {
-                _instance.selectedForm = TransformationType.Puma;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(true);
-            }
-            else
-            {
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
-            }
-        }
-        else
-        {
-            _instance.selectedForm = _instance.currentForm;
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(false);
         }
     }
 
-    private void CloseTransformationWheel()
+    public void CloseTransformationWheel()
     {
+        Debug.Log("Close");
         _instance.transformationWheelOpen = false;
         Time.timeScale = 1;
         _instance.transformationWheel.SetActive(false);
+        if (selectedForm != currentForm)
+        {
+            Transformation();
+        }
     }
 
     private void Transformation()
@@ -206,7 +201,6 @@ public class FormsController : MonoBehaviour
         {
             positionCourant = transformation.activeSelf ? transformation.transform.position : positionCourant;
             transformation.SetActive(false);
-            //positionCourant = availableForms[(int)TransformationType.Human].transform.position;
         }
         if (_instance.currentForm != _instance.selectedForm)
         {
@@ -215,6 +209,8 @@ public class FormsController : MonoBehaviour
         // Activation nouvelle forme
         _instance.availableForms[(int)selectedForm].transform.position = positionCourant;
         _instance.availableForms[(int)selectedForm].SetActive(true);
+        // Override the inputs of the current forms
+        _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterInputs();
         _instance.currentForm = _instance.selectedForm;
     }
 

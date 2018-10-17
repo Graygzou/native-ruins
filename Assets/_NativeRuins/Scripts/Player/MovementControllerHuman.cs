@@ -7,7 +7,6 @@ public class MovementControllerHuman : MovementController {
 
     //[SerializeField] private ActionsNew actions = null;
     public float mouseSmoothness = 5.0f;
-    private Camera playerCamera;
     private Camera aimCamera;
     private bool isAiming;
     private bool isReloading;
@@ -39,9 +38,6 @@ public class MovementControllerHuman : MovementController {
         isReloading = false;
         hasArrowLeft = false;
 
-        // Get the regular camera
-        playerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-
         // Disable the aim camera
         aimCamera = GameObject.Find("SportyGirl/AimedCamera").GetComponent<Camera>();
         offset = aimCamera.transform.position - GameObject.FindWithTag("Player").transform.position;
@@ -66,22 +62,18 @@ public class MovementControllerHuman : MovementController {
         initFleche = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").transform.rotation;
     }
 
-    protected override void Start()
+    override public void RegisterInputs()
     {
-        base.Start();
+        base.RegisterInputs();
 
         // Special movements inputs
-        m_inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Crouch, "Crouch", new System.Action[] { SwicthIsPlayerCrouch, SwicthIsPlayerCrouch, null });
-        m_inputsManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { JumpingAndLanding, null, null });
+        InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Crouch, "Crouch", InputManager.EventTypeButton.Down, SwicthIsPlayerCrouch);
         
         // Register the fighting inputs
-        m_inputsManager.SubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeChanged.Changed, Fire);
-        m_inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.Aiming, "Aiming", InputManager.EventTypeButton.Down, ChangedPlayerAimedState);
-        m_inputsManager.SubscribeButtonEvent(InputManager.ActionsLabels.PutAwayWeapon, "PutAwayWeapon", InputManager.EventTypeButton.Down, InventoryManager.Instance.PutWeaponInBag);
-
-
+        InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Aiming, "Aiming", InputManager.EventTypeButton.Down, ChangedPlayerAimedState);
+        InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.PutAwayWeapon, "PutAwayWeapon", InputManager.EventTypeButton.Down, InventoryManager.Instance.PutWeaponInBag);
+        
         // Register others possible interactions
-
         /* TODO Later
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -110,7 +102,6 @@ public class MovementControllerHuman : MovementController {
         if (Input.GetKeyDown(KeyCode.J)) {
             bow.strech() 
         }*/
-
     }
 
     // In this case, the vector3 NextDir is not used.
@@ -163,13 +154,13 @@ public class MovementControllerHuman : MovementController {
 
     #region Callbacks
 
-    public void Fire()
+    override protected void Attack()
     {
         if (m_isGrounded)
         {
             if (InventoryManager.Instance.isBowEquiped && isAiming && !isReloading && hasArrowLeft)
             {
-                Debug.Log("Fire");
+                Debug.Log("Attack");
                 FireArrow();
             }
             else if (InventoryManager.Instance.isTorchEquiped)
@@ -193,7 +184,7 @@ public class MovementControllerHuman : MovementController {
 
                 // change the camera for the aim
                 aimCamera.enabled = true;
-                playerCamera.enabled = false;
+                m_cameraPivot.GetComponent<Camera>().enabled = false;
 
                 // Activate the crosshair
                 GameObject crosshair = GameObject.Find("Arrow_aim").gameObject;
@@ -221,7 +212,7 @@ public class MovementControllerHuman : MovementController {
                 // change the camera for the aim
                 //SwitchToRegular();
                 aimCamera.enabled = false;
-                playerCamera.enabled = true;
+                m_cameraPivot.GetComponent<Camera>().enabled = true;
 
                 GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(false);
 
