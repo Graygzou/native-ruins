@@ -14,8 +14,6 @@ public class AutoSelectInput : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log("IsFocused" + eventSystem.isFocused);
-        Debug.Log("CurrentGameObject" + eventSystem.currentSelectedGameObject);
         if (Input.GetAxisRaw("Vertical") != 0 && buttonSelected == false)
         {
             eventSystem.SetSelectedGameObject(selectedObject);
