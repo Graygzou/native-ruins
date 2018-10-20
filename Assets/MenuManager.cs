@@ -24,7 +24,12 @@ public class MenuManager : MonoBehaviour {
 
     #region Serialize fields
     [SerializeField]
-    private string mainSceneName = "Map Island";
+    private string mainMenuName = "MenuDemarrer";
+    [SerializeField]
+    private string mainSceneName = "MapIslandNew";
+
+    [SerializeField]
+    private GameObject mainUI;
 
     [SerializeField]
     private Button loadButton;
@@ -49,6 +54,24 @@ public class MenuManager : MonoBehaviour {
         {
             _instance = this;
         }
+
+        // Enable or not the launch game button
+        PlayerPrefs.SetInt("load_scene", 0);
+        loadButton.enabled = PlayerPrefs.HasKey("xPlayer");
+    }
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name.Equals(SceneManager.GetSceneByName(mainMenuName)))
+        {
+            // Set the canvas's render mode to Screen Space - Camera
+            mainUI.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+        }
+        else
+        {
+            // Set the canvas's render mode to World Space Render
+            mainUI.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+        }
     }
 
     void FixedUpdate()
@@ -56,18 +79,6 @@ public class MenuManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pause.SetActive(!pause.activeSelf);
-        }
-
-    }
-
-    private void Start()
-    {
-        PlayerPrefs.SetInt("load_scene", 0);
-
-        // Enable or not the launch game button
-        if (PlayerPrefs.HasKey("xPlayer"))
-        {
-            loadButton.enabled = true;
         }
     }
 
