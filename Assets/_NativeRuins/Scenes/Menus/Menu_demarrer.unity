@@ -1524,11 +1524,10 @@ GameObject:
   - component: {fileID: 198303574}
   - component: {fileID: 198303578}
   - component: {fileID: 198303577}
-  - component: {fileID: 198303575}
+  - component: {fileID: 198303581}
   - component: {fileID: 198303576}
   - component: {fileID: 198303579}
   - component: {fileID: 198303580}
-  - component: {fileID: 198303581}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1557,19 +1556,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 900, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &198303575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 198303573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dd38646cbd3e064d883f5946d71d97c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainSceneName: Map Island
-  loadButton: {fileID: 1812449674}
 --- !u!114 &198303576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1655,6 +1641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfddf6d0c53a43e4a803f2281bd042ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSceneName: Map Island
+  loadButton: {fileID: 1812449674}
   pause: {fileID: 0}
   help: {fileID: 0}
 --- !u!1 &202469136
@@ -4431,7 +4419,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 198303575}
+      - m_Target: {fileID: 198303581}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -12065,7 +12053,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 198303581}
         m_MethodName: NouvellePartie
         m_Mode: 1
         m_Arguments:
@@ -14705,8 +14693,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1812449677}
-        m_MethodName: TransitionToNextPanel
+      - m_Target: {fileID: 198303581}
+        m_MethodName: LancerPartie
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
