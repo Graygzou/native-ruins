@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour {
 
+    #region Enums
+    public enum MenuPanel : int
+    {
+        Panel0 = 0,
+        Panel1 = 1,
+        Panel2 = 2,
+        Panel3 = 3,
+    }
+    #endregion
+
     #region Singleton
     private static MenuManager _instance;
 
@@ -16,6 +26,8 @@ public class MenuManager : MonoBehaviour {
 
     [SerializeField]
     private GameObject help;
+
+    private Animator animator;
     #endregion
 
     protected void Awake()
@@ -28,6 +40,7 @@ public class MenuManager : MonoBehaviour {
         {
             _instance = this;
         }
+        _instance.animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -48,6 +61,13 @@ public class MenuManager : MonoBehaviour {
     public void CloseHelpMenu()
     {
         _instance.help.SetActive(false);
+    }
+
+    public void TransitionToNextPanel(MenuPanel nextPanel)
+    {
+        // Enable the trigger for the given panel
+        _instance.animator.SetInteger("PanelNumber", (int)nextPanel);
+        _instance.animator.SetTrigger("Close");
     }
 
 }
