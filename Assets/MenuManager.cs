@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour {
     [SerializeField]
     private GameObject help = null;
 
+    [SerializeField]
     private Animator animator;
     #endregion
 
@@ -48,7 +49,6 @@ public class MenuManager : MonoBehaviour {
         {
             _instance = this;
         }
-        _instance.animator = GetComponent<Animator>();
     }
 
     void FixedUpdate()
