@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour {
+public class MenuManager : Manager {
 
     #region Enums
     public enum MenuPanel : int
     {
-        Panel0 = 0,
-        Panel1 = 1,
-        Panel2 = 2,
-        Panel3 = 3,
+        MainMenu = 0,
+        Options = 1,
+        Credits = 2,
+        Pause = 3,
+        Controls = 4,
     }
     #endregion
 
@@ -22,27 +23,30 @@ public class MenuManager : MonoBehaviour {
     public static MenuManager Instance { get { return _instance; } }
     #endregion
 
-    #region Serialize fields
+    [Header("Scenes names")]
     [SerializeField]
     private string mainMenuName = "MenuDemarrer";
     [SerializeField]
     private string mainSceneName = "MapIslandNew";
 
+    [Header("UI Prefabs")]
     [SerializeField]
-    private GameObject mainUI;
+    private GameObject mainUIPrefab;
+    private GameObject _currentMainUI;
 
+    [SerializeField]
+    private GameObject inGameUIPrefab;
+    private GameObject _currentInGameUI;
+
+    [Header("Others settings")]
     [SerializeField]
     private Button loadButton;
-
     [SerializeField]
     private GameObject pause = null;
-
     [SerializeField]
     private GameObject help = null;
-
     [SerializeField]
-    private Animator animator;
-    #endregion
+    private MainUI mainUIScript;
 
     protected void Awake()
     {
@@ -54,24 +58,51 @@ public class MenuManager : MonoBehaviour {
         {
             _instance = this;
         }
-
-        // Enable or not the launch game button
-        PlayerPrefs.SetInt("load_scene", 0);
-        loadButton.enabled = PlayerPrefs.HasKey("xPlayer");
+        Init();
     }
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name.Equals(SceneManager.GetSceneByName(mainMenuName)))
+        Canvas canvas = _currentMainUI.GetComponent<Canvas>();
+        if (SceneManager.GetActiveScene().name.Equals(mainMenuName))
         {
             // Set the canvas's render mode to Screen Space - Camera
-            mainUI.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
+            canvas.worldCamera = Camera.main;
+
+            // Let know the animator of events
+            mainUIScript.MainMenuAnimator.SetTrigger("Open");
+            mainUIScript.MainMenuAnimator.SetInteger("PanelNumber", (int)MenuPanel.MainMenu);
         }
         else
         {
             // Set the canvas's render mode to World Space Render
-            mainUI.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+            canvas.renderMode = RenderMode.WorldSpace;
+            // Let know the animator of that
+            mainUIScript.MainMenuAnimator.SetTrigger("Open");
+            mainUIScript.MainMenuAnimator.SetInteger("PanelNumber", (int)MenuPanel.Pause);
         }
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        Debug.Log("Info: Load Level Number: " + level);
+
+        Init();
+
+        switch (level)
+        {
+            case 0:
+                // Nothing more
+                break;
+            case 1:
+                InitMapIsland();
+                break;
+            default:
+                // Nothing here
+                break;
+        }
+        
     }
 
     void FixedUpdate()
@@ -81,6 +112,43 @@ public class MenuManager : MonoBehaviour {
             pause.SetActive(!pause.activeSelf);
         }
     }
+
+    #region Level UI init
+    private void Init()
+    {
+        // Create the UI prefab if needed
+        if (!GameObject.FindGameObjectWithTag(mainUIPrefab.tag))
+        {
+            Debug.Log("Info: Create mainUI in the hierarchy");
+            _currentMainUI = Instantiate(mainUIPrefab);
+        }
+        else
+        {
+            _currentMainUI = GameObject.FindGameObjectWithTag(mainUIPrefab.tag);
+            // Enable or not the launch game button
+            PlayerPrefs.SetInt("load_scene", 0);
+            loadButton.enabled = PlayerPrefs.HasKey("xPlayer");
+        }
+        mainUIScript = _currentMainUI.GetComponent<MainUI>();
+    }
+
+    private void InitMapIsland()
+    {
+        // Create the HUD if needed
+        if (!GameObject.FindGameObjectWithTag(inGameUIPrefab.tag))
+        {
+            Debug.Log("Info: Create InGameUI in the hierarchy");
+            _currentMainUI = Instantiate(inGameUIPrefab);
+        }
+        else
+        {
+            _currentMainUI = GameObject.FindGameObjectWithTag(inGameUIPrefab.tag);
+            // Enable or not the launch game button
+            PlayerPrefs.SetInt("load_scene", 0);
+            loadButton.enabled = PlayerPrefs.HasKey("xPlayer");
+        }
+    }
+    #endregion
 
     public void DisplayHelpMenu()
     {
@@ -92,42 +160,17 @@ public class MenuManager : MonoBehaviour {
         _instance.help.SetActive(false);
     }
 
-    //Lance la scène Map Island et détruit la scène actuelle "Menu_demarrer"
-    public void LancerPartie()
-    {
-        //Permet de verifier qu'il y ait bien une sauvegarde
-        if(PlayerPrefs.HasKey("xPlayer"))
-        {
-            PlayerPrefs.SetInt("load_scene", 1);
-            //Chargement de la scene
-            SceneManager.LoadScene(PlayerPrefs.GetString("scene"));
-        }
-        else
-        {
-            Debug.LogWarning("The player should have saved data to be able to click on this button..");
-        }
-    }
-
-    //Créer une nouvelle partie et écrase l'ancienne
+    // Créer une nouvelle partie et écrase l'ancienne
     public void NouvellePartie()
     {
         SceneManager.LoadScene(mainSceneName);
     }
 
-    public void QuitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit ();
-#endif
-    }
-
-    public void TransitionToNextPanel(MenuPanel nextPanel)
+    public void TransitionToNextPanelMain(MenuPanel nextPanel)
     {
         // Enable the trigger for the given panel
-        _instance.animator.SetInteger("PanelNumber", (int)nextPanel);
-        _instance.animator.SetTrigger("Close");
+        mainUIScript.MainMenuAnimator.SetInteger("PanelNumber", (int)nextPanel);
+        mainUIScript.MainMenuAnimator.SetTrigger("Close");
     }
 
 }

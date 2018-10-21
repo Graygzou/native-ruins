@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Sauvegarde : MonoBehaviour {
+public class Sauvegarde : Manager {
 
     // Used to save and load the game
     private static GameObject Player;
