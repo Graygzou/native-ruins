@@ -15,10 +15,6 @@ public class MovementControllerHuman : MovementController {
 
     private Vector3 targetDirection;                        // Direction toward the target (mouse position in the World)
 
-    //public Transform aimCamHolder;
-    Vector3 initLargeurCrossHair;
-    Vector3 initHauteurCrossHair;
-
     private Quaternion initUpperBody;
     private Quaternion initEpaule;
     private Quaternion initMain;
@@ -42,14 +38,6 @@ public class MovementControllerHuman : MovementController {
         aimCamera = GameObject.Find("SportyGirl/AimedCamera").GetComponent<Camera>();
         offset = aimCamera.transform.position - GameObject.FindWithTag("Player").transform.position;
         aimCamera.enabled = false;
-
-        // Get the initial position of the crosshair (to print it correctly)
-        GameObject crosshair = GameObject.Find("Arrow_aim").gameObject;
-        Transform largeurCrossHair = crosshair.transform.GetChild(0);
-        Transform hauteurCrossHair = crosshair.transform.GetChild(1);
-
-        initLargeurCrossHair = largeurCrossHair.GetComponent<RectTransform>().localPosition;
-        initHauteurCrossHair = hauteurCrossHair.GetComponent<RectTransform>().localPosition;
 
         // Get all the audio clips of the bow
         bow = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D");
@@ -108,20 +96,20 @@ public class MovementControllerHuman : MovementController {
     override protected void JumpingAndLanding()
     {
         bool jumpCooldownOver;
-        if (m_rigidBody.velocity.magnitude <= 1.0)
+        if (rigidBody.velocity.magnitude <= 1.0)
         {
-            jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
+            jumpCooldownOver = (Time.time - jumpTimeStamp) >= minJumpInterval;
         }
         else
         {
-            jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= 1.0;
+            jumpCooldownOver = (Time.time - jumpTimeStamp) >= 1.0;
         }
 
-        if (jumpCooldownOver && m_isGrounded)
+        if (jumpCooldownOver && isGrounded)
         {
-            m_jumpTimeStamp = Time.time;
-            m_animator.Play("JumpMecanics", m_animator.GetLayerIndex("Movement Layer"));
-            m_rigidBody.AddForce(Vector3.up * 45, ForceMode.Impulse);
+            jumpTimeStamp = Time.time;
+            animator.Play("JumpMecanics", animator.GetLayerIndex("Movement Layer"));
+            rigidBody.AddForce(Vector3.up * 45, ForceMode.Impulse);
         }
     }
 
@@ -156,7 +144,7 @@ public class MovementControllerHuman : MovementController {
 
     override protected void Attack()
     {
-        if (m_isGrounded)
+        if (isGrounded)
         {
             if (InventoryManager.Instance.isBowEquiped && isAiming && !isReloading && hasArrowLeft)
             {
@@ -173,10 +161,12 @@ public class MovementControllerHuman : MovementController {
 
     public void ChangedPlayerAimedState()
     {
-        if (m_isGrounded && InventoryManager.Instance.isBowEquiped)
+        if (isGrounded && InventoryManager.Instance.isBowEquiped)
         {
             if (!isAiming)
             {
+                // Should change the subscribe inputs for crosshair
+
                 // Equip the bow
                 isAiming = true;
 
@@ -184,9 +174,11 @@ public class MovementControllerHuman : MovementController {
 
                 // change the camera for the aim
                 aimCamera.enabled = true;
-                m_cameraPivot.GetComponent<Camera>().enabled = false;
+                cameraPivot.enabled = false;
 
                 // Activate the crosshair
+                MenuManager.Instance.EnableCrossHair();
+                /*
                 GameObject crosshair = GameObject.Find("Arrow_aim").gameObject;
                 Transform largeurCrossHair = crosshair.transform.GetChild(0);
                 Transform hauteurCrossHair = crosshair.transform.GetChild(1);
@@ -195,10 +187,13 @@ public class MovementControllerHuman : MovementController {
 
                 // Set his first position
                 largeurCrossHair.transform.position = Input.mousePosition + initLargeurCrossHair;
-                hauteurCrossHair.transform.position = Input.mousePosition + initHauteurCrossHair;
+                hauteurCrossHair.transform.position = Input.mousePosition + initHauteurCrossHair;*/
             }
             else
             {
+                // Should comeback on the subscribe inputs for following camera
+
+
                 // unbend the string
                 GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D/BowRig_tex/Root/String").GetComponent<BowString>().Release();
 
@@ -212,14 +207,14 @@ public class MovementControllerHuman : MovementController {
                 // change the camera for the aim
                 //SwitchToRegular();
                 aimCamera.enabled = false;
-                m_cameraPivot.GetComponent<Camera>().enabled = true;
+                cameraPivot.GetComponent<Camera>().enabled = true;
 
                 GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Arrow3D").SetActive(false);
 
                 // Remove the bow
                 isAiming = false;
             }
-            m_animator.SetBool("Aiming", isAiming);
+            animator.SetBool("Aiming", isAiming);
         }
     }
 
@@ -237,14 +232,10 @@ public class MovementControllerHuman : MovementController {
         //Vector3 rotate = upperBody.transform.eulerAngles + new Vector3(-Input.mousePosition.y * mouseSmoothness, Input.mousePosition.x * mouseSmoothness, 0f);
         //upperBody.transform.eulerAngles = rotate;
 
-        // Move the crosshair
-        GameObject crosshair = GameObject.Find("Arrow_aim").gameObject;
-        Transform largeurCrossHair = crosshair.transform.GetChild(0);
-        Transform hauteurCrossHair = crosshair.transform.GetChild(1);
-
-        // Set his first position
+        // Update the crosshair (ADD Subscribe)
+        /*
         largeurCrossHair.transform.position = Input.mousePosition + initLargeurCrossHair;
-        hauteurCrossHair.transform.position = Input.mousePosition + initHauteurCrossHair;
+        hauteurCrossHair.transform.position = Input.mousePosition + initHauteurCrossHair;*/ 
 
         // Point the body toward the crosshair. We use Raycast
         Ray ray = aimCamera.ScreenPointToRay(Input.mousePosition);
@@ -276,7 +267,7 @@ public class MovementControllerHuman : MovementController {
 
         // TODO garder la tete vers la cible ?
 
-        if (m_animator.GetCurrentAnimatorClipInfo(1).Length > 0 && m_animator.GetCurrentAnimatorClipInfo(1)[0].clip.name != "New Standing Draw Arrow")
+        if (animator.GetCurrentAnimatorClipInfo(1).Length > 0 && animator.GetCurrentAnimatorClipInfo(1)[0].clip.name != "New Standing Draw Arrow")
         {
             Vector3 targetdir = targetPoint - upperBody.transform.position;
             Vector3 targetdir2 = targetPoint - main.transform.position;
@@ -352,7 +343,7 @@ public class MovementControllerHuman : MovementController {
         // Launch the animation
         //m_animator.Play("SwordAttack", m_animator.GetLayerIndex("Movement Layer"));
         //m_animator.Play("SwordAttack", m_animator.GetLayerIndex("Fight Layer"));
-        m_animator.SetTrigger("Hit");
+        animator.SetTrigger("Hit");
 
         // Change the clip to the firing clip and play it.
         GameObject torch = GameObject.Find("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D");
@@ -384,7 +375,7 @@ public class MovementControllerHuman : MovementController {
         hasArrowLeft = InventoryManager.HasArrowLeft();
         
         // Update animator
-        m_animator.SetBool("HasArrowLeft", hasArrowLeft);
+        animator.SetBool("HasArrowLeft", hasArrowLeft);
 
         if (hasArrowLeft) {
             // SetActive the arrow

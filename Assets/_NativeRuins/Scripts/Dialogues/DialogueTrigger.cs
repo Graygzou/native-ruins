@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueTrigger : Manager {
+public class DialogueTrigger : MonoBehaviour, IManager {
 
     public static Dialogue dialogue;
 
@@ -144,4 +144,13 @@ public class DialogueTrigger : Manager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
+    public void Init()
+    {
+        // Nothing yet ?
+    }
+
+    public void InitMainScene()
+    {
+        // Nothing yet ?
+    }
 }

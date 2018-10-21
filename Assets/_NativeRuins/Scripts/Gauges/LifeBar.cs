@@ -49,7 +49,7 @@ public class LifeBar : MonoBehaviour {
     private float hurtByHungerScale = 3f;
     #endregion
 
-    private GameObject judy;
+    private GameObject playerRoot;
     private ActionsNew actions;
     private bool isWeak;
 
@@ -60,8 +60,8 @@ public class LifeBar : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		judy = GameObject.FindWithTag ("Player");
-		actions = judy.GetComponent ("ActionsNew") as ActionsNew;
+        playerRoot = GameObject.FindWithTag ("Player");
+		actions = playerRoot.GetComponent ("ActionsNew") as ActionsNew;
         isWeak = false;
      }
 
@@ -88,7 +88,7 @@ public class LifeBar : MonoBehaviour {
     void FixedUpdate () {
         // Si Judy chute 
         // Should not be in the FixedUpdate
-        if (judy.GetComponent<Rigidbody>().velocity.y < 0 && judy.GetComponent<Rigidbody>().velocity.magnitude > 100f)
+        if (playerRoot.GetComponent<Rigidbody>().velocity.y < 0 && playerRoot.GetComponent<Rigidbody>().velocity.magnitude > 100f)
         {
             Debug.Log(lifeSprite.sizeDelta.y);
             Debug.Log("Player Fall. Old life =" + lifeSprite.sizeDelta.x + ", New life = " + (lifeSprite.sizeDelta.x - hurtByFallScale));
@@ -152,9 +152,7 @@ public class LifeBar : MonoBehaviour {
 
     private void Death()
     {
-        judy.GetComponent<MovementController>().setDeath(true);
-        GameObject playerRoot = GameObject.Find("Player");
-        playerRoot.GetComponent<FormsController>().Transformation(0);
+        playerRoot.GetComponent<PlayerProperties>().KillPlayer();
         actions.Death();
         audio.Stop();
         GameObject.Find("Affichages/Menus/Menu_game_over").SetActive(true);

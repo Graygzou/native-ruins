@@ -41,7 +41,6 @@ public class InventoryManager : MonoBehaviour {
     private GameObject pickupButton;
 
     [Header("RectTransform settings")]
-    [SerializeField] private RectTransform m_canvas;
     [SerializeField] private RectTransform m_bag;
     [SerializeField] private RectTransform m_itemsContainer;
     [SerializeField] private RectTransform spawningAnchor;
@@ -62,7 +61,6 @@ public class InventoryManager : MonoBehaviour {
     public bool isTorchEquiped = false;
 
     public bool bag_open = false;
-    private Vector2 deltaScreen;
     private AudioSource audioSource;
     private EdgeCollider2D collider;
 
@@ -81,10 +79,6 @@ public class InventoryManager : MonoBehaviour {
         }
         audioSource = GetComponent<AudioSource>();
         collider = m_bag.GetComponent<EdgeCollider2D>();
-    }
-
-    void Start () {
-        deltaScreen = m_canvas.sizeDelta;
     }
 
     public void OpenOrCloseInventory()

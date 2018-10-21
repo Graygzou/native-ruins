@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : Manager {
+public class AudioManager : MonoBehaviour, IManager {
 
     #region Serialize Fields
     [SerializeField]
@@ -46,4 +46,13 @@ public class AudioManager : Manager {
         }
     }
 
+    public void Init()
+    {
+        // Nothing yet ?
+    }
+
+    public void InitMainScene()
+    {
+        // Nothing yet ?
+    }
 }

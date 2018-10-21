@@ -2,70 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementController : MonoBehaviour {
+public class MovementController : MonoBehaviour
+{
 
-    [SerializeField] protected float m_walkSpeed = 5;
-    [SerializeField] protected float m_runMultFactor = 2;
-    [SerializeField] protected float m_turnSpeed;
-    [SerializeField] protected float m_jumpForce;
+    [SerializeField] protected float walkSpeed = 5;
+    [SerializeField] protected float runMultFactor = 2;
+    [SerializeField] protected float turnSpeed;
+    [SerializeField] protected float jumpForce;
 
-    [SerializeField] protected float m_cameraSpeed = 2f;
-    protected Animator m_animator;
-    [SerializeField] protected Rigidbody m_rigidBody;
-    [SerializeField] protected AudioSource m_footstep;
-    [SerializeField] protected int m_camera_zoom_max = -1;
-    [SerializeField] protected int m_camera_zoom_min = -3;
-
-    // Actual State of the player
-    [Header("Player States (read only)")]
-    [SerializeField] private bool m_isDead;
-    [SerializeField] private bool m_isSaving;
-    [SerializeField] private bool m_dialogueOn;
-    [SerializeField] protected bool m_isPlayerCrouch = false;
-    [SerializeField] protected bool m_isMoving = false;
-    [SerializeField] protected float m_currentSpeed;
+    [SerializeField] protected float cameraSpeed = 2f;
+    protected Animator animator;
+    [SerializeField] protected Rigidbody rigidBody;
+    [SerializeField] protected AudioSource footstep;
+    [SerializeField] protected int camera_zoom_max = -1;
+    [SerializeField] protected int camera_zoom_min = -3;
 
     // Inputs gestion
-    [SerializeField] protected bool m_isShiftHold = false;
-    
-    // Cameras gestion
-    [SerializeField]
-    protected Transform m_cameraPivot;
+    [SerializeField] protected bool isShiftHold = false;
+
+    [SerializeField] protected float currentSpeed;
+    [SerializeField] protected bool isMoving = false;
+    [SerializeField] protected bool isPlayerCrouch = false;
+
     [SerializeField]
     protected EnergyBar energyBar;
     [SerializeField]
     protected LifeBar lifeBar;
 
+    protected Camera cameraPivot;
+
     protected int currentCamera = 0;
     protected Vector3 initial_orientation;
     protected Vector3 lastMousePosition = Vector3.zero;
 
-    protected bool m_wasGrounded;
-    protected Vector3 m_currentDirection = Vector3.zero;
+    protected bool wasGrounded;
+    protected Vector3 currentDirection = Vector3.zero;
 
-    protected float m_jumpTimeStamp = 0;
-    protected float m_minJumpInterval = 1.50f;
+    protected float jumpTimeStamp = 0;
+    protected float minJumpInterval = 1.50f;
 
-    protected bool m_isGrounded;
-    protected List<Collider> m_collisions = new List<Collider>();
+    protected bool isGrounded;
+    protected List<Collider> collisions = new List<Collider>();
 
-    protected PlayerInteraction m_playerInteraction;
+    protected PlayerInteraction playerInteraction;
 
-    // Use this for initialization
-    protected virtual void Awake() {
-        m_isDead = false;
-        m_dialogueOn = false;
-        m_isSaving = false;
+    protected virtual void Awake()
+    {
+        cameraPivot = Camera.main;
+
         initial_orientation = Vector3.forward;
-        m_footstep.Play();
-        m_footstep.loop = true;
-        m_footstep.Pause();
+        footstep.Play();
+        footstep.loop = true;
+        footstep.Pause();
 
-        m_currentSpeed = 0.0f;
+        currentSpeed = 0.0f;
 
         // Components
-        m_animator = GetComponent<Animator>();
-        m_playerInteraction = GetComponent<PlayerInteraction>();
+        animator = GetComponent<Animator>();
+        playerInteraction = GetComponent<PlayerInteraction>();
     }
 
     protected virtual void Start()
@@ -73,27 +67,88 @@ public class MovementController : MonoBehaviour {
         RegisterInputs();
     }
 
+    #region Inputs register
     public virtual void RegisterInputs()
     {
-        // Register Camera movements.
+        // Register all the events.
+        RegisterCameraMovementsInputs();
+        RegisterPlayerMovementsInputs();
+        RegisterTransformationInputs();
+        RegisterFightingInputs();
+        RegisterInventoryInputs();
+    }
+
+    public virtual void RegisterCameraMovementsInputs()
+    {
         InputManager.SubscribeMouseMovementsEvent("HorizontalCamera", MoveFollowingCamera);
         InputManager.SubscribeMouseMovementsEvent("VerticalCamera", MoveFollowingCamera);
+    }
 
-        // Register Player Movements
+    public virtual void RegisterPlayerMovementsInputs()
+    {
         InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { MoveCharacter, StopMovements });
         InputManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { JumpingAndLanding, null, null });
         InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Sprint, "Boost", new System.Action[] { MakePlayerSprint, StopSprint });
+    }
 
+    public virtual void RegisterTransformationInputs()
+    {
         // Register transformation inputs
         InputManager.SubscribeButtonEvents(InputManager.ActionsLabels.Transformation, "Transformation", new System.Action[] { FormsController.Instance.CloseTransformationWheel, null, FormsController.Instance.OpenTransformationWheel });
+    }
 
-        // Register Fighting inputs
+    public virtual void RegisterFightingInputs()
+    {
         InputManager.SubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Attack, "Fire1", InputManager.EventTypeChanged.Changed, Attack);
+    }
 
-        // Register inventory inputs
+    public virtual void RegisterInventoryInputs()
+    {
         InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.OpenInventory, "OpenInventory", InputManager.EventTypeButton.Down, InventoryManager.Instance.OpenOrCloseInventory);
         InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Interact, "Interact", InputManager.EventTypeButton.Down, Interact);
-    }   
+    }
+    #endregion
+
+    #region Inputs deregister
+    public virtual void DeRegisterInputs()
+    {
+        // Unregister all the events.
+        DeregisterCameraMovementsInputs();
+        DeregisterPlayerMovementsInputs();
+        DeregisterTransformationInputs();
+        DeregisterFightingInputs();
+        DeregisterInventoryInputs();
+    }
+
+    public virtual void DeregisterCameraMovementsInputs()
+    {
+        InputManager.UnsubscribeMouseMovementsEvent("HorizontalCamera");
+        InputManager.UnsubscribeMouseMovementsEvent("VerticalCamera");
+    }
+
+    public virtual void DeregisterPlayerMovementsInputs()
+    {
+        InputManager.UnsubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Movement);
+        InputManager.UnsubscribeButtonEvent(InputManager.ActionsLabels.Jump);
+        InputManager.UnsubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Sprint);
+    }
+
+    public virtual void DeregisterTransformationInputs()
+    {
+        InputManager.UnsubscribeButtonEvent(InputManager.ActionsLabels.Transformation);
+    }
+
+    public virtual void DeregisterFightingInputs()
+    {
+        InputManager.UnsubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Attack);
+    }
+
+    public virtual void DeregisterInventoryInputs()
+    {
+        InputManager.UnsubscribeButtonEvent(InputManager.ActionsLabels.OpenInventory);
+        InputManager.UnsubscribeButtonEvent(InputManager.ActionsLabels.Interact);
+    }
+    #endregion
 
     protected virtual void Update()
     {
@@ -102,11 +157,11 @@ public class MovementController : MonoBehaviour {
         //inputsManager.GetMouseMoveInput();
         InputManager.GetMouseMovementsChangedInput();
 
-        m_wasGrounded = m_isGrounded;
+        wasGrounded = isGrounded;
 
         // Update the animator with player data
-        m_animator.SetFloat("Speed", GetCurrentSpeed());
-        m_animator.SetFloat("Health", lifeBar.GetCurrentSizeLifeBar());
+        animator.SetFloat("Speed", GetCurrentSpeed());
+        //m_animator.SetFloat("Health", InGameUI.GetCurrentSizeLifeBar());
     }
 
     protected void LateUpdate() {
@@ -118,31 +173,31 @@ public class MovementController : MonoBehaviour {
     /**
      * Callback to move the following Camera
      */
-    private void MoveFollowingCamera()
+    public void MoveFollowingCamera()
     {
         float mouseX = Input.GetAxis("HorizontalCamera");
         float mouseY = Input.GetAxis("VerticalCamera");
         Vector3 dir = new Vector3(mouseX, mouseY, 0f);
         lastMousePosition = Input.mousePosition;
-        if (!FormsController.Instance.GetComponent<FormsController>().IsTransformationWheelOpened() && !InventoryManager.Instance.bag_open && !m_dialogueOn)
+        if (!FormsController.Instance.GetComponent<FormsController>().IsTransformationWheelOpened() && !InventoryManager.Instance.bag_open)
         {
             UpdateFollowingCamera(dir.x, -dir.y);
         }
-        Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
+        Transform cameraTrans = cameraPivot.transform;
         float z;
-        z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, m_camera_zoom_min, m_camera_zoom_max);
+        z = Mathf.Clamp(Input.mouseScrollDelta.y * 0.3f + cameraTrans.localPosition.z, camera_zoom_min, camera_zoom_max);
         cameraTrans.localPosition = new Vector3(cameraTrans.localPosition.x, cameraTrans.localPosition.y, z);
     }
 
     protected virtual void UpdateFollowingCamera(float deltaX, float deltaY) {
-        m_cameraPivot.localPosition = this.transform.Find("UpAnchor").position;
+        cameraPivot.transform.parent.localPosition = transform.Find("UpAnchor").position;
 
         if (deltaX == 0 && deltaY == 0) return;
 
-        Vector3 rotate = m_cameraPivot.localEulerAngles + new Vector3(deltaY * m_cameraSpeed, deltaX * m_cameraSpeed, 0);
+        Vector3 rotate = cameraPivot.transform.parent.localEulerAngles + new Vector3(deltaY * cameraSpeed, deltaX * cameraSpeed, 0);
         if (rotate.x >= 180f) rotate.x -= 360f;
         if (rotate.x > -20f && rotate.x < 90f) {
-            m_cameraPivot.localEulerAngles = rotate;
+            cameraPivot.transform.parent.localEulerAngles = rotate;
         }
     }
     #endregion
@@ -150,27 +205,27 @@ public class MovementController : MonoBehaviour {
     #region Others callbacks
     public void MakePlayerSprint()
     {
-        if(m_isMoving)
+        if(isMoving)
         {
-            m_currentSpeed = m_walkSpeed * (Input.GetAxis("Boost") * m_runMultFactor);
+            currentSpeed = walkSpeed * (Input.GetAxis("Boost") * runMultFactor);
         }
     }
 
     public void StopSprint()
     {
-        m_currentSpeed = m_isMoving ? m_walkSpeed : 0.0f;
+        currentSpeed = isMoving ? walkSpeed : 0.0f;
     }
 
     public void SwicthIsPlayerCrouch()
     {
-        m_isPlayerCrouch = !m_isPlayerCrouch;
+        isPlayerCrouch = !isPlayerCrouch;
     }
 
     public void Interact()
     {
-        if(m_playerInteraction != null)
+        if(playerInteraction != null)
         {
-            m_playerInteraction.GetClosestItem().Interact();
+            playerInteraction.GetClosestItem().Interact();
         }
     }
 
@@ -184,11 +239,11 @@ public class MovementController : MonoBehaviour {
         {
             if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
             {
-                if (!m_collisions.Contains(collision.collider))
+                if (!collisions.Contains(collision.collider))
                 {
-                    m_collisions.Add(collision.collider);
+                    collisions.Add(collision.collider);
                 }
-                m_isGrounded = true;
+                isGrounded = true;
             }
         }
     }
@@ -207,32 +262,32 @@ public class MovementController : MonoBehaviour {
 
         if (validSurfaceNormal)
         {
-            m_isGrounded = true;
-            if (!m_collisions.Contains(collision.collider))
+            isGrounded = true;
+            if (!collisions.Contains(collision.collider))
             {
-                m_collisions.Add(collision.collider);
+                collisions.Add(collision.collider);
             }
         } else {
-            if (m_collisions.Contains(collision.collider))
+            if (collisions.Contains(collision.collider))
             {
-                m_collisions.Remove(collision.collider);
+                collisions.Remove(collision.collider);
             }
-            if (m_collisions.Count == 0)
+            if (collisions.Count == 0)
             {
-                m_isGrounded = false;
+                isGrounded = false;
             }
         }
     }
 
     protected void OnCollisionExit(Collision collision)
     {
-        if (m_collisions.Contains(collision.collider))
+        if (collisions.Contains(collision.collider))
         {
-            m_collisions.Remove(collision.collider);
+            collisions.Remove(collision.collider);
         }
-        if (m_collisions.Count == 0)
+        if (collisions.Count == 0)
         {
-            m_isGrounded = false;
+            isGrounded = false;
         }
     }
 
@@ -240,35 +295,32 @@ public class MovementController : MonoBehaviour {
     {
         if (Input.GetAxis("Vertical").Equals(0.0f) && Input.GetAxis("Horizontal").Equals(0.0f))
         {
-            m_currentSpeed = 0.0f;
-            m_isMoving = false;
-            m_footstep.Pause();
+            currentSpeed = 0.0f;
+            isMoving = false;
+            footstep.Pause();
         }
     }
 
     protected void MoveCharacter() {
-       if (!m_isDead && !m_dialogueOn && !m_isSaving) {
-            m_isMoving = true;
-            if (m_currentSpeed.Equals(0.0f))
-            {
-                m_currentSpeed = m_walkSpeed;
-            }
-
-            float v = Input.GetAxis("Vertical");
-            float h = Input.GetAxis("Horizontal");
-
-            // Get the camera
-            Transform cameraTrans = m_cameraPivot.GetChild(currentCamera);
-            Vector3 projected_forward_camera = Vector3.ProjectOnPlane(cameraTrans.forward, new Vector3(0, 1, 0));
-
-            // Calculated the movement vector
-            float angle = SignedAngleBetween(initial_orientation, projected_forward_camera, Vector3.up);
-            Vector3 NextDir = new Vector3(h, 0, v);
-            NextDir = Quaternion.Euler(0f, angle, 0f) * NextDir;
-
-            // Control Judy's movement
-            Move(NextDir.normalized, h, v);
+        isMoving = true;
+        if (currentSpeed.Equals(0.0f))
+        {
+            currentSpeed = walkSpeed;
         }
+
+        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+
+        // Get the camera
+        Vector3 projected_forward_camera = Vector3.ProjectOnPlane(cameraPivot.transform.forward, new Vector3(0, 1, 0));
+
+        // Calculated the movement vector
+        float angle = SignedAngleBetween(initial_orientation, projected_forward_camera, Vector3.up);
+        Vector3 NextDir = new Vector3(h, 0, v);
+        NextDir = Quaternion.Euler(0f, angle, 0f) * NextDir;
+
+        // Control Judy's movement
+        Move(NextDir.normalized, h, v);
     }
 
     protected virtual void Move(Vector3 nextDir, float h, float v) {
@@ -286,19 +338,19 @@ public class MovementController : MonoBehaviour {
 
     public void WalkOrRun()
     {
-        m_footstep.UnPause();
-        if (m_isShiftHold)
+        footstep.UnPause();
+        if (isShiftHold)
         {
             // Run
             if (energyBar.canRun && energyBar.GetCurrentEnergy() > 0f)
             {
-                m_footstep.pitch = 1.7f;
+                footstep.pitch = 1.7f;
             }
         }
         else
         {
             // Walk
-            m_footstep.pitch = 1f;
+            footstep.pitch = 1f;
         }
     }
 
@@ -319,25 +371,8 @@ public class MovementController : MonoBehaviour {
     }
 
     public float GetCurrentSpeed() {
-        return m_currentSpeed;
+        return currentSpeed;
         //return (m_isRunning ? m_walkSpeed * m_runMultFactor : (m_isMoving ? m_walkSpeed : 0.0f));
-    }
-    
-    public void setDeath(bool isDead) {
-        m_isDead = isDead;
-    }
-
-    public bool isDeath()
-    {
-        return m_isDead;
-    }
-
-    public void setDialogue(bool isDialogueOn) {
-        m_dialogueOn = isDialogueOn;
-    }
-
-    public void setIsSaving(bool isSaving) {
-        m_isSaving = isSaving;
     }
 
     void OnDrawGizmosSelected() {

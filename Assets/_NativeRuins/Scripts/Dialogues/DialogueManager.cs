@@ -51,7 +51,7 @@ public class DialogueManager : MonoBehaviour {
         // if the dialogueManager is empty at the moment
         if (this.dialoguesQueue.Count == 1 && !isProcessing) {
             // Process the current dialogue
-            judy.GetComponent<MovementController>().setDialogue(true);
+            judy.GetComponent<PlayerProperties>().LaunchDialogue();
             audioSource.clip = sonDialog;
             audioSource.Play();
             animator.SetBool("isOpen", true);
@@ -117,7 +117,7 @@ public class DialogueManager : MonoBehaviour {
         } else {
             // Stop the dialogue
             isProcessing = false;
-            judy.GetComponent<MovementController>().setDialogue(false);
+            judy.GetComponent<PlayerProperties>().CloseDialogue();
             StopAllCoroutines();
             audioSource.Stop();
             audioSource.clip = sonDialog;

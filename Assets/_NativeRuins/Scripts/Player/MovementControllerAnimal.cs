@@ -19,7 +19,7 @@ public class MovementControllerAnimal : MovementController {
         sons = GetComponents<AudioSource>();
         sonAttaque = sons[1];
 
-        m_animator = this.gameObject.GetComponent<Animator>();
+        animator = this.gameObject.GetComponent<Animator>();
         // Set the attribute to the desire amount
         //m_moveSpeed = 1;
         //m_minSpeed = 1;
@@ -35,11 +35,11 @@ public class MovementControllerAnimal : MovementController {
 
     override protected void JumpingAndLanding()
     {
-        bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
+        bool jumpCooldownOver = (Time.time - jumpTimeStamp) >= minJumpInterval;
 
-        if (jumpCooldownOver && m_isGrounded && Input.GetKey(KeyCode.Space))
+        if (jumpCooldownOver && isGrounded && Input.GetKey(KeyCode.Space))
         {
-            m_jumpTimeStamp = Time.time;
+            jumpTimeStamp = Time.time;
 			//actions.Jump ();
             /*
 			if(!NextDir.Equals(Vector3.zero))
@@ -50,7 +50,7 @@ public class MovementControllerAnimal : MovementController {
     }
 
     override protected void GetInputs(Vector3 NextDir, float h, float v){
-		if (!m_isGrounded) {
+		if (!isGrounded) {
             /*
             Animator judyAnim = this.gameObject.GetComponent<Animator>();
             float currTime = judyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
@@ -71,9 +71,9 @@ public class MovementControllerAnimal : MovementController {
         {
             m_attackTimeStamp = Time.time;
 
-            Debug.Log(m_animator.GetCurrentAnimatorClipInfo(m_animator.GetLayerIndex("Base Layer"))[0].clip.name);
+            Debug.Log(animator.GetCurrentAnimatorClipInfo(animator.GetLayerIndex("Base Layer"))[0].clip.name);
             GameObject playerRoot = GameObject.Find("Player");
-            m_animator.SetTrigger("Attack");
+            animator.SetTrigger("Attack");
             sonAttaque.Play();
 
             RaycastHit hit;

@@ -178,7 +178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1086913699976842
 GameObject:
   m_ObjectHideFlags: 1
@@ -3787,6 +3787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainMenuAnimator: {fileID: 95252848921933350}
   _helpMenuAnimator: {fileID: 95615850766483874}
+  _title: {fileID: 1075651962683770}
 --- !u!114 &114531276710790042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5966,7 +5967,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -365259417
+  randomSeed: -1049579026
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -12082,8 +12083,8 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1771922783941288}
   m_Enabled: 1
-  m_Alpha: 0.9
-  m_Interactable: 1
+  m_Alpha: 0
+  m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!225 &225452405970882090

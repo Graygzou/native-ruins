@@ -68,7 +68,7 @@ public class InteractBonFire : MonoBehaviour {
         GameObject judy = GameObject.FindWithTag("Player");
         judy.GetComponent<ActionsNew>().SitDown();
         // Remove control of judy
-        judy.GetComponent<MovementController>().setIsSaving(true);
+        judy.GetComponent<PlayerProperties>().EnableSaving();
         yield return new WaitForSeconds(3.6f);
         // Enable the save menu
         GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
@@ -81,7 +81,7 @@ public class InteractBonFire : MonoBehaviour {
         GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
         yield return new WaitForSeconds(4.4f);
         // Can control judy
-        judy.GetComponent<MovementController>().setIsSaving(false);
+        judy.GetComponent<PlayerProperties>().DisableSaving();
         try
         {
             // If the bonfire is a real one (not craft)

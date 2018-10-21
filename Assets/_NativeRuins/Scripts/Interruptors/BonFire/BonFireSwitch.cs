@@ -20,7 +20,7 @@ public class BonFireSwitch : Switch {
         DiactivateSwitch();
         GameObject judy = GameObject.FindWithTag("Player");
         yield return new WaitForSeconds(4.4f);
-        judy.GetComponent<MovementController>().setIsSaving(false);
+        judy.GetComponent<PlayerProperties>().DisableSaving();
         StopCutScene();
 
         if (gameObject.GetComponent<SwitchObject>() != null) {
@@ -34,7 +34,7 @@ public class BonFireSwitch : Switch {
         GameObject judy = GameObject.FindWithTag("Player");
         judy.GetComponent<ActionsNew>().SitDown();
         // Remove control of judy
-        judy.GetComponent<MovementController>().setIsSaving(true);
+        judy.GetComponent<PlayerProperties>().EnableSaving();
     }
 
     override protected void DiactivateSwitch() {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Sauvegarde : Manager {
+public class Sauvegarde : MonoBehaviour, IManager {
 
     // Used to save and load the game
     private static GameObject Player;
@@ -276,5 +276,15 @@ public class Sauvegarde : Manager {
         {
             SceneManager.LoadScene("Map Island");
         }
+    }
+
+    public void Init()
+    {
+        // Nothing yet ?
+    }
+
+    public void InitMainScene()
+    {
+        // Nothing yet ?
     }
 }

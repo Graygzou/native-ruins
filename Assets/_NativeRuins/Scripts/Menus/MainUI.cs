@@ -11,8 +11,12 @@ public class MainUI : MonoBehaviour {
     [SerializeField]
     private Animator _helpMenuAnimator;
 
+    [SerializeField]
+    private GameObject _title;
+
     public Animator MainMenuAnimator { get { return _mainMenuAnimator; } }
     public Animator HelpMenuAnimator { get { return _helpMenuAnimator; } }
+    public GameObject Title { get { return _title; } }
 
     #region Button Interactions
     //Lance la scène Map Island et détruit la scène actuelle "Menu_demarrer"
