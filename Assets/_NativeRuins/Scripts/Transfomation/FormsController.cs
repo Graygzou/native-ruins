@@ -112,7 +112,7 @@ public class FormsController : MonoBehaviour
         Time.timeScale = 0f;
 
         // Affichage de la roue
-        MenuManager.Instance.DisplayTransformationWheel();
+        (MainManager.Instance.FindManager(MainManager.ManagerName.MenuManager) as MenuManager).DisplayTransformationWheel();
 
         // Données utiles à la sélection
         Vector3 centreScreen = new Vector3(Screen.width / 2, Screen.height / 2, 0);
@@ -180,7 +180,7 @@ public class FormsController : MonoBehaviour
         _instance.transformationWheelOpen = false;
         Time.timeScale = 1;
 
-        MenuManager.Instance.CloseTransformationWheel();
+        (MainManager.Instance.FindManager(MainManager.ManagerName.MenuManager) as MenuManager).CloseTransformationWheel();
 
         if (selectedForm != currentForm)
         {

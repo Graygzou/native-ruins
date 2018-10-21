@@ -214,8 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfddf6d0c53a43e4a803f2281bd042ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuName: MenuDemarrer
-  mainSceneName: NewMapIsland
   mainUIPrefab: {fileID: 1007320855193296, guid: eadc7606101f9af44b4ac61b2b4915fe,
     type: 2}
   inGameUIPrefab: {fileID: 1225817829860012, guid: ce3479a038b8bdc41b897aaa14200ef9,
@@ -234,6 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3771eed79bcfc474889cd2330e872e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuName: MenuDemarrer
+  mainSceneName: NewMapIsland
   managers:
   - {fileID: 114686218824438036}
   - {fileID: 114782317905545496}

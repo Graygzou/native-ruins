@@ -17,12 +17,6 @@ public class MenuManager : MonoBehaviour, IManager {
     }
     #endregion
 
-    #region Singleton
-    private static MenuManager _instance;
-
-    public static MenuManager Instance { get { return _instance; } }
-    #endregion
-
     [Header("UI Prefabs")]
     [SerializeField]
     private GameObject mainUIPrefab;
@@ -43,18 +37,6 @@ public class MenuManager : MonoBehaviour, IManager {
     private GameObject help = null;
 
     private Canvas _mainUICanvas;
-
-    protected void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-    }
 
     #region Init methods
     void IManager.Init()
@@ -150,6 +132,7 @@ public class MenuManager : MonoBehaviour, IManager {
 
     #endregion
 
+    /*
     public void DisplayHelpMenu()
     {
         _instance.help.SetActive(true);
@@ -158,11 +141,5 @@ public class MenuManager : MonoBehaviour, IManager {
     public void CloseHelpMenu()
     {
         _instance.help.SetActive(false);
-    }
-
-    // Créer une nouvelle partie et écrase l'ancienne
-    public void NouvellePartie()
-    {
-        //SceneManager.LoadScene(mainSceneName);
-    }
+    }*/
 }

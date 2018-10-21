@@ -10,6 +10,6 @@ public class OnClickTransition : MonoBehaviour {
     public void TransitionToNextPanel()
     {
         // Enable the trigger for the given panel
-        MenuManager.Instance.TransitionToNextPanelMain(transitionTo);
+        (MainManager.Instance.FindManager(MainManager.ManagerName.MenuManager) as MenuManager).TransitionToNextPanelMain(transitionTo);
     }
 }

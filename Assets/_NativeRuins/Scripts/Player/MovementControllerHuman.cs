@@ -177,7 +177,7 @@ public class MovementControllerHuman : MovementController {
                 cameraPivot.enabled = false;
 
                 // Activate the crosshair
-                MenuManager.Instance.EnableCrossHair();
+                (MainManager.Instance.FindManager(MainManager.ManagerName.MenuManager) as MenuManager).EnableCrossHair();
                 /*
                 GameObject crosshair = GameObject.Find("Arrow_aim").gameObject;
                 Transform largeurCrossHair = crosshair.transform.GetChild(0);

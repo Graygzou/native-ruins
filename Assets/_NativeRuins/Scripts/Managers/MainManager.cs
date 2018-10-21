@@ -15,17 +15,32 @@ public class MainManager : MonoBehaviour {
     }
     #endregion
 
+    #region Singleton
+    private static MainManager _instance;
+
+    public static MainManager Instance { get { return _instance; } }
+    #endregion
+
     [Header("Scenes names")]
     [SerializeField]
     private string mainMenuName = "MenuDemarrer";
     [SerializeField]
-    private string mainSceneName = "MapIslandNew";
+    private string mainSceneName = "NewMapIsland";
 
     [SerializeField]
     private MonoBehaviour[] managers;
 
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
         // This manager will be persistent
         DontDestroyOnLoad(gameObject);
 
@@ -42,6 +57,13 @@ public class MainManager : MonoBehaviour {
         }
     }
 
+    // Créer une nouvelle partie et écrase l'ancienne
+    public void NouvellePartie()
+    {
+        SceneManager.LoadScene(mainSceneName);
+    }
+
+    #region Managers methods
     private void InitManagers()
     {
         foreach(IManager manager in managers)
@@ -62,5 +84,6 @@ public class MainManager : MonoBehaviour {
     {
         return managers[(int)manageName] as IManager;
     }
+    #endregion
 
 }
