@@ -60,6 +60,7 @@ public class MainManager : MonoBehaviour {
     // Créer une nouvelle partie et écrase l'ancienne
     public void NouvellePartie()
     {
+        (FindManager(ManagerName.AudioManager) as AudioManager).FadeDown();
         SceneManager.LoadScene(mainSceneName);
     }
 

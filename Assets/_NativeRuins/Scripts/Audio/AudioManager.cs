@@ -12,7 +12,41 @@ public class AudioManager : MonoBehaviour, IManager {
     private AudioMixerSnapshot paused;
     [SerializeField]
     private AudioMixerSnapshot unpaused;
+    [SerializeField]
+    private AudioMixerSnapshot volumeDown;
+
+    [SerializeField]
+    private float fadeUpTime = 0.01f;
+    [SerializeField]
+    private float fadeDownTime = 0.05f;
+    [SerializeField]
+    private float fadeTimePause = 0.01f;
     #endregion
+
+    public void Init()
+    {
+        FadeUp();
+    }
+
+    public void InitMainScene()
+    {
+        FadeUp();
+    }
+
+    public void FadeUp()
+    {
+        unpaused.TransitionTo(fadeUpTime);
+    }
+
+    public void FadeDown()
+    {
+        volumeDown.TransitionTo(fadeDownTime);
+    }
+
+    public void FadePause()
+    {
+        paused.TransitionTo(fadeTimePause);
+    }
 
     private bool isPaused = false;
 
@@ -44,15 +78,5 @@ public class AudioManager : MonoBehaviour, IManager {
         {
             unpaused.TransitionTo(0.1f);
         }
-    }
-
-    public void Init()
-    {
-        // Nothing yet ?
-    }
-
-    public void InitMainScene()
-    {
-        // Nothing yet ?
     }
 }

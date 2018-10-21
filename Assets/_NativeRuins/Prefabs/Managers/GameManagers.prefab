@@ -201,8 +201,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterMixer: {fileID: 24100000, guid: 5ed6b637688a3a247b102c1d1501d324, type: 2}
-  paused: {fileID: 0}
-  unpaused: {fileID: 0}
+  paused: {fileID: 245022694255184892, guid: 5ed6b637688a3a247b102c1d1501d324, type: 2}
+  unpaused: {fileID: 24500006, guid: 5ed6b637688a3a247b102c1d1501d324, type: 2}
+  volumeDown: {fileID: 245243027738614612, guid: 5ed6b637688a3a247b102c1d1501d324,
+    type: 2}
+  fadeUpTime: 0.01
+  fadeDownTime: 0.15
+  fadeTimePause: 0.01
 --- !u!114 &114782317905545496
 MonoBehaviour:
   m_ObjectHideFlags: 1
