@@ -85,6 +85,7 @@ public class MenuManager : MonoBehaviour, IManager {
         }
         _InGameUIScript = _currentInGameUI.GetComponent<InGameUI>();
 
+        DisplayHUD();
 
         // Set the canvas's render mode to World Space Render
         _mainUICanvas.renderMode = RenderMode.WorldSpace;
@@ -93,6 +94,7 @@ public class MenuManager : MonoBehaviour, IManager {
     }
     #endregion
 
+    // TODO : REMOVED THAT
     void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -100,7 +102,6 @@ public class MenuManager : MonoBehaviour, IManager {
             pause.SetActive(!pause.activeSelf);
         }
     }
-
 
     #region MainUI Methods
 
@@ -114,6 +115,11 @@ public class MenuManager : MonoBehaviour, IManager {
     #endregion
 
     #region InGameUI Methods
+
+    public void DisplayHUD()
+    {
+        _InGameUIScript.DisplayHUD();
+    }
 
     public void EnableCrossHair()
     {
@@ -132,14 +138,4 @@ public class MenuManager : MonoBehaviour, IManager {
 
     #endregion
 
-    /*
-    public void DisplayHelpMenu()
-    {
-        _instance.help.SetActive(true);
-    }
-
-    public void CloseHelpMenu()
-    {
-        _instance.help.SetActive(false);
-    }*/
 }

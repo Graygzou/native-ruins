@@ -18,8 +18,8 @@ public static class InputManager {
         PutAwayWeapon = 7,
         Interact = 8,
         Transformation = 9,
-        MoveCamera = 100,
-        
+        MoveCamera = 10,
+        Cancel = 11,
     }
 
     public enum EventTypeButton : int
@@ -107,8 +107,6 @@ public static class InputManager {
         }
     }
     #endregion
-
-    
 
     #region SubscribeEvents
     public static void SubscribeButtonEvent(ActionsLabels action, string input, EventTypeButton type, System.Action callback)
@@ -257,7 +255,6 @@ public static class InputManager {
     }
 
     #endregion
-
 
 }
 

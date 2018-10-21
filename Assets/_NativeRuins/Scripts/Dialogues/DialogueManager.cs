@@ -45,24 +45,31 @@ public class DialogueManager : MonoBehaviour {
     //Lancer le dialogue
 	public void StartDialogue (Dialogue dialogue, Switch action) {
         // Put the dialogue in the queue ans the switch
-        this.dialoguesQueue.Enqueue(dialogue);
-        this.actionsQueue.Enqueue(action);
+        dialoguesQueue.Enqueue(dialogue);
+        actionsQueue.Enqueue(action);
 
         // if the dialogueManager is empty at the moment
-        if (this.dialoguesQueue.Count == 1 && !isProcessing) {
+        if (dialoguesQueue.Count == 1 && !isProcessing) {
             // Process the current dialogue
             judy.GetComponent<PlayerProperties>().LaunchDialogue();
             audioSource.clip = sonDialog;
             audioSource.Play();
             animator.SetBool("isOpen", true);
-            FillSentences(this.dialoguesQueue.Dequeue());
+            FillSentences(dialoguesQueue.Dequeue());
         }
+    }
+
+    public void InterruptDialogue()
+    {
+        sentences.Clear();
+        dialoguesQueue.Clear();
+        actionsQueue.Clear();
     }
 
     private void FillSentences(Dialogue dialogue) {
         isProcessing = true;
         foreach (string sentence in dialogue.sentences) {
-            this.sentences.Enqueue(sentence);
+            sentences.Enqueue(sentence);
         }
         DisplayNextSentence();
     }
@@ -81,9 +88,9 @@ public class DialogueManager : MonoBehaviour {
                 EndDialogue();
                 return;
             }
-            this.currentSentence = sentences.Dequeue();
+            currentSentence = sentences.Dequeue();
             StopAllCoroutines();
-            StartCoroutine(TypeSentence(this.currentSentence));
+            StartCoroutine(TypeSentence(currentSentence));
             audioSource.Stop();
         }
     }
@@ -112,8 +119,8 @@ public class DialogueManager : MonoBehaviour {
         }
 
         // Check if a dialogue need to be played.
-        if (this.dialoguesQueue.Count >= 1) {
-            this.FillSentences(this.dialoguesQueue.Dequeue());
+        if (dialoguesQueue.Count >= 1) {
+            FillSentences(dialoguesQueue.Dequeue());
         } else {
             // Stop the dialogue
             isProcessing = false;

@@ -189,26 +189,7 @@ public class Sauvegarde : MonoBehaviour, IManager {
             //GameObject carreNoir = GameObject.Find("CameraCutscenes/Intro/PlaneFade");
             //carreNoir.SetActive(false);
         } else {
-            /*
-            // Setting up the scene
-            GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
-            GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
-            GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
-            GameObject.FindWithTag("MainCamera").GetComponent<Camera>().enabled = false;
-
-            // Execute the sleeping action
-            GameObject.FindWithTag("Player").GetComponent<ActionsNew>().StartIntro();
-
-            // Disabled UI
-            gameHUD.GetComponent<CanvasGroup>().alpha = 0.0f;
-
-            // Call dialogues
-            DialogueTrigger.TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
-            DialogueTrigger.TriggerDialogueDebut2(GameObject.Find("SecondCutSceneCamera").GetComponent<StandUpCutScene>());
-            DialogueTrigger.TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
-            DialogueTrigger.TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
-            DialogueTrigger.TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
-            DialogueTrigger.TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());*/
+            
         }
     }
 

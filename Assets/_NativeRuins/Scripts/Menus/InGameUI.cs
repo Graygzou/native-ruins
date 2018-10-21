@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class InGameUI : MonoBehaviour
 {
+    [Header("HUD")]
+    [SerializeField]
+    private CanvasGroup HUDCanvas;
+
     [Header("CrossHair UI")]
     [SerializeField]
     private CanvasGroup crosshair;
@@ -32,6 +36,16 @@ public class InGameUI : MonoBehaviour
         }
         _initLargeurCrossHair = largeurCrossHair.transform.localPosition;
         _initHauteurCrossHair = hauteurCrossHair.transform.localPosition;
+    }
+
+    public void DisplayHUD()
+    {
+        HUDCanvas.alpha = 1.0f;
+    }
+
+    public void HideHUD()
+    {
+        HUDCanvas.alpha = 0.0f;
     }
 
     public void EnableCrossHair()

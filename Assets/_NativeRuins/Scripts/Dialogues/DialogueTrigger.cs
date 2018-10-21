@@ -4,7 +4,58 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour, IManager {
 
+    [SerializeField]
+    private Camera[] cameras;
+
     public static Dialogue dialogue;
+
+    public delegate void CutsceneEnd();
+    public static event CutsceneEnd CutsceneHasEnded;
+
+    public void Init()
+    {
+        // Nothing yet ?
+    }
+
+    public void InitMainScene()
+    {
+        // Nothing yet ?
+    }
+
+    /**
+     * Start the first cutscene where Judy arrived on the beach.
+     */
+    public void LaunchInitialCutscene()
+    {
+        // Setting up the scene
+        GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
+        GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
+        GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
+        GameObject.FindWithTag("MainCamera").GetComponent<Camera>().enabled = false;
+
+        // Execute the sleeping action
+        GameObject.FindWithTag("Player").GetComponent<ActionsNew>().StartIntro();
+
+        // Call dialogues
+        TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
+        TriggerDialogueDebut2(GameObject.Find("SecondCutSceneCamera").GetComponent<StandUpCutScene>());
+        TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
+        TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
+        TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
+        TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());
+
+        // Fire the event to init the other managers.
+        CutsceneHasEnded();
+    }
+
+    public void SkipCutscene()
+    {
+        // Fade the cutscene
+
+
+        // Fire the event to init the other managers.
+        CutsceneHasEnded();
+    }
 
     public static void TriggerSauvegarde(Switch action)
     {
@@ -142,15 +193,5 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         dialogue.sentences[1] = "Des éléments sur l'île vous permettront de créer des flèches.";
         dialogue.sentences[2] = "Pour l'utiliser : Le CLIC DROIT de la souris vous permet de viser et le CLIC GAUCHE vous permet de tirer une flèche.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
-    }
-
-    public void Init()
-    {
-        // Nothing yet ?
-    }
-
-    public void InitMainScene()
-    {
-        // Nothing yet ?
     }
 }
