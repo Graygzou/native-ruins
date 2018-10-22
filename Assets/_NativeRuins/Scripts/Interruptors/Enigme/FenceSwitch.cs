@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FenceSwitch : Switch {
+public class FenceSwitch : CutScene
+{
 
     public float smoothing = 1f;
     private Vector3 target;

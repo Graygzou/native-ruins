@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-
     [SerializeField] protected float walkSpeed = 5;
     [SerializeField] protected float runMultFactor = 2;
     [SerializeField] protected float turnSpeed;
     [SerializeField] protected float jumpForce;
 
     [SerializeField] protected float cameraSpeed = 2f;
-    protected Animator animator;
     [SerializeField] protected Rigidbody rigidBody;
     [SerializeField] protected AudioSource footstep;
     [SerializeField] protected int camera_zoom_max = -1;
@@ -29,6 +27,7 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     protected LifeBar lifeBar;
 
+    protected Animator animator;
     protected Camera cameraPivot;
 
     protected int currentCamera = 0;

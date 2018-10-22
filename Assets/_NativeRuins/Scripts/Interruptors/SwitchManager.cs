@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class SwitchManager {
 
     private static bool isProcessing = false;
-    private static Queue<Switch> actionsQueue = new Queue<Switch>();
+    private static Queue<CutScene> actionsQueue = new Queue<CutScene>();
 	
     //Lancer le dialogue
-	public static void StartAction (Switch action) {
+	public static void StartAction (CutScene action) {
         // Put the dialogue in the queue ans the switch
         actionsQueue.Enqueue(action);
 
@@ -20,7 +20,7 @@ public class SwitchManager {
     }
 
     //Afficher les phrases suivantes du dialogue
-    public static void ExecuteAction(Switch action) {
+    public static void ExecuteAction(CutScene action) {
         isProcessing = true;
         // launch the animation
         action.Activate();

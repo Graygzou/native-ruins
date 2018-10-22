@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowSwitch : Switch {
+public class ArrowSwitch : CutScene
+{
 
     private bool hasBeenActivated;
     private Transform colliderTransform;

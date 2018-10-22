@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LostCutScene : Switch {
+public class LostCutScene : CutScene
+{
 
     protected override void ActivateSwitch() {
 

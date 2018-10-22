@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadeCutScene : Switch {
+public class FadeCutScene : CutScene {
 
     private float timer;
 

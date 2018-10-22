@@ -54,7 +54,7 @@ public class InteractBonFire : MonoBehaviour {
             try
             {
                 // If the bonfire is a real one (not craft)
-                GetComponent<Switch>().Activate();
+                GetComponent<CutScene>().Activate();
                 StartCoroutine("SitDownNearFire");
             }
             catch(Exception e) {}
@@ -85,7 +85,7 @@ public class InteractBonFire : MonoBehaviour {
         try
         {
             // If the bonfire is a real one (not craft)
-            GetComponent<Switch>().StopCutScene();
+            GetComponent<CutScene>().StopCutScene();
         }
         catch (Exception e) { }
     }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BonFireSwitch : Switch {
+public class BonFireSwitch : CutScene
+{
 
     override public IEnumerator PlayCutSceneStart() {
         ActivateSwitch();

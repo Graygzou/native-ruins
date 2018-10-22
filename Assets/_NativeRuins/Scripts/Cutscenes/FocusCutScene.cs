@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FocusCutScene : Switch {
+public class FocusCutScene : CutScene
+{
 
     protected override void ActivateSwitch() {
 

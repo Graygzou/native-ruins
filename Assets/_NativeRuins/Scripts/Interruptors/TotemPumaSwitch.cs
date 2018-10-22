@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TotemPumaSwitch : Switch {
+public class TotemPumaSwitch : CutScene
+{
 
     private bool PlayedOnce;
 

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RightPositionSwitch : Switch {
+public class RightPositionSwitch : CutScene
+{
 
     public void OnTriggerEnter(Collider other) {
         if(other.tag == "Switch") {

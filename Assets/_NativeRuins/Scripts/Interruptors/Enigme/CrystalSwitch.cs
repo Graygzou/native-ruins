@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrystalSwitch : Switch
+public class CrystalSwitch : CutScene
 {
 
     public Texture texture;

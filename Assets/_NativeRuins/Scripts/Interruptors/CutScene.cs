@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Switch : MonoBehaviour {
+public abstract class CutScene {
 
     protected Camera playerCamera;
-    protected bool isActived;
-
     public Camera cameraCutScene;
 
-    void Awake() {
+    protected bool isActived = false;
+
+    void Awake()
+    {
         // Get the camera of the player
-        playerCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        playerCamera = Camera.main;
     }
 
-    // Use this for initialization
     void Start() {
-        isActived = false;
         if (cameraCutScene != null )
             cameraCutScene.enabled = false;
     }
@@ -26,12 +25,15 @@ public abstract class Switch : MonoBehaviour {
         if (cameraCutScene != null && !isActived) {
             // Call a cut-scene to start the switch
             SetupCutSceneStart();
-            StartCoroutine("PlayCutSceneStart");
+            PlayCutSceneStart();
         }
-        else if (cameraCutScene != null && isActived) {
+        else if (cameraCutScene != null && isActived)
+        {
             // Call a cut-scene to end the switch
-            StartCoroutine("PlayCutSceneEnd");
-        } else {
+            PlayCutSceneEnd();
+        }
+        else
+        {
             // Simply activate the desired switch
             ActivateSwitch();
         }
@@ -46,7 +48,6 @@ public abstract class Switch : MonoBehaviour {
     // Used to setup a cutscene
     public virtual void SetupCutSceneStart() {
         isActived = true;
-        //GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = false;
         GameObject.FindWithTag("Player").GetComponent<MovementController>().enabled = false;
         ActionsNew actions = GameObject.FindWithTag("Player").GetComponent<ActionsNew>();
         if (actions != null) {

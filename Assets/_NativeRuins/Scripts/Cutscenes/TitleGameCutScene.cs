@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleGameCutScene : Switch {
+public class TitleGameCutScene : CutScene
+{
 
     public AnimationClip cutScene;
     public AudioClip cutSceneMusic;

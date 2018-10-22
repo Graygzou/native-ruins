@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StandUpCutScene : Switch {
+public class StandUpCutScene : CutScene
+{
 
     protected override void ActivateSwitch() {
         // Setting up

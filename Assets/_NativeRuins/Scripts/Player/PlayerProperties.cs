@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerProperties : MonoBehaviour
 {
-
     // Actual State of the player
     [Header("Player States (read only)")]
     [SerializeField] private bool isDead;
@@ -12,8 +11,9 @@ public class PlayerProperties : MonoBehaviour
     [SerializeField] private bool dialogueOn;
     
 
-    [Header("Others scripts")]
-    [SerializeField] private MovementController movementController;
+    [Header("Childrens Information")]
+    [SerializeField] private MovementController[] childrenMovementController;
+    [SerializeField] private Animator[] childrenAnimator;
 
     private void Awake()
     {
@@ -27,18 +27,22 @@ public class PlayerProperties : MonoBehaviour
     {
         isDead = true;
 
+        // Retransform Judy in Human
         GetComponent<FormsController>().Transformation(0);
 
         // UnSubscribe all events.
-        movementController.DeRegisterInputs();
+        foreach(MovementController controller in childrenMovementController)
+        {
+            controller.DeRegisterInputs();
+        }
     }
 
     public void RevivePlayer()
     {
         isDead = false;
 
-        // Subscribe events back.
-        movementController.RegisterInputs();
+        // Subscribe human movements events back.
+        childrenMovementController[(int)FormsController.TransformationType.Human].RegisterInputs();
     }
 
     public bool IsDeath()
@@ -51,17 +55,13 @@ public class PlayerProperties : MonoBehaviour
     public void LaunchDialogue()
     {
         dialogueOn = true;
-
-        // UnSubscribe some events.
-        movementController.DeregisterCameraMovementsInputs();
+        childrenMovementController[FormsController.Instance.GetCurrentForm()].DeregisterCameraMovementsInputs();
     }
 
     public void CloseDialogue()
     {
         dialogueOn = true;
-
-        // Subscribe back events
-        movementController.RegisterCameraMovementsInputs();
+        childrenMovementController[FormsController.Instance.GetCurrentForm()].RegisterCameraMovementsInputs();
     }
     #endregion
 
@@ -69,17 +69,21 @@ public class PlayerProperties : MonoBehaviour
     public void EnableSaving()
     {
         isSaving = true;
-
-        movementController.DeregisterPlayerMovementsInputs();
+        childrenMovementController[FormsController.Instance.GetCurrentForm()].DeregisterPlayerMovementsInputs();
     }
 
     public void DisableSaving()
     {
         isSaving = false;
-
-        movementController.DeregisterPlayerMovementsInputs();
+        childrenMovementController[FormsController.Instance.GetCurrentForm()].RegisterPlayerMovementsInputs();
     }
     #endregion
 
+    #region Cutscene methods
+    public void Sleep()
+    {
+        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("Sleep");
+    }
+    #endregion
 
 }

@@ -2,15 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueTrigger : MonoBehaviour, IManager {
-
-    [SerializeField]
-    private Camera[] cameras;
+public class DialogueTrigger : MonoBehaviour, IManager
+{
+    #region Enums
+    public enum CutsceneName : int
+    {
+        introductionCutscene = 0,
+    }
+    #endregion
 
     public static Dialogue dialogue;
 
+    private IDictionary<CutsceneName, CutScene> cutscenes;
+    //private Camera cutsceneCamera;
+
     public delegate void CutsceneEnd();
     public static event CutsceneEnd CutsceneHasEnded;
+
+    private void Awake()
+    {
+        //cutsceneCamera = GameObject.FindWithTag("CutsceneCamera").GetComponent<Camera>();
+
+        // Create all the cutscenes
+        cutscenes = new Dictionary<CutsceneName, CutScene>();
+        cutscenes.Add(CutsceneName.introductionCutscene, new TitleGameCutScene());
+    }
 
     public void Init()
     {
@@ -25,26 +41,38 @@ public class DialogueTrigger : MonoBehaviour, IManager {
     /**
      * Start the first cutscene where Judy arrived on the beach.
      */
+     /*
     public void LaunchInitialCutscene()
     {
         // Setting up the scene
-        GameObject.Find("FirstCutSceneCamera").GetComponent<Camera>().enabled = true;
-        GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
-        GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
-        GameObject.FindWithTag("MainCamera").GetComponent<Camera>().enabled = false;
+        cutsceneCamera.enabled = true;
+        Camera.main.enabled = false;
+
+        //GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
+        //GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
 
         // Execute the sleeping action
-        GameObject.FindWithTag("Player").GetComponent<ActionsNew>().StartIntro();
+        GameObject.FindWithTag("Player").GetComponent<PlayerProperties>().Sleep();
 
         // Call dialogues
+        /*
         TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
         TriggerDialogueDebut2(GameObject.Find("SecondCutSceneCamera").GetComponent<StandUpCutScene>());
         TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
         TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
         TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
-        TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());
+        TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());*/
 
         // Fire the event to init the other managers.
+        //CutsceneHasEnded();
+    //}*/
+
+    public void StartCutscene(CutsceneName name)
+    {
+        CutScene currentCutscene = cutscenes[name];
+
+        currentCutscene.Activate();
+
         CutsceneHasEnded();
     }
 
@@ -57,7 +85,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         CutsceneHasEnded();
     }
 
-    public static void TriggerSauvegarde(Switch action)
+    public static void TriggerSauvegarde(CutScene action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Menu";
@@ -66,7 +94,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueDebut(Switch action) {
+    public static void TriggerDialogueDebut(CutScene action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
@@ -75,7 +103,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueDebut2(Switch action) {
+    public static void TriggerDialogueDebut2(CutScene action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[3];
@@ -85,7 +113,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueDebut3(Switch action) {
+    public static void TriggerDialogueDebut3(CutScene action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
@@ -94,7 +122,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueDebut4(Switch action) {
+    public static void TriggerDialogueDebut4(CutScene action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
@@ -103,7 +131,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueDebut5(Switch action) {
+    public static void TriggerDialogueDebut5(CutScene action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
@@ -111,7 +139,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         dialogue.sentences[1] = "Comment je vais partir d'ici ? ... Mmmmmhhhh ...";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
-    public static void TriggerDialogueDebut6(Switch action) {
+    public static void TriggerDialogueDebut6(CutScene action) {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
         dialogue.sentences = new string[2];
@@ -120,7 +148,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueInstructions(Switch action)
+    public static void TriggerDialogueInstructions(CutScene action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -135,7 +163,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
     }
 
 
-    public static void TriggerDialogueFin(Switch action)
+    public static void TriggerDialogueFin(CutScene action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Judy";
@@ -145,7 +173,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueTotemOurs(Switch action)
+    public static void TriggerDialogueTotemOurs(CutScene action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -156,7 +184,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueTotemPuma(Switch action)
+    public static void TriggerDialogueTotemPuma(CutScene action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -166,7 +194,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueVoile(Switch action)
+    public static void TriggerDialogueVoile(CutScene action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -175,7 +203,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueCorde(Switch action)
+    public static void TriggerDialogueCorde(CutScene action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";
@@ -184,7 +212,7 @@ public class DialogueTrigger : MonoBehaviour, IManager {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
-    public static void TriggerDialogueArc(Switch action)
+    public static void TriggerDialogueArc(CutScene action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Aide";

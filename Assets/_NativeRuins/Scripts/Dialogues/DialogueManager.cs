@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour {
     #endregion
 
     private Queue<Dialogue> dialoguesQueue;
-    private Queue<Switch> actionsQueue;
+    private Queue<CutScene> actionsQueue;
     private Queue<string> sentences;
 
     private AudioSource audioSource;
@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         dialoguesQueue = new Queue<Dialogue>();
-        actionsQueue = new Queue<Switch>();
+        actionsQueue = new Queue<CutScene>();
         sentences = new Queue<string>();
 
         isTyping = false;
@@ -43,7 +43,7 @@ public class DialogueManager : MonoBehaviour {
     }
 	
     //Lancer le dialogue
-	public void StartDialogue (Dialogue dialogue, Switch action) {
+	public void StartDialogue (Dialogue dialogue, CutScene action) {
         // Put the dialogue in the queue ans the switch
         dialoguesQueue.Enqueue(dialogue);
         actionsQueue.Enqueue(action);
@@ -113,7 +113,7 @@ public class DialogueManager : MonoBehaviour {
     //Fin du dialogue
     public void EndDialogue() {
         // Play the corresponding switch
-        Switch action = actionsQueue.Dequeue();
+        CutScene action = actionsQueue.Dequeue();
         if(action != null) {
             SwitchManager.StartAction(action);
         }

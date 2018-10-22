@@ -11,8 +11,8 @@ public class SwitchObject : MonoBehaviour {
 	// Method used to launch the mecanism.
 	public void Activate () {
         // If the currentObject has a mecanism, active it.
-        if (gameObject.GetComponent<Switch>() != null) {
-            gameObject.GetComponent<Switch>().Activate();
+        if (gameObject.GetComponent<CutScene>() != null) {
+            gameObject.GetComponent<CutScene>().Activate();
         } else {
             ActivateChildren();
         }
@@ -20,10 +20,10 @@ public class SwitchObject : MonoBehaviour {
 
     public void ActivateChildren() {
         // Get all the children of the current component and activate all of them.
-        Switch elem = null;
+        CutScene elem = null;
         foreach (Transform child in gameObject.transform) {
             // Get the child C# script
-            elem = child.GetComponent<Switch>();
+            elem = child.GetComponent<CutScene>();
             if (elem != null) {
                 // Call the method to active the mecanism
                 elem.Activate();

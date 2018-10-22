@@ -49,12 +49,15 @@ public class MainManager : MonoBehaviour {
 
     private void Init(Scene scene, LoadSceneMode mode)
     {
-        InitManagers();
-    
-        if(scene.name.Equals(mainSceneName))
+        if(scene.name.Equals(mainMenuName))
+        {
+            InitManagers();
+
+        }
+        else if(scene.name.Equals(mainSceneName))
         {
             // Start the first cutscene
-            (FindManager(ManagerName.AudioManager) as DialogueTrigger).LaunchInitialCutscene();
+            (FindManager(ManagerName.DialogueTrigger) as DialogueTrigger).StartCutscene(DialogueTrigger.CutsceneName.introductionCutscene);
             // Subscribe the escape button if the player want to escape the cutscene.
             InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Cancel, "Cancel", InputManager.EventTypeButton.Down, (FindManager(ManagerName.AudioManager) as DialogueTrigger).SkipCutscene);
 
