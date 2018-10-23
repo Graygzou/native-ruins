@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TotemPumaSwitch : CutScene
 {
-
+    /*
     private bool PlayedOnce;
 
     // Use this for initialization
@@ -48,5 +48,5 @@ public class TotemPumaSwitch : CutScene
     override protected void DiactivateSwitch()
     {
         GameObject judy = GameObject.FindWithTag("Player");
-    }
+    }*/
 }

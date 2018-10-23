@@ -232,7 +232,7 @@ public class Sauvegarde : MonoBehaviour, IManager {
         PlayerPrefs.SetInt("bearUnlocked", Player.GetComponent<FormsController>().IsBearUnlocked());
 
         //Afficher message de sauvegarde
-        DialogueTrigger.TriggerSauvegarde(null);
+        // TODO DialogueTrigger.TriggerSauvegarde(null);
     }
 
     //Permet de revenir au menu demarrer pour quitter le jeu

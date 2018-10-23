@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BonFireSwitch : CutScene
 {
-
+    /*
     override public IEnumerator PlayCutSceneStart() {
         ActivateSwitch();
         yield return new WaitForSeconds(3.6f);
@@ -43,5 +43,5 @@ public class BonFireSwitch : CutScene
         judy.GetComponent<ActionsNew>().StandUp();
         // Disable the save menu
         GameObject.Find("Affichages/Menus/Menu_sauvegarder").SetActive(!GameObject.Find("Affichages/Menus/Menu_sauvegarder").activeSelf);
-    }
+    }*/
 }

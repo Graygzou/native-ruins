@@ -56,13 +56,14 @@ public class MainManager : MonoBehaviour {
         }
         else if(scene.name.Equals(mainSceneName))
         {
-            // Start the first cutscene
-            (FindManager(ManagerName.DialogueTrigger) as DialogueTrigger).StartCutscene(DialogueTrigger.CutsceneName.introductionCutscene);
-            // Subscribe the escape button if the player want to escape the cutscene.
-            InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Cancel, "Cancel", InputManager.EventTypeButton.Down, (FindManager(ManagerName.AudioManager) as DialogueTrigger).SkipCutscene);
+            // init all the managers when the introduction cutscene has ended
+            InteractionManager.OnIntroCutsceneHasEnded += InitManagersMainScene;
 
-            // Then init all the managers.
-            DialogueTrigger.CutsceneHasEnded += InitManagersMainScene;
+            // Start the first cutscene
+            (FindManager(ManagerName.DialogueTrigger) as InteractionManager).StartCutscene(CutScene.CutsceneName.IntroductionCutscene);
+
+            // TODO Subscribe the escape button if the player want to escape the cutscene.
+            //InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Cancel, "Cancel", InputManager.EventTypeButton.Down, (FindManager(ManagerName.AudioManager) as DialogueTrigger).SkipCutscene);
         }
     }
 

@@ -5,6 +5,77 @@ using UnityEngine;
 public class TitleGameCutScene : CutScene
 {
 
+    new void Awake()
+    {
+        base.Awake();
+
+        CreateDialogues();
+    }
+
+    #region Dialogue init
+    private void CreateDialogues()
+    {
+        // Create all the phases
+        /*
+        cutscenePhases = new Phase[]
+        {
+            new Phase(new Dialogue() {
+                name = "Judy",
+                sentences = new string[] {
+                    ".........           ",
+                    "  ... aaah..  aaah.... ma tête...",
+                }
+            }),
+            new Phase(new Dialogue() {
+                name = "Judy",
+                sentences = new string[] {
+                    ".........",
+                    "Ou suis-je... ?",
+                    "Que m'est-il arrivé... ?",
+                }
+            }),
+            new Phase(new Dialogue() {
+                name = "Judy",
+                sentences = new string[] {
+                    ".........",
+                    " Aie... J'ai mal partout...",
+                }
+            }),
+            new Phase(new Dialogue() {
+                name = "Judy",
+                sentences = new string[] {
+                    "Je suis sur une île ?! Mais comment c'est possible ? Je ne me souviens de rien..",
+                    "Ca ne m'a pas l'air très habité..",
+                }
+            }),
+            new Phase(new Dialogue() {
+                name = "Judy",
+                sentences = new string[] {
+                    "Quel-est ce cauchemard !",
+                    "Comment vais-je partir d'ici ? ... Mmmmmhhhh ...",
+                }
+            }),
+            new Phase(new Dialogue() {
+                name = "Judy",
+                sentences = new string[] {
+                    "Je sais ! Et si je construisais un radeau !",
+                    "Bon ne nous emballons pas trop...  Commençons par explorer cette plage !",
+                }
+            })
+        };*/
+        //Debug.Log(cutscenePhases.Length);
+    }
+    #endregion
+    /*
+    public override void Activate()
+    {
+        
+        Debug.Log(cutscenePhases.Length);
+        Debug.Log((cutscenePhases[0] as Phase).Dialogue.sentences[0]);
+        base.Activate();
+    }*/
+
+    /*
     public AnimationClip cutScene;
     public AudioClip cutSceneMusic;
     private GameObject songs;
@@ -100,5 +171,5 @@ public class TitleGameCutScene : CutScene
 
         yield return new WaitForEndOfFrame();
         DialogueTrigger.TriggerDialogueInstructions(null);
-    }
+    }*/
 }

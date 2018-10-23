@@ -20,10 +20,11 @@ public class DialogueManager : MonoBehaviour {
     #endregion
 
     private Queue<Dialogue> dialoguesQueue;
-    private Queue<CutScene> actionsQueue;
+    private Queue<Trigger> actionsQueue;
     private Queue<string> sentences;
 
     private AudioSource audioSource;
+    private CanvasGroup canvas;
     private GameObject judy;
 
     private bool isTyping;
@@ -33,17 +34,20 @@ public class DialogueManager : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         dialoguesQueue = new Queue<Dialogue>();
-        actionsQueue = new Queue<CutScene>();
+        actionsQueue = new Queue<Trigger>();
         sentences = new Queue<string>();
 
         isTyping = false;
         isProcessing = false;
         judy = GameObject.FindWithTag("Player");
         audioSource = GetComponent<AudioSource>();
+        canvas = GetComponent<CanvasGroup>();
     }
 	
     //Lancer le dialogue
-	public void StartDialogue (Dialogue dialogue, CutScene action) {
+	public void StartDialogue (Dialogue dialogue, Trigger action) {
+        DisplayDialogueCanvas();
+
         // Put the dialogue in the queue ans the switch
         dialoguesQueue.Enqueue(dialogue);
         actionsQueue.Enqueue(action);
@@ -64,6 +68,8 @@ public class DialogueManager : MonoBehaviour {
         sentences.Clear();
         dialoguesQueue.Clear();
         actionsQueue.Clear();
+
+        HideDialogueCanvas();
     }
 
     private void FillSentences(Dialogue dialogue) {
@@ -113,7 +119,7 @@ public class DialogueManager : MonoBehaviour {
     //Fin du dialogue
     public void EndDialogue() {
         // Play the corresponding switch
-        CutScene action = actionsQueue.Dequeue();
+        Trigger action = actionsQueue.Dequeue();
         if(action != null) {
             SwitchManager.StartAction(action);
         }
@@ -130,6 +136,22 @@ public class DialogueManager : MonoBehaviour {
             audioSource.clip = sonDialog;
             audioSource.Play();
             animator.SetBool("isOpen", false);
+
+            HideDialogueCanvas();
         }
+    }
+
+    private void DisplayDialogueCanvas()
+    {
+        canvas.alpha = 1.0f;
+        canvas.interactable = true;
+        canvas.blocksRaycasts = true;
+    }
+
+    private void HideDialogueCanvas()
+    {
+        canvas.alpha = 0.0f;
+        canvas.interactable = false;
+        canvas.blocksRaycasts = false;
     }
 }

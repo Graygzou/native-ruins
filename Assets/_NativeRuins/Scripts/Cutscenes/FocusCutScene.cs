@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FocusCutScene : CutScene
 {
-
+    /*
     protected override void ActivateSwitch() {
 
         // Execute the desired action
@@ -17,6 +17,6 @@ public class FocusCutScene : CutScene
         // Wait the end of the animation
         yield return new WaitForSeconds(3f);
         SwitchManager.EndAction();
-    }
+    }*/
 
 }

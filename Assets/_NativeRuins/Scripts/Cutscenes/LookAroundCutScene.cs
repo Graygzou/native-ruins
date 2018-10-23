@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LookAroundCutScene : CutScene
 {
-
+    /*
     protected override void ActivateSwitch() {
         // Setting up
         GameObject.Find("ThirdCutSceneCamera").GetComponent<Camera>().enabled = true;
@@ -20,6 +20,6 @@ public class LookAroundCutScene : CutScene
         // Wait the end of the animation
         yield return new WaitForSeconds(3f);
         SwitchManager.EndAction();
-    }
+    }*/
 
 }

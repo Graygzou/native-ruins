@@ -85,7 +85,7 @@ public class InteractBonFire : MonoBehaviour {
         try
         {
             // If the bonfire is a real one (not craft)
-            GetComponent<CutScene>().StopCutScene();
+            //GetComponent<CutScene>().StopCutScene();
         }
         catch (Exception e) { }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FenceSwitch : CutScene
 {
-
+    /*
     public float smoothing = 1f;
     private Vector3 target;
 
@@ -37,7 +37,7 @@ public class FenceSwitch : CutScene
         ActivateSwitch();
         yield return new WaitForSeconds(1f);
         StopCutScene();
-    }
+    }*/
 
     //IEnumerator PlayCutScene(float time)
     //{

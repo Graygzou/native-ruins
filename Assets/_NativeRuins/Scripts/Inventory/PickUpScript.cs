@@ -54,19 +54,19 @@ public class PickUpScript : MonoBehaviour {
             if (o_type.Equals(ObjectsType.Bow) && !brain.HasDiscoveredBow)
             {
                 brain.HasDiscoveredBow = true;
-                DialogueTrigger.TriggerDialogueArc(null);
+                // TODO DialogueTrigger.TriggerDialogueArc(null);
                 FindObjectPostProcess();
             }
             if (o_type.Equals(ObjectsType.Rope) && !brain.HasDiscoveredRope)
             {
                 brain.HasDiscoveredRope = true;
-                DialogueTrigger.TriggerDialogueCorde(null);
+                // TODO DialogueTrigger.TriggerDialogueCorde(null);
                 FindObjectPostProcess();
             }
             if (o_type.Equals(ObjectsType.Sail) && !brain.HasDiscoveredSail)
             {
                 brain.HasDiscoveredSail = true;
-                DialogueTrigger.TriggerDialogueVoile(null);
+                // TODO DialogueTrigger.TriggerDialogueVoile(null);
                 FindObjectPostProcess();
             }
             InventoryManager.Instance.AddObjectOfType(o_type, o_object);

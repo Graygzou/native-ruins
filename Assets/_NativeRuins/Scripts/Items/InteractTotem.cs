@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractTotem : MonoBehaviour {
 
     [SerializeField]
-    private DialogueTrigger dialogue;
+    private InteractionManager dialogue;
     [SerializeField]
     private GameObject buttonInteragir;
 
@@ -61,7 +61,7 @@ public class InteractTotem : MonoBehaviour {
                 son.Play();
                 particuleEffect.Stop();
                 judy.GetComponent<FormsController>().SetBearUnlocked(true);
-                DialogueTrigger.TriggerDialogueTotemOurs(null);
+                // TODO DialogueTrigger.TriggerDialogueTotemOurs(null);
             }
             else //le totem ours a deja ete recupere donc il ne reste que celui du puma
             {
@@ -72,7 +72,7 @@ public class InteractTotem : MonoBehaviour {
                 son.Play();
                 particuleEffect.Stop();
                 judy.GetComponent<FormsController>().SetPumaUnlocked(true);
-                DialogueTrigger.TriggerDialogueTotemPuma(null);
+                // TODO DialogueTrigger.TriggerDialogueTotemPuma(null);
             }
             // Disable the totem
             gameObject.SetActive(false);

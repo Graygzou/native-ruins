@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LostCutScene : CutScene
 {
-
+    /*
     protected override void ActivateSwitch() {
 
         // Execute the desired action
@@ -17,6 +17,6 @@ public class LostCutScene : CutScene
         // Wait the end of the animation
         yield return new WaitForSeconds(2f);
         SwitchManager.EndAction();
-    }
+    }*/
 
 }

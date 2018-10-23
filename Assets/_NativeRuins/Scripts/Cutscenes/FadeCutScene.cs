@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FadeCutScene : CutScene {
-
+    /*
     private float timer;
 
 	// Use this for initialization
@@ -36,6 +36,6 @@ public class FadeCutScene : CutScene {
         }
         Destroy(gameObject);
         SwitchManager.EndAction();
-    }
+    }*/
 
 }

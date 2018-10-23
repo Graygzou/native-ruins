@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowSwitch : CutScene
 {
-
+    /*
     private bool hasBeenActivated;
     private Transform colliderTransform;
 
@@ -29,5 +29,5 @@ public class ArrowSwitch : CutScene
             hasBeenActivated = true;
             colliderTransform.gameObject.GetComponent<AgentProperties>().takeDamages(15f);
         }
-    }
+    }*/ 
 }

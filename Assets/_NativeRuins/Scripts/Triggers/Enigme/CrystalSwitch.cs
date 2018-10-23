@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrystalSwitch : CutScene
 {
-
+    /*
     public Texture texture;
 
     // Use this for initialization
@@ -28,5 +28,5 @@ public class CrystalSwitch : CutScene
     // The switch does what he's meant for here.
     override protected void ActivateSwitch() {
         gameObject.GetComponent<Renderer>().material.mainTexture = texture;
-    }
+    }*/
 }

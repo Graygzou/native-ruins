@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StandUpCutScene : CutScene
 {
-
+    /*
     protected override void ActivateSwitch() {
         // Setting up
         GameObject.Find("SecondCutSceneCamera").GetComponent<Camera>().enabled = true;
@@ -20,6 +20,6 @@ public class StandUpCutScene : CutScene
         // Wait the end of the animation
         yield return new WaitForSeconds(7f);
         SwitchManager.EndAction();
-    }
+    }*/
 
 }

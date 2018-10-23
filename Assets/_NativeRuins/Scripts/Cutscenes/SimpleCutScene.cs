@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimpleCutScene : CutScene
 {
-
+    /*
     public string nameCutScene;
     public AudioClip cutSceneMusic;
     public float PauseTime;
@@ -42,5 +42,5 @@ public class SimpleCutScene : CutScene
 
     protected override void ActivateSwitch() {
         //throw new System.NotImplementedException();
-    }
+    }*/
 }

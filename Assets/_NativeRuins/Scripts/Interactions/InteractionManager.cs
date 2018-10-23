@@ -2,31 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueTrigger : MonoBehaviour, IManager
+public class InteractionManager : MonoBehaviour, IManager
 {
-    #region Enums
-    public enum CutsceneName : int
+    [System.Serializable]
+    public struct CutsceneInfos
     {
-        introductionCutscene = 0,
+        [SerializeField]
+        public CutScene.CutsceneName name;
+
+        [SerializeField]
+        public CutScene cutscene;
     }
-    #endregion
 
-    public static Dialogue dialogue;
+    private DialogueManager dialogue;
 
-    private IDictionary<CutsceneName, CutScene> cutscenes;
-    //private Camera cutsceneCamera;
+    [SerializeField]
+    private List<CutsceneInfos> cutscenes;
 
-    public delegate void CutsceneEnd();
-    public static event CutsceneEnd CutsceneHasEnded;
-
-    private void Awake()
-    {
-        //cutsceneCamera = GameObject.FindWithTag("CutsceneCamera").GetComponent<Camera>();
-
-        // Create all the cutscenes
-        cutscenes = new Dictionary<CutsceneName, CutScene>();
-        cutscenes.Add(CutsceneName.introductionCutscene, new TitleGameCutScene());
-    }
+    public delegate void CutsceneHasEnded();
+    public static event CutsceneHasEnded OnIntroCutsceneHasEnded;
+    public static event CutsceneHasEnded OnBearTotemCutsceneHasEnded;
+    // ...
 
     public void Init()
     {
@@ -41,110 +37,92 @@ public class DialogueTrigger : MonoBehaviour, IManager
     /**
      * Start the first cutscene where Judy arrived on the beach.
      */
-     /*
-    public void LaunchInitialCutscene()
-    {
-        // Setting up the scene
-        cutsceneCamera.enabled = true;
-        Camera.main.enabled = false;
+    /*
+   public void LaunchInitialCutscene()
+   {
+       // Setting up the scene
+       cutsceneCamera.enabled = true;
+       Camera.main.enabled = false;
 
-        //GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
-        //GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
+       //GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
+       //GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
 
-        // Execute the sleeping action
-        GameObject.FindWithTag("Player").GetComponent<PlayerProperties>().Sleep();
+       // Execute the sleeping action
+       GameObject.FindWithTag("Player").GetComponent<PlayerProperties>().Sleep();
 
-        // Call dialogues
-        /*
-        TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
-        TriggerDialogueDebut2(GameObject.Find("SecondCutSceneCamera").GetComponent<StandUpCutScene>());
-        TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
-        TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
-        TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
-        TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());*/
+       // Call dialogues
+       /*
+       TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
+       TriggerDialogueDebut2(GameObject.Find("SecondCutSceneCamera").GetComponent<StandUpCutScene>());
+       TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
+       TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
+       TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
+       TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());*/
 
-        // Fire the event to init the other managers.
-        //CutsceneHasEnded();
+    // Fire the event to init the other managers.
+    //CutsceneHasEnded();
     //}*/
 
-    public void StartCutscene(CutsceneName name)
+    public void StartCutscene(CutScene.CutsceneName name)
     {
-        CutScene currentCutscene = cutscenes[name];
+        Debug.Log("Info: starting " + name + " cutscene.");
 
-        currentCutscene.Activate();
+        // Get the cutscene to play
+        CutScene currentCutscene = FindCutscene(name);
+        if(currentCutscene != null)
+        {
+            // Subscribe to the end of the cutscene
+            CutScene.OnCutsceneEnd += WhenCutsceneEnds;
 
-        CutsceneHasEnded();
+            Debug.Log("Info: activate " + name + " cutscene.");
+            // Activate it
+            currentCutscene.Activate();
+        }
     }
 
-    public void SkipCutscene()
+    public void WhenCutsceneEnds(CutScene.CutsceneName name)
     {
-        // Fade the cutscene
-
-
-        // Fire the event to init the other managers.
-        CutsceneHasEnded();
+        // Fire the right trigger depending on the given name
+        switch (name)
+        {
+            case CutScene.CutsceneName.IntroductionCutscene:
+                OnIntroCutsceneHasEnded();
+                break;
+            case CutScene.CutsceneName.BearTotemCutscene:
+                OnBearTotemCutsceneHasEnded();
+                break;
+            default:
+                break;
+        }
     }
 
+    public void SkipCutscene(CutScene.CutsceneName name)
+    {
+        // Fade the cutscene : THIS NEED TO BE DONE IN THE CUTSCENE ITSELF.
+        FindCutscene(name).Interrupt();
+    }
+
+    private CutScene FindCutscene(CutScene.CutsceneName name)
+    {
+        CutScene result = null;
+        bool found = false;
+        int i = 0;
+        while(!found && i < cutscenes.Count)
+        {
+            found = (cutscenes[i].name.Equals(name));
+            result = found ? cutscenes[i].cutscene : result;
+            i++;
+        }
+        return result;
+    }
+
+    /*
     public static void TriggerSauvegarde(CutScene action)
     {
         dialogue = new Dialogue();
         dialogue.name = "Menu";
         dialogue.sentences = new string[1];
         dialogue.sentences[0] = "Votre partie a bien été sauvegardée.";
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
-    }
-
-    public static void TriggerDialogueDebut(CutScene action) {
-        dialogue = new Dialogue();
-        dialogue.name = "Judy";
-        dialogue.sentences = new string[2];
-        dialogue.sentences[0] = ".........           ";
-        dialogue.sentences[1] = "  ... aaah..  aaah.... ma tête...";
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
-    }
-
-    public static void TriggerDialogueDebut2(CutScene action) {
-        dialogue = new Dialogue();
-        dialogue.name = "Judy";
-        dialogue.sentences = new string[3];
-        dialogue.sentences[0] = ".........";
-        dialogue.sentences[1] = "Ou suis-je... ?";
-        dialogue.sentences[2] = "Que m'est-il arrivé... ?";
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
-    }
-
-    public static void TriggerDialogueDebut3(CutScene action) {
-        dialogue = new Dialogue();
-        dialogue.name = "Judy";
-        dialogue.sentences = new string[2];
-        dialogue.sentences[0] = ".........";
-        dialogue.sentences[1] = " Aie... J'ai mal partout...";
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
-    }
-
-    public static void TriggerDialogueDebut4(CutScene action) {
-        dialogue = new Dialogue();
-        dialogue.name = "Judy";
-        dialogue.sentences = new string[2];
-        dialogue.sentences[0] = "Je suis sur une île ?! Mais comment c'est possible ? Je ne me souviens de rien..";
-        dialogue.sentences[1] = "Ca ne m'a pas l'air très habité..";
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
-    }
-
-    public static void TriggerDialogueDebut5(CutScene action) {
-        dialogue = new Dialogue();
-        dialogue.name = "Judy";
-        dialogue.sentences = new string[2];
-        dialogue.sentences[0] = "Quel-est ce cauchemard !";
-        dialogue.sentences[1] = "Comment je vais partir d'ici ? ... Mmmmmhhhh ...";
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
-    }
-    public static void TriggerDialogueDebut6(CutScene action) {
-        dialogue = new Dialogue();
-        dialogue.name = "Judy";
-        dialogue.sentences = new string[2];
-        dialogue.sentences[0] = "Je sais ! Et si je construisais un radeau !";
-        dialogue.sentences[1] = "Bon ne nous emballons pas trop...  Commençons par explorer cette plage !";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
     }
 
@@ -221,5 +199,5 @@ public class DialogueTrigger : MonoBehaviour, IManager
         dialogue.sentences[1] = "Des éléments sur l'île vous permettront de créer des flèches.";
         dialogue.sentences[2] = "Pour l'utiliser : Le CLIC DROIT de la souris vous permet de viser et le CLIC GAUCHE vous permet de tirer une flèche.";
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue, action);
-    }
+    }*/
 }

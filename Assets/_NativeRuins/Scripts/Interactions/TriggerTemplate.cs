@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CutScene {
+public abstract class TriggerTemplate {
+
+    public Camera cameraCutScene;
 
     protected Camera playerCamera;
-    public Camera cameraCutScene;
 
     protected bool isActived = false;
 
@@ -15,14 +16,19 @@ public abstract class CutScene {
         playerCamera = Camera.main;
     }
 
-    void Start() {
-        if (cameraCutScene != null )
+    void Start()
+    {
+        if (cameraCutScene != null)
+        {
             cameraCutScene.enabled = false;
+        }
     }
 
-    public void Activate() {
+    public void Activate()
+    {
         // If the switch got a camera, switch to activate it
-        if (cameraCutScene != null && !isActived) {
+        if (cameraCutScene != null && !isActived)
+        {
             // Call a cut-scene to start the switch
             SetupCutSceneStart();
             PlayCutSceneStart();
@@ -46,20 +52,23 @@ public abstract class CutScene {
     protected virtual void DiactivateSwitch() { }
 
     // Used to setup a cutscene
-    public virtual void SetupCutSceneStart() {
+    public virtual void SetupCutSceneStart()
+    {
         isActived = true;
         GameObject.FindWithTag("Player").GetComponent<MovementController>().enabled = false;
         ActionsNew actions = GameObject.FindWithTag("Player").GetComponent<ActionsNew>();
-        if (actions != null) {
+        if (actions != null)
+        {
             actions.Stay(100f);
         }
-        
+
         // Enable the right camera
         playerCamera.enabled = false;
         cameraCutScene.enabled = true;
     }
 
-    public virtual IEnumerator PlayCutSceneStart() {
+    public virtual IEnumerator PlayCutSceneStart()
+    {
         yield return null;
     }
 
@@ -68,7 +77,8 @@ public abstract class CutScene {
         yield return null;
     }
 
-    public virtual void StopCutScene() {
+    public virtual void StopCutScene()
+    {
         cameraCutScene.enabled = false;
         playerCamera.enabled = true;
         GameObject.FindWithTag("Player").GetComponent<MovementController>().enabled = true;
