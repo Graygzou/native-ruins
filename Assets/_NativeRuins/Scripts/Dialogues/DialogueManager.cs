@@ -74,9 +74,10 @@ public class DialogueManager : MonoBehaviour {
 
     private void FillSentences(Dialogue dialogue) {
         isProcessing = true;
+        /*
         foreach (string sentence in dialogue.sentences) {
             sentences.Enqueue(sentence);
-        }
+        }*/
         DisplayNextSentence();
     }
 

@@ -36,6 +36,7 @@ public abstract class CutScene : MonoBehaviour
         playerCamera = Camera.main;
 
         Debug.Log(cutscenePhases.Count);
+        /* TODO
         MonoBehaviourPhase t = new MonoBehaviourPhase(new Dialogue()
         {
             name = "Judy",
@@ -44,7 +45,7 @@ public abstract class CutScene : MonoBehaviour
                     "  ... aaah..  aaah.... ma tête...",
                 }
         });
-        cutscenePhases.Add(t);
+        cutscenePhases.Add(t);*/
         Debug.Log(cutscenePhases.Count);
     }
 

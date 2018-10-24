@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dialogue : ScriptableObject
+public class DialogueList : ScriptableObject
 {
-    public List<DialogueSentence> dialogue;
+    public List<Dialogue> dialogueList;
 }
