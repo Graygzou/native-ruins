@@ -2,44 +2,78 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Phase : IPhase {
-
+[System.Serializable]
+public class Phase
+{
     public const int NUM_ACTIONS_MAX = 10;
 
+    [SerializeField]
     private Camera attachedCamera;
 
-    private Dialogue _dialogue;
-    public Dialogue Dialogue { get { return _dialogue; } }
+    [SerializeField]
+    private int startDialogueIndex;
 
+    [SerializeField]
+    private int endDialogueIndex;
+
+    [SerializeField]
+    public float min = 0;
+    [SerializeField]
+    public float max = 10;
+
+    [MinMaxSlider (0, 100)]
+    public Vector2 myVector;
+
+    [SerializeField]
     private Trigger[] actions;
 
+    [SerializeField]
     private bool canPlayerMove;
 
-    public Phase() : this(new Dialogue(), new Trigger[NUM_ACTIONS_MAX])
-    { }
-
-    public Phase(Dialogue presetDialogue) : this(presetDialogue, new Trigger[NUM_ACTIONS_MAX])
-    { }
-
-    public Phase(Dialogue presetDialogue, Trigger[] presetActions)
+    public void Awake()
     {
-        _dialogue = presetDialogue;
-        actions = presetActions;
+        if (attachedCamera != null)
+        {
+            attachedCamera.enabled = false;
+        }
     }
 
-    void IPhase.Interrupt()
+    public void Interrupt()
     {
+        StopCutSceneEnd();
 
         // Fire the finish event
     }
 
     public void SetupCutScene()
     {
-        // nothing yet
+        if (!canPlayerMove)
+        {
+            // Get all component needed form the player
+
+        }
+
+        // Activate the camera
+        attachedCamera.enabled = true;
+    }
+
+    private void PlayCutSceneAnimation()
+    {
+        // Launch the dialogues
+        //Debug.Log(_dialogue);
+        //FindObjectOfType<DialogueManager>().StartDialogue(_dialogue, null);
+    }
+
+    private void StopCutSceneEnd()
+    {
+
     }
 
     public void TriggerActions()
     {
-        // nothing yet
+        foreach(Trigger action in actions)
+        {
+            action.Fire();
+        }
     }
 }

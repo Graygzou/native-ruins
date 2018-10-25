@@ -17,12 +17,12 @@ public abstract class CutScene : MonoBehaviour
 
     #region Serialize Fields
     [SerializeField]
-    protected List<MonoBehaviourPhase> cutscenePhases;
+    private Dialogue _dialogue;
+    public Dialogue Dialogue { get { return _dialogue; } }
 
     [SerializeField]
-    private bool canPlayerMove = false;
-    [SerializeField]
-    private bool useHardCodedPhases = true;
+    protected List<Phase> cutscenePhases;
+    
     #endregion
 
     public delegate void CutsceneEnd(CutsceneName name);
@@ -58,7 +58,7 @@ public abstract class CutScene : MonoBehaviour
         Debug.Log(cutscenePhases.Count);
         for(int i = 0; i < cutscenePhases.Count; i++)
         {
-            IPhase phase = cutscenePhases[i];
+            Phase phase = cutscenePhases[i];
             Debug.Log(phase);
             if (phase != null)
             {
@@ -70,7 +70,7 @@ public abstract class CutScene : MonoBehaviour
 
 
     #region IPhase workflow
-    private void Activate(IPhase currentPhase)
+    private void Activate(Phase currentPhase)
     {
         // Setup
         currentPhase.SetupCutScene();
@@ -82,19 +82,20 @@ public abstract class CutScene : MonoBehaviour
         currentPhase.TriggerActions();
     }
 
-    private void PlayCutSceneAnimation(IPhase currentPhase)
+    private void PlayCutSceneAnimation(Phase currentPhase)
     {
         Dialogue currentDialogue = null;
         // Retrieve the dialogue
         if(currentPhase is Phase)
         {
-            currentDialogue = (currentPhase as Phase).Dialogue;
+            //currentDialogue = currentPhase.Dialogue;
         }
+        /*
         else if(currentPhase is MonoBehaviourPhase)
         {
             currentDialogue = (currentPhase as MonoBehaviourPhase).Dialogue;
         }
-        
+        */
         if (currentPhase != null)
         {
             Debug.Log(currentDialogue);

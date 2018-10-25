@@ -15,8 +15,9 @@ public class DialogueEditor : EditorWindow
     [MenuItem("Tools/Dialogue/Dialogues Editor %#e")]
     static void Init()
     {
-        DialogueEditor window = (DialogueEditor)EditorWindow.GetWindow(typeof(DialogueEditor), true, "DialogueEditor");
-        window.Show();
+        //DialogueEditor window = (DialogueEditor)
+        EditorWindow.GetWindow(typeof(DialogueEditor));
+        //window.Show();
     }
 
     void OnEnable()
@@ -67,7 +68,7 @@ public class DialogueEditor : EditorWindow
 
         GUI.enabled = dialogueList == null ? false : true;
         GUILayout.BeginHorizontal();
-        GUILayout.Space(20);
+        GUILayout.Space(10);
         if (GUILayout.Button("Create New Dialogue", GUILayout.ExpandWidth(false)))
         {
             AddDialogue();
@@ -76,6 +77,11 @@ public class DialogueEditor : EditorWindow
         if (GUILayout.Button("Delete Dialogue", GUILayout.ExpandWidth(false)))
         {
             DeleteDialogue();
+        }
+        GUI.enabled = true;
+        if (GUILayout.Button("Open Existing Dialogue", GUILayout.ExpandWidth(false)))
+        {
+            OpenDialogue();
         }
         GUILayout.EndHorizontal();
         GUI.enabled = true;
@@ -89,7 +95,7 @@ public class DialogueEditor : EditorWindow
 
             if (GUILayout.Button("Prev", GUILayout.ExpandWidth(false)))
             {
-                if (viewIndex > 0)
+                if (viewIndex > 1)
                     viewIndex--;
             }
             GUILayout.Space(5);
@@ -103,25 +109,33 @@ public class DialogueEditor : EditorWindow
 
             GUILayout.Space(60);
 
-            if (GUILayout.Button("Add Item", GUILayout.ExpandWidth(false)))
+            if (GUILayout.Button("Add dialogue sentence", GUILayout.ExpandWidth(false)))
             {
                 AddDialogueSentence();
             }
-            if (GUILayout.Button("Delete Item", GUILayout.ExpandWidth(false)))
+            if (GUILayout.Button("Delete last dialogue sentence", GUILayout.ExpandWidth(false)))
             {
-                DeleteLastDialogueSentence();
+                if(dialogueList.dialogueList.Count > 0 && dialogueList.dialogueList[viewIndex - 1].dialogue.Count > 0)
+                {
+                    DeleteLastDialogueSentence();
+                }
             }
-
             GUILayout.EndHorizontal();
+
             if (dialogueList.dialogueList == null)
+            {
                 Debug.Log("wtf");
+            }
+            else
+            {
+                // Draw the dialogue number on the list
+                GUILayout.BeginHorizontal();
+                viewIndex = Mathf.Clamp(EditorGUILayout.IntField("Current Dialogue", viewIndex, GUILayout.ExpandWidth(false)), 1, dialogueList.dialogueList.Count);
+                EditorGUILayout.LabelField("of   " + dialogueList.dialogueList.Count.ToString() + "  dialogue(s)", "", GUILayout.ExpandWidth(false));
+                GUILayout.EndHorizontal();
+            }
             if (dialogueList.dialogueList.Count > 0 && dialogueList.dialogueList[viewIndex - 1].dialogue.Count > 0)
             {
-                GUILayout.BeginHorizontal();
-                viewIndex = Mathf.Clamp(EditorGUILayout.IntField("Current Item", viewIndex, GUILayout.ExpandWidth(false)), 1, dialogueList.dialogueList.Count);
-                EditorGUILayout.LabelField("of   " + dialogueList.dialogueList.Count.ToString() + "  items", "", GUILayout.ExpandWidth(false));
-                GUILayout.EndHorizontal();
-
                 showDialogue = EditorGUILayout.Foldout(showDialogue, "Dialogue", true);
                 if (showDialogue)
                 {
@@ -131,12 +145,9 @@ public class DialogueEditor : EditorWindow
                         if (currentDialogueSentence != null)
                         {
                             currentDialogueSentence.name = EditorGUILayout.TextField("Locutor Name", currentDialogueSentence.name as string);
-                            currentDialogueSentence.locutorImage = EditorGUILayout.ObjectField("Locutor Icon", currentDialogueSentence.locutorImage, typeof(Texture2D), false) as Texture2D;
+                            currentDialogueSentence.locutorImage = EditorGUILayout.ObjectField("Locutor Icon", currentDialogueSentence.locutorImage, typeof(Texture2D), true, GUILayout.Height(16)) as Texture2D;
                             currentDialogueSentence.soundExpression = EditorGUILayout.ObjectField("Sound Expression", currentDialogueSentence.soundExpression, typeof(AudioClip), false) as AudioClip;
                             currentDialogueSentence.sentence = EditorGUILayout.TextField("Locutor sentence", currentDialogueSentence.sentence as string);
-
-                            GUILayout.Space(10);
-
                             GUILayout.BeginHorizontal();
                             currentDialogueSentence.playSong = (bool)EditorGUILayout.Toggle("playSong", currentDialogueSentence.playSong, GUILayout.ExpandWidth(false));
                             GUILayout.EndHorizontal();

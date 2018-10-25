@@ -45,7 +45,7 @@ public class TitleGameCutScene : CutScene
                 name = "Judy",
                 sentences = new string[] {
                     "Je suis sur une île ?! Mais comment c'est possible ? Je ne me souviens de rien..",
-                    "Ca ne m'a pas l'air très habité..",
+                    "Elle ne m'a pas l'air très habitée..",
                 }
             }),
             new Phase(new Dialogue() {

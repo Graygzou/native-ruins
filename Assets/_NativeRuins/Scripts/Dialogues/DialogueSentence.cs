@@ -18,7 +18,7 @@ public class DialogueSentence {
 
     // the sentence said by the locutor
     [TextArea(3, 10)] //pour bloquer la taille de la ou on ecrit les dialogues dans le manager
-    public string sentence;
+    public string sentence = "This is where the sentence needs to be written.";
 
     public bool playSong = false;
 }
