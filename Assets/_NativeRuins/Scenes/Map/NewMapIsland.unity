@@ -1378,9 +1378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!135 &178119626
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1406,9 +1405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!1001 &186447973
 Prefab:
   m_ObjectHideFlags: 0
@@ -7471,9 +7469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ea5720ee27c4445b9585dfcf2ce135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!135 &514581739
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7668,9 +7665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ea5720ee27c4445b9585dfcf2ce135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!1001 &519709998
 Prefab:
   m_ObjectHideFlags: 0
@@ -9704,9 +9700,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f827ab2fbb029804ea2d849ac4f3cdd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!124 &745235813
 Behaviour:
   m_ObjectHideFlags: 0
@@ -14059,9 +14054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!4 &870000527
 Transform:
   m_ObjectHideFlags: 0
@@ -14088,9 +14082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!135 &870000529
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20025,9 +20018,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e178e3f22d6a94ab08c351b1478800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!65 &1104586550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20463,9 +20455,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a9c2ff342d0884784ccf227f0c3d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!114 &1131866691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20477,9 +20468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d0d0f38c12b9c4babe1b821b45aca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!124 &1131866692
 Behaviour:
   m_ObjectHideFlags: 0
@@ -21728,9 +21718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ea5720ee27c4445b9585dfcf2ce135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!135 &1233350848
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -22013,9 +22002,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ea5720ee27c4445b9585dfcf2ce135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!1 &1265067115
 GameObject:
   m_ObjectHideFlags: 0
@@ -23623,9 +23611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d3eae6181f95845aafbe82f72aec7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!114 &1430533437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23637,9 +23624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf765ac8d3a6dcb42ba6ed7e8d2cc35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!124 &1430533438
 Behaviour:
   m_ObjectHideFlags: 0
@@ -24326,9 +24312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!114 &1490864929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24341,9 +24326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!135 &1490864930
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24883,9 +24867,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51a416a166ac634b8874932cf28d619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!114 &1556541056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27020,9 +27003,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f827ab2fbb029804ea2d849ac4f3cdd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
+  _dialogue: {fileID: 11400000, guid: 751c62b77ec3d514cacda6ed5520de68, type: 2}
+  cutscenePhases:
+  - attachedCamera: {fileID: 0}
+    startDialogueIndex: 0
+    endDialogueIndex: 0
+    min: 0
+    max: 0
+    myVector: {x: 0, y: 20.538734}
+    actions:
+    - {fileID: 0}
+    - {fileID: 0}
+    canPlayerMove: 1
+  - attachedCamera: {fileID: 0}
+    startDialogueIndex: 0
+    endDialogueIndex: 0
+    min: 0
+    max: 0
+    myVector: {x: 0, y: 0}
+    actions:
+    - {fileID: 0}
+    - {fileID: 0}
+    canPlayerMove: 0
 --- !u!4 &1837204347
 Transform:
   m_ObjectHideFlags: 0
@@ -27840,9 +27842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!114 &1863014901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27855,9 +27856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
   cutscenePhases: []
-  canPlayerMove: 0
-  useHardCodedPhases: 1
 --- !u!135 &1863014902
 SphereCollider:
   m_ObjectHideFlags: 0
