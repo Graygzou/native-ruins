@@ -47,15 +47,18 @@ public abstract class CutScene : MonoBehaviour
 
     public virtual void Init()
     {
-        for (int i = 0; i < _dialogue.dialogue.Count; i++)
+        for (int dialogueIndex = 0; dialogueIndex < _dialogue.dialogue.Count; dialogueIndex++)
         {
             // Tidy up Phase to accelerate the activation process.
             foreach (Phase phase in cutscenePhases)
             {
-                if (phase.min >= i && phase.max < i)
+                for (int actionIndex = 0; actionIndex < phase.Actions.Length; actionIndex++)
                 {
-                    // The phase want to belong to that dialogue
-                    dialogueSentenceTriggers[i].AddRange(phase.Actions);
+                    if(phase.DialogueSentenceReferences[actionIndex].Equals(dialogueIndex))
+                    {
+                        // This current action want to belong to the current dialogue
+                        dialogueSentenceTriggers[dialogueIndex].Add(phase.Actions[actionIndex]);
+                    }
                 }
             }
         }

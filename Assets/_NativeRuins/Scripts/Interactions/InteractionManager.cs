@@ -65,17 +65,19 @@ public class InteractionManager : MonoBehaviour, IManager
 
     public void StartCutscene(CutScene.CutsceneName name)
     {
-        Debug.Log("Info: starting " + name + " cutscene.");
-
         // Get the cutscene to play
+        Debug.Log("Info: starting " + name + " cutscene.");
         CutScene currentCutscene = FindCutscene(name);
         if(currentCutscene != null)
         {
             // Subscribe to the end of the cutscene
             CutScene.OnCutsceneEnd += WhenCutsceneEnds;
 
-            Debug.Log("Info: activate " + name + " cutscene.");
+            // Init it
+            currentCutscene.Init();
+
             // Activate it
+            Debug.Log("Info: activate " + name + " cutscene.");
             currentCutscene.Activate();
         }
     }

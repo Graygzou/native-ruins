@@ -35,7 +35,6 @@ public class PhaseDrawable : PropertyDrawer
             Rect startIndexRecdt = new Rect(position.x, position.y + 2 * SPACING, 130, position.height);
             EditorGUI.LabelField(startIndexRecdt, "Phase range");
 
-            EditorGUI.BeginProperty(position, label, property);
             Rect dialogueStartLabel = new Rect(position.x + 125, position.y + 2 * SPACING, 130, position.height);
             EditorGUI.LabelField(dialogueStartLabel, "dialogue n°");
 
@@ -72,13 +71,13 @@ public class PhaseDrawable : PropertyDrawer
 
                 EditorGUI.BeginChangeCheck();
                 // Display the references changes
-                for (int i = 0; i < property.FindPropertyRelative("dialogueSentenceReferences").arraySize; i++)
+                for (int i = 0; i < property.FindPropertyRelative("_dialogueSentenceReferences").arraySize; i++)
                 {
                     Rect labelRef = new Rect(position.x + 305, position.y + 5 * SPACING + (i * 18) + 2, 60, position.height);
                     EditorGUI.LabelField(labelRef, "n°");
 
                     Rect refRect = new Rect(position.x + 327, position.y + 5 * SPACING + (i * 18) + 2, 75, position.height);
-                    EditorGUI.PropertyField(refRect, property.FindPropertyRelative("dialogueSentenceReferences").GetArrayElementAtIndex(i), GUIContent.none, true);
+                    EditorGUI.PropertyField(refRect, property.FindPropertyRelative("_dialogueSentenceReferences").GetArrayElementAtIndex(i), GUIContent.none, true);
                 }
                 EditorGUI.EndChangeCheck();
                 if (GUI.changed)
@@ -100,14 +99,14 @@ public class PhaseDrawable : PropertyDrawer
 
     private void MatchRefToActions(Rect position, SerializedProperty property, SerializedProperty actions)
     {
-        SerializedProperty refArray = property.FindPropertyRelative("dialogueSentenceReferences");
+        SerializedProperty refArray = property.FindPropertyRelative("_dialogueSentenceReferences");
         // Match the size of the two arrays
         if (actions.arraySize > refArray.arraySize)
         {
             // Add dummy elements
             for (int i = refArray.arraySize; i < actions.arraySize; i++)
             {
-                property.FindPropertyRelative("dialogueSentenceReferences").InsertArrayElementAtIndex(i);
+                property.FindPropertyRelative("_dialogueSentenceReferences").InsertArrayElementAtIndex(i);
             }
         }
         else if (actions.arraySize < refArray.arraySize)
@@ -115,11 +114,11 @@ public class PhaseDrawable : PropertyDrawer
             // Remove last elements
             for (int i = refArray.arraySize - 1; i >= actions.arraySize; i--)
             {
-                //Debug.Log("Elem :" + property.FindPropertyRelative("dialogueSentenceReferences").GetArrayElementAtIndex(i).intValue);
-                property.FindPropertyRelative("dialogueSentenceReferences").DeleteArrayElementAtIndex(i);
+                //Debug.Log("Elem :" + property.FindPropertyRelative("_dialogueSentenceReferences").GetArrayElementAtIndex(i).intValue);
+                property.FindPropertyRelative("_dialogueSentenceReferences").DeleteArrayElementAtIndex(i);
             }
         }
-        Debug.Log(property.FindPropertyRelative("dialogueSentenceReferences").arraySize);
+        Debug.Log(property.FindPropertyRelative("_dialogueSentenceReferences").arraySize);
     }
 
     private void CheckDialogueReference(SerializedProperty property)
@@ -128,9 +127,9 @@ public class PhaseDrawable : PropertyDrawer
         int endIndex = property.FindPropertyRelative("endDialogueIndex").intValue;
 
         SerializedProperty currentRef;
-        for (int i = 0; i < property.FindPropertyRelative("dialogueSentenceReferences").arraySize; i++)
+        for (int i = 0; i < property.FindPropertyRelative("_dialogueSentenceReferences").arraySize; i++)
         {
-            currentRef = property.FindPropertyRelative("dialogueSentenceReferences").GetArrayElementAtIndex(i);
+            currentRef = property.FindPropertyRelative("_dialogueSentenceReferences").GetArrayElementAtIndex(i);
             currentRef.intValue = currentRef.intValue > endIndex ? endIndex : (currentRef.intValue < startIndex ? startIndex : currentRef.intValue);
         }
     }
@@ -159,6 +158,6 @@ public class PhaseDrawable : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        return EditorGUI.GetPropertyHeight(property) > 16 ? EditorGUI.GetPropertyHeight(property) - 60 : EditorGUI.GetPropertyHeight(property);
+        return EditorGUI.GetPropertyHeight(property) > 16 ? EditorGUI.GetPropertyHeight(property) - 90 : EditorGUI.GetPropertyHeight(property);
     }
 }

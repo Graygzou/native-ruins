@@ -26,7 +26,8 @@ public class Phase
     public Trigger[] Actions { get { return _actions; } }
 
     [SerializeField]
-    private List<int> dialogueSentenceReferences = new List<int>();
+    private List<int> _dialogueSentenceReferences = new List<int>();
+    public List<int> DialogueSentenceReferences { get { return _dialogueSentenceReferences; } }
 
     [SerializeField]
     private bool canPlayerMove;
