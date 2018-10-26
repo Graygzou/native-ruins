@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger : MonoBehaviour {
+public class Trigger : MonoBehaviour
+{
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +15,7 @@ public class Trigger : MonoBehaviour {
 		
 	}
 
-    public void Fire()
+    public virtual void Fire()
     {
 
     }

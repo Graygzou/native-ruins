@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadeCutScene : CutScene {
-    /*
+public class FadeCutScene : Trigger
+{
+
     private float timer;
 
 	// Use this for initialization
@@ -14,7 +15,7 @@ public class FadeCutScene : CutScene {
         GetComponent<Renderer>().material.color = color;
     }
 
-    protected override void ActivateSwitch() {
+    public override void Fire() {
         StartCoroutine("StartFade");
     }
 
@@ -36,6 +37,5 @@ public class FadeCutScene : CutScene {
         }
         Destroy(gameObject);
         SwitchManager.EndAction();
-    }*/
-
+    }
 }

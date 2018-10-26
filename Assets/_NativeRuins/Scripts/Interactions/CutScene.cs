@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public abstract class CutScene : MonoBehaviour
 {
     #region Enums
@@ -22,7 +23,6 @@ public abstract class CutScene : MonoBehaviour
 
     [SerializeField]
     protected List<Phase> cutscenePhases;
-    
     #endregion
 
     public delegate void CutsceneEnd(CutsceneName name);
@@ -30,32 +30,51 @@ public abstract class CutScene : MonoBehaviour
 
     protected Camera playerCamera;
 
+    private List<Trigger>[] dialogueSentenceTriggers;
+
     protected virtual void Awake()
     {
+        foreach(Phase phase in cutscenePhases)
+        {
+            phase.maxNumberDialogue = _dialogue.dialogue.Count;
+        }
+        // Structure that will hold all the trigger for one dialogue sentence
+        dialogueSentenceTriggers = new List<Trigger>[_dialogue.dialogue.Count];
+
         // Get the camera of the player
         playerCamera = Camera.main;
-
-        Debug.Log(cutscenePhases.Count);
-        /* TODO
-        MonoBehaviourPhase t = new MonoBehaviourPhase(new Dialogue()
-        {
-            name = "Judy",
-            sentences = new string[] {
-                    ".........           ",
-                    "  ... aaah..  aaah.... ma tête...",
-                }
-        });
-        cutscenePhases.Add(t);*/
-        Debug.Log(cutscenePhases.Count);
     }
 
-    protected virtual void Start()
+    public virtual void Init()
     {
-        
+        for (int i = 0; i < _dialogue.dialogue.Count; i++)
+        {
+            // Tidy up Phase to accelerate the activation process.
+            foreach (Phase phase in cutscenePhases)
+            {
+                if (phase.min >= i && phase.max < i)
+                {
+                    // The phase want to belong to that dialogue
+                    dialogueSentenceTriggers[i].AddRange(phase.Actions);
+                }
+            }
+        }
     }
 
     public virtual void Activate() {
-        Debug.Log(cutscenePhases.Count);
+        for (int i = 0; i < _dialogue.dialogue.Count; i++)
+        {
+            // Retrieve all the Trigger events that needs to occur for the next dialogue sentence.
+
+            
+            // Launch the dialogue
+            FindObjectOfType<DialogueManager>().StartDialogue(_dialogue, null);
+        }
+
+
+
+
+            Debug.Log(cutscenePhases.Count);
         for(int i = 0; i < cutscenePhases.Count; i++)
         {
             Phase phase = cutscenePhases[i];
@@ -68,39 +87,25 @@ public abstract class CutScene : MonoBehaviour
         }
     }
 
-
-    #region IPhase workflow
+    #region Phase workflow
     private void Activate(Phase currentPhase)
     {
         // Setup
         currentPhase.SetupCutScene();
 
         // Call a cut-scene to start the switch
-        PlayCutSceneAnimation(currentPhase);
+        PlayCutSceneAnimation();
 
         // Simply activate the desired switch
         currentPhase.TriggerActions();
     }
 
-    private void PlayCutSceneAnimation(Phase currentPhase)
+    private void PlayCutSceneAnimation()
     {
-        Dialogue currentDialogue = null;
-        // Retrieve the dialogue
-        if(currentPhase is Phase)
+        if (_dialogue != null)
         {
-            //currentDialogue = currentPhase.Dialogue;
-        }
-        /*
-        else if(currentPhase is MonoBehaviourPhase)
-        {
-            currentDialogue = (currentPhase as MonoBehaviourPhase).Dialogue;
-        }
-        */
-        if (currentPhase != null)
-        {
-            Debug.Log(currentDialogue);
             // Launch the dialogue
-            FindObjectOfType<DialogueManager>().StartDialogue(currentDialogue, null);
+            FindObjectOfType<DialogueManager>().StartDialogue(_dialogue, null);
         }
     }
     #endregion

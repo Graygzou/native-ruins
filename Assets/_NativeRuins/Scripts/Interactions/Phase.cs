@@ -21,14 +21,17 @@ public class Phase
     [SerializeField]
     public float max = 10;
 
-    [MinMaxSlider (0, 100)]
-    public Vector2 myVector;
+    [SerializeField]
+    private Trigger[] _actions;
+    public Trigger[] Actions { get { return _actions; } }
 
     [SerializeField]
-    private Trigger[] actions;
+    private List<int> dialogueSentenceReferences = new List<int>();
 
     [SerializeField]
     private bool canPlayerMove;
+
+    public int maxNumberDialogue = 0;
 
     public void Awake()
     {
@@ -71,9 +74,10 @@ public class Phase
 
     public void TriggerActions()
     {
+        /*
         foreach(Trigger action in actions)
         {
             action.Fire();
-        }
+        }*/
     }
 }
