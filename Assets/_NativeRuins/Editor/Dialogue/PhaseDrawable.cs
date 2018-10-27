@@ -6,11 +6,17 @@ using UnityEngine;
 [CustomPropertyDrawer(typeof(Phase))]
 public class PhaseDrawable : PropertyDrawer
 {
-    private static float SPACING = 17f;
+    private const float SPACING = 17f;
 
     // Draw the property inside the given rect
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        // Retrieve all SerializedProperty property from the class
+        SerializedProperty attachedCamera = property.FindPropertyRelative("attachedCamera");
+        SerializedProperty startDialogueIndex = property.FindPropertyRelative("startDialogueIndex");
+        SerializedProperty endDialogueIndex = property.FindPropertyRelative("endDialogueIndex");
+        SerializedProperty dialogueSentenceReferences = property.FindPropertyRelative("_dialogueSentenceReferences");
+        SerializedProperty canPlayerMove = property.FindPropertyRelative("canPlayerMove");
 
         // Draw label
         //position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
@@ -28,36 +34,44 @@ public class PhaseDrawable : PropertyDrawer
         {
             EditorGUI.BeginProperty(position, label, property);
             Rect cameraRect = new Rect(position.x, position.y + SPACING, position.width, position.height);
-            EditorGUI.PropertyField(cameraRect, property.FindPropertyRelative("attachedCamera"), new GUIContent("Attached camera"), true);
+            EditorGUI.PropertyField(cameraRect, attachedCamera, new GUIContent("Attached camera"), true);
             EditorGUI.EndProperty();
 
             EditorGUI.BeginProperty(position, label, property);
-            Rect startIndexRecdt = new Rect(position.x, position.y + 2 * SPACING, 130, position.height);
-            EditorGUI.LabelField(startIndexRecdt, "Phase range");
-
-            Rect dialogueStartLabel = new Rect(position.x + 125, position.y + 2 * SPACING, 130, position.height);
-            EditorGUI.LabelField(dialogueStartLabel, "dialogue n°");
+            float currentY = position.y + 2 * SPACING;
+            
+            Rect dialogueStartLabel = new Rect(position.x, currentY, position.width - 500, position.height);
+            EditorGUI.LabelField(dialogueStartLabel, "Phase range (dialogues)", "n°", new GUIStyle());
 
             EditorGUI.BeginChangeCheck();
-            Rect startIndexRect = new Rect(position.x + 196, position.y + 2 * SPACING, 70, position.height);
-            EditorGUI.PropertyField(startIndexRect, property.FindPropertyRelative("startDialogueIndex"), GUIContent.none, true);
+            Rect dialogueStart = new Rect(position.width - 115, currentY, 60, position.height);
+            EditorGUI.PropertyField(dialogueStart, startDialogueIndex, GUIContent.none, true);
+            
 
-            Rect startIndexRecdtd = new Rect(position.x + 241, position.y + 2 * SPACING, 150, position.height);
-            EditorGUI.LabelField(startIndexRecdtd, "to dialogue n°");
+            Rect endIndexLabelRect = new Rect(position.width - 80, currentY, 70, position.height);
+            EditorGUI.LabelField(endIndexLabelRect, "to n°");
 
-            Rect endIndexRect = new Rect(position.x + 331, position.y + 2 * SPACING, 70, position.height);
-            EditorGUI.PropertyField(endIndexRect, property.FindPropertyRelative("endDialogueIndex"), GUIContent.none, true);
+            Rect endIndexRect = new Rect(position.width - 47, currentY, 60, position.height);
+            EditorGUI.PropertyField(endIndexRect, endDialogueIndex, GUIContent.none, true);
+
+            /*
+            Rect startIndexRecdtd = new Rect(position.x + 241, currentY, 150, position.height);
+            EditorGUI.LabelField(startIndexRecdtd, "to dialogue n°");*/
+
+            /*
+            Rect endIndexRect = new Rect(position.x + 331, currentY, 70, position.height);
+            EditorGUI.PropertyField(endIndexRect, endDialogueIndex, GUIContent.none, true);*/
             EditorGUI.EndChangeCheck();
             if (GUI.changed)
             {
-                CheckDialogueIndex(property);
+                CheckDialogueIndex(property, startDialogueIndex, endDialogueIndex);
             }
             EditorGUI.EndProperty();
 
             EditorGUI.BeginProperty(position, label, property);
             EditorGUI.BeginChangeCheck();
             SerializedProperty actions = property.FindPropertyRelative("_actions");
-            Rect actionsRect = new Rect(position.x + 11, position.y + 3 * SPACING, position.width - 110, EditorGUI.GetPropertyHeight(actions));
+            Rect actionsRect = new Rect(position.x + 11, position.y + 3 * SPACING, position.width - 75, EditorGUI.GetPropertyHeight(actions));
             EditorGUI.PropertyField(actionsRect, actions, new GUIContent("Actions"), true);
             EditorGUI.EndChangeCheck();
             if (GUI.changed)
@@ -66,30 +80,30 @@ public class PhaseDrawable : PropertyDrawer
             }
             if(actions.isExpanded)
             {
-                Rect labelRefs = new Rect(position.x + 300, position.y + 4 * SPACING + 2, 118, position.height);
-                EditorGUI.LabelField(labelRefs, "dialogue Refs");
+                Rect labelRefs = new Rect(position.width - 75, position.y + 4 * SPACING + 2, 110, position.height);
+                EditorGUI.LabelField(labelRefs, "Dial. Refs");
 
                 EditorGUI.BeginChangeCheck();
                 // Display the references changes
-                for (int i = 0; i < property.FindPropertyRelative("_dialogueSentenceReferences").arraySize; i++)
+                for (int i = 0; i < dialogueSentenceReferences.arraySize; i++)
                 {
-                    Rect labelRef = new Rect(position.x + 305, position.y + 5 * SPACING + (i * 18) + 2, 60, position.height);
-                    EditorGUI.LabelField(labelRef, "n°");
+                    Rect refLabel = new Rect(position.width - 65, position.y + 5 * SPACING + (i * 18) + 2, 50, position.height);
+                    EditorGUI.LabelField(refLabel, "n°");
 
-                    Rect refRect = new Rect(position.x + 327, position.y + 5 * SPACING + (i * 18) + 2, 75, position.height);
-                    EditorGUI.PropertyField(refRect, property.FindPropertyRelative("_dialogueSentenceReferences").GetArrayElementAtIndex(i), GUIContent.none, true);
+                    Rect refRect = new Rect(position.width - 47, position.y + 5 * SPACING + (i * 18) + 2, 60, position.height);
+                    EditorGUI.PropertyField(refRect, dialogueSentenceReferences.GetArrayElementAtIndex(i), GUIContent.none, true);
                 }
                 EditorGUI.EndChangeCheck();
                 if (GUI.changed)
                 {
-                    CheckDialogueReference(property);
+                    CheckDialogueReference(property, startDialogueIndex.intValue, endDialogueIndex.intValue);
                 }
             }
             EditorGUI.EndProperty();
 
             EditorGUI.BeginProperty(position, label, property);
             Rect canPlayerMoveRect = new Rect(position.x, position.y + 3 * SPACING + EditorGUI.GetPropertyHeight(actions), position.width, position.height);
-            EditorGUI.PropertyField(canPlayerMoveRect, property.FindPropertyRelative("canPlayerMove"), new GUIContent("Can Player Move"), true);
+            EditorGUI.PropertyField(canPlayerMoveRect, canPlayerMove, new GUIContent("Can Player Move"), true);
             EditorGUI.EndProperty();
         }
 
@@ -121,11 +135,8 @@ public class PhaseDrawable : PropertyDrawer
         Debug.Log(property.FindPropertyRelative("_dialogueSentenceReferences").arraySize);
     }
 
-    private void CheckDialogueReference(SerializedProperty property)
+    private void CheckDialogueReference(SerializedProperty property, int startIndex, int endIndex)
     {
-        int startIndex = property.FindPropertyRelative("startDialogueIndex").intValue;
-        int endIndex = property.FindPropertyRelative("endDialogueIndex").intValue;
-
         SerializedProperty currentRef;
         for (int i = 0; i < property.FindPropertyRelative("_dialogueSentenceReferences").arraySize; i++)
         {
@@ -134,25 +145,24 @@ public class PhaseDrawable : PropertyDrawer
         }
     }
 
-    private void CheckDialogueIndex(SerializedProperty property)
+    private void CheckDialogueIndex(SerializedProperty property, SerializedProperty startIndex, SerializedProperty endIndex)
     {
         int maxNumberDialogue = property.FindPropertyRelative("maxNumberDialogue").intValue;
-        int startIndex = property.FindPropertyRelative("startDialogueIndex").intValue;
-        int endIndex = property.FindPropertyRelative("endDialogueIndex").intValue;
-        if(startIndex <= 0)
+        if(startIndex.intValue <= 0)
         {
-            property.FindPropertyRelative("startDialogueIndex").intValue = 1;
+            startIndex.intValue = 1;
         }
-        if(endIndex > maxNumberDialogue)
+        if(endIndex.intValue > maxNumberDialogue)
         {
-            property.FindPropertyRelative("endDialogueIndex").intValue = maxNumberDialogue;
+            endIndex.intValue = maxNumberDialogue;
         }
-        if(endIndex < startIndex)
+        if(startIndex.intValue > maxNumberDialogue)
         {
-            property.FindPropertyRelative("startDialogueIndex").intValue = endIndex;
-        } else if(startIndex > endIndex)
+            startIndex.intValue = maxNumberDialogue;
+        }
+        if(startIndex.intValue > endIndex.intValue)
         {
-            property.FindPropertyRelative("endDialogueIndex").intValue = startIndex;
+            endIndex.intValue = startIndex.intValue;
         }
     }
 

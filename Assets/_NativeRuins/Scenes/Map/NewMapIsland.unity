@@ -1373,7 +1373,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 178119623}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
@@ -1400,7 +1400,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 178119623}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
@@ -1675,6 +1675,68 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 465c505844950da499dcf096a6da4409, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &227344764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 227344765}
+  - component: {fileID: 227344766}
+  m_Layer: 0
+  m_Name: TestPhaseRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &227344765
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 227344764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 429.05096, y: 1.3135192, z: 150.82901}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &227344766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 227344764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ed27a677f6a9a4bbe722885f47ba1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDialogueIndex: 0
+  endDialogueIndex: 0
+  myScaledCurve:
+    scale: 1
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!1001 &249161916
 Prefab:
   m_ObjectHideFlags: 0
@@ -7464,7 +7526,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 514581736}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0ea5720ee27c4445b9585dfcf2ce135, type: 3}
   m_Name: 
@@ -7660,7 +7722,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 517664019}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0ea5720ee27c4445b9585dfcf2ce135, type: 3}
   m_Name: 
@@ -14049,7 +14111,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 870000525}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
@@ -14077,7 +14139,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 870000525}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
@@ -20013,7 +20075,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1104586548}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0e178e3f22d6a94ab08c351b1478800, type: 3}
   m_Name: 
@@ -21713,7 +21775,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1233350845}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0ea5720ee27c4445b9585dfcf2ce135, type: 3}
   m_Name: 
@@ -21997,7 +22059,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1263743261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0ea5720ee27c4445b9585dfcf2ce135, type: 3}
   m_Name: 
@@ -24291,7 +24353,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1490864926}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
@@ -24305,7 +24367,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1490864926}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
@@ -24846,7 +24908,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1556541053}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a51a416a166ac634b8874932cf28d619, type: 3}
   m_Name: 
@@ -26990,15 +27052,14 @@ MonoBehaviour:
   _dialogue: {fileID: 11400000, guid: 751c62b77ec3d514cacda6ed5520de68, type: 2}
   cutscenePhases:
   - attachedCamera: {fileID: 1317714327}
-    startDialogueIndex: 2
-    endDialogueIndex: 13
+    startDialogueIndex: 5
+    endDialogueIndex: 7
     min: 0
     max: 0
     _actions:
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
-    _dialogueSentenceReferences: 020000000200000002000000
+    _dialogueSentenceReferences: 0500000005000000
     canPlayerMove: 1
     maxNumberDialogue: 13
 --- !u!4 &1837204347
@@ -27813,7 +27874,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1863014898}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
@@ -27827,7 +27888,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1863014898}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9d296b4f2199c04fb3614b872de9cc9, type: 3}
   m_Name: 
