@@ -31,6 +31,12 @@ public class DialogueManager : MonoBehaviour {
     private bool isProcessing;
     private string currentSentence;
 
+    public delegate void EventNextSentence();
+    public static event EventNextSentence OnClicked;
+
+    public delegate void SentenceFinished();
+    public static event SentenceFinished OnSentenceFinish;
+
     // Use this for initialization
     void Awake () {
         dialoguesQueue = new Queue<Dialogue>();
@@ -46,7 +52,6 @@ public class DialogueManager : MonoBehaviour {
 	
     //Lancer le dialogue
 	public void StartDialogue (Dialogue dialogue, Trigger action) {
-        DisplayDialogueCanvas();
 
         // Put the dialogue in the queue ans the switch
         dialoguesQueue.Enqueue(dialogue);
@@ -55,12 +60,18 @@ public class DialogueManager : MonoBehaviour {
         // if the dialogueManager is empty at the moment
         if (dialoguesQueue.Count == 1 && !isProcessing) {
             // Process the current dialogue
-            judy.GetComponent<PlayerProperties>().LaunchDialogue();
-            audioSource.clip = sonDialog;
-            audioSource.Play();
-            animator.SetBool("isOpen", true);
-            FillSentences(dialoguesQueue.Dequeue());
+            InitDialogueUI();
         }
+    }
+
+    public void InitDialogueUI()
+    {
+        judy.GetComponent<PlayerProperties>().LaunchDialogue();
+        audioSource.clip = sonDialog;
+        audioSource.Play();
+        animator.SetTrigger("Open");
+
+        //DisplayDialogueCanvas();
     }
 
     public void InterruptDialogue()
@@ -69,7 +80,8 @@ public class DialogueManager : MonoBehaviour {
         dialoguesQueue.Clear();
         actionsQueue.Clear();
 
-        HideDialogueCanvas();
+        animator.SetTrigger("Close");
+        //HideDialogueCanvas();
     }
 
     private void FillSentences(Dialogue dialogue) {
@@ -81,24 +93,25 @@ public class DialogueManager : MonoBehaviour {
         DisplayNextSentence();
     }
 
+    public void DisplayNextSentence2(DialogueSentence sentence)
+    {
+        currentSentence = sentence.sentence;
+        StartCoroutine(TypeSentence(sentence.sentence));
+    }
+
     //Afficher les phrases suivantes du dialogue
     public void DisplayNextSentence()
     {
         // if the sentence isn't finished, fast print it.
-        if (isTyping) {
+        if (isTyping)
+        {
             StopAllCoroutines();
             dialogueText.text = currentSentence;
             isTyping = false;
-        } else {
-            if (sentences.Count == 0)
-            {
-                EndDialogue();
-                return;
-            }
-            currentSentence = sentences.Dequeue();
-            StopAllCoroutines();
-            StartCoroutine(TypeSentence(currentSentence));
-            audioSource.Stop();
+        }
+        else
+        {
+            OnClicked();
         }
     }
 
@@ -115,11 +128,14 @@ public class DialogueManager : MonoBehaviour {
             yield return null;
         }
         isTyping = false;
+
+        //OnSentenceFinish();
     }
 
     //Fin du dialogue
     public void EndDialogue() {
         // Play the corresponding switch
+        /*
         Trigger action = actionsQueue.Dequeue();
         if(action != null) {
             SwitchManager.StartAction(action);
@@ -128,20 +144,24 @@ public class DialogueManager : MonoBehaviour {
         // Check if a dialogue need to be played.
         if (dialoguesQueue.Count >= 1) {
             FillSentences(dialoguesQueue.Dequeue());
-        } else {
-            // Stop the dialogue
-            isProcessing = false;
-            judy.GetComponent<PlayerProperties>().CloseDialogue();
-            StopAllCoroutines();
-            audioSource.Stop();
-            audioSource.clip = sonDialog;
-            audioSource.Play();
-            animator.SetBool("isOpen", false);
+        } else {*/
+        // Stop the dialogue
+        isProcessing = false;
+        animator.SetTrigger("Close");
 
-            HideDialogueCanvas();
-        }
+        StopAllCoroutines();
+        
+        audioSource.Stop();
+        audioSource.clip = sonDialog;
+        audioSource.Play();
+        
+
+        //HideDialogueCanvas();
+
+        judy.GetComponent<PlayerProperties>().CloseDialogue();
+        //}
     }
-
+    /*
     private void DisplayDialogueCanvas()
     {
         canvas.alpha = 1.0f;
@@ -154,5 +174,5 @@ public class DialogueManager : MonoBehaviour {
         canvas.alpha = 0.0f;
         canvas.interactable = false;
         canvas.blocksRaycasts = false;
-    }
+    }*/
 }

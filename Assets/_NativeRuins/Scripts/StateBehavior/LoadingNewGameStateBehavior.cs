@@ -1,14 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadingNewGameStateBehavior : StateMachineBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
-        MainManager.Instance.NouvellePartie();
+        if(SceneManager.GetActiveScene().name.Equals(MainManager.Instance.MainMenuName))
+        {
+            // Load the game
+            MainManager.Instance.NouvellePartie();
+        }
+        else if (SceneManager.GetActiveScene().name.Equals(MainManager.Instance.MainSceneName))
+        {
+            // Change The active the main Camera
+            (MainManager.Instance.FindManager(MainManager.ManagerName.InteractionManager) as InteractionManager).DisableCutscene();
+        }
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

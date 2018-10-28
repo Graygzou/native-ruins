@@ -14,10 +14,11 @@ public class InteractionManager : MonoBehaviour, IManager
         public CutScene cutscene;
     }
 
-    private DialogueManager dialogue;
-
     [SerializeField]
     private List<CutsceneInfos> cutscenes;
+
+    private DialogueManager dialogue;
+    private CutScene activeCutscene = null;
 
     public delegate void CutsceneHasEnded();
     public static event CutsceneHasEnded OnIntroCutsceneHasEnded;
@@ -78,6 +79,7 @@ public class InteractionManager : MonoBehaviour, IManager
 
             // Activate it
             Debug.Log("Info: activate " + name + " cutscene.");
+            activeCutscene = currentCutscene;
             currentCutscene.Activate();
         }
     }
@@ -98,10 +100,9 @@ public class InteractionManager : MonoBehaviour, IManager
         }
     }
 
-    public void SkipCutscene(CutScene.CutsceneName name)
+    public void SkipCutscene()
     {
-        // Fade the cutscene : THIS NEED TO BE DONE IN THE CUTSCENE ITSELF.
-        FindCutscene(name).Interrupt();
+        activeCutscene.Interrupt();
     }
 
     private CutScene FindCutscene(CutScene.CutsceneName name)
@@ -116,6 +117,11 @@ public class InteractionManager : MonoBehaviour, IManager
             i++;
         }
         return result;
+    }
+
+    public void DisableCutscene()
+    {
+        activeCutscene.Disable();
     }
 
     /*

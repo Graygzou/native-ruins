@@ -8,13 +8,13 @@ public class Phase
     public const int NUM_ACTIONS_MAX = 10;
 
     [SerializeField]
-    private Camera attachedCamera;
+    public Camera attachedCamera;
 
     [SerializeField]
-    private int startDialogueIndex;
+    public int startDialogueIndex;
 
     [SerializeField]
-    private int endDialogueIndex;
+    public int endDialogueIndex;
 
     [SerializeField]
     public float min = 0;
@@ -34,6 +34,8 @@ public class Phase
 
     public int maxNumberDialogue = 0;
 
+    private Camera mainCamera;
+
     public void Awake()
     {
         if (attachedCamera != null)
@@ -42,35 +44,63 @@ public class Phase
         }
     }
 
+    /*
     public void Interrupt()
     {
         StopCutSceneEnd();
 
         // Fire the finish event
-    }
+    }*/
 
-    public void SetupCutScene()
+    public void SetupCutScene(Camera defaultCamera, Canvas canvas)
     {
         if (!canPlayerMove)
         {
             // Get all component needed form the player
-
+            // TODO
         }
 
-        // Activate the camera
-        attachedCamera.enabled = true;
+        // Activate the camera if one is specified
+        if (attachedCamera != null)
+        {
+            attachedCamera.enabled = true;
+            canvas.worldCamera = attachedCamera;
+            if(defaultCamera != null)
+            {
+                defaultCamera.enabled = false;
+            }
+        }
+        else
+        {
+            canvas.worldCamera = defaultCamera;
+        }
     }
 
-    private void PlayCutSceneAnimation()
+    public void PlayCutSceneAnimation(Camera defaultCamera)
     {
-        // Launch the dialogues
-        //Debug.Log(_dialogue);
-        //FindObjectOfType<DialogueManager>().StartDialogue(_dialogue, null);
+        // Launch the animator here
+        /*
+        Animator animator;
+        if ((attachedCamera != null && (animator = attachedCamera.GetComponent<Animator>()) != null) ||
+            (defaultCamera != null && (animator = defaultCamera.GetComponent<Animator>()) != null))
+        {
+            animator.SetTrigger("StartCutscene");
+        }*/
     }
 
-    private void StopCutSceneEnd()
+    public void StopCutSceneEnd(Camera defaultCamera)
     {
+        foreach (Trigger action in _actions)
+        {
+            action.Interrupt();
+        }
 
+        if (attachedCamera != null)
+        {
+            attachedCamera.enabled = false;
+            defaultCamera.enabled = true;
+        }
+        
     }
 
     public void TriggerActions()

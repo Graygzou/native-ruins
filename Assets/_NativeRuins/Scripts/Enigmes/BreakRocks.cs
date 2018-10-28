@@ -6,10 +6,11 @@ public class BreakRocks : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        /*
         GameObject cubes = transform.parent.GetChild(1).gameObject;
         cubes.SetActive(false);
         GameObject fog = transform.parent.GetChild(2).gameObject;
-        fog.GetComponent<ParticleSystem>().Stop();
+        fog.GetComponent<ParticleSystem>().Stop();*/
     }
 
 

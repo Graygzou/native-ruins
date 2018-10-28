@@ -11,7 +11,7 @@ public class MainManager : MonoBehaviour {
         AudioManager = 0,
         MenuManager = 1,
         ScriptManager = 2,
-        DialogueTrigger = 3
+        InteractionManager = 3
     }
     #endregion
 
@@ -23,9 +23,12 @@ public class MainManager : MonoBehaviour {
 
     [Header("Scenes names")]
     [SerializeField]
-    private string mainMenuName = "MenuDemarrer";
+    private string _mainMenuName = "MenuDemarrer";
+    public string MainMenuName { get { return _mainMenuName; } }
+
     [SerializeField]
-    private string mainSceneName = "NewMapIsland";
+    private string _mainSceneName = "NewMapIsland";
+    public string MainSceneName { get { return _mainSceneName; } }
 
     [SerializeField]
     private MonoBehaviour[] managers;
@@ -47,23 +50,28 @@ public class MainManager : MonoBehaviour {
         SceneManager.sceneLoaded += Init;
     }
 
+    private void Update()
+    {
+        InputManager.GetVirtualButtonInputs();
+    }
+
     private void Init(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name.Equals(mainMenuName))
+        if(scene.name.Equals(_mainMenuName))
         {
             InitManagers();
 
         }
-        else if(scene.name.Equals(mainSceneName))
+        else if(scene.name.Equals(_mainSceneName))
         {
             // init all the managers when the introduction cutscene has ended
             InteractionManager.OnIntroCutsceneHasEnded += InitManagersMainScene;
 
-            // Start the first cutscene
-            (FindManager(ManagerName.DialogueTrigger) as InteractionManager).StartCutscene(CutScene.CutsceneName.IntroductionCutscene);
+            // Subscribe the escape key so the player can escape the cutscene.
+            InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Cancel, "Cancel", InputManager.EventTypeButton.Down, (FindManager(ManagerName.InteractionManager) as InteractionManager).SkipCutscene);
 
-            // TODO Subscribe the escape button if the player want to escape the cutscene.
-            //InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Cancel, "Cancel", InputManager.EventTypeButton.Down, (FindManager(ManagerName.AudioManager) as DialogueTrigger).SkipCutscene);
+            // Start the first cutscene
+            (FindManager(ManagerName.InteractionManager) as InteractionManager).StartCutscene(CutScene.CutsceneName.IntroductionCutscene);
         }
     }
 
@@ -71,7 +79,7 @@ public class MainManager : MonoBehaviour {
     public void NouvellePartie()
     {
         (FindManager(ManagerName.AudioManager) as AudioManager).FadeDown();
-        SceneManager.LoadScene(mainSceneName);
+        SceneManager.LoadScene(_mainSceneName);
     }
 
     #region Managers methods
@@ -92,7 +100,7 @@ public class MainManager : MonoBehaviour {
     }
 
     public IManager FindManager(ManagerName manageName)
-    {
+    {   
         return managers[(int)manageName] as IManager;
     }
     #endregion

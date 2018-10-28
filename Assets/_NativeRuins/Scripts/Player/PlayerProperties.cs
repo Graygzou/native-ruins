@@ -9,7 +9,6 @@ public class PlayerProperties : MonoBehaviour
     [SerializeField] private bool isDead;
     [SerializeField] private bool isSaving;
     [SerializeField] private bool dialogueOn;
-    
 
     [Header("Childrens Information")]
     [SerializeField] private MovementController[] childrenMovementController;
@@ -79,10 +78,50 @@ public class PlayerProperties : MonoBehaviour
     }
     #endregion
 
-    #region Cutscene methods
+    #region Animator methods
+    public void Idle()
+    {
+        Debug.Log(FormsController.Instance.GetCurrentForm());
+        childrenAnimator[FormsController.Instance.GetCurrentForm()].SetTrigger("Idle");
+    }
+
+    #region Cutscenes methods
     public void Sleep()
     {
         childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("Sleep");
+    }
+
+    public void StandUp()
+    {
+        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("StandUp");
+    }
+
+    public void LookAround()
+    {
+        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("LookAround");
+    }
+
+    public void Mad()
+    {
+        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("Mad");
+    }
+
+    public void Focus()
+    {
+        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("Focus");
+    }
+    #endregion
+    #endregion
+
+    #region MovementsController methods
+    public void EnableMovementController(FormsController.TransformationType type)
+    {
+        childrenMovementController[(int)type].enabled = true;
+    }
+
+    public void DisableMovementController(FormsController.TransformationType type)
+    {
+        childrenMovementController[(int)type].enabled = false;
     }
     #endregion
 

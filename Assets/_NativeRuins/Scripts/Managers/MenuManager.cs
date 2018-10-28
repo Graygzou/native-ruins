@@ -42,21 +42,11 @@ public class MenuManager : MonoBehaviour, IManager {
     void IManager.Init()
     {
         // Create the UI prefab if needed
-        if (!GameObject.FindGameObjectWithTag(mainUIPrefab.tag))
-        {
-            Debug.Log("Info: Create mainUI in the hierarchy");
-            _currentMainUI = Instantiate(mainUIPrefab);
-        }
-        else
-        {
-            _currentMainUI = GameObject.FindGameObjectWithTag(mainUIPrefab.tag);
-            // Enable or not the launch game button
-            PlayerPrefs.SetInt("load_scene", 0);
-            loadButton.enabled = PlayerPrefs.HasKey("xPlayer");
-        }
-        _mainUICanvas = _currentMainUI.GetComponent<Canvas>();
-        _mainUIScript = _currentMainUI.GetComponent<MainUI>();
-        
+        RetrieveOrCreateMainUI();
+
+        // Enable or not the launch game button
+        PlayerPrefs.SetInt("load_scene", 0);
+        loadButton.enabled = PlayerPrefs.HasKey("xPlayer");
 
         // Set the canvas's render mode to Screen Space - Camera
         _mainUICanvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -70,40 +60,33 @@ public class MenuManager : MonoBehaviour, IManager {
 
     void IManager.InitMainScene()
     {
+        RetrieveOrCreateMainUI();
         // Create the HUD if needed
-        if (!GameObject.FindGameObjectWithTag(inGameUIPrefab.tag))
-        {
-            Debug.Log("Info: Create InGameUI in the hierarchy");
-            _currentInGameUI = Instantiate(inGameUIPrefab);
-        }
-        else
-        {
-            _currentInGameUI = GameObject.FindGameObjectWithTag(inGameUIPrefab.tag);
-            // Enable or not the launch game button
-            PlayerPrefs.SetInt("load_scene", 0);
-            loadButton.enabled = PlayerPrefs.HasKey("xPlayer");
-        }
-        _InGameUIScript = _currentInGameUI.GetComponent<InGameUI>();
+        RetrieveOrCreatedInGameUI();
 
         DisplayHUD();
 
         // Set the canvas's render mode to World Space Render
-        _mainUICanvas.renderMode = RenderMode.WorldSpace;
-        // Let know the animator of that
-        _mainUIScript.MainMenuAnimator.SetInteger("PanelNumber", (int)MenuPanel.Pause);
+        _mainUICanvas.renderMode = RenderMode.ScreenSpaceOverlay;
     }
     #endregion
 
-    // TODO : REMOVED THAT
-    void FixedUpdate()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pause.SetActive(!pause.activeSelf);
-        }
-    }
-
     #region MainUI Methods
+
+    public void RetrieveOrCreateMainUI ()
+    {
+        if (!GameObject.FindGameObjectWithTag(mainUIPrefab.tag))
+        {
+            Debug.Log("Info: Create mainUI in the hierarchy");
+            _currentMainUI = Instantiate(mainUIPrefab);
+        }
+        else
+        {
+            _currentMainUI = GameObject.FindGameObjectWithTag(mainUIPrefab.tag);
+        }
+        _mainUICanvas = _currentMainUI.GetComponent<Canvas>();
+        _mainUIScript = _currentMainUI.GetComponent<MainUI>();
+    }
 
     public void TransitionToNextPanelMain(MenuPanel nextPanel)
     {
@@ -115,6 +98,20 @@ public class MenuManager : MonoBehaviour, IManager {
     #endregion
 
     #region InGameUI Methods
+
+    private void RetrieveOrCreatedInGameUI()
+    {
+        if (!GameObject.FindGameObjectWithTag(inGameUIPrefab.tag))
+        {
+            Debug.Log("Info: Create InGameUI in the hierarchy");
+            _currentInGameUI = Instantiate(inGameUIPrefab);
+        }
+        else
+        {
+            _currentInGameUI = GameObject.FindGameObjectWithTag(inGameUIPrefab.tag);
+        }
+        _InGameUIScript = _currentInGameUI.GetComponent<InGameUI>();
+    }
 
     public void DisplayHUD()
     {

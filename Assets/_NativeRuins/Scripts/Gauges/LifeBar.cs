@@ -88,12 +88,13 @@ public class LifeBar : MonoBehaviour {
     void FixedUpdate () {
         // Si Judy chute 
         // Should not be in the FixedUpdate
+        /*
         if (playerRoot.GetComponent<Rigidbody>().velocity.y < 0 && playerRoot.GetComponent<Rigidbody>().velocity.magnitude > 100f)
         {
             Debug.Log(lifeSprite.sizeDelta.y);
             Debug.Log("Player Fall. Old life =" + lifeSprite.sizeDelta.x + ", New life = " + (lifeSprite.sizeDelta.x - hurtByFallScale));
             ChangeLifeBar(-hurtByFallScale);
-        }
+        }*/
     }
 
     public float GetCurrentSizeLifeBar()

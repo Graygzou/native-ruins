@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class Sauvegarde : MonoBehaviour, IManager {
 
     // Used to save and load the game
-    private static GameObject Player;
+    [SerializeField]
+    private PlayerProperties player;
 
     #region ComponentSettings
     [Header("Component settings")]
@@ -41,6 +42,73 @@ public class Sauvegarde : MonoBehaviour, IManager {
     [SerializeField] private RectTransform rope2D;
     [SerializeField] private RectTransform torch2D;
     [SerializeField] private RectTransform wood2D;
+
+    public void Init()
+    {
+        // Nothing yet ?
+    }
+
+    public void InitMainScene()
+    {
+        if(player == null)
+        {
+            player = GameObject.Find("Player").GetComponent<PlayerProperties>();
+        }
+
+        //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
+        if (PlayerPrefs.GetInt("load_scene") == 1)
+        {
+            Debug.Log("Chargement scene");
+
+            float y = PlayerPrefs.GetFloat("xPlayer");
+            float u = PlayerPrefs.GetFloat("yPlayer");
+            float p = PlayerPrefs.GetFloat("zPlayer");
+
+            //Positionnement du joueur
+            player.transform.position = new Vector3(PlayerPrefs.GetFloat("xPlayer"), PlayerPrefs.GetFloat("yPlayer"), PlayerPrefs.GetFloat("zPlayer"));
+
+            //Jauges de vie et faim
+            Debug.Log("Life :" + PlayerPrefs.GetFloat("life") + ", Hunger :" + PlayerPrefs.GetFloat("hunger"));
+            lifeBar.GetComponent<LifeBar>().RestoreLifeFromData(PlayerPrefs.GetFloat("life"));
+            hungerBar.GetComponent<HungerBar>().RestoreHungerFromData(PlayerPrefs.GetFloat("hunger"));
+
+            //Chargement de l'inventaire
+            inventory.EmptyBag();
+
+            addInInventory(ObjectsType.Arrow);
+            addInInventory(ObjectsType.Bow);
+            addInInventory(ObjectsType.Fire);
+            addInInventory(ObjectsType.Flint);
+            addInInventory(ObjectsType.Meat);
+            addInInventory(ObjectsType.Mushroom);
+            addInInventory(ObjectsType.Plank);
+            addInInventory(ObjectsType.Raft);
+            addInInventory(ObjectsType.Sail);
+            addInInventory(ObjectsType.Rope);
+            addInInventory(ObjectsType.Torch);
+            addInInventory(ObjectsType.Wood);
+
+            //Chargement totems obtenus
+            checkTotem(PlayerPrefs.GetInt("pumaUnlocked"), 0);
+            checkTotem(PlayerPrefs.GetInt("bearUnlocked"), 1);
+
+            //Enleve les totems deja trouves
+            if (PlayerPrefs.GetInt("pumaUnlocked") == 1)
+            {
+                GameObject.FindWithTag("TotemPuma").SetActive(false);
+            }
+            if (PlayerPrefs.GetInt("pumaUnlocked") == 1)
+            {
+                GameObject.FindWithTag("TotemOurs").SetActive(false);
+            }
+        }
+
+        // Enable player movements
+        player.EnableMovementController(FormsController.TransformationType.Human);
+
+        // Trigger the idle pose
+        player.Idle();
+    }
 
     private RectTransform GetObject2D(ObjectsType obj)
     {
@@ -108,7 +176,7 @@ public class Sauvegarde : MonoBehaviour, IManager {
 
     private void checkTotem(int totemBool, int typeForm)
     {
-        FormsController script = Player.GetComponent<FormsController>();
+        FormsController script = player.GetComponent<FormsController>();
         if (typeForm == 0) //Puma
         {
             if (totemBool == 0) //Pas de totem
@@ -132,65 +200,6 @@ public class Sauvegarde : MonoBehaviour, IManager {
             }
         }
 
-    }
-
-    // Use this for initialization
-    void Awake() {
-
-        Player = GameObject.Find("Player");
-            
-        //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
-        if (PlayerPrefs.GetInt("load_scene") == 1)
-        {
-            Debug.Log("Chargement scene");
-
-            float y = PlayerPrefs.GetFloat("xPlayer");
-            float u = PlayerPrefs.GetFloat("yPlayer");
-            float p = PlayerPrefs.GetFloat("zPlayer");
-
-            //Positionnement du joueur
-            Player.transform.position = new Vector3(PlayerPrefs.GetFloat("xPlayer"), PlayerPrefs.GetFloat("yPlayer"), PlayerPrefs.GetFloat("zPlayer"));
-
-            //Jauges de vie et faim
-            Debug.Log("Life :" + PlayerPrefs.GetFloat("life") + ", Hunger :" + PlayerPrefs.GetFloat("hunger"));
-            lifeBar.GetComponent<LifeBar>().RestoreLifeFromData(PlayerPrefs.GetFloat("life"));
-            hungerBar.GetComponent<HungerBar>().RestoreHungerFromData(PlayerPrefs.GetFloat("hunger"));
-
-            //Chargement de l'inventaire
-            inventory.EmptyBag();
-
-            addInInventory(ObjectsType.Arrow);
-            addInInventory(ObjectsType.Bow);
-            addInInventory(ObjectsType.Fire);
-            addInInventory(ObjectsType.Flint);
-            addInInventory(ObjectsType.Meat);
-            addInInventory(ObjectsType.Mushroom);
-            addInInventory(ObjectsType.Plank);
-            addInInventory(ObjectsType.Raft);
-            addInInventory(ObjectsType.Sail);
-            addInInventory(ObjectsType.Rope);
-            addInInventory(ObjectsType.Torch);
-            addInInventory(ObjectsType.Wood);
-
-            //Chargement totems obtenus
-            checkTotem(PlayerPrefs.GetInt("pumaUnlocked"), 0);
-            checkTotem(PlayerPrefs.GetInt("bearUnlocked"), 1);
-
-            //Enleve les totems deja trouves
-            if (PlayerPrefs.GetInt("pumaUnlocked") == 1)
-            {
-                GameObject.FindWithTag("TotemPuma").SetActive(false);
-            }
-            if (PlayerPrefs.GetInt("pumaUnlocked") == 1)
-            {
-                GameObject.FindWithTag("TotemOurs").SetActive(false);
-            }
-
-            //GameObject carreNoir = GameObject.Find("CameraCutscenes/Intro/PlaneFade");
-            //carreNoir.SetActive(false);
-        } else {
-            
-        }
     }
 
     public void EnableUI() {
@@ -228,8 +237,8 @@ public class Sauvegarde : MonoBehaviour, IManager {
         PlayerPrefs.SetInt("" + ObjectsType.Raft, inventory.GetNumberItems(ObjectsType.Raft));
 
         //Connaitre transformation debloquee
-        PlayerPrefs.SetInt("pumaUnlocked", Player.GetComponent<FormsController>().IsPumaUnlocked());
-        PlayerPrefs.SetInt("bearUnlocked", Player.GetComponent<FormsController>().IsBearUnlocked());
+        PlayerPrefs.SetInt("pumaUnlocked", player.GetComponent<FormsController>().IsPumaUnlocked());
+        PlayerPrefs.SetInt("bearUnlocked", player.GetComponent<FormsController>().IsBearUnlocked());
 
         //Afficher message de sauvegarde
         // TODO DialogueTrigger.TriggerSauvegarde(null);
@@ -257,15 +266,5 @@ public class Sauvegarde : MonoBehaviour, IManager {
         {
             SceneManager.LoadScene("Map Island");
         }
-    }
-
-    public void Init()
-    {
-        // Nothing yet ?
-    }
-
-    public void InitMainScene()
-    {
-        // Nothing yet ?
     }
 }

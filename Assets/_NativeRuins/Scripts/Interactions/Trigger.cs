@@ -2,21 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger : MonoBehaviour
+public abstract class Trigger : MonoBehaviour
 {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public virtual void Fire()
     {
 
+    }
+
+    public virtual void Interrupt()
+    {
+        StopAllCoroutines();
     }
 }
