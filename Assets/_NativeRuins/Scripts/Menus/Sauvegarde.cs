@@ -52,7 +52,7 @@ public class Sauvegarde : MonoBehaviour, IManager {
     {
         if(player == null)
         {
-            player = GameObject.Find("Player").GetComponent<PlayerProperties>();
+            player = GameObject.FindWithTag("Player").GetComponent<PlayerProperties>();
         }
 
         //Si le bouton Lancer Partie du Menu principal a ete clique alors on charge les donnees
@@ -103,11 +103,11 @@ public class Sauvegarde : MonoBehaviour, IManager {
             }
         }
 
-        // Enable player movements
-        player.EnableMovementController(FormsController.TransformationType.Human);
-
         // Trigger the idle pose
         player.Idle();
+
+        // Enable player movements
+        player.EnableMovementController(FormsController.TransformationType.Human);
     }
 
     private RectTransform GetObject2D(ObjectsType obj)

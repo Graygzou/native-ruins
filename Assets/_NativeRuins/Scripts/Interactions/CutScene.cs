@@ -223,7 +223,7 @@ public class CutScene : MonoBehaviour
     {
         // Fade the cutscene with a white screen
         // Should trigger the Diable method in the stateBehavior..
-        whiteScreenAnimator.SetTrigger("Fade");
+        whiteScreenAnimator.SetTrigger("QuickFade");
 
         // Escape all the current active phases
         for (int phaseIndex = 0; phaseIndex < activePhases.Count; phaseIndex++)
