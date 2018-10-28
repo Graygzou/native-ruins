@@ -3,49 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * This class acts just like a container for the hungerBar HUD. 
+ * The player will access those UI thanks to that class/container.
+ */
 public class HungerBar : MonoBehaviour
 {
-    #region Consts
-    private const float MAX_HUNGER_PLAYER = 300f;
-    #endregion
-
     #region Components
-    [SerializeField]
-    private RectTransform hungerSprite;
+    [SerializeField] private RectTransform hungerSprite;
     #endregion
-
-    #region Hunger settings
-    [SerializeField]
-    private int timeMaxBeforeHungerDecrease = 5;
-
-    [SerializeField]
-    private float hungerDecreasingFactor = 0.04f;
-
-    [SerializeField]
-    private float hungerDecreasingFactorPuma = 0.08f;
-    #endregion
-
-    private float currentTimeFaim = 0.0f;
-    
-	private GameObject forms;
-
-    // Update is called once per frame
-    void Update () {
-        currentTimeFaim += Time.deltaTime;
-        if (currentTimeFaim >= timeMaxBeforeHungerDecrease)
-        {
-            GameObject playerRoot = GameObject.Find("Player");
-            if (FormsController.Instance.GetCurrentForm() == (int)Forms.id_puma)
-            {
-                ChangeHungerBar(-hungerDecreasingFactorPuma);
-            }
-            else
-            {
-                ChangeHungerBar(-hungerDecreasingFactor);
-            }
-            currentTimeFaim = 0.0f;
-        }
-    }
 
     public float GetSizeHungerBar()
     {
@@ -54,7 +20,7 @@ public class HungerBar : MonoBehaviour
 
     private void SetSizeHungerBar(float size)
     {
-        float newHungerValue = Mathf.Clamp(size, 0, MAX_HUNGER_PLAYER);
+        float newHungerValue = Mathf.Clamp(size, 0, PlayerProperties.MAX_HUNGER_PLAYER);
         hungerSprite.sizeDelta = new Vector2(newHungerValue, hungerSprite.sizeDelta.y);
     }
 
@@ -65,11 +31,11 @@ public class HungerBar : MonoBehaviour
 
     public void RestoreHungerFromData(float amount)
     {
-        SetSizeHungerBar(amount * MAX_HUNGER_PLAYER);
+        SetSizeHungerBar(amount * PlayerProperties.MAX_HUNGER_PLAYER);
     }
 
     public bool IsFull()
     {
-        return hungerSprite.sizeDelta.x == MAX_HUNGER_PLAYER;
+        return hungerSprite.sizeDelta.x == PlayerProperties.MAX_HUNGER_PLAYER;
     }
 }

@@ -15,17 +15,13 @@ public class MovementController : MonoBehaviour
     [SerializeField] protected int camera_zoom_max = -1;
     [SerializeField] protected int camera_zoom_min = -3;
 
-    // Inputs gestion
-    [SerializeField] protected bool isShiftHold = false;
-
     [SerializeField] protected float currentSpeed;
+
+    // Inputs gestion
+    [SerializeField] protected bool _isShiftHold = false;
+    public bool IsShiftHold { get { return _isShiftHold; } }
     [SerializeField] protected bool isMoving = false;
     [SerializeField] protected bool isPlayerCrouch = false;
-
-    [SerializeField]
-    protected EnergyBar energyBar;
-    [SerializeField]
-    protected LifeBar lifeBar;
 
     protected Animator animator;
     protected Camera cameraPivot;
@@ -160,7 +156,6 @@ public class MovementController : MonoBehaviour
 
         // Update the animator with player data
         animator.SetFloat("Speed", GetCurrentSpeed());
-        //m_animator.SetFloat("Health", InGameUI.GetCurrentSizeLifeBar());
     }
 
     protected void LateUpdate() {
@@ -207,12 +202,14 @@ public class MovementController : MonoBehaviour
         if(isMoving)
         {
             currentSpeed = walkSpeed * (Input.GetAxis("Boost") * runMultFactor);
+            footstep.pitch = 1.7f;
         }
     }
 
     public void StopSprint()
     {
         currentSpeed = isMoving ? walkSpeed : 0.0f;
+        footstep.pitch = isMoving ? 1.0f : 0.0f;
     }
 
     public void SwicthIsPlayerCrouch()
@@ -323,35 +320,14 @@ public class MovementController : MonoBehaviour
     }
 
     protected virtual void Move(Vector3 nextDir, float h, float v) {
-        WalkOrRun();
-
         if (!nextDir.Equals(Vector3.zero))
         {
             transform.rotation = Quaternion.LookRotation(nextDir);
         }
-
         transform.position += nextDir * GetCurrentSpeed() * Time.deltaTime;
     }
 
     protected virtual void JumpingAndLanding() { }
-
-    public void WalkOrRun()
-    {
-        footstep.UnPause();
-        if (isShiftHold)
-        {
-            // Run
-            if (energyBar.canRun && energyBar.GetCurrentEnergy() > 0f)
-            {
-                footstep.pitch = 1.7f;
-            }
-        }
-        else
-        {
-            // Walk
-            footstep.pitch = 1f;
-        }
-    }
 
     protected virtual void GetInputs(Vector3 NextDir, float h, float v) { }
 

@@ -66,6 +66,9 @@ public class MenuManager : MonoBehaviour, IManager {
 
         DisplayHUD();
 
+        // Se fait connaitre aupres du joueur
+        GameObject.FindWithTag("Player").GetComponent<PlayerProperties>().SetMenuManager(this);
+
         // Set the canvas's render mode to World Space Render
         _mainUICanvas.renderMode = RenderMode.ScreenSpaceOverlay;
     }
@@ -133,6 +136,40 @@ public class MenuManager : MonoBehaviour, IManager {
         _InGameUIScript.CloseTransformationWheel();
     }
 
+    public float GetCurrentSizeLifeBar()
+    {
+        return _InGameUIScript.lifeBar.GetCurrentSizeLifeBar();
+    }
+
+    public void UpdateLifeBar(float amount)
+    {
+        _InGameUIScript.lifeBar.ChangeLifeBar(amount);
+    }
+
+    public float GetSizeHungerBar()
+    {
+        return _InGameUIScript.hungerBar.GetSizeHungerBar();
+    }
+
+    public void UpdateHungerBar(float amount)
+    {
+        _InGameUIScript.hungerBar.ChangeHungerBar(amount);
+    }
+
+    public float GetSizeEnergyBar()
+    {
+        return _InGameUIScript.energyBar.GetCurrentEnergy();
+    }
+
+    public void UpdateEnergyBar(float amount)
+    {
+        _InGameUIScript.energyBar.SetSizeEnergyBar(amount);
+    }
+
+    public bool IsLifeBarFull()
+    {
+        return _InGameUIScript.lifeBar.IsFull();
+    }
     #endregion
 
 }

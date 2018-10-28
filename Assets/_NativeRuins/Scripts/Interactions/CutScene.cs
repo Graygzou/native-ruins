@@ -106,7 +106,12 @@ public class CutScene : MonoBehaviour
 
     private void SetupPlayerState()
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerProperties>().Sleep();
+        PlayerProperties playerProperties = GameObject.FindWithTag("Player").GetComponent<PlayerProperties>();
+        playerProperties.LaunchDialogue();
+
+        // Should be in a specified cutscene
+        // TODO later....
+        playerProperties.Sleep();
     }
 
     public virtual void Activate()
@@ -139,7 +144,7 @@ public class CutScene : MonoBehaviour
                         {
                             //Debug.Log("Info: Remove Phase" + activePhase.attachedCamera);
                             // Stop the phase
-                            activePhase.StopCutSceneEnd(defaultCamera);
+                            activePhase.StopCutSceneEnd(defaultCamera, overlayCanvas);
                             activePhases.Remove(activePhase);
                         }
                     }
@@ -198,6 +203,8 @@ public class CutScene : MonoBehaviour
 
         FindObjectOfType<DialogueManager>().EndDialogue();
 
+        GameObject.FindWithTag("Player").GetComponent<PlayerProperties>().CloseDialogue();
+
         // Fire the end event
         OnCutsceneEnd(cutsceneName);
     }
@@ -230,7 +237,7 @@ public class CutScene : MonoBehaviour
         {
             Phase activePhase = activePhases[phaseIndex];
 
-            activePhase.StopCutSceneEnd(defaultCamera);
+            activePhase.StopCutSceneEnd(defaultCamera, overlayCanvas);
             activePhases.Remove(activePhase);
         }
 

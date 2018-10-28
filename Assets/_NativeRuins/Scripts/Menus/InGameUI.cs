@@ -5,8 +5,10 @@ using UnityEngine;
 public class InGameUI : MonoBehaviour
 {
     [Header("HUD")]
-    [SerializeField]
-    private CanvasGroup HUDCanvas;
+    [SerializeField] private CanvasGroup HUDCanvas;
+    [SerializeField] public LifeBar lifeBar;
+    [SerializeField] public HungerBar hungerBar;
+    [SerializeField] public EnergyBar energyBar;
 
     [Header("CrossHair UI")]
     [SerializeField]
@@ -66,4 +68,10 @@ public class InGameUI : MonoBehaviour
     {
         transformationWheel.alpha = 0.0f;
     }
+
+    #region Players HUD methods
+    
+
+
+    #endregion
 }

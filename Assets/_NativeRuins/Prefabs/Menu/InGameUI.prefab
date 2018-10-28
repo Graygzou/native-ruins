@@ -8249,15 +8249,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeSprite: {fileID: 224584443344467222}
   hungerBar: {fileID: 114763281883826446}
+  audio: {fileID: 0}
   sonCri: {fileID: 8300000, guid: b985aef9125fafe47bad73db7ef01cfa, type: 3}
   sonManger: {fileID: 8300000, guid: af0b5f2fe3cab7a408c9d4c9befb46bb, type: 3}
   sonVieBasse: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
-  Hunger: {fileID: 0}
   animator: {fileID: 95180478244207302}
-  timeMaxBeforeHungerHurt: 15
-  timeMaxBeforeHeartBeat: 1
-  hurtByFallScale: 0.5
-  hurtByHungerScale: 1
 --- !u!114 &114750756809306946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8374,9 +8370,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerSprite: {fileID: 224720239592926728}
-  timeMaxBeforeHungerDecrease: 15
-  hungerDecreasingFactor: 5
-  hungerDecreasingFactorPuma: 8
 --- !u!114 &114763861275635764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9418,9 +9411,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energySprite: {fileID: 224525076180585220}
-  energyDecreasingFactor: 1
-  energizingBackFactor: 2
-  energizingBackAfterEmptyFactor: 2
 --- !u!114 &114901959775726444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9579,6 +9569,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HUDCanvas: {fileID: 225113881804288730}
+  lifeBar: {fileID: 114747496665085988}
+  hungerBar: {fileID: 114763281883826446}
+  energyBar: {fileID: 114901772002492558}
   crosshair: {fileID: 225074551535491864}
   largeurCrossHair: {fileID: 224892148795400490}
   hauteurCrossHair: {fileID: 224932779496846964}

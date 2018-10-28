@@ -227,20 +227,28 @@ public static class InputManager {
     #endregion
 
     #region UnsubscribeEvents
-
     public static void UnsubscribeMouseMovementsEvent(string input)
     {
-        axisMovementsCallbacks.Remove(input);
+        if(axisMovementsCallbacks.ContainsKey(input))
+        {
+            axisMovementsCallbacks.Remove(input);
+        }
     }
 
     public static void UnsubscribeMouseMovementsChangedEvent(ActionsLabels action)
     {
-        axisMovementsChangedCallbacks.Remove(action);
+        if(axisMovementsChangedCallbacks.ContainsKey(action))
+        {
+            axisMovementsChangedCallbacks.Remove(action);
+        }
     }
 
     public static void UnsubscribeButtonEvent(ActionsLabels action)
     {
-        buttonInputsCallbacks.Remove(action);
+        if (buttonInputsCallbacks.ContainsKey(action))
+        {
+            buttonInputsCallbacks.Remove(action);
+        }
     }
 
     public static void UnsubscribeAll()
@@ -253,7 +261,6 @@ public static class InputManager {
         axisMovementsCallbacks = null;
         axisMovementsChangedCallbacks = null;
     }
-
     #endregion
 
 }

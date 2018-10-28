@@ -88,7 +88,7 @@ public class Phase
         }*/
     }
 
-    public void StopCutSceneEnd(Camera defaultCamera)
+    public void StopCutSceneEnd(Camera defaultCamera, Canvas canvas)
     {
         foreach (Trigger action in _actions)
         {
@@ -97,10 +97,12 @@ public class Phase
 
         if (attachedCamera != null)
         {
+            // Set back the camera default in the canvas
+            canvas.worldCamera = defaultCamera;
+
             attachedCamera.enabled = false;
             defaultCamera.enabled = true;
         }
-        
     }
 
     public void TriggerActions()

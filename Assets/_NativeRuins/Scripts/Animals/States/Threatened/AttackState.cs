@@ -35,7 +35,7 @@ public class AttackState : State<GameObject>
         float currTime = o.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
         if (currTime >= FSM.timeIdle - 0.06) {
             AgentProperties properties = o.GetComponent<AgentProperties>();
-            GameObject playerRoot = GameObject.Find("Player");
+            PlayerProperties playerRoot = GameObject.Find("Player").GetComponent<PlayerProperties>();
             GameObject lifeBar = GameObject.Find("Gauges/Life");
 
             RaycastHit hitInfo;
@@ -44,7 +44,7 @@ public class AttackState : State<GameObject>
                 if (hitInfo.transform.tag == "Player") {
                     if (lifeBar.GetComponent<LifeBar>().GetComponent<Scrollbar>().size != 0) {
                         // Decrease the current life of the player
-                        lifeBar.GetComponent<LifeBar>().TakeDamages(properties.Damages / 100);
+                        playerRoot.TakeDamages(properties.Damages / 100);
                         Debug.Log("Take that ! dmg:" + properties.Damages);
                     }
                 }

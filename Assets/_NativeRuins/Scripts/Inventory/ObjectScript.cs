@@ -19,7 +19,7 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public RectTransform MyRect;
     private Vector3 player_pos;
 
-    private GameObject lifeBar;
+    private PlayerProperties playerProperties;
     private GameObject buttonUtiliser;
     private GameObject infoObjets;
 
@@ -49,7 +49,7 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         myWidth = (MyRect.rect.width + 5) / 2;
         myHeight = (MyRect.rect.height + 5) / 2;
 
-        lifeBar = GameObject.FindWithTag("LifeBar");
+        playerProperties = GameObject.FindWithTag("Player").GetComponent<PlayerProperties>();
         buttonUtiliser = GameObject.Find("Affichages/HUD/InventoryHUD/ButtonUtiliser");
         infoObjets = GameObject.FindWithTag("InfoObjets");
     }
@@ -143,50 +143,52 @@ public class ObjectScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 	//Ajouter la verification de si on ets humain pour arc et torche !!!
 	private void UseObject(ObjectsType o_type){
 		switch(o_type) {
-		case ObjectsType.Bow:
-			if (!InventoryManager.Instance.isTorchEquiped) {
-				InventoryManager.Instance.isBowEquiped = true;
+	        case ObjectsType.Bow:
+		        if (!InventoryManager.Instance.isTorchEquiped) {
+			        InventoryManager.Instance.isBowEquiped = true;
+                    buttonUtiliser.SetActive(false);
+			        HideInfo ();
+                    inventoryManager.RemoveObjectOfType (o_type);
+			        isUsed = true;
+                    GameObject player = GameObject.FindWithTag("Player");
+                    player.GetComponent<ActionsNew>().EquipWeapon();
+                    GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive (true);
+			        Destroy(this.gameObject);
+                }
+		        break;
+	        case ObjectsType.Fire:
+		        break;
+	        case ObjectsType.Meat:
+                playerProperties.Eat (30);
+                buttonUtiliser.SetActive (false);
+		        HideInfo ();
+                    inventoryManager.RemoveObjectOfType (o_type);
+		        isUsed = true;
+		        Destroy(this.gameObject);
+		        break;
+	        case ObjectsType.Mushroom:
+                playerProperties.Eat(10);
                 buttonUtiliser.SetActive(false);
-				HideInfo ();
-                inventoryManager.RemoveObjectOfType (o_type);
-				isUsed = true;
-                GameObject player = GameObject.FindWithTag("Player");
-                player.GetComponent<ActionsNew>().EquipWeapon();
-                GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmLeftCollarbone/RigArmLeft1/RigArmLeft2/RigArmLeft3/Bow3D").SetActive (true);
-			    Destroy(this.gameObject);
-            }
-			break;
-		case ObjectsType.Fire:
-			break;
-		case ObjectsType.Meat:
-            lifeBar.GetComponent<LifeBar> ().Eat (30);
-            buttonUtiliser.SetActive (false);
-			HideInfo ();
-                inventoryManager.RemoveObjectOfType (o_type);
-			isUsed = true;
-			Destroy(this.gameObject);
-			break;
-		case ObjectsType.Mushroom:
-            lifeBar.GetComponent<LifeBar>().Eat(10);
-            buttonUtiliser.SetActive(false);
-			HideInfo ();
-                inventoryManager.RemoveObjectOfType (o_type);
-			isUsed = true;
-			Destroy(this.gameObject);
-			break;
-		case ObjectsType.Torch:
-			if (!InventoryManager.Instance.isBowEquiped) {
-				InventoryManager.Instance.isTorchEquiped = true;
-                buttonUtiliser.SetActive(false);
-				HideInfo ();
-                inventoryManager.RemoveObjectOfType (o_type);
-				isUsed = true;
-                GameObject player = GameObject.FindWithTag("Player");
-                player.GetComponent<ActionsNew>().EquipWeapon();
-                GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive (true);
-				Destroy(this.gameObject);
-			}
-			break;
+		        HideInfo ();
+                    inventoryManager.RemoveObjectOfType (o_type);
+		        isUsed = true;
+		        Destroy(this.gameObject);
+		        break;
+	        case ObjectsType.Torch:
+		        if (!InventoryManager.Instance.isBowEquiped) {
+			        InventoryManager.Instance.isTorchEquiped = true;
+                    buttonUtiliser.SetActive(false);
+			        HideInfo ();
+                    inventoryManager.RemoveObjectOfType (o_type);
+			        isUsed = true;
+                    GameObject player = GameObject.FindWithTag("Player");
+                    player.GetComponent<ActionsNew>().EquipWeapon();
+                    GameObject.Find ("SportyGirl/RigAss/RigSpine1/RigSpine2/RigSpine3/RigArmRightCollarbone/RigArmRight1/RigArmRight2/RigArmRight3/Torch3D").SetActive (true);
+			        Destroy(this.gameObject);
+		        }
+		        break;
+            default:
+                break;
 		}
 	}
 
