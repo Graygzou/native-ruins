@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FenceSwitch : CutScene
+public class FenceSwitch : Trigger
 {
     /*
     public float smoothing = 1f;

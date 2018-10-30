@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that hold all the in-game cutscenes. Also in-charge to setup, launch, interrupt the right cutscnes.
+/// </summary>
 public class InteractionManager : MonoBehaviour, IManager
 {
-    [System.Serializable]
-    public struct CutsceneInfos
-    {
-        [SerializeField]
-        public CutScene.CutsceneName name;
-
-        [SerializeField]
-        public CutScene cutscene;
-    }
-
     [SerializeField]
-    private List<CutsceneInfos> cutscenes;
+    private IDictionary<CutScene.InGameCutsceneName, CutScene> cutscenes = new Dictionary<CutScene.InGameCutsceneName, CutScene>();
 
     private DialogueManager dialogue;
-    private CutScene activeCutscene = null;
+    private CutScene.InGameCutsceneName activeCutsceneName;
 
     public delegate void CutsceneHasEnded();
     public static event CutsceneHasEnded OnIntroCutsceneHasEnded;
@@ -27,49 +20,29 @@ public class InteractionManager : MonoBehaviour, IManager
 
     public void Init()
     {
-        // Nothing yet ?
+        // Find all the cutscenes
+        foreach (CutScene cutscene in FindObjectsOfType<CutScene>())
+        {
+            if(!cutscenes.ContainsKey(cutscene.CutsceneName))
+            {
+                cutscenes.Add(cutscene.CutsceneName, cutscene);
+            }
+            Debug.Log("obj:" + cutscene.gameObject + "name: " + cutscene.CutsceneName);
+        }
     }
 
     public void InitMainScene()
     {
-        // Nothing yet ?
+        // Nothing yet ??
     }
 
-    /**
-     * Start the first cutscene where Judy arrived on the beach.
-     */
-    /*
-   public void LaunchInitialCutscene()
-   {
-       // Setting up the scene
-       cutsceneCamera.enabled = true;
-       Camera.main.enabled = false;
-
-       //GameObject.FindWithTag("Player").GetComponent<MovementControllerHuman>().enabled = false;
-       //GameObject.Find("Player").GetComponent<FormsController>().enabled = false;
-
-       // Execute the sleeping action
-       GameObject.FindWithTag("Player").GetComponent<PlayerProperties>().Sleep();
-
-       // Call dialogues
-       /*
-       TriggerDialogueDebut(GameObject.Find("PlaneFade").GetComponent<FadeCutScene>());
-       TriggerDialogueDebut2(GameObject.Find("SecondCutSceneCamera").GetComponent<StandUpCutScene>());
-       TriggerDialogueDebut3(GameObject.Find("SecondCutSceneCamera").GetComponent<LookAroundCutScene>());
-       TriggerDialogueDebut4(GameObject.Find("ThirdCutSceneCamera").GetComponent<LostCutScene>());
-       TriggerDialogueDebut5(GameObject.Find("ThirdCutSceneCamera").GetComponent<FocusCutScene>());
-       TriggerDialogueDebut6(GameObject.Find("ForthCutSceneCamera").GetComponent<TitleGameCutScene>());*/
-
-    // Fire the event to init the other managers.
-    //CutsceneHasEnded();
-    //}*/
-
-    public void StartCutscene(CutScene.CutsceneName name)
+    public void StartCutscene(CutScene.InGameCutsceneName name)
     {
-        // Get the cutscene to play
         Debug.Log("Info: starting " + name + " cutscene.");
-        CutScene currentCutscene = FindCutscene(name);
-        if(currentCutscene != null)
+
+        // Get the cutscene to play
+        CutScene currentCutscene = cutscenes[name];
+        if (currentCutscene != null)
         {
             // Subscribe to the end of the cutscene
             CutScene.OnCutsceneEnd += WhenCutsceneEnds;
@@ -79,20 +52,20 @@ public class InteractionManager : MonoBehaviour, IManager
 
             // Activate it
             Debug.Log("Info: activate " + name + " cutscene.");
-            activeCutscene = currentCutscene;
+            activeCutsceneName = name;
             currentCutscene.Activate();
         }
     }
 
-    public void WhenCutsceneEnds(CutScene.CutsceneName name)
+    public void WhenCutsceneEnds(CutScene.InGameCutsceneName name)
     {
         // Fire the right trigger depending on the given name
         switch (name)
         {
-            case CutScene.CutsceneName.IntroductionCutscene:
+            case CutScene.InGameCutsceneName.IntroductionCutscene:
                 OnIntroCutsceneHasEnded();
                 break;
-            case CutScene.CutsceneName.BearTotemCutscene:
+            case CutScene.InGameCutsceneName.BearTotemCutscene:
                 OnBearTotemCutsceneHasEnded();
                 break;
             default:
@@ -102,26 +75,27 @@ public class InteractionManager : MonoBehaviour, IManager
 
     public void SkipCutscene()
     {
-        activeCutscene.Interrupt();
+        StartCoroutine(cutscenes[activeCutsceneName].Interrupt());
     }
 
-    private CutScene FindCutscene(CutScene.CutsceneName name)
+    /*
+    private GameObject FindCutscene(CutScene.InGameCutsceneName name)
     {
-        CutScene result = null;
+        GameObject result = null;
         bool found = false;
         int i = 0;
         while(!found && i < cutscenes.Count)
         {
-            found = (cutscenes[i].name.Equals(name));
-            result = found ? cutscenes[i].cutscene : result;
+            found = (cutscenes[i].cutscenePrefabs.GetComponent<CutScene>().CutsceneName.Equals(name));
+            result = found ? cutscenes[i].cutscenePrefabs : result;
             i++;
         }
         return result;
-    }
+    }*/
 
     public void DisableCutscene()
     {
-        activeCutscene.Disable();
+        cutscenes[activeCutsceneName].Disable();
     }
 
     /*

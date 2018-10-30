@@ -30,6 +30,7 @@ public class FadeTrigger : Trigger
             yield return new WaitForEndOfFrame();
         }
         SwitchManager.EndAction();
+        base.NoticeSubscribers();
     }
 
     public override void Interrupt()

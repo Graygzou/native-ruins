@@ -16,6 +16,8 @@ public class TitleGameTrigger : Trigger
 
     [SerializeField]
     private AudioSource audioSource;
+    //[SerializeField]
+    //private Audio audioSource;
 
     [SerializeField]
     private Sprite[] spriteCredits;
@@ -114,7 +116,7 @@ public class TitleGameTrigger : Trigger
 
         // End CutScene
         yield return new WaitForSeconds(3f);
-        //StopCutScene();
+        NoticeSubscribers();
 
         // Setting the game player
         /*
@@ -132,5 +134,14 @@ public class TitleGameTrigger : Trigger
 
         yield return new WaitForEndOfFrame();
         DialogueTrigger.TriggerDialogueInstructions(null);*/
+    }
+
+    public override void Interrupt()
+    {
+        image.color = new Color(255, 255, 225, 0);
+        animator.Play("Idle");
+        (MainManager.Instance.FindManager(MainManager.ManagerName.AudioManager) as AudioManager).FadeDown();
+
+        base.Interrupt();
     }
 }

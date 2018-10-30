@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour {
 
@@ -14,11 +15,14 @@ public class MainUI : MonoBehaviour {
     [SerializeField]
     private GameObject _title;
 
+    [SerializeField]
+    private Button loadButton;
+
     public Animator MainMenuAnimator { get { return _mainMenuAnimator; } }
     public Animator HelpMenuAnimator { get { return _helpMenuAnimator; } }
     public GameObject Title { get { return _title; } }
 
-    #region Button Interactions
+    #region Buttons Interactions
     //Lance la scène Map Island et détruit la scène actuelle "Menu_demarrer"
     public void LoadGame()
     {
@@ -45,4 +49,12 @@ public class MainUI : MonoBehaviour {
     }
 
     #endregion
+
+    #region Buttons states.
+    public void ChangeStateLoadButton(bool state)
+    {
+        loadButton.enabled = state;
+    }
+    #endregion
+
 }

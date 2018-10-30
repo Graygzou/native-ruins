@@ -7,36 +7,25 @@ public class Phase
 {
     public const int NUM_ACTIONS_MAX = 10;
 
-    [SerializeField]
-    public Camera attachedCamera;
+    [SerializeField] public Camera attachedCamera;
+    [SerializeField] public int startDialogueIndex;
+    [SerializeField] public int endDialogueIndex;
+    [SerializeField] public float min = 0;
+    [SerializeField] public float max = 10;
 
-    [SerializeField]
-    public int startDialogueIndex;
-
-    [SerializeField]
-    public int endDialogueIndex;
-
-    [SerializeField]
-    public float min = 0;
-    [SerializeField]
-    public float max = 10;
-
-    [SerializeField]
-    private Trigger[] _actions;
+    [SerializeField] private Trigger[] _actions;
     public Trigger[] Actions { get { return _actions; } }
 
-    [SerializeField]
-    private List<int> _dialogueSentenceReferences = new List<int>();
+    [SerializeField] private List<int> _dialogueSentenceReferences = new List<int>();
     public List<int> DialogueSentenceReferences { get { return _dialogueSentenceReferences; } }
 
-    [SerializeField]
-    private bool canPlayerMove;
+    [SerializeField] private bool canPlayerMove;
 
     public int maxNumberDialogue = 0;
 
     private Camera mainCamera;
 
-    public void Awake()
+    public void AwakePhase()
     {
         if (attachedCamera != null)
         {
@@ -44,16 +33,19 @@ public class Phase
         }
     }
 
-    /*
-    public void Interrupt()
+    public void Activate(Camera defaultCamera, Canvas canvas)
     {
-        StopCutSceneEnd();
+        // Setup
+        SetupCutScene(defaultCamera, canvas);
 
-        // Fire the finish event
-    }*/
+        // Call a cut-scene to start the switch
+        PlayCutSceneAnimation(defaultCamera);
+    }
 
     public void SetupCutScene(Camera defaultCamera, Canvas canvas)
     {
+        Debug.Log(this);
+
         if (!canPlayerMove)
         {
             // Get all component needed form the player
@@ -63,16 +55,18 @@ public class Phase
         // Activate the camera if one is specified
         if (attachedCamera != null)
         {
-            attachedCamera.enabled = true;
-            canvas.worldCamera = attachedCamera;
+            //canvas.worldCamera = attachedCamera;
             if(defaultCamera != null)
             {
+                Debug.Log("Dectivate Default Camera !" + defaultCamera.name);
                 defaultCamera.enabled = false;
             }
+            Debug.Log("Activate Custom Camera !" + attachedCamera.name);
+            attachedCamera.enabled = true;
         }
         else
         {
-            canvas.worldCamera = defaultCamera;
+            //canvas.worldCamera = defaultCamera;
         }
     }
 
@@ -90,10 +84,8 @@ public class Phase
 
     public void StopCutSceneEnd(Camera defaultCamera, Canvas canvas)
     {
-        foreach (Trigger action in _actions)
-        {
-            action.Interrupt();
-        }
+        Debug.Log("Stop");
+        Interrupt();
 
         if (attachedCamera != null)
         {
@@ -105,12 +97,12 @@ public class Phase
         }
     }
 
-    public void TriggerActions()
+    public void Interrupt()
     {
-        /*
-        foreach(Trigger action in actions)
+        // Stop the previous action if they were not completed
+        foreach (Trigger action in _actions)
         {
-            action.Fire();
-        }*/
+            action.Interrupt();
+        }
     }
 }

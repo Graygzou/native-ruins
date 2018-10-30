@@ -28,9 +28,7 @@ public class MenuManager : MonoBehaviour, IManager {
     private GameObject _currentInGameUI;
     private InGameUI _InGameUIScript;
 
-    [Header("Others settings")]
-    [SerializeField]
-    private Button loadButton;
+    [Header("Others Settings")]
     [SerializeField]
     private GameObject pause = null;
     [SerializeField]
@@ -46,7 +44,8 @@ public class MenuManager : MonoBehaviour, IManager {
 
         // Enable or not the launch game button
         PlayerPrefs.SetInt("load_scene", 0);
-        loadButton.enabled = PlayerPrefs.HasKey("xPlayer");
+        _mainUIScript.ChangeStateLoadButton(PlayerPrefs.HasKey("xPlayer"));
+        
 
         // Set the canvas's render mode to Screen Space - Camera
         _mainUICanvas.renderMode = RenderMode.ScreenSpaceCamera;

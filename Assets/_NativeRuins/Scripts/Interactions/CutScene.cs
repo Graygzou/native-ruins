@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class used to create, managed and end an in-game cutscene.
+/// </summary>
 [ExecuteInEditMode]
 public class CutScene : MonoBehaviour
 {
     #region Enums
-    public enum CutsceneName : int
+    public enum InGameCutsceneName : int
     {
         IntroductionCutscene = 0,
         BearTotemCutscene = 1,
@@ -19,7 +22,8 @@ public class CutScene : MonoBehaviour
 
     #region Serialize Fields
     [SerializeField]
-    private CutsceneName cutsceneName;
+    private InGameCutsceneName _cutsceneName;
+    public InGameCutsceneName CutsceneName { get { return _cutsceneName; } }
 
     [SerializeField]
     private Dialogue _dialogue;
@@ -38,7 +42,7 @@ public class CutScene : MonoBehaviour
     protected List<Phase> cutscenePhases;
     #endregion
 
-    public delegate void CutsceneEnd(CutsceneName name);
+    public delegate void CutsceneEnd(InGameCutsceneName name);
     public static event CutsceneEnd OnCutsceneEnd;
 
     private List<Trigger>[] dialogueSentenceTriggers;
@@ -46,30 +50,34 @@ public class CutScene : MonoBehaviour
     private List<Phase> activePhases;
     private Camera mainCamera;
 
-    /*
-    private Camera playerCamera;*/
-
     private bool isTyping = false;
+    private bool actionsFinished = false;
 
     private int actualSentenceIndex;
+    private int nbTriggers;
+    private int triggerDone;
 
     // For the editor..
+    /*
     public void Awake()
     {
         foreach(Phase phase in cutscenePhases)
         {
             phase.maxNumberDialogue = _dialogue.dialogue.Count;
-            phase.Awake();
+            phase.AwakePhase();
         }
-    }
+    }*/
 
     public virtual void Init()
     {
         Debug.Log("Info: Cutscene init");
 
         // Disable the main camera
-        mainCamera = Camera.main;
-        mainCamera.enabled = false;
+        if((mainCamera = Camera.main) != null)
+        {
+            mainCamera.enabled = false;
+        }
+        
         // Enable the default camera for the cutscene
         defaultCamera.enabled = true;
 
@@ -99,6 +107,8 @@ public class CutScene : MonoBehaviour
         }
         activePhases = new List<Phase>();
         actualSentenceIndex = -1;
+        actionsFinished = false;
+        triggerDone = 0;
 
         // Custom setup for this cutscene.
         SetupPlayerState();
@@ -156,21 +166,25 @@ public class CutScene : MonoBehaviour
                         // Start the phase
                         activePhases.Add(phase);
 
-                        Activate(phase);
+                        phase.Activate(defaultCamera, overlayCanvas);
                     }
                 }
             }
 
             // Launch the current dialogue's sentence with associated triggers
-            // TODO : Pass the entire List and not just the first element.... dialogueSentenceTriggers[i] et not dialogueSentenceTriggers[i][0]
             if (dialogueSentenceTriggers.Length > actualSentenceIndex && dialogueSentenceTriggers[actualSentenceIndex] != null &&
                 dialogueSentenceTriggers[actualSentenceIndex].Count > 0)
             {
+                // Reset tmp values
+                actionsFinished = false;
+                triggerDone = 0;
+                nbTriggers = dialogueSentenceTriggers[actualSentenceIndex].Count;
                 foreach (Trigger trigger in dialogueSentenceTriggers[actualSentenceIndex])
                 {
                     if (trigger != null)
                     {
                         Debug.Log("Info: Start trigger :" + trigger);
+                        Trigger.OnTriggerFinish += TriggerEndCallback;
                         SwitchManager.ExecuteAction(trigger);
                     }
                 }
@@ -179,22 +193,33 @@ public class CutScene : MonoBehaviour
         }
         else
         {
-            Finish();
-            Disable();
+            if(actionsFinished)
+            {
+                EndCutscene();
+            }
+            else
+            {
+                FindObjectOfType<DialogueManager>().EndDialogue();
+            }
         }
     }
-    
-    #region Phase workflow
-    private void Activate(Phase currentPhase)
+
+    public void TriggerEndCallback()
     {
-        // Setup
-        currentPhase.SetupCutScene(defaultCamera, overlayCanvas);
+        triggerDone++;
+        actionsFinished = triggerDone >= nbTriggers;
+        if (actionsFinished && actualSentenceIndex >= _dialogue.dialogue.Count)
+        {
+            EndCutscene();
+        }
+    }
 
-        // Call a cut-scene to start the switch
-        currentPhase.PlayCutSceneAnimation(defaultCamera);
-
-        // Simply activate the desired switch
-        currentPhase.TriggerActions();
+    private void EndCutscene()
+    {
+        Finish();
+        Disable();
+        // Fire the end event
+        OnCutsceneEnd(_cutsceneName);
     }
 
     private void Finish()
@@ -204,9 +229,6 @@ public class CutScene : MonoBehaviour
         FindObjectOfType<DialogueManager>().EndDialogue();
 
         GameObject.FindWithTag("Player").GetComponent<PlayerProperties>().CloseDialogue();
-
-        // Fire the end event
-        OnCutsceneEnd(cutsceneName);
     }
 
     public void Disable()
@@ -215,32 +237,25 @@ public class CutScene : MonoBehaviour
         defaultCamera.enabled = false;
     }
 
-    /*
-    private void PlayCutSceneAnimation()
+    public IEnumerator Interrupt()
     {
-        if (_dialogue != null)
-        {
-            // Launch the dialogue
-            FindObjectOfType<DialogueManager>().StartDialogue(_dialogue, null);
-        }
-    }*/
-    #endregion
+        Finish();
 
-    public void Interrupt()
-    {
         // Fade the cutscene with a white screen
-        // Should trigger the Diable method in the stateBehavior..
         whiteScreenAnimator.SetTrigger("QuickFade");
+
+        yield return new WaitForSeconds(1.0f);
 
         // Escape all the current active phases
         for (int phaseIndex = 0; phaseIndex < activePhases.Count; phaseIndex++)
         {
             Phase activePhase = activePhases[phaseIndex];
 
-            activePhase.StopCutSceneEnd(defaultCamera, overlayCanvas);
+            activePhase.Interrupt();
             activePhases.Remove(activePhase);
         }
 
-        Finish();
+        // Fire the end event
+        OnCutsceneEnd(_cutsceneName);
     }
 }

@@ -193,7 +193,6 @@ MonoBehaviour:
     type: 2}
   inGameUIPrefab: {fileID: 1225817829860012, guid: ce3479a038b8bdc41b897aaa14200ef9,
     type: 2}
-  loadButton: {fileID: 0}
   pause: {fileID: 0}
   help: {fileID: 0}
 --- !u!114 &114662695597273938
@@ -207,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791c258001fa094418fe1ccd5813f1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 114838536712182658, guid: c2f6a88fda9ed4a4ca3cda97416d5017, type: 2}
+  player: {fileID: 0}
   gameHUD: {fileID: 0}
   lifeBar: {fileID: 0}
   hungerBar: {fileID: 0}
@@ -241,7 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscenes:
   - name: 0
-    cutscene: {fileID: 0}
+    cutscenePrefabs: {fileID: 1763572980741488, guid: 8fe5e3e8ac71ee24a8c403480f31eaec,
+      type: 2}
 --- !u!114 &114956281612902560
 MonoBehaviour:
   m_ObjectHideFlags: 1

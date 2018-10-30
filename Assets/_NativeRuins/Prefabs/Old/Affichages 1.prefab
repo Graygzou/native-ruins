@@ -6574,7 +6574,6 @@ MonoBehaviour:
   arrowNumber: {fileID: 0}
   fallDetector: {fileID: 61875882881890042}
   pickupButton: {fileID: 1052615564212298}
-  m_canvas: {fileID: 0}
   m_bag: {fileID: 224919495014556310}
   m_itemsContainer: {fileID: 224060546212543146}
   spawningAnchor: {fileID: 224670775107309540}
@@ -7422,9 +7421,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerSprite: {fileID: 224051822031160962}
-  timeMaxBeforeHungerDecrease: 15
-  hungerDecreasingFactor: 5
-  hungerDecreasingFactorPuma: 8
 --- !u!114 &114305924192754332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10051,9 +10047,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energySprite: {fileID: 224394244701177880}
-  energyDecreasingFactor: 1
-  energizingBackFactor: 2
-  energizingBackAfterEmptyFactor: 2
 --- !u!114 &114660077234767280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11154,15 +11147,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeSprite: {fileID: 224969922211596846}
   hungerBar: {fileID: 114304713995975004}
+  audio: {fileID: 0}
   sonCri: {fileID: 8300000, guid: b985aef9125fafe47bad73db7ef01cfa, type: 3}
   sonManger: {fileID: 8300000, guid: af0b5f2fe3cab7a408c9d4c9befb46bb, type: 3}
   sonVieBasse: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
-  Hunger: {fileID: 0}
   animator: {fileID: 95565955347129826}
-  timeMaxBeforeHungerHurt: 15
-  timeMaxBeforeHeartBeat: 1
-  hurtByFallScale: 0.5
-  hurtByHungerScale: 1
 --- !u!114 &114832570800074148
 MonoBehaviour:
   m_ObjectHideFlags: 1

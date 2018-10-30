@@ -20,6 +20,7 @@ public class StandUpTrigger : Trigger
         //yield return new WaitForSeconds(7f);
         yield return null;
         SwitchManager.EndAction();
+        NoticeSubscribers();
     }
 
 }

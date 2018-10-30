@@ -58,7 +58,7 @@ public class PlayerProperties : MonoBehaviour
 
     void Update()
     {
-        if(!dialogueOn)
+        if(!dialogueOn && menuManager != null)
         {
             currentTimeFaim += Time.deltaTime;
             if (currentTimeFaim >= timeMaxBeforeHungerDecrease)

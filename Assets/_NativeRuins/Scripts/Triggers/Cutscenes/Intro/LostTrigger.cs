@@ -17,5 +17,6 @@ public class LostTrigger : Trigger
         // Wait the end of the animation
         yield return new WaitForSeconds(2f);
         SwitchManager.EndAction();
+        NoticeSubscribers();
     }
 }

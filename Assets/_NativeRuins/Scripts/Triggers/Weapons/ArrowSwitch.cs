@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowSwitch : CutScene
+public class ArrowSwitch : Trigger
 {
     /*
     private bool hasBeenActivated;

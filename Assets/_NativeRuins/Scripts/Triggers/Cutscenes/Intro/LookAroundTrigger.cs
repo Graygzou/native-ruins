@@ -20,5 +20,6 @@ public class LookAroundTrigger : Trigger
         // Wait the end of the animation
         yield return new WaitForSeconds(3f);
         SwitchManager.EndAction();
+        NoticeSubscribers();
     }
 }

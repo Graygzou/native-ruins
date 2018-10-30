@@ -71,7 +71,8 @@ public class MainManager : MonoBehaviour {
             InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Cancel, "Cancel", InputManager.EventTypeButton.Down, (FindManager(ManagerName.InteractionManager) as InteractionManager).SkipCutscene);
 
             // Start the first cutscene
-            (FindManager(ManagerName.InteractionManager) as InteractionManager).StartCutscene(CutScene.CutsceneName.IntroductionCutscene);
+            (FindManager(ManagerName.InteractionManager) as InteractionManager).Init();
+            (FindManager(ManagerName.InteractionManager) as InteractionManager).StartCutscene(CutScene.InGameCutsceneName.IntroductionCutscene);
         }
     }
 
