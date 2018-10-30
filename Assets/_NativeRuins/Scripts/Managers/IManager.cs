@@ -6,5 +6,7 @@ public interface IManager
 {
     void Init();
 
+    void InitMainMenuScene();
+
     void InitMainScene();
 }

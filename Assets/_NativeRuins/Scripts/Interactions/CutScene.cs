@@ -72,14 +72,7 @@ public class CutScene : MonoBehaviour
     {
         Debug.Log("Info: Cutscene init");
 
-        // Disable the main camera
-        if((mainCamera = Camera.main) != null)
-        {
-            mainCamera.enabled = false;
-        }
-        
-        // Enable the default camera for the cutscene
-        defaultCamera.enabled = true;
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
         if (_dialogue != null && _dialogue.dialogue != null)
         {
@@ -98,7 +91,7 @@ public class CutScene : MonoBehaviour
                 {
                     if(phase.DialogueSentenceReferences[actionIndex].Equals(dialogueIndex+1))
                     {
-                        Debug.Log("Trigger found for the dialogue " + dialogueIndex + 1 + ", trigger :" + phase.Actions[actionIndex]);
+                        //Debug.Log("Trigger found for the dialogue " + dialogueIndex + 1 + ", trigger :" + phase.Actions[actionIndex]);
                         // This current action want to belong to the current dialogue
                         dialogueSentenceTriggers[dialogueIndex].Add(phase.Actions[actionIndex]);
                     }
@@ -126,6 +119,14 @@ public class CutScene : MonoBehaviour
 
     public virtual void Activate()
     {
+        // Disable the main camera
+        if (mainCamera != null)
+        {
+            mainCamera.enabled = false;
+        }
+        // Enable the default camera for the cutscene
+        defaultCamera.enabled = true;
+
         DialogueManager.OnClicked += Display;
         // Call only once!
         FindObjectOfType<DialogueManager>().InitDialogueUI();
@@ -233,7 +234,10 @@ public class CutScene : MonoBehaviour
 
     public void Disable()
     {
-        mainCamera.enabled = true;
+        if(mainCamera != null)
+        {
+            mainCamera.enabled = true;
+        }
         defaultCamera.enabled = false;
     }
 
@@ -254,6 +258,8 @@ public class CutScene : MonoBehaviour
             activePhase.Interrupt();
             activePhases.Remove(activePhase);
         }
+
+        Disable();
 
         // Fire the end event
         OnCutsceneEnd(_cutsceneName);

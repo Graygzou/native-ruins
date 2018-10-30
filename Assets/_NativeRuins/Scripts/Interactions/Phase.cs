@@ -44,8 +44,6 @@ public class Phase
 
     public void SetupCutScene(Camera defaultCamera, Canvas canvas)
     {
-        Debug.Log(this);
-
         if (!canPlayerMove)
         {
             // Get all component needed form the player
@@ -58,10 +56,8 @@ public class Phase
             //canvas.worldCamera = attachedCamera;
             if(defaultCamera != null)
             {
-                Debug.Log("Dectivate Default Camera !" + defaultCamera.name);
                 defaultCamera.enabled = false;
             }
-            Debug.Log("Activate Custom Camera !" + attachedCamera.name);
             attachedCamera.enabled = true;
         }
         else
@@ -84,9 +80,7 @@ public class Phase
 
     public void StopCutSceneEnd(Camera defaultCamera, Canvas canvas)
     {
-        Debug.Log("Stop");
         Interrupt();
-
         if (attachedCamera != null)
         {
             // Set back the camera default in the canvas

@@ -11,22 +11,15 @@ public class Sauvegarde : MonoBehaviour, IManager {
 
     #region ComponentSettings
     [Header("Component settings")]
-    [SerializeField]
-    private GameObject gameHUD;
-    [SerializeField]
-    private LifeBar lifeBar;
-    [SerializeField]
-    private HungerBar hungerBar;
-    [SerializeField]
-    private InventoryManager inventory;
+    [SerializeField] private GameObject gameHUD;
+    [SerializeField] private LifeBar lifeBar;
+    [SerializeField] private HungerBar hungerBar;
+    [SerializeField] private InventoryManager inventory;
 
     [Header("Puzzles rewards")]
-    [SerializeField]
-    private GameObject firstRope;
-    [SerializeField]
-    private GameObject firstSail;
-    [SerializeField]
-    private GameObject firstBow;
+    [SerializeField] private GameObject firstRope;
+    [SerializeField] private GameObject firstSail;
+    [SerializeField] private GameObject firstBow;
     #endregion
 
     [Header("Items settings")]
@@ -46,6 +39,11 @@ public class Sauvegarde : MonoBehaviour, IManager {
     public void Init()
     {
         // Nothing yet ?
+    }
+
+    public void InitMainMenuScene()
+    {
+        // Nothing Yet ?
     }
 
     public void InitMainScene()

@@ -31,7 +31,9 @@ public class MainManager : MonoBehaviour {
     public string MainSceneName { get { return _mainSceneName; } }
 
     [SerializeField]
-    private MonoBehaviour[] managers;
+    private GameObject[] managers;
+
+    private IManager[] managersScripts;
 
     private void Awake()
     {
@@ -48,6 +50,7 @@ public class MainManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         SceneManager.sceneLoaded += Init;
+        managersScripts = new IManager[managers.Length];
     }
 
     private void Update()
@@ -57,18 +60,17 @@ public class MainManager : MonoBehaviour {
 
     private void Init(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name.Equals(_mainMenuName))
+        InitManagers();
+
+        if (scene.name.Equals(_mainMenuName))
         {
-            InitManagers();
+            InitManagersMainMenuScene();
 
         }
         else if(scene.name.Equals(_mainSceneName))
         {
             // init all the managers when the introduction cutscene has ended
             InteractionManager.OnIntroCutsceneHasEnded += InitManagersMainScene;
-
-            // Subscribe the escape key so the player can escape the cutscene.
-            InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Cancel, "Cancel", InputManager.EventTypeButton.Down, (FindManager(ManagerName.InteractionManager) as InteractionManager).SkipCutscene);
 
             // Start the first cutscene
             (FindManager(ManagerName.InteractionManager) as InteractionManager).Init();
@@ -86,23 +88,35 @@ public class MainManager : MonoBehaviour {
     #region Managers methods
     private void InitManagers()
     {
-        foreach(IManager manager in managers)
+        for (int i = 0; i < managers.Length; i++)
         {
-            manager.Init();
+            // Instantiate it
+            managersScripts[i] = Instantiate(managers[i]).GetComponent<IManager>();
+
+            // Call the init method on them
+            managersScripts[i].Init();
         }
     }
 
     private void InitManagersMainScene()
     {
-        foreach (IManager manager in managers)
+        foreach (IManager manager in managersScripts)
         {
             manager.InitMainScene();
         }
     }
 
+    private void InitManagersMainMenuScene()
+    {
+        foreach (IManager manager in managersScripts)
+        {
+            manager.InitMainMenuScene();
+        }
+    }
+
     public IManager FindManager(ManagerName manageName)
     {   
-        return managers[(int)manageName] as IManager;
+        return managersScripts[(int)manageName] as IManager;
     }
     #endregion
 

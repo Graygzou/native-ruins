@@ -28,9 +28,14 @@ public class AudioManager : MonoBehaviour, IManager {
         FadeUp();
     }
 
+    public void InitMainMenuScene()
+    {
+        // Nothing Yet ?
+    }
+
     public void InitMainScene()
     {
-        FadeUp();
+        // Nothing Yet ?
     }
 
     public void FadeUp()

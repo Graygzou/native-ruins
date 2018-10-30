@@ -8,7 +8,7 @@ using UnityEngine;
 public class InteractionManager : MonoBehaviour, IManager
 {
     [SerializeField]
-    private IDictionary<CutScene.InGameCutsceneName, CutScene> cutscenes = new Dictionary<CutScene.InGameCutsceneName, CutScene>();
+    private IDictionary<CutScene.InGameCutsceneName, CutScene> cutscenes;
 
     private DialogueManager dialogue;
     private CutScene.InGameCutsceneName activeCutsceneName;
@@ -20,6 +20,7 @@ public class InteractionManager : MonoBehaviour, IManager
 
     public void Init()
     {
+        cutscenes = new Dictionary<CutScene.InGameCutsceneName, CutScene>();
         // Find all the cutscenes
         foreach (CutScene cutscene in FindObjectsOfType<CutScene>())
         {
@@ -27,8 +28,13 @@ public class InteractionManager : MonoBehaviour, IManager
             {
                 cutscenes.Add(cutscene.CutsceneName, cutscene);
             }
-            Debug.Log("obj:" + cutscene.gameObject + "name: " + cutscene.CutsceneName);
+            //Debug.Log("obj:" + cutscene.gameObject + "name: " + cutscene.CutsceneName);
         }
+    }
+
+    public void InitMainMenuScene()
+    {
+        // Nothing yet ??
     }
 
     public void InitMainScene()
@@ -39,6 +45,9 @@ public class InteractionManager : MonoBehaviour, IManager
     public void StartCutscene(CutScene.InGameCutsceneName name)
     {
         Debug.Log("Info: starting " + name + " cutscene.");
+
+        // Subscribe the escape key so the player can escape the cutscene.
+        InputManager.SubscribeButtonEvent(InputManager.ActionsLabels.Cancel, "Cancel", InputManager.EventTypeButton.Down, SkipCutscene);
 
         // Get the cutscene to play
         CutScene currentCutscene = cutscenes[name];
@@ -59,6 +68,9 @@ public class InteractionManager : MonoBehaviour, IManager
 
     public void WhenCutsceneEnds(CutScene.InGameCutsceneName name)
     {
+        // Unsubscribe the escape key so the player can escape the cutscene.
+        InputManager.UnsubscribeButtonEvent(InputManager.ActionsLabels.Cancel);
+
         // Fire the right trigger depending on the given name
         switch (name)
         {

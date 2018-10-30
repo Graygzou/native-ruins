@@ -11,6 +11,8 @@ public class DialogueManager : MonoBehaviour {
     [SerializeField]
     public Text dialogueText;
     [SerializeField]
+    public Button dialogueContinueButton;
+    [SerializeField]
     private Animator animator;
 
     [SerializeField]
@@ -148,6 +150,8 @@ public class DialogueManager : MonoBehaviour {
         // Stop the dialogue
         isProcessing = false;
         animator.SetTrigger("Close");
+
+        dialogueContinueButton.interactable = false;
 
         StopAllCoroutines();
         

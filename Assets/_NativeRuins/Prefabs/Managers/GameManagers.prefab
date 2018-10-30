@@ -174,10 +174,10 @@ MonoBehaviour:
   _mainMenuName: MenuDemarrer
   _mainSceneName: NewMapIsland
   managers:
-  - {fileID: 114956281612902560}
-  - {fileID: 114627741311697050}
-  - {fileID: 114662695597273938}
-  - {fileID: 114765009982575720}
+  - {fileID: 1025113027101308}
+  - {fileID: 1034587435575338}
+  - {fileID: 1607223761217818}
+  - {fileID: 1009017923320616}
 --- !u!114 &114627741311697050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,10 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c171e6d8f40e4409e68d54e8e2675e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutscenes:
-  - name: 0
-    cutscenePrefabs: {fileID: 1763572980741488, guid: 8fe5e3e8ac71ee24a8c403480f31eaec,
-      type: 2}
 --- !u!114 &114956281612902560
 MonoBehaviour:
   m_ObjectHideFlags: 1

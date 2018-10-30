@@ -17,35 +17,37 @@ public class MenuManager : MonoBehaviour, IManager {
     }
     #endregion
 
+    #region Serialize Field
     [Header("UI Prefabs")]
-    [SerializeField]
-    private GameObject mainUIPrefab;
-    private GameObject _currentMainUI;
-    private MainUI _mainUIScript;
-
-    [SerializeField]
-    private GameObject inGameUIPrefab;
-    private GameObject _currentInGameUI;
-    private InGameUI _InGameUIScript;
+    [SerializeField] private GameObject mainUIPrefab;
+    [SerializeField] private GameObject inGameUIPrefab;
 
     [Header("Others Settings")]
-    [SerializeField]
-    private GameObject pause = null;
-    [SerializeField]
-    private GameObject help = null;
+    [SerializeField] private GameObject pause = null;
+    [SerializeField] private GameObject help = null;
+    #endregion
+
+    private GameObject _currentMainUI;
+    private GameObject _currentInGameUI;
+
+    private MainUI _mainUIScript;
+    private InGameUI _InGameUIScript;
 
     private Canvas _mainUICanvas;
 
-    #region Init methods
     void IManager.Init()
     {
         // Create the UI prefab if needed
         RetrieveOrCreateMainUI();
+    }
 
+    #region Scenes initialization methods
+    void IManager.InitMainMenuScene()
+    {
         // Enable or not the launch game button
         PlayerPrefs.SetInt("load_scene", 0);
         _mainUIScript.ChangeStateLoadButton(PlayerPrefs.HasKey("xPlayer"));
-        
+
 
         // Set the canvas's render mode to Screen Space - Camera
         _mainUICanvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -59,7 +61,6 @@ public class MenuManager : MonoBehaviour, IManager {
 
     void IManager.InitMainScene()
     {
-        RetrieveOrCreateMainUI();
         // Create the HUD if needed
         RetrieveOrCreatedInGameUI();
 
