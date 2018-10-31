@@ -32,6 +32,9 @@ public class FormsController : MonoBehaviour
 
     private Color colorStartHuman;
 
+    //private InGameUI inGameUI;
+    private MenuManager menuManager;
+
     // Use this for initialization
     protected void Awake()
     {
@@ -52,6 +55,13 @@ public class FormsController : MonoBehaviour
             _instance.currentForm = _instance.transform.GetChild(i).gameObject.activeSelf ? (TransformationType)i : _instance.currentForm;
         }
         Debug.Log(_instance.currentForm);
+
+        //inGameUI = GameObject.FindWithTag("InGameUI").GetComponent<InGameUI>();
+    }
+
+    public void Start()
+    {
+        menuManager = (MainManager.Instance.FindManager(MainManager.ManagerName.MenuManager) as MenuManager);
     }
 
     public int IsPumaUnlocked()
@@ -86,92 +96,32 @@ public class FormsController : MonoBehaviour
 
     public void OpenTransformationWheel()
     {
-        // Unsubscribe the player movement and plug it to the transformation wheel
-            
-            
-        _instance.transformationWheelOpen = true;
-        // Verification des formes disponibles
-        if (!_instance.pumaUnlocked)
-        {
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPuma").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(true);
-        }
-        else
-        {
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPuma").SetActive(true);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaLocked").SetActive(false);
-        }
+        // Override player movement event to plug in transformation wheel events
+        InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { UpdateWheelSelection, UpdateWheelSelection });
 
-        if (!bearUnlocked)
-        {
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconBear").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearLocked").SetActive(true);
-        }
+        _instance.transformationWheelOpen = true;
+
+        // Verification des formes disponibles
+        menuManager.SetActivePumaIcon(!pumaUnlocked);
+        menuManager.SetActiveBearIcon(!bearUnlocked);
 
         // Temps arrêté
         Time.timeScale = 0f;
 
         // Affichage de la roue
-        (MainManager.Instance.FindManager(MainManager.ManagerName.MenuManager) as MenuManager).DisplayTransformationWheel();
+        menuManager.DisplayTransformationWheel();
+    }
 
-        // Données utiles à la sélection
-        Vector3 centreScreen = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        Vector3 positionMouse = Input.mousePosition;
-        Vector3 difference = positionMouse - centreScreen;
+    public void UpdateWheelSelection()
+    {
+        float mouseX = Input.GetAxis("Horizontal");
+        float mouseY = Input.GetAxis("Vertical");
+        menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f), bearUnlocked, pumaUnlocked);
+    }
 
-        // Si en dehors du centre de la roue :
-        if (difference.magnitude > 125)
-        {
-            // Si sur le tiers du dessus :
-            // coefficient directeur de la droite "gauche"
-            float a1 = -182f / 312f;
-            // "ordonnée à l'origine"
-            float b1 = centreScreen.y - a1 * centreScreen.x;
-            // coefficient directeur de la droite "droite"
-            float a2 = -a1;
-            // "ordonnée à l'origine"
-            float b2 = centreScreen.y - a2 * centreScreen.x;
-
-            // SELECTION HUMAIN
-            if ((positionMouse.y > positionMouse.x * a1 + b1) && (positionMouse.y > positionMouse.x * a2 + b2))
-            {
-                _instance.selectedForm = TransformationType.Human;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(true);
-            }
-            else
-            {
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(false);
-            }
-
-            // SELECTION OURS
-            if ((positionMouse.y < positionMouse.x * a2 + b2) && (positionMouse.x > centreScreen.x) && bearUnlocked)
-            {
-                _instance.selectedForm = TransformationType.Bear;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(true);
-            }
-            else
-            {
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(false);
-            }
-
-            // SELECTION PUMA
-            if ((positionMouse.y < positionMouse.x * a1 + b1) && (positionMouse.x < centreScreen.x) && pumaUnlocked)
-            {
-                _instance.selectedForm = TransformationType.Puma;
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(true);
-            }
-            else
-            {
-                GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
-            }
-        }
-        else
-        {
-            _instance.selectedForm = _instance.currentForm;
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconHumanSelected").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconPumaSelected").SetActive(false);
-            GameObject.Find("Affichages/TransformationSystem/Wheel/IconBearSelected").SetActive(false);
-        }
+    public void SetSelectedForm(TransformationType type)
+    {
+        selectedForm = type;
     }
 
     public void CloseTransformationWheel()
@@ -184,6 +134,23 @@ public class FormsController : MonoBehaviour
 
         if (selectedForm != currentForm)
         {
+            Transformation();
+
+            // No need to Unsusbcribe transformation's event because the Transformation method call RegisterInputs()
+        }
+        else
+        {
+            // Subscribe back the movement events.
+            InputManager.UnsubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Movement);
+            _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterPlayerMovementsInputs();
+        }
+    }
+
+    public void Transformation(TransformationType type)
+    {
+        if (_instance.currentForm != type)
+        {
+            _instance.selectedForm = type;
             Transformation();
         }
     }
@@ -202,21 +169,14 @@ public class FormsController : MonoBehaviour
         {
             StartCoroutine(ExplosionAnimation(positionCourant));
         }
+
         // Activation nouvelle forme
         _instance.availableForms[(int)selectedForm].transform.position = positionCourant;
         _instance.availableForms[(int)selectedForm].SetActive(true);
+
         // Override the inputs of the current forms
         _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterInputs();
         _instance.currentForm = _instance.selectedForm;
-    }
-
-    public void Transformation(TransformationType type)
-    {
-        if(_instance.currentForm != type)
-        {
-            _instance.selectedForm = type;
-            Transformation();
-        }
     }
 
     private IEnumerator ExplosionAnimation(Vector3 position)

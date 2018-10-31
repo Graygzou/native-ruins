@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
+    [Header("Walk")]
     [SerializeField] protected float walkSpeed = 5;
     [SerializeField] protected float runMultFactor = 2;
     [SerializeField] protected float turnSpeed;
-    [SerializeField] protected float jumpForce;
+    // Should be readonly
+    [SerializeField] protected float currentSpeed;
 
+    [Header("Jump")]
+    [SerializeField] protected float jumpForce;
+    [SerializeField] protected float minJumpInterval = 1.50f;
+
+    [Header("Camera")]
     [SerializeField] protected float cameraSpeed = 2f;
     [SerializeField] protected Rigidbody rigidBody;
-    [SerializeField] protected AudioSource footstep;
+    
     [SerializeField] protected int camera_zoom_max = -1;
     [SerializeField] protected int camera_zoom_min = -3;
 
-    [SerializeField] protected float currentSpeed;
+    [SerializeField] protected AudioSource footstep;
 
     // Inputs gestion
     [SerializeField] protected bool _isShiftHold = false;
@@ -34,7 +41,7 @@ public class MovementController : MonoBehaviour
     protected Vector3 currentDirection = Vector3.zero;
 
     protected float jumpTimeStamp = 0;
-    protected float minJumpInterval = 1.50f;
+    
 
     protected bool isGrounded;
     protected List<Collider> collisions = new List<Collider>();
@@ -82,7 +89,7 @@ public class MovementController : MonoBehaviour
     public virtual void RegisterPlayerMovementsInputs()
     {
         InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { MoveCharacter, StopMovements });
-        InputManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { JumpingAndLanding, null, null });
+        InputManager.SubscribeButtonEvents(InputManager.ActionsLabels.Jump, "Jump", new System.Action[] { null, JumpingAndLanding, null });
         InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Sprint, "Boost", new System.Action[] { MakePlayerSprint, StopSprint });
     }
 
@@ -219,7 +226,7 @@ public class MovementController : MonoBehaviour
 
     public void Interact()
     {
-        if(playerInteraction != null)
+        if(playerInteraction != null && playerInteraction.GetClosestItem() != null)
         {
             playerInteraction.GetClosestItem().Interact();
         }

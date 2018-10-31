@@ -51,7 +51,8 @@ public static class InputManager {
     #region UnityVirtualEvents
     public static void GetVirtualButtonInputs()
     {
-        foreach (ActionsLabels action in buttonInputsCallbacks.Keys)
+        List<ActionsLabels> keys = new List<ActionsLabels>(buttonInputsCallbacks.Keys);
+        foreach (ActionsLabels action in keys)
         {
             KeyValuePair<string[], System.Action[]> currentPair = buttonInputsCallbacks[action];
             bool triggered = false;
@@ -74,19 +75,23 @@ public static class InputManager {
                 i++;
             }
         }
+        keys.Clear();
     }
 
     public static void GetMouseMoveInput()
     {
-        foreach (string input in axisMovementsCallbacks.Keys)
+        List<string> keys = new List<string>(axisMovementsCallbacks.Keys);
+        foreach (string input in keys)
         {
             axisMovementsCallbacks[input]();
         }
+        keys.Clear();
     }
 
     public static void GetMouseMovementsChangedInput()
     {
-        foreach (ActionsLabels action in axisMovementsChangedCallbacks.Keys)
+        List<ActionsLabels> keys = new List<ActionsLabels>(axisMovementsChangedCallbacks.Keys);
+        foreach (ActionsLabels action in keys)
         {
             KeyValuePair<string[], System.Action[]> currentPair = axisMovementsChangedCallbacks[action];
             bool triggered = false;
@@ -105,6 +110,7 @@ public static class InputManager {
                 i++;
             }
         }
+        keys.Clear();
     }
     #endregion
 

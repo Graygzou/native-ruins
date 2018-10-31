@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -75,7 +76,6 @@ public class MenuManager : MonoBehaviour, IManager {
     #endregion
 
     #region MainUI Methods
-
     public void RetrieveOrCreateMainUI ()
     {
         if (!GameObject.FindGameObjectWithTag(mainUIPrefab.tag))
@@ -97,11 +97,9 @@ public class MenuManager : MonoBehaviour, IManager {
         _mainUIScript.MainMenuAnimator.SetInteger("PanelNumber", (int)nextPanel);
         _mainUIScript.MainMenuAnimator.SetTrigger("Close");
     }
-
     #endregion
 
     #region InGameUI Methods
-
     private void RetrieveOrCreatedInGameUI()
     {
         if (!GameObject.FindGameObjectWithTag(inGameUIPrefab.tag))
@@ -125,7 +123,9 @@ public class MenuManager : MonoBehaviour, IManager {
     {
         _currentInGameUI.GetComponent<InGameUI>().EnableCrossHair();
     }
+    #endregion
 
+    #region TransformationWheel methods
     public void DisplayTransformationWheel()
     {
         _InGameUIScript.DisplayTransformationWheel();
@@ -136,6 +136,23 @@ public class MenuManager : MonoBehaviour, IManager {
         _InGameUIScript.CloseTransformationWheel();
     }
 
+    public void SetActivePumaIcon(bool state)
+    {
+        _InGameUIScript.SetActivePumaIcon(state);
+    }
+
+    public void SetActiveBearIcon(bool state)
+    {
+        _InGameUIScript.SetActiveBearIcon(state);
+    }
+
+    public void UpdateWheelSelection(Vector3 positionMouse, bool bearUnlocked, bool pumaUnlocked)
+    {
+        _InGameUIScript.UpdateWheelSelection(positionMouse, bearUnlocked, pumaUnlocked);
+    }
+    #endregion
+
+    #region Player HUD methods
     public float GetCurrentSizeLifeBar()
     {
         return _InGameUIScript.lifeBar.GetCurrentSizeLifeBar();
@@ -171,5 +188,4 @@ public class MenuManager : MonoBehaviour, IManager {
         return _InGameUIScript.lifeBar.IsFull();
     }
     #endregion
-
 }
