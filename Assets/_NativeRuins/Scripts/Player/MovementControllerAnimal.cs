@@ -17,7 +17,7 @@ public class MovementControllerAnimal : MovementController {
         base.Awake();
 
         sons = GetComponents<AudioSource>();
-        sonAttaque = sons[1];
+        //sonAttaque = sons[1];
 
         animator = this.gameObject.GetComponent<Animator>();
         // Set the attribute to the desire amount

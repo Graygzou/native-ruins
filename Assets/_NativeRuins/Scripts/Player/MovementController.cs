@@ -53,9 +53,10 @@ public class MovementController : MonoBehaviour
         cameraPivot = Camera.main;
 
         initial_orientation = Vector3.forward;
+        /*
         footstep.Play();
         footstep.loop = true;
-        footstep.Pause();
+        footstep.Pause();*/
 
         currentSpeed = 0.0f;
 

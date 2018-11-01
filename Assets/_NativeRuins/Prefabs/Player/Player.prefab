@@ -2809,6 +2809,8 @@ MonoBehaviour:
   - {fileID: 1292053163352466}
   - {fileID: 1443802238304122}
   transformationWheelOpen: 0
+  pumaUnlocked: 0
+  bearUnlocked: 0
 --- !u!114 &114486619302859718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2823,18 +2825,17 @@ MonoBehaviour:
   walkSpeed: 5
   runMultFactor: 2
   turnSpeed: 0
+  currentSpeed: 0
   jumpForce: 0
+  minJumpInterval: 1.5
   cameraSpeed: 2
-  rigidBody: {fileID: 0}
-  footstep: {fileID: 0}
+  rigidBody: {fileID: 54140332332221852}
   camera_zoom_max: -1
   camera_zoom_min: -3
-  isShiftHold: 0
-  currentSpeed: 0
+  footstep: {fileID: 82599515990941326}
+  _isShiftHold: 0
   isMoving: 0
   isPlayerCrouch: 0
-  energyBar: {fileID: 0}
-  lifeBar: {fileID: 0}
   m_minSpeed: 22
   m_maxSpeed: 66
 --- !u!114 &114510037080249662
@@ -2862,18 +2863,17 @@ MonoBehaviour:
   walkSpeed: 5
   runMultFactor: 2
   turnSpeed: 0
+  currentSpeed: 0
   jumpForce: 0
+  minJumpInterval: 1.5
   cameraSpeed: 2
-  rigidBody: {fileID: 0}
-  footstep: {fileID: 0}
+  rigidBody: {fileID: 54057794553854394}
   camera_zoom_max: -1
   camera_zoom_min: -3
-  isShiftHold: 0
-  currentSpeed: 0
+  footstep: {fileID: 82772954524117302}
+  _isShiftHold: 0
   isMoving: 0
   isPlayerCrouch: 0
-  energyBar: {fileID: 0}
-  lifeBar: {fileID: 0}
   m_minSpeed: 11
   m_maxSpeed: 44
 --- !u!114 &114588453232216852
@@ -2918,18 +2918,17 @@ MonoBehaviour:
   walkSpeed: 5
   runMultFactor: 2
   turnSpeed: 0
+  currentSpeed: 0
   jumpForce: 0
+  minJumpInterval: 1.5
   cameraSpeed: 2
   rigidBody: {fileID: 54318257204615872}
-  footstep: {fileID: 82674334519927310}
   camera_zoom_max: -1
   camera_zoom_min: -3
-  isShiftHold: 0
-  currentSpeed: 0
+  footstep: {fileID: 82674334519927310}
+  _isShiftHold: 0
   isMoving: 0
   isPlayerCrouch: 0
-  energyBar: {fileID: 0}
-  lifeBar: {fileID: 0}
   mouseSmoothness: 5
   m_Arrow: {fileID: 54902542769894204, guid: 3a08acef54a451542955f22f488ff967, type: 2}
 --- !u!114 &114995672637474904
@@ -2946,6 +2945,17 @@ MonoBehaviour:
   isDead: 0
   isSaving: 0
   dialogueOn: 0
+  canRun: 0
+  timeMaxBeforeHungerHurt: 15
+  timeMaxBeforeHeartBeat: 1
+  hurtByFallScale: 0.5
+  hurtByHungerScale: 3
+  timeMaxBeforeHungerDecrease: 5
+  hungerDecreasingFactor: 0.04
+  hungerDecreasingFactorPuma: 0.08
+  energyDecreasingFactor: 1
+  energizingBackFactor: 2
+  energizingBackAfterEmptyFactor: 2
   childrenMovementController:
   - {fileID: 114848465575159398}
   - {fileID: 114554604719519190}

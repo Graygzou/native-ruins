@@ -16,7 +16,8 @@ public class FormsController : MonoBehaviour
     {
         Human = 0,
         Bear = 1,
-        Puma = 2
+        Puma = 2,
+        None = 9999,
     }
 
     [SerializeField]
@@ -102,10 +103,12 @@ public class FormsController : MonoBehaviour
     public void OpenTransformationWheel()
     {
         // Override camera movement event to plug in transformation wheel events
-        InputManager.SubscribeMouseMovementsEvent("HorizontalCamera", UpdateWheelSelection);
-        InputManager.SubscribeMouseMovementsEvent("VerticalCamera", UpdateWheelSelection);
+        InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { UpdateWheelSelection, UpdateWheelSelection });
 
         _instance.transformationWheelOpen = true;
+
+        // Temps arrêté
+        Time.timeScale = 0f;
 
         // Verification des formes disponibles
         menuManager.SetActiveBearIcon(bearUnlocked);
@@ -121,8 +124,8 @@ public class FormsController : MonoBehaviour
         //if(!menuManager.UpdateWheelSelectionMouse(Input.mousePosition, bearUnlocked, pumaUnlocked))
         //{
             // if doesn't work: Joystick inputs
-            float mouseX = Input.GetAxis("HorizontalCamera");
-            float mouseY = Input.GetAxis("VerticalCamera");
+            float mouseX = Input.GetAxis("Horizontal");
+            float mouseY = Input.GetAxis("Vertical");
             menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f), bearUnlocked, pumaUnlocked);
         //}
     }
@@ -149,15 +152,14 @@ public class FormsController : MonoBehaviour
         else
         {
             // Subscribe back the movement events.
-            InputManager.UnsubscribeMouseMovementsEvent("HorizontalCamera");
-            InputManager.UnsubscribeMouseMovementsEvent("VerticalCamera");
-            _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterCameraMovementsInputs();
+            InputManager.UnsubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Movement);
+            _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterPlayerMovementsInputs();
         }
     }
 
     public void Transformation(TransformationType type)
     {
-        if (_instance.currentForm != type)
+        if (_instance.currentForm != type && type != TransformationType.None)
         {
             _instance.selectedForm = type;
             Transformation();
