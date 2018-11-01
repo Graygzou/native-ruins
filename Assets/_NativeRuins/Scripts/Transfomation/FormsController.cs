@@ -21,12 +21,17 @@ public class FormsController : MonoBehaviour
 
     [SerializeField]
     private GameObject[] availableForms;
+
+    [Header("Forms states (Read Only)")]
     [SerializeField]
     private bool transformationWheelOpen;
+    [SerializeField]
+    private bool pumaUnlocked;
+    [SerializeField]
+    private bool bearUnlocked;
 
     private ParticleSystem plasmaExplosionEffect;
-    private bool pumaUnlocked;
-    private bool bearUnlocked;
+    
     private TransformationType currentForm = TransformationType.Human;
     private TransformationType selectedForm;
 
@@ -96,17 +101,15 @@ public class FormsController : MonoBehaviour
 
     public void OpenTransformationWheel()
     {
-        // Override player movement event to plug in transformation wheel events
-        InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { UpdateWheelSelection, UpdateWheelSelection });
+        // Override camera movement event to plug in transformation wheel events
+        InputManager.SubscribeMouseMovementsEvent("HorizontalCamera", UpdateWheelSelection);
+        InputManager.SubscribeMouseMovementsEvent("VerticalCamera", UpdateWheelSelection);
 
         _instance.transformationWheelOpen = true;
 
         // Verification des formes disponibles
-        menuManager.SetActivePumaIcon(!pumaUnlocked);
-        menuManager.SetActiveBearIcon(!bearUnlocked);
-
-        // Temps arrêté
-        Time.timeScale = 0f;
+        menuManager.SetActiveBearIcon(bearUnlocked);
+        menuManager.SetActivePumaIcon(pumaUnlocked);
 
         // Affichage de la roue
         menuManager.DisplayTransformationWheel();
@@ -114,9 +117,14 @@ public class FormsController : MonoBehaviour
 
     public void UpdateWheelSelection()
     {
-        float mouseX = Input.GetAxis("Horizontal");
-        float mouseY = Input.GetAxis("Vertical");
-        menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f), bearUnlocked, pumaUnlocked);
+        // Test with the mouse inputs.
+        //if(!menuManager.UpdateWheelSelectionMouse(Input.mousePosition, bearUnlocked, pumaUnlocked))
+        //{
+            // if doesn't work: Joystick inputs
+            float mouseX = Input.GetAxis("HorizontalCamera");
+            float mouseY = Input.GetAxis("VerticalCamera");
+            menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f), bearUnlocked, pumaUnlocked);
+        //}
     }
 
     public void SetSelectedForm(TransformationType type)
@@ -141,8 +149,9 @@ public class FormsController : MonoBehaviour
         else
         {
             // Subscribe back the movement events.
-            InputManager.UnsubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Movement);
-            _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterPlayerMovementsInputs();
+            InputManager.UnsubscribeMouseMovementsEvent("HorizontalCamera");
+            InputManager.UnsubscribeMouseMovementsEvent("VerticalCamera");
+            _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterCameraMovementsInputs();
         }
     }
 

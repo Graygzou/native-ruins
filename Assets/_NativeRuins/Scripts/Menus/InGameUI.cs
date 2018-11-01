@@ -102,52 +102,54 @@ public class InGameUI : MonoBehaviour
     public void UpdateWheelSelection(Vector3 positionMouse, bool bearUnlocked, bool pumaUnlocked)
     {
         // Si en dehors du centre de la roue :
-        if (positionMouse.x != 0.0f && positionMouse.y != 0.0f)
+        if (positionMouse.x != 0.0f || positionMouse.y != 0.0f)
         {
             //Debug.Log("Update... X:" + positionMouse.x + ", y:" + positionMouse.y);
 
-            bool isCurrentFormSelected = false;
+            bool isHumanFormSelected = false;
+            bool isBearFormSelected = false;
+            bool isPumaFormSelected = false;
+
             // SELECTION HUMAIN
-            if (isCurrentFormSelected = (positionMouse.x <= Mathf.Cos(Mathf.PI/4) || positionMouse.x >= Mathf.Cos(3 * Mathf.PI / 4)))
+            if (isHumanFormSelected = positionMouse.x <= Mathf.Cos(Mathf.PI/4) && positionMouse.x >= Mathf.Cos(3 * Mathf.PI / 4) && positionMouse.y < 0)
             {
-                Debug.Log("Hoora !");
                 FormsController.Instance.SetSelectedForm(FormsController.TransformationType.Human);
             }
-            transformationScript.humanSelected.SetActive(isCurrentFormSelected);
-            /*
             // SELECTION OURS
-            if (isCurrentFormSelected = ((positionMouse.y < positionMouse.x * a2 + b2) && (positionMouse.x > centreScreen.x) && bearUnlocked))
+            else if (isBearFormSelected = positionMouse.x <= 1.0 && positionMouse.x >= 0.0 && positionMouse.y < Mathf.Sin(Mathf.PI / 4) && bearUnlocked)
             {
                 FormsController.Instance.SetSelectedForm(FormsController.TransformationType.Bear);
             }
-            transformationScript.bearSelected.SetActive(isCurrentFormSelected);
-
             // SELECTION PUMA
-            if (isCurrentFormSelected = ((positionMouse.y < positionMouse.x * a1 + b1) && (positionMouse.x < centreScreen.x) && pumaUnlocked))
+            else if (isPumaFormSelected = positionMouse.x < 0.0 && positionMouse.x >= -1.0 && positionMouse.y < Mathf.Sin(3 * Mathf.PI / 4) && pumaUnlocked)
             {
                 FormsController.Instance.SetSelectedForm(FormsController.TransformationType.Puma);
             }
-            transformationScript.pumaSelected.SetActive(isCurrentFormSelected);*/
+            transformationScript.humanSelected.SetActive(isHumanFormSelected);
+            transformationScript.bearSelected.SetActive(isBearFormSelected);
+            transformationScript.pumaSelected.SetActive(isPumaFormSelected);
         }
         else
         {
+            UpdateWheelSelectionMouse(Input.mousePosition, bearUnlocked, pumaUnlocked);
+            /*
             transformationScript.humanSelected.SetActive(false);
             transformationScript.bearSelected.SetActive(false);
-            transformationScript.pumaSelected.SetActive(false);
+            transformationScript.pumaSelected.SetActive(false);*/
         }
     }
 
-
-
     public void UpdateWheelSelectionMouse(Vector3 positionMouse, bool bearUnlocked, bool pumaUnlocked)
     {
+        bool triggered = false;
+
         Debug.Log("Update... X:" + positionMouse.x + ", y:" + positionMouse.y);
         // Données utiles à la sélection
         Vector3 centreScreen = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Vector3 difference = positionMouse - centreScreen;
 
-        // Si en dehors du centre de la roue :
-        if (difference.magnitude > 125)
+        // Si en dehors du centre de la roue et une sourie presente et qu'elle est utilisée
+        if (triggered = (Input.mousePresent && positionMouse != Input.mousePosition && difference.magnitude > 125))
         {
             // Si sur le tiers du dessus :
             // coefficient directeur de la droite "gauche"
@@ -187,6 +189,8 @@ public class InGameUI : MonoBehaviour
             transformationScript.bearSelected.SetActive(false);
             transformationScript.pumaSelected.SetActive(false);
         }
+
+        //return triggered;
     }
     #endregion
 }

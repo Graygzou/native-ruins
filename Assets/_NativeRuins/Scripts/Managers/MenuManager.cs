@@ -150,6 +150,12 @@ public class MenuManager : MonoBehaviour, IManager {
     {
         _InGameUIScript.UpdateWheelSelection(positionMouse, bearUnlocked, pumaUnlocked);
     }
+
+    /*
+    public bool UpdateWheelSelectionMouse(Vector3 positionMouse, bool bearUnlocked, bool pumaUnlocked)
+    {
+        return _InGameUIScript.UpdateWheelSelectionMouse(positionMouse, bearUnlocked, pumaUnlocked);
+    }*/
     #endregion
 
     #region Player HUD methods
