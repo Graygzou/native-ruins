@@ -80,7 +80,7 @@ public class PickUpScript : MonoBehaviour {
     private void FindObjectPostProcess()
     {
         GameObject playerRoot = GameObject.Find("Player");
-        FormsController.Instance.Transformation(FormsController.TransformationType.Human);
+        FormsController.Instance.Transformation(TransformationType.Human);
         /*
         AudioSource son = GetComponentInParent<AudioSource>();
         son.Play();

@@ -64,7 +64,7 @@ public class PlayerProperties : MonoBehaviour
             if (currentTimeFaim >= timeMaxBeforeHungerDecrease)
             {
                 GameObject playerRoot = GameObject.Find("Player");
-                if (FormsController.Instance.GetCurrentForm() == (int)Forms.id_puma)
+                if (FormsController.Instance.GetCurrentForm() == (int)TransformationType.Puma)
                 {
                     menuManager.UpdateHungerBar(-hungerDecreasingFactorPuma);
                 }
@@ -89,7 +89,7 @@ public class PlayerProperties : MonoBehaviour
                 currentTimeFaim = 0.0f;
             }
             // Weak(); Included in the animation ??
-            MovementController activeMovementController = childrenMovementController[(int)FormsController.TransformationType.Human];
+            MovementController activeMovementController = childrenMovementController[(int)TransformationType.Human];
             if (canRun && activeMovementController.IsShiftHold)
             {
                 energyIsAt0 = !(menuManager.GetSizeEnergyBar() >= 1f);
@@ -180,16 +180,16 @@ public class PlayerProperties : MonoBehaviour
         GameObject playerRoot = GameObject.Find("Player");
         //audio.PlayOneShot(sonCri);
         //si forme puma, 50% de degats en plus
-        if (playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)Forms.id_puma)
+        if (playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)TransformationType.Puma)
         {
             menuManager.UpdateLifeBar(-(lifeLoosed + lifeLoosed * 0.5f));
         }
-        else if (playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)Forms.id_human)
+        else if (playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)TransformationType.Human)
         {
             //actions.Damage();
             menuManager.UpdateLifeBar(-lifeLoosed);
         } //si forme ours, 25% de degats en moins
-        else if (playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)Forms.id_bear)
+        else if (playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)TransformationType.Bear)
         {
             menuManager.UpdateLifeBar(-(lifeLoosed - lifeLoosed * 0.25f));
         }
@@ -225,7 +225,7 @@ public class PlayerProperties : MonoBehaviour
         isDead = false;
 
         // Subscribe human movements events back.
-        childrenMovementController[(int)FormsController.TransformationType.Human].RegisterInputs();
+        childrenMovementController[(int)TransformationType.Human].RegisterInputs();
     }
 
     public bool IsDeath()
@@ -271,38 +271,38 @@ public class PlayerProperties : MonoBehaviour
     #region Cutscenes methods
     public void Sleep()
     {
-        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("Sleep");
+        childrenAnimator[(int)TransformationType.Human].SetTrigger("Sleep");
     }
 
     public void StandUp()
     {
-        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("StandUp");
+        childrenAnimator[(int)TransformationType.Human].SetTrigger("StandUp");
     }
 
     public void LookAround()
     {
-        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("LookAround");
+        childrenAnimator[(int)TransformationType.Human].SetTrigger("LookAround");
     }
 
     public void Mad()
     {
-        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("Mad");
+        childrenAnimator[(int)TransformationType.Human].SetTrigger("Mad");
     }
 
     public void Focus()
     {
-        childrenAnimator[(int)FormsController.TransformationType.Human].SetTrigger("Focus");
+        childrenAnimator[(int)TransformationType.Human].SetTrigger("Focus");
     }
     #endregion
     #endregion
 
     #region MovementsController methods
-    public void EnableMovementController(FormsController.TransformationType type)
+    public void EnableMovementController(TransformationType type)
     {
         childrenMovementController[(int)type].enabled = true;
     }
 
-    public void DisableMovementController(FormsController.TransformationType type)
+    public void DisableMovementController(TransformationType type)
     {
         childrenMovementController[(int)type].enabled = false;
     }

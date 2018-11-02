@@ -10,7 +10,7 @@ public class TransformationWheel : MonoBehaviour
 {
     #region Transformation sprites
     [Header("Sprites")]
-    public Sprite humanIcon;
+    public Sprite[] humanIcon;
     public Sprite bearIcon;
     public Sprite pumaIcon;
     public Sprite bearLockIcon;

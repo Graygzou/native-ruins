@@ -48,7 +48,7 @@ public class InteractBonFire : MonoBehaviour {
             //Range arme avant d'ouvrir le menu de sauvegarde
             InventoryManager.Instance.GetComponent<InventoryManager>().PutWeaponInBag();
             GameObject playerRoot = GameObject.Find("Player");
-            FormsController.Instance.Transformation(FormsController.TransformationType.Human);
+            FormsController.Instance.Transformation(TransformationType.Human);
 
             // Play the sitting animation
             try

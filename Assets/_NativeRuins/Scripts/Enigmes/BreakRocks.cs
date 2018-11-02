@@ -18,7 +18,7 @@ public class BreakRocks : MonoBehaviour {
     {
         GameObject playerRoot = GameObject.Find("Player");
         if (other.gameObject.tag == "Player" && 
-            playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)Forms.id_bear &&
+            playerRoot.GetComponent<FormsController>().GetCurrentForm() == (int)TransformationType.Bear &&
             Input.GetKey(KeyCode.LeftShift)) {
             transform.parent.parent.GetChild(0).gameObject.SetActive(false); //desactive le gros collider
             GameObject cubes = transform.parent.GetChild(1).gameObject;

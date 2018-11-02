@@ -86,9 +86,8 @@ public class Sauvegarde : MonoBehaviour, IManager {
             addInInventory(ObjectsType.Torch);
             addInInventory(ObjectsType.Wood);
 
-            //Chargement totems obtenus
-            checkTotem(PlayerPrefs.GetInt("pumaUnlocked"), 0);
-            checkTotem(PlayerPrefs.GetInt("bearUnlocked"), 1);
+            //Chargement des formes obtenus
+            ActivateForms();
 
             //Enleve les totems deja trouves
             if (PlayerPrefs.GetInt("pumaUnlocked") == 1)
@@ -105,7 +104,7 @@ public class Sauvegarde : MonoBehaviour, IManager {
         player.Idle();
 
         // Enable player movements
-        player.EnableMovementController(FormsController.TransformationType.Human);
+        player.EnableMovementController(TransformationType.Human);
     }
 
     private RectTransform GetObject2D(ObjectsType obj)
@@ -172,32 +171,13 @@ public class Sauvegarde : MonoBehaviour, IManager {
         }
     }
 
-    private void checkTotem(int totemBool, int typeForm)
+    private void ActivateForms()
     {
         FormsController script = player.GetComponent<FormsController>();
-        if (typeForm == 0) //Puma
+        foreach(TransformationType type in script.GetAvailableForms())
         {
-            if (totemBool == 0) //Pas de totem
-            {
-                script.SetPumaUnlocked(false);
-            }
-            else //Totem
-            {
-                script.SetPumaUnlocked(true);
-            }
+            script.SetFormState(TransformationType.Bear, PlayerPrefs.GetInt(type.ToString() + "Unlocked") != 0);
         }
-        else //Ours
-        {
-            if (totemBool == 0) //Pas de totem
-            {
-                script.SetBearUnlocked(false);
-            }
-            else //Totem
-            {
-                script.SetBearUnlocked(true);
-            }
-        }
-
     }
 
     public void EnableUI() {
@@ -235,8 +215,8 @@ public class Sauvegarde : MonoBehaviour, IManager {
         PlayerPrefs.SetInt("" + ObjectsType.Raft, inventory.GetNumberItems(ObjectsType.Raft));
 
         //Connaitre transformation debloquee
-        PlayerPrefs.SetInt("pumaUnlocked", player.GetComponent<FormsController>().IsPumaUnlocked());
-        PlayerPrefs.SetInt("bearUnlocked", player.GetComponent<FormsController>().IsBearUnlocked());
+        PlayerPrefs.SetInt(TransformationType.Puma.ToString() + "Unlocked", player.GetComponent<FormsController>().IsFormUnlocked(TransformationType.Puma));
+        PlayerPrefs.SetInt(TransformationType.Bear.ToString() + "Unlocked", player.GetComponent<FormsController>().IsFormUnlocked(TransformationType.Bear));
 
         //Afficher message de sauvegarde
         // TODO DialogueTrigger.TriggerSauvegarde(null);

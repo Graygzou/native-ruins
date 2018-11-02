@@ -88,7 +88,7 @@ public class InventoryManager : MonoBehaviour {
         if (!bag_open)
         {
             // Force to transform back into human form when opening the bag
-            FormsController.Instance.Transformation(FormsController.TransformationType.Human);
+            FormsController.Instance.Transformation(TransformationType.Human);
 
             m_bag.localPosition = Vector3.zero;
             m_bag.anchoredPosition = new Vector3(-960f, 540f, 0f);

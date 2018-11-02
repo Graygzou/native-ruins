@@ -12,24 +12,13 @@ public class FormsController : MonoBehaviour
     public static FormsController Instance { get { return _instance; } }
     #endregion
 
-    public enum TransformationType : int
-    {
-        Human = 0,
-        Bear = 1,
-        Puma = 2,
-        None = 9999,
-    }
-
+    [Header("Transformations")]
     [SerializeField]
-    private GameObject[] availableForms;
+    private Dictionary<TransformationType, TransformationForm> availableForms = new Dictionary<TransformationType, TransformationForm>();
 
     [Header("Forms states (Read Only)")]
     [SerializeField]
     private bool transformationWheelOpen;
-    [SerializeField]
-    private bool pumaUnlocked;
-    [SerializeField]
-    private bool bearUnlocked;
 
     private ParticleSystem plasmaExplosionEffect;
     
@@ -54,8 +43,7 @@ public class FormsController : MonoBehaviour
         }
         //ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
         plasmaExplosionEffect = GetComponent<ParticleSystem>();
-        _instance.pumaUnlocked = false;
-        _instance.bearUnlocked = true;
+
         for (int i = 0;  i < _instance.transform.childCount; i++)
         {
             _instance.currentForm = _instance.transform.GetChild(i).gameObject.activeSelf ? (TransformationType)i : _instance.currentForm;
@@ -70,14 +58,9 @@ public class FormsController : MonoBehaviour
         menuManager = (MainManager.Instance.FindManager(MainManager.ManagerName.MenuManager) as MenuManager);
     }
 
-    public int IsPumaUnlocked()
+    public int IsFormUnlocked(TransformationType type)
     {
-        return System.Convert.ToInt32(_instance.pumaUnlocked == true);
-    }
-
-    public int IsBearUnlocked()
-    {
-        return System.Convert.ToInt32(_instance.bearUnlocked == true);
+        return System.Convert.ToInt32(_instance.availableForms[type].isUnlocked);
     }
 
     public bool IsTransformationWheelOpened()
@@ -85,14 +68,16 @@ public class FormsController : MonoBehaviour
         return transformationWheelOpen;
     }
 
-    public void SetPumaUnlocked(bool puma)
+    public Dictionary<TransformationType, TransformationForm>.KeyCollection GetAvailableForms()
     {
-        pumaUnlocked = puma;
+        return _instance.availableForms.Keys;
     }
 
-    public void SetBearUnlocked(bool ours)
+    public void SetFormState(TransformationType type, bool state)
     {
-        bearUnlocked = ours;
+        TransformationForm form = _instance.availableForms[type];
+        form.isUnlocked = state;
+        _instance.availableForms[type] = form;
     }
 
     public int GetCurrentForm()
@@ -111,8 +96,10 @@ public class FormsController : MonoBehaviour
         Time.timeScale = 0f;
 
         // Verification des formes disponibles
-        menuManager.SetActiveBearIcon(bearUnlocked);
-        menuManager.SetActivePumaIcon(pumaUnlocked);
+        foreach(TransformationType keysForm in _instance.availableForms.Keys)
+        {
+            menuManager.SetActiveBearIcon(_instance.availableForms[keysForm].isUnlocked);
+        }
 
         // Affichage de la roue
         menuManager.DisplayTransformationWheel();
@@ -126,7 +113,7 @@ public class FormsController : MonoBehaviour
             // if doesn't work: Joystick inputs
             float mouseX = Input.GetAxis("Horizontal");
             float mouseY = Input.GetAxis("Vertical");
-            menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f), bearUnlocked, pumaUnlocked);
+            menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f));
         //}
     }
 
@@ -153,7 +140,7 @@ public class FormsController : MonoBehaviour
         {
             // Subscribe back the movement events.
             InputManager.UnsubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Movement);
-            _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterPlayerMovementsInputs();
+            //_instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterPlayerMovementsInputs();
         }
     }
 
@@ -171,10 +158,12 @@ public class FormsController : MonoBehaviour
         // Memorisation position et orientation actuelle
         Vector3 positionCourant = new Vector3();
         // Desactiver toutes les formes
+        /*
         foreach (GameObject transformation in _instance.availableForms)
         {
             positionCourant = transformation.activeSelf ? transformation.transform.position : positionCourant;
             transformation.SetActive(false);
+            transformation.GetComponent<MovementController>().enabled = false;
         }
         if (_instance.currentForm != _instance.selectedForm)
         {
@@ -182,12 +171,14 @@ public class FormsController : MonoBehaviour
         }
 
         // Activation nouvelle forme
+        /*
         _instance.availableForms[(int)selectedForm].transform.position = positionCourant;
         _instance.availableForms[(int)selectedForm].SetActive(true);
+        _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().enabled = true;
 
         // Override the inputs of the current forms
         _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterInputs();
-        _instance.currentForm = _instance.selectedForm;
+        _instance.currentForm = _instance.selectedForm;*/
     }
 
     private IEnumerator ExplosionAnimation(Vector3 position)
