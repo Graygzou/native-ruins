@@ -5,17 +5,18 @@ using UnityEngine;
 [System.Serializable]
 public struct TransformationForm {
 
+    public TransformationType type;
+
     public GameObject form;
 
     public PlayerProperties stats;
 
     public Sprite icon;
 
-    public Sprite background;
-
     public Color color;
 
-    [SerializeField]
+    public Sprite background;
+
     public bool isUnlocked;
 
 };

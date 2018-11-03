@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
 public class FormsController : MonoBehaviour
 {
     #region Singleton
@@ -14,11 +13,16 @@ public class FormsController : MonoBehaviour
 
     [Header("Transformations")]
     [SerializeField]
-    private Dictionary<TransformationType, TransformationForm> availableForms = new Dictionary<TransformationType, TransformationForm>();
+    private List<TransformationForm> availableFormsList = new List<TransformationForm>();
+
+    [SerializeField]
+    private Sprite lockIcon;
 
     [Header("Forms states (Read Only)")]
     [SerializeField]
     private bool transformationWheelOpen;
+
+    private Dictionary<TransformationType, TransformationForm> availableForms;
 
     private ParticleSystem plasmaExplosionEffect;
     
@@ -50,12 +54,32 @@ public class FormsController : MonoBehaviour
         }
         Debug.Log(_instance.currentForm);
 
+        ResetForms();
+
         //inGameUI = GameObject.FindWithTag("InGameUI").GetComponent<InGameUI>();
     }
 
     public void Start()
     {
         menuManager = (MainManager.Instance.FindManager(MainManager.ManagerName.MenuManager) as MenuManager);
+    }
+
+    /// <summary>
+    /// Should be call by the UI Button
+    /// </summary>
+    /// <param name="type"></param>
+    private void ResetForms()
+    {
+        availableForms = new Dictionary<TransformationType, TransformationForm>();
+
+        // Construct the dictionnary based on the List
+        foreach (TransformationForm form in availableFormsList)
+        {
+            if (!availableForms.ContainsKey(form.type))
+            {
+                availableForms.Add(form.type, form);
+            }
+        }
     }
 
     public int IsFormUnlocked(TransformationType type)
@@ -71,6 +95,11 @@ public class FormsController : MonoBehaviour
     public Dictionary<TransformationType, TransformationForm>.KeyCollection GetAvailableForms()
     {
         return _instance.availableForms.Keys;
+    }
+
+    public Dictionary<TransformationType, TransformationForm> GetAllForms()
+    {
+        return _instance.availableForms;
     }
 
     public void SetFormState(TransformationType type, bool state)
@@ -96,15 +125,19 @@ public class FormsController : MonoBehaviour
         Time.timeScale = 0f;
 
         // Verification des formes disponibles
-        foreach(TransformationType keysForm in _instance.availableForms.Keys)
+        foreach (TransformationType keysForm in _instance.availableForms.Keys)
         {
-            menuManager.SetActiveBearIcon(_instance.availableForms[keysForm].isUnlocked);
+            //menuManager.SetActiveIcon(_instance.availableForms[keysForm].isUnlocked);
         }
+
+        // Construct the wheel with all the information
+        menuManager.UpdateWheelIcons();
 
         // Affichage de la roue
         menuManager.DisplayTransformationWheel();
     }
 
+    #region Wheel Selection
     public void UpdateWheelSelection()
     {
         // Test with the mouse inputs.
@@ -180,6 +213,7 @@ public class FormsController : MonoBehaviour
         _instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterInputs();
         _instance.currentForm = _instance.selectedForm;*/
     }
+    #endregion
 
     private IEnumerator ExplosionAnimation(Vector3 position)
     {
@@ -188,5 +222,5 @@ public class FormsController : MonoBehaviour
         yield return new WaitForSeconds(seconds: 1f);
         _instance.plasmaExplosionEffect.Stop();
     }
-
+    
 }

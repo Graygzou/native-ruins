@@ -136,14 +136,9 @@ public class MenuManager : MonoBehaviour, IManager {
         _InGameUIScript.CloseTransformationWheel();
     }
 
-    public void SetActivePumaIcon(bool state)
+    public void SetActiveIcon(int indice, bool state)
     {
-        _InGameUIScript.SetActivePumaIcon(state);
-    }
-
-    public void SetActiveBearIcon(bool state)
-    {
-        _InGameUIScript.SetActiveBearIcon(state);
+        _InGameUIScript.SetActiveIcon(indice, state);
     }
 
     public void UpdateWheelSelection(Vector3 positionMouse, bool bearUnlocked, bool pumaUnlocked)
@@ -154,6 +149,11 @@ public class MenuManager : MonoBehaviour, IManager {
     public void UpdateWheelSelection(Vector3 positionMouse)
     {
         _InGameUIScript.UpdateWheelSelection(positionMouse);
+    }
+
+    public void UpdateWheelIcons()
+    {
+        _InGameUIScript.UpdateWheelIcons();
     }
 
     /*

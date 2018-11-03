@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
@@ -75,33 +76,26 @@ public class InGameUI : MonoBehaviour
         transformationCanvas.alpha = 0.0f;
     }
 
-    public void SetActivePumaIcon(bool state)
+    public void SetActiveIcon(int indice, bool state)
     {
         if (state)
         {
-            transformationScript.pumaImage.sprite = transformationScript.pumaIcon;
+            transformationScript.GetWheelIcon(indice);
         }
         else
         {
-            transformationScript.pumaImage.sprite = transformationScript.pumaLockIcon;
-        }
-    }
-
-    public void SetActiveBearIcon(bool state)
-    {
-        if (state)
-        {
-            transformationScript.bearImage.sprite = transformationScript.bearIcon;
-        }
-        else
-        {
-            transformationScript.bearImage.sprite = transformationScript.bearLockIcon;
+            //transformationScript.GetWheelIcon(indice).GetComponent<Image>().sprite = ;
         }
     }
 
     public void UpdateWheelSelection(Vector3 positionMouse)
     {
         // TODO
+    }
+
+    public void UpdateWheelIcons()
+    {
+        transformationScript.UpdateWheelIcons();
     }
 
     public void UpdateWheelSelection(Vector3 positionMouse, bool bearUnlocked, bool pumaUnlocked)
@@ -134,15 +128,16 @@ public class InGameUI : MonoBehaviour
             {
                 FormsController.Instance.SetSelectedForm(TransformationType.Puma);
             }
+            /*
             transformationScript.humanSelected.SetActive(isHumanFormSelected);
             transformationScript.bearSelected.SetActive(isBearFormSelected);
-            transformationScript.pumaSelected.SetActive(isPumaFormSelected);
+            transformationScript.pumaSelected.SetActive(isPumaFormSelected);*/
         }
         else
-        {
+        {/*
             transformationScript.humanSelected.SetActive(false);
             transformationScript.bearSelected.SetActive(false);
-            transformationScript.pumaSelected.SetActive(false);
+            transformationScript.pumaSelected.SetActive(false);*/
 
             FormsController.Instance.SetSelectedForm(TransformationType.None);
         }
@@ -173,27 +168,27 @@ public class InGameUI : MonoBehaviour
             {
                 FormsController.Instance.SetSelectedForm(TransformationType.Human);
             }
-            transformationScript.humanSelected.SetActive(isCurrentFormSelected);
+            //transformationScript.humanSelected.SetActive(isCurrentFormSelected);
 
             // SELECTION OURS
             if (isCurrentFormSelected = ((positionMouse.y < positionMouse.x * a2 + b2) && (positionMouse.x > centreScreen.x) && bearUnlocked))
             {
                 FormsController.Instance.SetSelectedForm(TransformationType.Bear);
             }
-            transformationScript.bearSelected.SetActive(isCurrentFormSelected);
+            //transformationScript.bearSelected.SetActive(isCurrentFormSelected);
 
             // SELECTION PUMA
             if (isCurrentFormSelected = ((positionMouse.y < positionMouse.x * a1 + b1) && (positionMouse.x < centreScreen.x) && pumaUnlocked))
             {
                 FormsController.Instance.SetSelectedForm(TransformationType.Puma);
             }
-            transformationScript.pumaSelected.SetActive(isCurrentFormSelected);
+            //transformationScript.pumaSelected.SetActive(isCurrentFormSelected);
         }
         else
-        {
+        {/*
             transformationScript.humanSelected.SetActive(false);
             transformationScript.bearSelected.SetActive(false);
-            transformationScript.pumaSelected.SetActive(false);
+            transformationScript.pumaSelected.SetActive(false);*/
 
             FormsController.Instance.SetSelectedForm(TransformationType.None);
         }
