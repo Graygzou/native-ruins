@@ -21712,16 +21712,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114304970172843868, guid: c2f6a88fda9ed4a4ca3cda97416d5017,
-        type: 2}
-      propertyPath: unlockedForms.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114304970172843868, guid: c2f6a88fda9ed4a4ca3cda97416d5017,
-        type: 2}
-      propertyPath: availableFormsList.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4824861376135872, guid: c2f6a88fda9ed4a4ca3cda97416d5017, type: 2}
       propertyPath: m_LocalPosition.x
       value: 444.512
@@ -21752,37 +21742,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4824861376135872, guid: c2f6a88fda9ed4a4ca3cda97416d5017, type: 2}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114304970172843868, guid: c2f6a88fda9ed4a4ca3cda97416d5017,
-        type: 2}
-      propertyPath: availableFormsList.Array.data[1].type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114304970172843868, guid: c2f6a88fda9ed4a4ca3cda97416d5017,
-        type: 2}
-      propertyPath: availableFormsList.Array.data[0].type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114304970172843868, guid: c2f6a88fda9ed4a4ca3cda97416d5017,
-        type: 2}
-      propertyPath: availableFormsList.Array.data[2].type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114304970172843868, guid: c2f6a88fda9ed4a4ca3cda97416d5017,
-        type: 2}
-      propertyPath: lockIcon
-      value: 
-      objectReference: {fileID: 21300000, guid: c156c2b2693f894458b6e53af3e85c4a,
-        type: 3}
-    - target: {fileID: 114304970172843868, guid: c2f6a88fda9ed4a4ca3cda97416d5017,
-        type: 2}
-      propertyPath: availableFormsList.Array.data[3].type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114304970172843868, guid: c2f6a88fda9ed4a4ca3cda97416d5017,
-        type: 2}
-      propertyPath: availableFormsList.Array.data[4].type
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []

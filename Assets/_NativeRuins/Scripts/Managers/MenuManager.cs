@@ -143,17 +143,12 @@ public class MenuManager : MonoBehaviour, IManager {
 
     public void UpdateWheelSelection(Vector3 positionMouse, bool bearUnlocked, bool pumaUnlocked)
     {
-        _InGameUIScript.UpdateWheelSelection(positionMouse, bearUnlocked, pumaUnlocked);
+        _InGameUIScript.UpdateWheelSelection(positionMouse, true, true);
     }
 
-    public void UpdateWheelSelection(Vector3 positionMouse)
+    public void CreateWheelIcons()
     {
-        _InGameUIScript.UpdateWheelSelection(positionMouse);
-    }
-
-    public void UpdateWheelIcons()
-    {
-        _InGameUIScript.UpdateWheelIcons();
+        _InGameUIScript.CreateWheelIcons();
     }
 
     /*

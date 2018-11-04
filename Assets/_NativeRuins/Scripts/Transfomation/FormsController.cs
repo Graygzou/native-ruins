@@ -119,8 +119,6 @@ public class FormsController : MonoBehaviour
         // Override camera movement event to plug in transformation wheel events
         InputManager.SubscribeMouseMovementsChangedEvents(InputManager.ActionsLabels.Movement, new string[] { "Horizontal", "Vertical" }, new System.Action[] { UpdateWheelSelection, UpdateWheelSelection });
 
-        _instance.transformationWheelOpen = true;
-
         // Temps arrêté
         Time.timeScale = 0f;
 
@@ -130,8 +128,13 @@ public class FormsController : MonoBehaviour
             //menuManager.SetActiveIcon(_instance.availableForms[keysForm].isUnlocked);
         }
 
-        // Construct the wheel with all the information
-        menuManager.UpdateWheelIcons();
+        if(!_instance.transformationWheelOpen)
+        {
+            _instance.transformationWheelOpen = true;
+
+            // Construct the wheel with all the information
+            menuManager.CreateWheelIcons();
+        }
 
         // Affichage de la roue
         menuManager.DisplayTransformationWheel();
@@ -140,14 +143,10 @@ public class FormsController : MonoBehaviour
     #region Wheel Selection
     public void UpdateWheelSelection()
     {
-        // Test with the mouse inputs.
-        //if(!menuManager.UpdateWheelSelectionMouse(Input.mousePosition, bearUnlocked, pumaUnlocked))
-        //{
-            // if doesn't work: Joystick inputs
-            float mouseX = Input.GetAxis("Horizontal");
-            float mouseY = Input.GetAxis("Vertical");
-            menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f));
-        //}
+        // if doesn't work: Joystick inputs
+        float mouseX = Input.GetAxis("Horizontal");
+        float mouseY = Input.GetAxis("Vertical");
+        menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f), true, true);
     }
 
     public void SetSelectedForm(TransformationType type)

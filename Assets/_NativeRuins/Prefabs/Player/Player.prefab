@@ -2804,13 +2804,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04641258053b06348963354cc19816cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableForms:
-  - {fileID: 1778645263623508}
-  - {fileID: 1292053163352466}
-  - {fileID: 1443802238304122}
+  availableFormsList:
+  - type: 0
+    form: {fileID: 1778645263623508}
+    stats: {fileID: 0}
+    icon: {fileID: 21300000, guid: 89f23bff12960d44b9e2ff317502a1eb, type: 3}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    background: {fileID: 0}
+    isUnlocked: 0
+  - type: 1
+    form: {fileID: 1292053163352466}
+    stats: {fileID: 0}
+    icon: {fileID: 21300000, guid: db87746129cc599478e1ae8cecedefd7, type: 3}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    background: {fileID: 0}
+    isUnlocked: 0
+  - type: 2
+    form: {fileID: 1443802238304122}
+    stats: {fileID: 0}
+    icon: {fileID: 21300000, guid: d98957d25635e1844914d42e7a142b29, type: 3}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    background: {fileID: 0}
+    isUnlocked: 0
+  lockIcon: {fileID: 21300000, guid: c156c2b2693f894458b6e53af3e85c4a, type: 3}
   transformationWheelOpen: 0
-  pumaUnlocked: 0
-  bearUnlocked: 0
 --- !u!114 &114486619302859718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3261,7 +3278,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -1329889849
+  randomSeed: 1952033963
   InitialModule:
     serializedVersion: 3
     enabled: 1

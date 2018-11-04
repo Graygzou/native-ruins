@@ -8257,9 +8257,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be3361c4dc568e4bb3b415a0f7a7a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wheelObject: {fileID: 1783049377148372}
   defaultIconPrefab: {fileID: 1142384067239788, guid: 2a638618faae82d4f8f078518bb559b1,
     type: 2}
-  wheelObject: {fileID: 1783049377148372}
+  positionTopElement: {x: 0, y: 300, z: 0}
 --- !u!114 &114724638922460652
 MonoBehaviour:
   m_ObjectHideFlags: 1
