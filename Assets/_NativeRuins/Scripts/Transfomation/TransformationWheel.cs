@@ -9,14 +9,11 @@ using UnityEngine.UI;
 public class TransformationWheel : MonoBehaviour
 {
     [Header("Parent")]
-    [SerializeField]
-    private GameObject wheelObject;
+    [SerializeField] private GameObject wheelObject;
 
     [Header("Icons settings")]
-    [SerializeField]
-    private GameObject defaultIconPrefab;
-    [SerializeField]
-    private Vector3 positionTopElement;
+    [SerializeField] private GameObject defaultIconPrefab;
+    [SerializeField] private Vector3 positionTopElement;
 
     private WheelIcon[] wheelIcons;
 
@@ -37,42 +34,21 @@ public class TransformationWheel : MonoBehaviour
 
         wheelIcons = new WheelIcon[dict.Keys.Count];
 
-        // If we need to instantiate GameObject, we do so (only if dict size update..)
-        if (dict.Keys.Count > wheelObject.transform.childCount)
-        {
-            // Instantiate GameObjects
-            for (int i = wheelObject.transform.childCount; i < dict.Keys.Count; i++)
-            {
-                // Add it to the transformationWheel array
-                wheelIcons[i] = Instantiate(defaultIconPrefab, wheelObject.transform).GetComponent<WheelIcon>();
-
-                Debug.Log("Created child : " + wheelIcons[i]);
-            }
-        }
-        else if(dict.Keys.Count < wheelObject.transform.childCount)
-        {
-            //Remove GameObjects
-            for (int i = transform.childCount; i > dict.Keys.Count; i--)
-            {
-                Transform child = wheelObject.transform.GetChild(i);
-                child.transform.parent = null;
-                Destroy(child.gameObject);
-
-                wheelIcons[i] = null;
-
-                Debug.Log("Destroy child : " + wheelIcons[i]);
-            }
-        }
+        // Update the Hierarchy
+        DestroyExistingHierarchy(wheelObject.transform.childCount);
+        CreateNewHierarchy(dict.Keys.Count);
 
         float angle = 360f / dict.Keys.Count;
         float currentAngle = 0.0f;
         // For all child GameObject of the wheel
         foreach (TransformationType type in dict.Keys)
         {
+            Debug.Log("ANGLEEE :" + currentAngle + ", TYPE :" + type);
+
             // Get the script of the child
             WheelIcon iconScript = wheelObject.transform.GetChild((int)type).GetComponent<WheelIcon>();
 
-            // Should be setup elsewhere
+            // Should be setup elsewhere... TODO?
             iconScript.type = type;
 
             // Setup the icon
@@ -81,4 +57,34 @@ public class TransformationWheel : MonoBehaviour
             currentAngle += angle;
         }
     }
+
+    #region Hierarchy methods
+    /// <summary>
+    /// Method used to remove all the children of the current Wheel GameObject
+    /// </summary>
+    private void DestroyExistingHierarchy(int nbChildWheel)
+    {
+        for (int i = nbChildWheel - 1; i >= 0; i--)
+        {
+            Transform child = wheelObject.transform.GetChild(i);
+            child.transform.SetParent(null);
+            GameObject.Destroy(child.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Method used to created all the icons of the transformation wheel
+    /// </summary>
+    private void CreateNewHierarchy(int dictionnaryLength)
+    {
+        // Instantiate GameObjects
+        for (int i = 0; i < dictionnaryLength; i++)
+        {
+            // Add it to the transformationWheel array
+            wheelIcons[i] = Instantiate(defaultIconPrefab, wheelObject.transform).GetComponent<WheelIcon>();
+
+            Debug.Log("Created child : " + wheelIcons[i]);
+        }
+    }
+    #endregion
 }

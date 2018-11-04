@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -6,8 +7,7 @@ using UnityEngine.UI;
 /// </summary>
 public class WheelIcon : MonoBehaviour {
 
-    [SerializeField]
-    private Image childImage;
+    [SerializeField] private Image childImage;
 
     public TransformationType type;
 
@@ -24,19 +24,13 @@ public class WheelIcon : MonoBehaviour {
 
         // Compute values usefull for selection
         float actualAngle = currentAngle + 90f;
-        Debug.Log("ActualAngle :" + actualAngle);
-        Debug.Log("SelectionAngle :" + selectionAngle);
 
-        maxX = Mathf.Cos(actualAngle + selectionAngle);
-        minX = Mathf.Cos(actualAngle - selectionAngle);
-
-        Debug.Log("Test1 :" + (actualAngle + selectionAngle));
-        Debug.Log("Res Test1 :" + Mathf.Cos(actualAngle + selectionAngle));
-
-        maxY = Mathf.Max(Mathf.Sin(actualAngle), Mathf.Sin(currentAngle + selectionAngle));
-        minY = Mathf.Min(Mathf.Sin(actualAngle), Mathf.Sin(currentAngle - selectionAngle));
-
-        //Debug.Log(new Vector2(0.5f, ((transform.localPosition - positionTopElement) / (GetComponent<RectTransform>().sizeDelta.y / 2)).y * 0.5f));
+        float aboveActualDegree = actualAngle + selectionAngle;
+        float underActualDegree = actualAngle - selectionAngle;
+        CosAssignments(Mathf.Cos(aboveActualDegree * Mathf.PI / 180f), Mathf.Cos(underActualDegree * Mathf.PI / 180f));
+        SinAssignments(Mathf.Sin(aboveActualDegree * Mathf.PI / 180f), Mathf.Sin(underActualDegree * Mathf.PI / 180f));
+ 
+        ComputeSpecialCases(actualAngle - selectionAngle, actualAngle + selectionAngle);
 
         // Setup his pivot in the center of the wheel to make it rotate around it.
         GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f + ((transform.localPosition - positionTopElement) / (childImage.GetComponent<RectTransform>().sizeDelta.y / 2)).y * 0.5f);
@@ -52,8 +46,58 @@ public class WheelIcon : MonoBehaviour {
     {
         if(color == Color.red)
         {
-            Debug.Log("SELECTED : " + type);
+            //Debug.Log("SELECTED : " + type);
         }
         childImage.color = color;
     }
+
+    #region Assignments Helper
+    private void CosAssignments(float x1, float x2)
+    {
+        if (x1 > x2)
+        {
+            maxX = x1;
+            minX = x2;
+        }
+        else
+        {
+            maxX = x2;
+            minX = x1;
+        }
+    }
+
+    private void SinAssignments(float x1, float x2)
+    {
+        if (x1 > x2)
+        {
+            maxY = x1;
+            minY = x2;
+        }
+        else
+        {
+            maxY = x2;
+            minY = x1;
+        }
+    }
+
+    private void ComputeSpecialCases(float underActualDegree, float aboveActualDegree)
+    {
+        if (underActualDegree <= 180f && aboveActualDegree >= 180f)
+        {
+            minX = -1.0f;
+        }
+        if (underActualDegree <= 90f && aboveActualDegree >= 90f)
+        {
+            maxY = 1.0f;
+        }
+        if (underActualDegree <= 270f && aboveActualDegree >= 270f)
+        {
+            minY = -1.0f;
+        }
+        if (underActualDegree <= 360f && aboveActualDegree >= 360f)
+        {
+            maxX = 1.0f;
+        }
+    }
+    #endregion
 }

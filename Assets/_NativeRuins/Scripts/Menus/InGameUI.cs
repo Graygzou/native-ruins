@@ -100,25 +100,19 @@ public class InGameUI : MonoBehaviour
             UpdateWheelSelectionMouse(Input.mousePosition, true, true);
         }
         // Si en dehors du centre de la roue :
-        else if (positionMouse.x != 0.0f || positionMouse.y != 0.0f)
+        else
         {
             //Debug.Log("Update... X:" + positionMouse.x + ", y:" + positionMouse.y);
-
-            
-
             bool foundSelectedForm = false;
 
             // for all the icons created && !foundSelectedForm
             for(int i = 0; i < transformationScript.GetNbIcon(); i++)
             {
-                // currentIcon = child
                 WheelIcon child = transformationScript.GetWheelIcon(i);
                 if(child != null) {
-
-                    if (foundSelectedForm = positionMouse.x < child.maxX && positionMouse.x > child.minX && positionMouse.y < child.maxY && positionMouse.y > child.minY)
+                    if (foundSelectedForm = positionMouse.x <= child.maxX && positionMouse.x >= child.minX && positionMouse.y <= child.maxY && positionMouse.y >= child.minY)
                     {
                         FormsController.Instance.SetSelectedForm(child.type);
-
                         child.SetColor(Color.red);
                     }
                     else
@@ -126,44 +120,7 @@ public class InGameUI : MonoBehaviour
                         child.SetColor(Color.white);
                     }
                 }
-
             }
-
-
-
-
-            /*
-            bool isHumanFormSelected = false;
-            bool isBearFormSelected = false;
-            bool isPumaFormSelected = false;
-
-            // SELECTION HUMAIN
-            if (isHumanFormSelected = positionMouse.x <= Mathf.Cos(Mathf.PI/4) && positionMouse.x >= Mathf.Cos(3 * Mathf.PI / 4) && positionMouse.y > 0)
-            {
-                FormsController.Instance.SetSelectedForm(TransformationType.Human);
-            }
-            // SELECTION OURS
-            else if (isBearFormSelected = positionMouse.x <= 1.0 && positionMouse.x >= 0.0 && positionMouse.y <= Mathf.Sin(Mathf.PI / 4) && bearUnlocked)
-            {
-                FormsController.Instance.SetSelectedForm(TransformationType.Bear);
-            }
-            // SELECTION PUMA
-            else if (isPumaFormSelected = positionMouse.x < 0.0 && positionMouse.x >= -1.0 && positionMouse.y <= Mathf.Sin(3 * Mathf.PI / 4) && pumaUnlocked)
-            {
-                FormsController.Instance.SetSelectedForm(TransformationType.Puma);
-            }*/
-            /*
-            transformationScript.humanSelected.SetActive(isHumanFormSelected);
-            transformationScript.bearSelected.SetActive(isBearFormSelected);
-            transformationScript.pumaSelected.SetActive(isPumaFormSelected);*/
-        }
-        else
-        {/*
-            transformationScript.humanSelected.SetActive(false);
-            transformationScript.bearSelected.SetActive(false);
-            transformationScript.pumaSelected.SetActive(false);*/
-
-            FormsController.Instance.SetSelectedForm(TransformationType.None);
         }
     }
 
@@ -186,6 +143,8 @@ public class InGameUI : MonoBehaviour
             // "ordonnée à l'origine"
             float b2 = centreScreen.y - a2 * centreScreen.x;
 
+            // TODOOOOOOO
+            /*
             bool isCurrentFormSelected = false;
             // SELECTION HUMAIN
             if (isCurrentFormSelected = ((positionMouse.y > positionMouse.x * a1 + b1) && (positionMouse.y > positionMouse.x * a2 + b2)))
@@ -205,15 +164,19 @@ public class InGameUI : MonoBehaviour
             if (isCurrentFormSelected = ((positionMouse.y < positionMouse.x * a1 + b1) && (positionMouse.x < centreScreen.x) && pumaUnlocked))
             {
                 FormsController.Instance.SetSelectedForm(TransformationType.Puma);
-            }
+            }*/
             //transformationScript.pumaSelected.SetActive(isCurrentFormSelected);
         }
         else
-        {/*
-            transformationScript.humanSelected.SetActive(false);
-            transformationScript.bearSelected.SetActive(false);
-            transformationScript.pumaSelected.SetActive(false);*/
-
+        {
+            for (int i = 0; i < transformationScript.GetNbIcon(); i++)
+            {
+                WheelIcon child = transformationScript.GetWheelIcon(i);
+                if (child != null)
+                {
+                    child.SetColor(Color.white);
+                }
+            }
             FormsController.Instance.SetSelectedForm(TransformationType.None);
         }
     }

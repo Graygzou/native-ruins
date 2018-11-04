@@ -12,29 +12,19 @@ public class FormsController : MonoBehaviour
     #endregion
 
     [Header("Transformations")]
-    [SerializeField]
-    private List<TransformationForm> availableFormsList = new List<TransformationForm>();
-
-    [SerializeField]
-    private Sprite lockIcon;
+    [SerializeField] private List<TransformationForm> availableFormsList = new List<TransformationForm>();
+    [SerializeField] private Sprite lockIcon;
 
     [Header("Forms states (Read Only)")]
-    [SerializeField]
-    private bool transformationWheelOpen;
+    [SerializeField] private bool transformationWheelOpen;
 
     private Dictionary<TransformationType, TransformationForm> availableForms;
-
-    private ParticleSystem plasmaExplosionEffect;
-    
     private TransformationType currentForm = TransformationType.Human;
     private TransformationType selectedForm;
 
-    private Color colorStartHuman;
-
-    //private InGameUI inGameUI;
+    private ParticleSystem plasmaExplosionEffect;
     private MenuManager menuManager;
 
-    // Use this for initialization
     protected void Awake()
     {
         if (_instance != null && _instance != this)
@@ -45,18 +35,14 @@ public class FormsController : MonoBehaviour
         {
             _instance = this;
         }
-        //ColorStartHuman = HumanForm.GetComponentInChildren<Renderer>().material.color;
-        plasmaExplosionEffect = GetComponent<ParticleSystem>();
 
+        plasmaExplosionEffect = GetComponent<ParticleSystem>();
         for (int i = 0;  i < _instance.transform.childCount; i++)
         {
             _instance.currentForm = _instance.transform.GetChild(i).gameObject.activeSelf ? (TransformationType)i : _instance.currentForm;
         }
-        Debug.Log(_instance.currentForm);
 
         ResetForms();
-
-        //inGameUI = GameObject.FindWithTag("InGameUI").GetComponent<InGameUI>();
     }
 
     public void Start()
@@ -65,14 +51,12 @@ public class FormsController : MonoBehaviour
     }
 
     /// <summary>
-    /// Should be call by the UI Button
+    /// Create the form's dictionnary based on the current list (filled in the inspector)
     /// </summary>
-    /// <param name="type"></param>
     private void ResetForms()
     {
-        availableForms = new Dictionary<TransformationType, TransformationForm>();
-
         // Construct the dictionnary based on the List
+        availableForms = new Dictionary<TransformationType, TransformationForm>();
         foreach (TransformationForm form in availableFormsList)
         {
             if (!availableForms.ContainsKey(form.type))
@@ -80,6 +64,18 @@ public class FormsController : MonoBehaviour
                 availableForms.Add(form.type, form);
             }
         }
+    }
+
+    /// <summary>
+    /// Method used to update the transformation wheel and take into account new forms or remove some.
+    /// </summary>
+    public void UpdateWheel()
+    {
+        ResetForms();
+
+        Debug.Log(availableForms.Keys.Count);
+
+        menuManager.CreateWheelIcons();
     }
 
     public int IsFormUnlocked(TransformationType type)
@@ -128,30 +124,10 @@ public class FormsController : MonoBehaviour
             //menuManager.SetActiveIcon(_instance.availableForms[keysForm].isUnlocked);
         }
 
-        if(!_instance.transformationWheelOpen)
-        {
-            _instance.transformationWheelOpen = true;
-
-            // Construct the wheel with all the information
-            menuManager.CreateWheelIcons();
-        }
+        _instance.transformationWheelOpen = true;
 
         // Affichage de la roue
         menuManager.DisplayTransformationWheel();
-    }
-
-    #region Wheel Selection
-    public void UpdateWheelSelection()
-    {
-        // if doesn't work: Joystick inputs
-        float mouseX = Input.GetAxis("Horizontal");
-        float mouseY = Input.GetAxis("Vertical");
-        menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f), true, true);
-    }
-
-    public void SetSelectedForm(TransformationType type)
-    {
-        selectedForm = type;
     }
 
     public void CloseTransformationWheel()
@@ -174,6 +150,20 @@ public class FormsController : MonoBehaviour
             InputManager.UnsubscribeMouseMovementsChangedEvent(InputManager.ActionsLabels.Movement);
             //_instance.availableForms[(int)selectedForm].GetComponent<MovementController>().RegisterPlayerMovementsInputs();
         }
+    }
+
+    #region Wheel Selection
+    public void UpdateWheelSelection()
+    {
+        // if doesn't work: Joystick inputs
+        float mouseX = Input.GetAxis("Horizontal");
+        float mouseY = Input.GetAxis("Vertical");
+        menuManager.UpdateWheelSelection(new Vector3(mouseX, mouseY, 0f), true, true);
+    }
+
+    public void SetSelectedForm(TransformationType type)
+    {
+        selectedForm = type;
     }
 
     public void Transformation(TransformationType type)

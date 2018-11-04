@@ -72,6 +72,9 @@ public class MenuManager : MonoBehaviour, IManager {
 
         // Set the canvas's render mode to World Space Render
         _mainUICanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+        // Create the Transformation Wheel
+        CreateWheelIcons();
     }
     #endregion
 
