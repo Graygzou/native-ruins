@@ -18,6 +18,13 @@ public class FormsController : MonoBehaviour
     [Header("Forms states (Read Only)")]
     [SerializeField] private bool transformationWheelOpen;
 
+    [Header("Others fields")]
+    [SerializeField] private bool transformationWheelEditorRef;
+    // Usefull for general purpose.
+    // Maybe use it diretly.. ?
+    [SerializeField] private TransformationWheel _transformationWheel;
+    public TransformationWheel TransformationWheel { get { return _transformationWheel; } }
+
     private Dictionary<TransformationType, TransformationForm> availableForms;
     private TransformationType currentForm = TransformationType.Human;
     private TransformationType selectedForm;
@@ -25,7 +32,7 @@ public class FormsController : MonoBehaviour
     private ParticleSystem plasmaExplosionEffect;
     private MenuManager menuManager;
 
-    protected void Awake()
+    public void Awake()
     {
         if (_instance != null && _instance != this)
         {
@@ -53,7 +60,7 @@ public class FormsController : MonoBehaviour
     /// <summary>
     /// Create the form's dictionnary based on the current list (filled in the inspector)
     /// </summary>
-    private void ResetForms()
+    public void ResetForms()
     {
         // Construct the dictionnary based on the List
         availableForms = new Dictionary<TransformationType, TransformationForm>();
@@ -72,6 +79,15 @@ public class FormsController : MonoBehaviour
     public void UpdateWheel()
     {
         ResetForms();
+
+        Debug.Log(availableForms.Keys.Count);
+
+        menuManager.CreateWheelIcons();
+    }
+
+    public void GenerateTransformationWheel()
+    {
+        
 
         Debug.Log(availableForms.Keys.Count);
 

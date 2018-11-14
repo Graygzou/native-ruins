@@ -8,6 +8,8 @@ using UnityEngine.UI;
 /// </summary>
 public class TransformationWheel : MonoBehaviour
 {
+    private const float WHEEL_WIDTH = 20f;
+
     [Header("Parent")]
     [SerializeField] private GameObject wheelObject;
 
@@ -40,6 +42,9 @@ public class TransformationWheel : MonoBehaviour
 
         float angle = 360f / dict.Keys.Count;
         float currentAngle = 0.0f;
+
+        // CreateHighlightForm(dict.Keys.Count, angle);
+
         // For all child GameObject of the wheel
         foreach (TransformationType type in dict.Keys)
         {
@@ -58,6 +63,16 @@ public class TransformationWheel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method is called when creating the wheel to create custom highlight form depending on the number of children.
+    /// </summary>
+    private void CreateHighlightForm(int childrenNumber, float angle)
+    {
+        // TODO
+        // Use the script found.
+        // use this too : wheelWidth
+    }
+
     #region Hierarchy methods
     /// <summary>
     /// Method used to remove all the children of the current Wheel GameObject
@@ -68,7 +83,15 @@ public class TransformationWheel : MonoBehaviour
         {
             Transform child = wheelObject.transform.GetChild(i);
             child.transform.SetParent(null);
-            GameObject.Destroy(child.gameObject);
+            if(Application.isEditor)
+            {
+                GameObject.DestroyImmediate(child.gameObject);
+            }
+            else
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            
         }
     }
 
