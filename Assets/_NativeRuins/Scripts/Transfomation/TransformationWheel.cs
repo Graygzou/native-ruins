@@ -43,7 +43,7 @@ public class TransformationWheel : MonoBehaviour
         float angle = 360f / dict.Keys.Count;
         float currentAngle = 0.0f;
 
-        // CreateHighlightForm(dict.Keys.Count, angle);
+        CreateHighlightForm(dict.Keys.Count, angle);
 
         // For all child GameObject of the wheel
         foreach (TransformationType type in dict.Keys)
@@ -68,6 +68,7 @@ public class TransformationWheel : MonoBehaviour
     /// </summary>
     private void CreateHighlightForm(int childrenNumber, float angle)
     {
+
         // TODO
         // Use the script found.
         // use this too : wheelWidth
