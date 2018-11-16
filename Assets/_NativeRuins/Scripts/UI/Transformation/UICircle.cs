@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HighlightForm : MaskableGraphic
+public class UICircle : MaskableGraphic
 {
-    [Range(2, 100)]
+    [Range(2, 200)]
     [SerializeField] private int numberOfPointsUsed = 5;
+    [SerializeField] private int rayon = 7;
+    [SerializeField] private bool fill = true;
+
     [SerializeField] private float angleInDegree = 90;
-    [SerializeField] private int rayon1 = 5;
-    [SerializeField] private int rayon2 = 7;
+    [SerializeField] private int thickness = 5;
 
     Vector2[] points;
 
@@ -24,8 +26,8 @@ public class HighlightForm : MaskableGraphic
         topRightCorner = new Vector2(7 * Mathf.Cos(90 * (Mathf.PI / 180)), 7 * Mathf.Sin(90 * (Mathf.PI / 180)));*/
 
         // Starting points
-        points[0] = new Vector2(rayon1, 0);
-        points[1] = new Vector2(rayon2, 0);
+        points[0] = new Vector2(rayon, 0);
+        points[1] = new Vector2(thickness, 0);
 
         float dividedAngle = angleInDegree / (numberOfPointsUsed - 2);
         float currentAngle = dividedAngle;
@@ -34,12 +36,12 @@ public class HighlightForm : MaskableGraphic
             if (i % 2 != 0)
             {
                 // Rayon2
-                points[i] = new Vector2(rayon2 * Mathf.Cos(currentAngle * (Mathf.PI / 180)), rayon2 * Mathf.Sin(currentAngle * (Mathf.PI / 180)));
+                points[i] = new Vector2(thickness * Mathf.Cos(currentAngle * (Mathf.PI / 180)), thickness * Mathf.Sin(currentAngle * (Mathf.PI / 180)));
             }
             else
             {
                 // Rayon1
-                points[i] = new Vector2(rayon1 * Mathf.Cos(currentAngle * (Mathf.PI / 180)), rayon1 * Mathf.Sin(currentAngle * (Mathf.PI / 180)));
+                points[i] = new Vector2(rayon * Mathf.Cos(currentAngle * (Mathf.PI / 180)), rayon * Mathf.Sin(currentAngle * (Mathf.PI / 180)));
             }
             currentAngle += dividedAngle;
         }

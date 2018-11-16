@@ -15,7 +15,7 @@ public struct TransformationForm {
 
     public Color color;
 
-    public Sprite background;
+    public UICircle background;
 
     public bool isUnlocked;
 
