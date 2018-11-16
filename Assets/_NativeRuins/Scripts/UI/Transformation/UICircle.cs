@@ -10,43 +10,50 @@ public class UICircle : MaskableGraphic
     [SerializeField] private int rayon = 7;
     [SerializeField] private bool fill = true;
 
-    [SerializeField] private float angleInDegree = 90;
+    [SerializeField] private float startingAngle = 0.0f;
+    [SerializeField] private float angleInDegree = 90.0f;
     [SerializeField] private int thickness = 5;
 
-    Vector2[] points;
+    private Vector2[] points;
+    private int numberOfVertex;
 
     public void InitHighlightForm()
     {
-        points = new Vector2[numberOfPointsUsed];
 
-        /*
-        bottomLeftCorner = new Vector2(5, 0);
-        topLeftCorner = new Vector2(7, 0);
-        bottomRightCorner = new Vector2(5 * Mathf.Cos(90 * (Mathf.PI/180)), 5 * Mathf.Sin(90 * (Mathf.PI / 180)));
-        topRightCorner = new Vector2(7 * Mathf.Cos(90 * (Mathf.PI / 180)), 7 * Mathf.Sin(90 * (Mathf.PI / 180)));*/
+        numberOfVertex = (numberOfPointsUsed + 1) * 2;
+        points = new Vector2[numberOfVertex];
 
         // Starting points
-        points[0] = new Vector2(rayon, 0);
-        points[1] = new Vector2(thickness, 0);
+        //points[0] = new Vector2(rayon, 0);
+        //points[1] = new Vector2(thickness, 0);
 
-        float dividedAngle = angleInDegree / (numberOfPointsUsed - 2);
-        float currentAngle = dividedAngle;
-        for (int i = 2; i < numberOfPointsUsed; i++)
+        float dividedAngle = angleInDegree / numberOfPointsUsed;
+        float currentAngle = startingAngle;
+        for (int i = 0; i < numberOfVertex; i+=2)
         {
-            if (i % 2 != 0)
+            // Rayon
+            points[i] = new Vector2(rayon * Mathf.Cos(currentAngle * (Mathf.PI / 180)), rayon * Mathf.Sin(currentAngle * (Mathf.PI / 180)));
+            if (!fill)
             {
-                // Rayon2
-                points[i] = new Vector2(thickness * Mathf.Cos(currentAngle * (Mathf.PI / 180)), thickness * Mathf.Sin(currentAngle * (Mathf.PI / 180)));
+                // Border thickness
+                points[i+1] = new Vector2(thickness * Mathf.Cos(currentAngle * (Mathf.PI / 180)), thickness * Mathf.Sin(currentAngle * (Mathf.PI / 180)));
             }
             else
             {
-                // Rayon1
-                points[i] = new Vector2(rayon * Mathf.Cos(currentAngle * (Mathf.PI / 180)), rayon * Mathf.Sin(currentAngle * (Mathf.PI / 180)));
+                //  Center of the circle
+                points[i+1] = Vector2.zero;
             }
-            currentAngle += dividedAngle;
+            if(i >= numberOfVertex - 2)
+            {
+                // Last point to cover the entire angle
+                currentAngle = angleInDegree;
+            }
+            else
+            {
+                currentAngle += dividedAngle;
+            }
+            
         }
-
-        //SetVerticesDirty();
     }
 
     public void CreateForm()
@@ -82,21 +89,16 @@ public class UICircle : MaskableGraphic
             vh.AddVert(vert);
         }
 
+        // Double check even if the Range should avoid that
         if(numberOfPointsUsed > 2)
         {
             // Create first triangle
-            vh.AddTriangle(0, 1, 2);
+            //vh.AddTriangle(0, 1, 2);
 
-            for (int i = 1; (i+2) < numberOfPointsUsed; i++)
+            for (int i = 0; (i+2) < numberOfVertex; i+=2)
             {
-                if (i % 2 == 0)
-                {
-                    vh.AddTriangle(i, i + 1, i + 2);
-                }
-                else
-                {
-                    vh.AddTriangle(i, i + 2, i + 1);
-                }
+                vh.AddTriangle(i, i + 1, i + 2);
+                vh.AddTriangle(i + 1, i + 2, i + 3);
             }
         }
     }

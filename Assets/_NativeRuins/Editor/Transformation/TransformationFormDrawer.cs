@@ -12,9 +12,13 @@ public class TransformationFormDrawer : PropertyDrawer
     SerializedProperty form;
     SerializedProperty stats;
     SerializedProperty icon;
+    SerializedProperty useBackground;
     SerializedProperty background;
-    SerializedProperty color;
+    SerializedProperty highlightColor;
+    SerializedProperty expanded;
     SerializedProperty isUnlocked;
+
+    private bool activeBackground = false;
 
     // Draw the property inside the given rect
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -24,8 +28,10 @@ public class TransformationFormDrawer : PropertyDrawer
         form = property.FindPropertyRelative("form");
         stats = property.FindPropertyRelative("stats");
         icon = property.FindPropertyRelative("icon");
+        useBackground = property.FindPropertyRelative("useBackground");
         background = property.FindPropertyRelative("background");
-        color = property.FindPropertyRelative("color");
+        highlightColor = property.FindPropertyRelative("highlightColor");
+        expanded = property.FindPropertyRelative("expanded");
         isUnlocked = property.FindPropertyRelative("isUnlocked");
 
         // Don't make child fields be indented
@@ -58,17 +64,37 @@ public class TransformationFormDrawer : PropertyDrawer
             EditorGUI.EndProperty();
 
             EditorGUI.BeginProperty(position, label, property);
-            Rect colorRect = new Rect(position.x, position.y + 4 * SPACING, position.width, position.height);
-            EditorGUI.PropertyField(colorRect, color, new GUIContent("Color"), true);
+            Rect useBackgroundRect = new Rect(position.x, position.y + 4 * SPACING, position.width, position.height);
+            EditorGUI.PropertyField(useBackgroundRect, useBackground, new GUIContent("Use Background"), true);
             EditorGUI.EndProperty();
 
-            EditorGUI.BeginProperty(position, label, property);
-            Rect backgroundRect = new Rect(position.x, position.y + 5 * SPACING, position.width, position.height);
-            EditorGUI.PropertyField(backgroundRect, background, new GUIContent("Background"), true);
-            EditorGUI.EndProperty();
+            float currentY = position.y + 5 * SPACING;
+            if (useBackground.boolValue)
+            {
+                int indentLevel = EditorGUI.indentLevel;
+                EditorGUI.BeginProperty(position, label, property);
+                Rect colorRect = new Rect(position.x, currentY, position.width, position.height);
+                EditorGUI.PropertyField(colorRect, highlightColor, new GUIContent("Highlight color"), true);
+                EditorGUI.EndProperty();
+                currentY = position.y + 6 * SPACING;
+
+                EditorGUI.BeginProperty(position, label, property);
+                Rect backgroundRect = new Rect(position.x, currentY, position.width, position.height);
+                EditorGUI.PropertyField(backgroundRect, background, new GUIContent("Background UI"), true);
+                EditorGUI.EndProperty();
+                currentY = position.y + 7 * SPACING;
+
+                EditorGUI.BeginProperty(position, label, property);
+                Rect expandedRect = new Rect(position.x, currentY, position.width, position.height);
+                EditorGUI.PropertyField(expandedRect, expanded, new GUIContent("Expanded"), true);
+                EditorGUI.EndProperty();
+                currentY = position.y + 8 * SPACING;
+
+                EditorGUI.indentLevel = indentLevel;
+            }
 
             EditorGUI.BeginProperty(position, label, property);
-            Rect isUnlockRect = new Rect(position.x, position.y + 6 * SPACING, position.width, position.height);
+            Rect isUnlockRect = new Rect(position.x, currentY, position.width, position.height);
             EditorGUI.PropertyField(isUnlockRect, isUnlocked, new GUIContent("IsUnlock"), true);
             EditorGUI.EndProperty();
         }
@@ -79,6 +105,11 @@ public class TransformationFormDrawer : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        return EditorGUI.GetPropertyHeight(property) > 16 ? EditorGUI.GetPropertyHeight(property) - 25 : EditorGUI.GetPropertyHeight(property);
+        float offset = 25f;
+        if (!property.FindPropertyRelative("useBackground").boolValue)
+        {
+            offset += 3 * SPACING;
+        }
+        return EditorGUI.GetPropertyHeight(property) > 16 ? EditorGUI.GetPropertyHeight(property) - offset : EditorGUI.GetPropertyHeight(property);
     }
 }

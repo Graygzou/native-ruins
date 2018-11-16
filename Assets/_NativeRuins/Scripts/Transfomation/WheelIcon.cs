@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class WheelIcon : MonoBehaviour {
 
     [SerializeField] private Image childImage;
+    [SerializeField] private UICircle backgroundUI;
 
     public TransformationType type;
 
@@ -42,6 +43,13 @@ public class WheelIcon : MonoBehaviour {
         childImage.gameObject.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, -currentAngle));
     }
 
+    /// <summary>
+    /// This method is called when creating the wheel to create custom highlight form depending on the number of children.
+    /// </summary>
+    public void SetupBackground(int childrenNumber, Vector3 positionTopElement, float currentAngle, float selectionAngle, Sprite sprite)
+    {
+    }
+
     public void SetColor(Color color)
     {
         if(color == Color.red)
@@ -49,6 +57,11 @@ public class WheelIcon : MonoBehaviour {
             //Debug.Log("SELECTED : " + type);
         }
         childImage.color = color;
+    }
+
+    public UICircle GetBackgroundUI()
+    {
+        return backgroundUI;
     }
 
     #region Assignments Helper

@@ -13,9 +13,13 @@ public struct TransformationForm {
 
     public Sprite icon;
 
-    public Color color;
+    public bool useBackground;
 
     public UICircle background;
+
+    public Color highlightColor;
+
+    public bool expanded;
 
     public bool isUnlocked;
 

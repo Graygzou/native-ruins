@@ -40,17 +40,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.6102941, g: 0.094236605, b: 0.094236605, a: 0.622}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  numberOfPointsUsed: 20
+  numberOfPointsUsed: 23
+  rayon: 400
+  fill: 0
   angleInDegree: 50
-  rayon1: 398
-  rayon2: 232
+  thickness: 240
 --- !u!222 &222994904463721972
 CanvasRenderer:
   m_ObjectHideFlags: 1
