@@ -2,25 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class is made to be printed in the transformation wheel as item.
+/// </summary>
 [System.Serializable]
-public struct TransformationForm {
+public class TransformationForm : WheelItem {
 
+    [Header("Transformation fields")]
     public TransformationType type;
 
-    public GameObject form;
+    public Animator animator;
+
+    public SkinnedMeshRenderer mesh;
 
     public PlayerProperties stats;
-
-    public Sprite icon;
-
-    public bool useBackground;
-
-    public UICircle background;
-
-    public Color highlightColor;
-
-    public bool expanded;
-
-    public bool isUnlocked;
-
 };

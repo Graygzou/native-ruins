@@ -42,6 +42,9 @@ public class PlayerProperties : MonoBehaviour
     [Header("Childrens Information")]
     [SerializeField] private MovementController[] childrenMovementController;
     [SerializeField] private Animator[] childrenAnimator;
+    [SerializeField] private RuntimeAnimatorController[] childrenControllers;
+    [SerializeField] private Avatar[] childrenAvatar;
+    [SerializeField] private Transform[] childrenRootBone;
 
     private float currentTimeHeart = 0.0f;
     private float currentTimeFaim = 0.0f;

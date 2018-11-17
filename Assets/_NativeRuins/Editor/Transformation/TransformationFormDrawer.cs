@@ -3,44 +3,113 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(TransformationForm))]
-public class TransformationFormDrawer : PropertyDrawer
+[CustomEditor(typeof(TransformationForm))]
+public class TransformationFormDrawer : Editor
 {
     private const float SPACING = 17f;
 
+    TransformationForm transformationForm;
+
     SerializedProperty type;
-    SerializedProperty form;
+
+    SerializedProperty animator;
+    SerializedProperty mesh;
+
     SerializedProperty stats;
     SerializedProperty icon;
     SerializedProperty useBackground;
     SerializedProperty background;
+    SerializedProperty color;
     SerializedProperty highlightColor;
     SerializedProperty expanded;
     SerializedProperty isUnlocked;
 
+    private bool isExpanded = false;
     private bool activeBackground = false;
 
+
+    public void OnEnable()
+    {
+        transformationForm = (TransformationForm)target;
+    }
+
     // Draw the property inside the given rect
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    public override void OnInspectorGUI()
     {
         // Retrieve all SerializedProperty property from the class
-        type = property.FindPropertyRelative("type");
-        form = property.FindPropertyRelative("form");
-        stats = property.FindPropertyRelative("stats");
-        icon = property.FindPropertyRelative("icon");
-        useBackground = property.FindPropertyRelative("useBackground");
-        background = property.FindPropertyRelative("background");
-        highlightColor = property.FindPropertyRelative("highlightColor");
-        expanded = property.FindPropertyRelative("expanded");
-        isUnlocked = property.FindPropertyRelative("isUnlocked");
+        type = serializedObject.FindProperty("type");
+        animator = serializedObject.FindProperty("animator");
+        mesh = serializedObject.FindProperty("mesh");
+        stats = serializedObject.FindProperty("stats");
+        icon = serializedObject.FindProperty("icon");
+        background = serializedObject.FindProperty("background");
+        color = serializedObject.FindProperty("color");
+        highlightColor = serializedObject.FindProperty("highlightColor");
+        isUnlocked = serializedObject.FindProperty("isUnlocked");
 
         // Don't make child fields be indented
         int indent = EditorGUI.indentLevel;
-        EditorGUI.indentLevel = indent + 1;
 
+        /*
         Rect foldoutRect = new Rect(position.x, position.y, 120, 16);
-        property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, "Forms");
+        property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, "Forms");*/
 
+        //Rect rect2 = EditorGUILayout.GetControlRect(true);
+
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.BeginHorizontal();
+
+        EditorGUILayout.PropertyField(icon, GUILayout.MinWidth(50f));
+        Rect rect = Rect.zero;
+        if (icon.objectReferenceValue != null)
+        {
+            rect = EditorGUILayout.GetControlRect(true, 50, GUILayout.MaxWidth(100f));
+            rect.yMin += 20;
+            rect.yMax += 20;
+            GUI.DrawTexture(rect, (icon.objectReferenceValue as Sprite).texture, ScaleMode.ScaleToFit);
+
+            rect.height += 20;
+        }
+
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.EndVertical();
+
+        GUILayout.Space(rect.height);
+
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(color);
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(highlightColor);
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(isUnlocked);
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(background);
+        EditorGUILayout.EndVertical();
+
+        // TransformationWheel specific fields.
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(type);
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(animator);
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(stats);
+        EditorGUILayout.EndVertical();
+
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.PropertyField(mesh);
+        EditorGUILayout.EndVertical();
+
+        /*
         EditorGUI.BeginProperty(position, label, property);
         Rect cameraRect = new Rect(position.x, position.y, position.width, position.height);
         EditorGUI.PropertyField(cameraRect, type, new GUIContent(" "), true);
@@ -100,9 +169,10 @@ public class TransformationFormDrawer : PropertyDrawer
         }
 
         // Set indent back to what it was
-        EditorGUI.indentLevel = indent;
+        EditorGUI.indentLevel = indent;*/
     }
 
+    /*
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         float offset = 25f;
@@ -111,5 +181,5 @@ public class TransformationFormDrawer : PropertyDrawer
             offset += 3 * SPACING;
         }
         return EditorGUI.GetPropertyHeight(property) > 16 ? EditorGUI.GetPropertyHeight(property) - offset : EditorGUI.GetPropertyHeight(property);
-    }
+    }*/
 }

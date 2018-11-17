@@ -403,9 +403,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 1
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: bd230207ae5490e448055f036d3af422, type: 3}
 --- !u!65 &65017705104039418
@@ -623,6 +623,7 @@ MonoBehaviour:
   renderer: {fileID: 23984144977038856}
   o_type: 1
   o_object: {fileID: 224407149559836834, guid: 754a74e89cdd03e4c99c7599a50869fd, type: 2}
+  o_isPickable: 1
 --- !u!114 &114303048133508342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -634,21 +635,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a4ed356d357e74099aff0c98c7b11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  maxForce: 0
-  maxSpeed: 44
-  mass: 4
-  damages: 30
+  _maxHealth: 0
+  _damages: 0
+  _isMean: 0
+  _tauntRange: 0
+  _visionRange: {fileID: 0}
+  _awarenessRange: {fileID: 0}
+  _sonCri: {fileID: 0}
+  _sonCombat: {fileID: 0}
+  _maxForce: 300
+  _maxSpeed: 300
+  front: {fileID: 0}
   hungryIndicator: 0
-  isMean: 1
   isDead: 0
-  tauntRange: 50
-  visionRange: {fileID: 0}
-  awarenessRange: {fileID: 135871009251268688}
   isAlert: 0
   playerTooClose: 0
-  sonCri: {fileID: 0}
-  sonCombat: {fileID: 0}
+  currentSpeed: 22
+  currentHealth: 0
 --- !u!114 &114409595048441444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -674,6 +677,7 @@ MonoBehaviour:
   renderer: {fileID: 23721508227921868}
   o_type: 1
   o_object: {fileID: 224407149559836834, guid: 754a74e89cdd03e4c99c7599a50869fd, type: 2}
+  o_isPickable: 1
 --- !u!114 &114824255342417776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -685,6 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ceb9519d6fda0459abeaf8d5e4f0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noseTransform: {fileID: 0}
   vWanderTarget: {x: 0, y: 0, z: 0}
   target_p: {x: 0, y: 0, z: 0}
   minDetectionBoxLength: 10
@@ -693,6 +698,7 @@ MonoBehaviour:
   wanderOn: 0
   fleeOn: 0
   seekOn: 0
+  enthropy: 0.2
   boundingSphereRadius: 0
   obstacleMaxDistance: 0
 --- !u!135 &135187344297243916
@@ -1302,11 +1308,11 @@ ParticleSystem:
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
+    m_MeshMaterialIndex: 0
+    m_MeshNormalOffset: 0
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
-    m_MeshMaterialIndex: 0
-    m_MeshNormalOffset: 0
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
@@ -1998,6 +2004,47 @@ ParticleSystem:
         - serializedVersion: 2
           time: 1
           value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    speedModifier:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 2
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 1
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -3395,6 +3442,7 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 0
+    mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
@@ -3439,12 +3487,14 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
+    ribbonCount: 1
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0
+    splitSubEmitterRibbons: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0
