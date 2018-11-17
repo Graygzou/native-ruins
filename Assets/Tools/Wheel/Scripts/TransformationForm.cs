@@ -11,7 +11,9 @@ public class TransformationForm : WheelItem {
     [Header("Transformation fields")]
     public TransformationType type;
 
-    public Animator animator;
+    public RuntimeAnimatorController animatorController;
+
+    public Avatar avatar;
 
     public SkinnedMeshRenderer mesh;
 

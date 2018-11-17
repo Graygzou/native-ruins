@@ -18,5 +18,5 @@ public class WheelItem : ScriptableObject
     [Header("Others")]
     public bool isUnlocked;
 
-    public UICircle background;
+    public Sprite background;
 }
