@@ -9,7 +9,7 @@ public class FormsControllerEditor : Editor
     FormsController formController;
 
     SerializedProperty availableFormsList;
-    SerializedProperty lockIcon;
+    SerializedProperty lockItem;
     SerializedProperty transformationWheelOpen;
     SerializedProperty transformationWheelRef;
     SerializedProperty transformationWheel;
@@ -17,7 +17,7 @@ public class FormsControllerEditor : Editor
     public void OnEnable()
     {
         availableFormsList = serializedObject.FindProperty("availableFormsList");
-        lockIcon = serializedObject.FindProperty("lockIcon");
+        lockItem = serializedObject.FindProperty("lockItem");
         transformationWheelOpen = serializedObject.FindProperty("transformationWheelOpen");
         transformationWheelRef = serializedObject.FindProperty("transformationWheelEditorRef");
         transformationWheel = serializedObject.FindProperty("_transformationWheel");
@@ -29,7 +29,7 @@ public class FormsControllerEditor : Editor
 
         // Draw all regular fields
         EditorGUILayout.PropertyField(availableFormsList, new GUIContent("Available Forms List"), true);
-        EditorGUILayout.PropertyField(lockIcon, new GUIContent("Lock Icon"));
+        EditorGUILayout.PropertyField(lockItem, new GUIContent("Lock Form"));
 
         GUI.enabled = false;
         EditorGUILayout.PropertyField(transformationWheelOpen, new GUIContent("Is Transformation Wheel Open"));

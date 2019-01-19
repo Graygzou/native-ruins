@@ -83,7 +83,7 @@ public class UICircle : MaskableGraphic
 
         foreach (Vector2 vector in points)
         {
-            Debug.Log(vector);
+            //Debug.Log(vector);
             vert.position = vector;
             vert.color = color;
             vh.AddVert(vert);

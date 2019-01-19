@@ -33,6 +33,7 @@ public class TransformationFormDrawer : WheelItemDrawer
 
         EditorGUILayout.BeginVertical();
         EditorGUILayout.PropertyField(type);
+        transformationForm.type = (TransformationType)type.intValue;
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.BeginVertical();
@@ -45,10 +46,18 @@ public class TransformationFormDrawer : WheelItemDrawer
 
         EditorGUILayout.BeginVertical();
         EditorGUILayout.PropertyField(mesh);
+        if (mesh.objectReferenceValue != null)
+        {
+            transformationForm.mesh = mesh.objectReferenceValue as SkinnedMeshRenderer;
+        }
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.BeginVertical();
         EditorGUILayout.PropertyField(stats);
+        if (stats.objectReferenceValue != null)
+        {
+            transformationForm.stats = stats.objectReferenceValue as PlayerProperties;
+        }
         EditorGUILayout.EndVertical();
     }
 }

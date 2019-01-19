@@ -1,15 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-/// <summary>
-/// This class is used as a container. It allow to store all the wheel data.
-/// </summary>
-public class TransformationWheel : MonoBehaviour
-{
-    [Header("Parent")]
-    [SerializeField] private GameObject wheelObject;
+public class WheelUI : MonoBehaviour {
 
     [Header("Icons settings")]
     [SerializeField] private GameObject defaultIconPrefab;
@@ -35,7 +28,7 @@ public class TransformationWheel : MonoBehaviour
         wheelIcons = new WheelIcon[dict.Keys.Count];
 
         // Update the Hierarchy
-        DestroyExistingHierarchy(wheelObject.transform.childCount);
+        DestroyExistingHierarchy(transform.childCount);
         CreateNewHierarchy(dict.Keys.Count);
 
         float angle = 360f / dict.Keys.Count;
@@ -47,13 +40,13 @@ public class TransformationWheel : MonoBehaviour
             Debug.Log("ANGLEEE :" + currentAngle + ", TYPE :" + type);
 
             // Get the script of the child
-            WheelIcon iconScript = wheelObject.transform.GetChild((int)type).GetComponent<WheelIcon>();
+            WheelIcon iconScript = transform.GetChild((int)type).GetComponent<WheelIcon>();
 
             // Should be setup elsewhere... TODO?
             iconScript.type = type;
 
             // Setup the icon
-            iconScript.SetupIcon(positionTopElement, currentAngle, (angle/2), dict[type].icon);
+            iconScript.SetupIcon(positionTopElement, currentAngle, (angle / 2), dict[type].icon);
 
             // TODO 
             // use wheelObject.GetComponent<UICircle>().WHEELINFOS !!!!!
@@ -71,9 +64,9 @@ public class TransformationWheel : MonoBehaviour
     {
         for (int i = nbChildWheel - 1; i >= 0; i--)
         {
-            Transform child = wheelObject.transform.GetChild(i);
+            Transform child = transform.GetChild(i);
             child.transform.SetParent(null);
-            if(Application.isEditor)
+            if (Application.isEditor)
             {
                 GameObject.DestroyImmediate(child.gameObject);
             }
@@ -81,7 +74,7 @@ public class TransformationWheel : MonoBehaviour
             {
                 GameObject.Destroy(child.gameObject);
             }
-            
+
         }
     }
 
@@ -94,10 +87,11 @@ public class TransformationWheel : MonoBehaviour
         for (int i = 0; i < dictionnaryLength; i++)
         {
             // Add it to the transformationWheel array
-            wheelIcons[i] = Instantiate(defaultIconPrefab, wheelObject.transform).GetComponent<WheelIcon>();
+            wheelIcons[i] = Instantiate(defaultIconPrefab, transform).GetComponent<WheelIcon>();
 
             Debug.Log("Created child : " + wheelIcons[i]);
         }
     }
     #endregion
+
 }

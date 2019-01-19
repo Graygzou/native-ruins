@@ -12,8 +12,8 @@ public class FormsController : MonoBehaviour
     #endregion
 
     [Header("Transformations")]
-    [SerializeField] private List<TransformationForm> availableFormsList = new List<TransformationForm>();
-    [SerializeField] private Sprite lockIcon;
+    [SerializeField] private List<WheelItem> availableFormsList = new List<WheelItem>();
+    [SerializeField] private WheelItem lockItem;
 
     [Header("Forms states (Read Only)")]
     [SerializeField] private bool transformationWheelOpen;
@@ -48,7 +48,10 @@ public class FormsController : MonoBehaviour
         {
             _instance.currentForm = _instance.transform.GetChild(i).gameObject.activeSelf ? (TransformationType)i : _instance.currentForm;
         }
+    }
 
+    public void OnEnable()
+    {
         ResetForms();
     }
 
@@ -66,8 +69,10 @@ public class FormsController : MonoBehaviour
         availableForms = new Dictionary<TransformationType, TransformationForm>();
         foreach (TransformationForm form in availableFormsList)
         {
+            Debug.Log(form.type);
             if (!availableForms.ContainsKey(form.type))
             {
+                Debug.Log(form.type);
                 availableForms.Add(form.type, form);
             }
         }
