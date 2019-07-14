@@ -1,4 +1,7 @@
 # Native Ruins
+[![Website](https://img.shields.io/website/https/graygzou.github.io/native-ruins.svg)](https://graygzou.github.io/native-ruins/)   
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7338f7ea2aa54dd980db2c31a2088e7f)](https://www.codacy.com/app/gregoire.boiron/native-ruins?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Graygzou/native-ruins&amp;utm_campaign=Badge_Grade)
+
 3D game made with Unity engine. This game was origaly made for a school project at the Université du Québec à Chicoutimi (UQAC). 
 The course is the following : [Design Principles and Video Games Development (8INF955)](http://cours.uqac.ca/8INF955).
 
