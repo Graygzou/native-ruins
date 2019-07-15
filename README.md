@@ -5,10 +5,6 @@
 3D game made with Unity engine. This game was origaly made for a school project at the Université du Québec à Chicoutimi (UQAC). 
 The course is the following : [Design Principles and Video Games Development (8INF955)](http://cours.uqac.ca/8INF955).
 
-<img  width="430px" height="250px" src="https://github.com/Graygzou/native-ruins/blob/master/Images/NativeRuins.png"> <img width="430px" height="250px" src="https://github.com/Graygzou/native-ruins/blob/master/Images/BowHunting.png">
-<img width="430px" height="250px" src="https://github.com/Graygzou/native-ruins/blob/master/Images/Inventory.png">
-<img width="430px" height="250px" src="https://github.com/Graygzou/native-ruins/blob/master/Images/TransformationWheel.png">
-
 ## Technical sheet
 | Properties    | Values        |
 | ------------- |---------------|
